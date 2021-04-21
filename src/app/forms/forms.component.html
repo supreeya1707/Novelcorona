@@ -1,0 +1,181 @@
+<div class="row">
+  <div class="header-title font-prompt-medium fsize36">ข้อมูลทั่วไป</div>
+  <!--  <h2 class="card-title font-prompt-medium">-->
+  <!--    ข้อมูลทั่วไป-->
+  <!--  </h2>-->
+  <!--  <div class="form-group mb-8">-->
+  <!--    <div class="alert alert-custom alert-default" role="alert">-->
+  <!--      <div class="alert-icon"><i class="flaticon-warning text-primary"></i></div>-->
+  <!--      <div class="alert-text">-->
+
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <div class="col">
+    <div class="form-group col  font-prompt-medium">
+
+      <label>ชื่อ-นามสกุล <span class="text-danger">*</span></label>
+      <input type="name" class="form-control" placeholder="ชื่อ-นามสกุล"/>
+
+      <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+
+    </div>
+    <div class="form-group col font-prompt-medium">
+      <label>เลขบัตรประชาชน <span class="text-danger">*</span></label>
+      <input type="email" class="form-control" placeholder="เลขบัตรประชาชน" maxlength="13"/>
+      <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+    </div>
+    <div class="col font-prompt-medium fsize16">
+      <label for="ex1">สัญชาติ<span class="text-danger">*</span></label>
+      <input class="form-control" id="ex1" type="text">
+    </div>
+
+    <div class="form-group col font-prompt-medium mt-6">
+      <label>เพศ</label>
+      <div class="radio-inline col-md-6">
+        <label class="radio col-md-6">
+          <input type="radio" name="radios3" [(ngModel)]="radioGender" value="หญิง"/>
+          <span></span>
+          หญิง
+        </label>
+        <label class="radio col-md-6">
+          <input type="radio" name="radios3" [(ngModel)]="radioGender" value="ชาย"/>
+          <span></span>
+          ชาย
+        </label>
+      </div>
+
+      <div *ngIf="radioGender =='หญิง' ">
+        <div class="form-group col-sm-2 font-prompt-medium ">
+          <label>กรณีเพศหญิง</label>
+          <div class="radio-inline">
+            <label class="radio">
+              <input type="radio" name="radios4" [(ngModel)]="radioPreg" value="ไม่ได้ตั้งครรภ์"/>
+              <span></span>
+              ไม่ได้ตั้งครรภ์
+            </label>
+            <label class="radio">
+              <input type="radio" name="radios4" [(ngModel)]="radioPreg" value="ตั้งครรภ์"/>
+              <span></span>
+              ตั้งครรภ์
+            </label>
+            <div class="form-inline  col-xs-2 font-prompt-medium">
+              <label>ตั้งครรภ์ที่ <span class="text-danger">*</span></label>
+              <input type="Pregnan" class="form-control" maxlength="2"/>
+              <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+            </div>
+            <div class="form-inline col-xs-2">
+              <label>อายุครรภ์<span class="text-danger">*</span></label>
+              <input type="email" class="form-control" placeholder="สัปดาห์"/>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="form-group col font-prompt-medium">
+        <label>อาชีพ <span class="text-danger">*</span></label>
+        <input type="Job" class="form-control" placeholder="อาชีพ" maxlength="13"/>
+        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+      </div>
+      <div class="form-group col font-prompt-medium">
+        <label>สถานที่ทำงาน/สถานศึกษา<span class="text-danger">*</span></label>
+        <input type="station" class="form-control" placeholder="สถานที่ทำงาน/สถานศึกษา"/>
+        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+      </div>
+      <div class="form-group col font-prompt-medium">
+        <label>เบอร์โทรศัพท์ที่ติดต่อได้<span class="text-danger">*</span></label>
+        <input type="Telephone" class="form-control" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้" maxlength="10"/>
+        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+      </div>
+      <div class="form-group col font-prompt-medium">
+        <label>เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชั่น "หมอชนะ" <span class="text-danger">*</span></label>
+        <input type="Telephonedoc" class="form-control" maxlength="10"/>
+        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+      </div>
+      <div class="form-group col font-prompt-medium">
+        <label>สิทธิการรักษา <span class="text-danger">*</span></label>
+        <input type="treatment" class="form-control"/>
+        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+      </div>
+      <div class="form-group col font-prompt-medium">
+        <label>ที่อยู่ตามบัตรประชาชน <span class="text-danger">*</span></label>
+
+        <div class="radio-inline col-md-6">
+          <label class="radio col-md-2">
+            <input type="radio" name="radios4" value="บ้าน"/>
+            <span></span>
+            บ้าน
+          </label>
+          <label class="radio col-md-2">
+            <input type="radio" name="radios4" value="อื่นๆ"/>
+            <span></span>
+            อื่นๆ
+          </label>
+          <div class="form-row  col font-prompt-medium">
+
+
+            <input type="text" class="form-control" placeholder="โปรดระบุ" name="address">
+          </div>
+        </div>
+        <div class="form-group  col-xs-2 font-prompt-medium">
+          <label>เลขที่ <span class="text-danger">*</span></label>
+          <input type="text" class="form-control"/>
+          <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+        </div>
+        <div class="form-group col-xs-2">
+          <label>หมู่ที่<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-xs-2">
+          <label>หมู่บ้าน<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-xs-2">
+          <label>ซอย<span class="text-danger"></span></label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-xs-2">
+          <label>ถนน</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-xs-2">
+          <label>ตำบล<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-xs-2">
+          <label>อำเภอ<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-xs-2">
+          <label>จังหวัด<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-xs-2">
+          <label>โรคประจำตัว<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" />
+        </div>
+
+    </div><div class="form-group col  font-prompt-medium">
+
+      <label>การสูบบุหรี่</label>
+      <div class="radio-inline col-md-2">
+        <label class="radio ">
+          <input type="radio" name="radios5" [(ngModel)]="radioGender" value="ไม่เคยสูบบุหรี่"/>
+          <span></span>
+          ไม่เคยสูบบุหรี่
+        </label>
+        <label class="radio-inline col-md-2">
+          <input type="radio" name="radios5" [(ngModel)]="radioGender" value="ยังคงสูบบุหรี่"/>
+          <span></span>
+          ยังคงสูบบุหรี่
+        </label>
+        <label class="radio-inline col-md-2">
+          <input type="radio" name="radios5" [(ngModel)]="radioGender" value="เคยสูบแต่เลิกแล้ว"/>
+          <span></span>
+          เคยสูบแต่เลิกแล้ว
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
