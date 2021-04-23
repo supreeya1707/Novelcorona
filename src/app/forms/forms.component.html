@@ -1,305 +1,310 @@
 <div class="container font-prompt-medium mt-6">
-  <h2>1.ข้อมูลทั่วไป</h2>
-</div>
-<div class="container">
-
-
-  <!--  <div class="form-group mb-8">-->
-  <!--    <div class="alert alert-custom alert-default" role="alert">-->
-  <!--      <div class="alert-icon"><i class="flaticon-warning text-primary"></i></div>-->
-  <!--      <div class="alert-text">-->
-
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <div class="row font-prompt-medium">
-
-    <div class="form-inline col">
-      <label>ชื่อ-นามสกุล <span class="text-danger">*</span></label>
-      <input type="name" class="form-control" placeholder="ชื่อ-นามสกุล"/>
-    </div>
-    <div class="form-inline col">
-      <label>เลขบัตรประชาชน <span class="text-danger">*</span></label>
-      <input type="email" class="form-control" placeholder="เลขบัตรประชาชน" maxlength="13"/>
-    </div>
-    <div class="form-inline col">
-      <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
-      <label for="ex1">สัญชาติ<span class="text-danger">*</span></label>
-      <input class="form-control" id="ex1" type="text" placeholder="สัญชาติ">
-    </div>
-  </div>
-  <div class="form-group  font-prompt-medium ">
-
-    <label>เพศ</label>
-    <div class="radio-inline col-md-2">
-      <label class="radio ">
-        <input type="radio" name="radios3" [(ngModel)]="radioGender" value="หญิง"/>
-        <span></span>
-        หญิง
-      </label>
-      <label class="radio ">
-        <input type="radio" name="radios3" [(ngModel)]="radioGender" value="ชาย"/>
-        <span></span>
-        ชาย
-      </label>
-      <!--      <div *ngIf="radioGender =='หญิง' ">-->
-      <!--        <div class="form-group col-sm-2 font-prompt-medium ">-->
-      <label>กรณีเพศหญิง<span class="text-danger">*</span></label>
-      <div class="radio-inline">
-        <label class="radio">
-          <input type="radio" name="radios4" [(ngModel)]="radioPreg" value="ไม่ได้ตั้งครรภ์"/>
-          <span></span>
-          ไม่ได้ตั้งครรภ์
-        </label>
-        <label class="radio">
-          <input type="radio" name="radios4" [(ngModel)]="radioPreg" value="ตั้งครรภ์"/>
-          <span></span>
-          ตั้งครรภ์
-
-          <div class="form-inline  col-lg-5">
-            <input type="text" class="form-control" placeholder="ครรภ์ที่ "/>
+  <!--  <h2>1.ข้อมูลทั่วไป</h2>-->
+  <div class="row">
+    <div class="card col-md-12 shadow-xs">
+      <div class="card-header">
+        <h2 class="text-success">1.ข้อมูลทั่วไป</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <label>ชื่อ-นามสกุล <span class="text-danger">*</span></label>
+            <input type="name" class="form-control" placeholder="ชื่อ-นามสกุล"/>
           </div>
-
-          <div class="form-inline  col-lg-5">
-            <input type="email" class="form-control" placeholder="อายุครรภ์/สัปดาห์"/>
+          <div class="col-md-4">
+            <label>เลขบัตรประชาชน <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" placeholder="เลขบัตรประชาชน" maxlength="13"/>
           </div>
-        </label>
-      </div>
-    </div>
-    <div class="row font-prompt-medium">
-
-      <div class="col-lg-4">
-        <label>อาชีพ <span class="text-danger">*</span></label>
-        <input type="Job" class="form-control" placeholder="อาชีพ" maxlength="13"/>
-        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
-      </div>
-      <div class="col-lg-4">
-        <label>สถานที่ทำงาน/สถานศึกษา<span class="text-danger">*</span></label>
-        <input type="station" class="form-control" placeholder="สถานที่ทำงาน/สถานศึกษา"/>
-        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
-      </div>
-      <div class="col-lg-4">
-        <label>เบอร์โทรศัพท์ที่ติดต่อได้<span class="text-danger">*</span></label>
-        <input type="Telephone" class="form-control" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้" maxlength="10"/>
-        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
-      </div>
-      <div class="col-lg-4 mt-4">
-        <label>เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชั่น "หมอชนะ" <span class="text-danger">*</span></label>
-        <input type="Telephonedoc" class="form-control" maxlength="10"/>
-        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
-      </div>
-      <div class="col-lg-4 mt-4">
-        <label>สิทธิการรักษา <span class="text-danger">*</span></label>
-        <input type="treatment" class="form-control"/>
-        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
-      </div>
-    </div>
-
-    <div class="  font-prompt-medium mt-4 ">
-
-      <label>ที่อยู่ตามบัตรประชาชน <span class="text-danger">*</span></label>
-
-      <div class="radio-inline col-md-6">
-        <label class="radio col-md-2">
-          <input type="radio" name="radios4" value="บ้าน"/>
-          <span></span>
-          บ้าน
-        </label>
-        <label class="radio col-md-2">
-          <input type="radio" name="radios4" value="อื่นๆ"/>
-          <span></span>
-          อื่นๆ
-        </label>
-        <div class="form-row  col font-prompt-medium">
-          <input type="text" class="form-control" placeholder="โปรดระบุ" name="address">
+          <div class="col-md-4">
+            <label for="ex1">สัญชาติ<span class="text-danger">*</span></label>
+            <input class="form-control" id="ex1" type="text" placeholder="สัญชาติ">
+          </div>
         </div>
-      </div>
-      <div class="row font-prompt-medium">
-        <div class="col-2 mt-2">
-          <label>เลขที่ <span class="text-danger">*</span></label>
-          <input type="text" class="form-control"/>
-        <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+        <div class="row mt-5">
+          <div class="col-md-2">
+            <label>เพศ</label>
+            <div class="radio-inline col-md-2">
+              <label class="radio ">
+                <input type="radio" name="radios3" [(ngModel)]="radioGender" value="1"/>
+                <span></span>
+                หญิง
+              </label>
+              <label class="radio ">
+                <input type="radio" name="radios3" [(ngModel)]="radioGender" value="2"/>
+                <span></span>
+                ชาย
+              </label>
+            </div>
+          </div>
+          <div class="col-md-2" *ngIf="radioGender == 1">
+            <label>กรณีเพศหญิง<span class="text-danger">*</span></label>
+            <div class="radio-inline">
+              <label class="radio">
+                <input type="radio" name="radios4" [(ngModel)]="radioPreg" value="0"/>
+                <span></span>
+                ไม่ได้ตั้งครรภ์
+              </label>
+              <label class="radio">
+                <input type="radio" name="radios4" [(ngModel)]="radioPreg" value="1"/>
+                <span></span>
+                ตั้งครรภ์
+              </label>
+            </div>
+          </div>
+          <div class="col-md-8 mt-8" *ngIf="radioPreg ==1">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="ครรภ์ที่ "/>
+              </div>
+              <div class="col-md-6">
+                <input type="email" class="form-control" placeholder="อายุครรภ์/สัปดาห์"/>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="row mt-5">
+          <div class="col">
+            <label>อาชีพ <span class="text-danger">*</span></label>
+            <input type="Job" class="form-control" placeholder="อาชีพ" maxlength="13"/>
+          </div>
+          <div class="col">
+            <label>สถานที่ทำงาน/สถานศึกษา<span class="text-danger">*</span></label>
+            <input type="station" class="form-control" placeholder="สถานที่ทำงาน/สถานศึกษา"/>
+          </div>
+          <div class="col">
+            <label>เบอร์โทรศัพท์ที่ติดต่อได้<span class="text-danger">*</span></label>
+            <input type="Telephone" class="form-control" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้" maxlength="10"/>
+
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-lg-4 mt-4">
+            <label>เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชั่น "หมอชนะ" <span class="text-danger">*</span></label>
+            <input type="Telephonedoc" class="form-control" maxlength="10"/>
+            <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+          </div>
+          <div class="col-lg-4 mt-4">
+            <label>สิทธิการรักษา <span class="text-danger">*</span></label>
+            <input type="treatment" class="form-control"/>
+            <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col">
+            <label>ที่อยู่ตามบัตรประชาชน <span class="text-danger">*</span></label>
+
+            <div class="radio-inline col-md-6">
+              <label class="radio col-md-2">
+                <input type="radio" name="radios4" value="บ้าน"/>
+                <span></span>
+                บ้าน
+              </label>
+              <label class="radio col-md-2">
+                <input type="radio" name="radios4" value="อื่นๆ"/>
+                <span></span>
+                อื่นๆ
+              </label>
+              <div class="form-row  col font-prompt-medium">
+                <input type="text" class="form-control" placeholder="โปรดระบุ" name="address">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-2 mt-2">
+            <label>เลขที่ <span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+
+          </div>
           <div class=" col-2 mt-2">
             <label>หมู่ที่<span class="text-danger">*</span></label>
             <input type="text" class="form-control"/>
           </div>
-      <div class="col-2 mt-2">
-        <label>หมู่บ้าน<span class="text-danger">*</span></label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="col-3 mt-2">
-        <label>ซอย<span class="text-danger"></span></label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="col-3 mt-2">
-        <label>ถนน</label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="col-lg-4  mt-4">
-        <label>ตำบล<span class="text-danger">*</span></label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="col-lg-4  mt-4">
-        <label>อำเภอ<span class="text-danger">*</span></label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="col-lg-4 mt-4">
-        <label>จังหวัด<span class="text-danger">*</span></label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="col-lg-4 mt-2">
-        <label>โรคประจำตัว<span class="text-danger">*</span></label>
-        <input type="text" class="form-control"/>
-      </div>
-
-    </div>
-    <div class="row  mt-4 font-prompt-medium">
-
-      <label>การสูบบุหรี่</label>
-      <div class="radio-inline col">
-        <label class="radio ">
-          <input type="radio" name="radios5" [(ngModel)]="radioGender" value="ไม่เคยสูบบุหรี่"/>
-          <span></span>
-          ไม่เคยสูบบุหรี่
-        </label>
-        <div class="radio-inline col">
-          <label class="radio">
-            <input type="radio" name="radios5" [(ngModel)]="radioGender" value="ยังคงสูบบุหรี่"/>
-            <span></span>
-            ยังคงสูบบุหรี่
-          </label>
-          <div class="radio-inline col">
-            <label class="radio ">
-              <input type="radio" name="radios5" [(ngModel)]="radioGender" value="เคยสูบแต่เลิกแล้ว"/>
-              <span></span>
-              เคยสูบแต่เลิกแล้ว
-            </label>
+          <div class="col-2 mt-2">
+            <label>หมู่บ้าน<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
           </div>
-        </div>
-      </div>
-    </div>
-    </div>
-<h2>2.ข้อมูลทางคลินิก</h2>
-  <div class="row font-prompt-medium">
-     <div class=" col-lg-5 col-md-5 col-lg-4 form-group">
-        <label for="example-date-input" class="col col-form-label">วันที่เริ่มป่วย</label>
-        <div class="col-10">
-          <input class="form-control" type="date" value="2011-08-19" id="example-date-input"/>
-        </div>
-     </div>
-
-      <div class="col-lg-5 col-md-5 col-lg-4 form-group">
-        <label for="example-date-input" class="col col-form-label">วันที่เข้ารับการรักษาครั้งแรก</label>
-        <div class="col-10">
-          <input class="form-control" type="date" value="2011-08-19" id="example-date-input"/>
-        </div>
-      </div>
-  </div>
-
-    <div class="row font-prompt-medium">
-    <div class="form-group col-lg-5 col-md-5 col-lg-4">
-        <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาครั้งแรก<span class="text-danger">*</span></label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="form-group col-lg-5 col-md-5 col-lg-4">
-        <label>จังหวัด<span class="text-danger">*</span></label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="form-group col-lg-5 col-md-5 col-lg-4">
-        <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาปัจจุบัน<span class="text-danger">*</span></label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="form-group col-lg-5 col-md-5 col-lg-4">
-        <label>จังหวัด<span class="text-danger">*</span></label>
-        <input type="text" class="form-control"/>
-      </div>
-      <div class="form-group col  font-prompt-medium">
-
-        <label>อาการและอาการแสดงในวันพบผู้ป่วย</label>
-        <div class="radio-inline col-mt-6">
-          <label class="radio ">
-            <input type="radio" name="radios5" value="ไข้"/>
-            <span></span>
-            ไข้
-          </label>
-          <div class="form-inline col-lg-5 col-md-5 col-lg-4">
-            <label>อุณภูมิแรกรับ <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" placeholder="องศาเซลเซียส"/>
+          <div class="col-3 mt-2">
+            <label>ซอย<span class="text-danger"></span></label>
+            <input type="text" class="form-control"/>
           </div>
-          <div class="form-inline col-lg-5 col-md-5 col-lg-4 ">
-            <label>O2 Sat <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" placeholder="%"/>
+          <div class="col-3 mt-2">
+            <label>ถนน</label>
+            <input type="text" class="form-control"/>
           </div>
-          <div class="radio-inline col-mt-6">
-            <label class="radio ">
-              <input type="radio" name="radios6" value="ไอ"/>
-              <span></span>
-              ไอ
-            </label>
-
-            <label class="radio  ">
-              <input type="radio" name="radios7" value="เจ็บคอ"/>
-              <span></span>
-              เจ็บคอ
-            </label>
-
-            <label class="radio ">
-              <input type="radio" name="radios8" value="ปวดกล้ามเนื้อ"/>
-              <span></span>
-              ปวดกล้ามเนื้อ
-            </label>
-
-            <label class="radio ">
-              <input type="radio" name="radios9" value="มีน้ำมูก"/>
-              <span></span>
-              มีน้ำมูก
-            </label>
-
-            <label class="radio ">
-              <input type="radio" name="radios10" value="มีเสมหะ"/>
-              <span></span>
-              มีเสมหะ
-            </label>
-
-
-            <label class="radio ">
-              <input type="radio" name="radios11" value="หายใจลำบาก"/>
-              <span></span>
-              หายใจลำบาก
-            </label>
-
-            <label class="radio ">
-              <input type="radio" name="radios12" value="ปวดศรีษะ"/>
-              <span></span>
-              ปวดศรีษะ
-            </label>
-
-            <label class="radio ">
-              <input type="radio" name="radios13" value="ถ่ายเหลว"/>
-              <span></span>
-              ถ่ายเหลว
-            </label>
-
-            <label class="radio ">
-              <input type="radio" name="radios14" value="จมูกไม่ได้กลิ่น"/>
-              <span></span>
-              จมูกไม่ได้กลิ่น
-            </label>
-
-            <label class="radio ">
-              <input type="radio" name="radios15" value="ลิ้นไม่รับรส"/>
-              <span></span>
-              ลิ้นไม่รับรส
-            </label>
-
-            <label class="radio ">
-              <input type="radio" name="radios16" value="ตาแดง"/>
-              <span></span>
-              ตาแดง
-            </label>
-            <div class="radio-inline col-mt-6">
+          <div class="col-lg-4  mt-4">
+            <label>ตำบล<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+          </div>
+          <div class="col-lg-4  mt-4">
+            <label>อำเภอ<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+          </div>
+          <div class="col-lg-4 mt-4">
+            <label>จังหวัด<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+          </div>
+          <div class="col-lg-4 mt-2">
+            <label>โรคประจำตัว(ถ้ามี)<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+          </div>
+          <div class="col-md-4 mt-4">
+            <label>การสูบบุหรี่</label>
+            <div class="col-md-12 radio-inline ">
               <label class="radio ">
+                <input type="radio" name="radios5" [(ngModel)]="radioGender" value="ไม่เคยสูบบุหรี่"/>
+                <span></span>
+                ไม่เคยสูบบุหรี่
+              </label>
+            </div>
+            <div class="radio-inline col-md-12">
+              <label class="radio ">
+                <input type="radio" name="radios5" [(ngModel)]="radioGender" value="ยังคงสูบบุหรี่"/>
+                <span></span>
+                ยังคงสูบบุหรี่
+              </label>
+            </div>
+            <div class="radio-inline  col-md-12">
+              <label class="radio ">
+                <input type="radio" name="radios5" [(ngModel)]="radioGender" value="เคยสูบแต่เลิกแล้ว"/>
+                <span></span>
+                เคยสูบแต่เลิกแล้ว
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--  section2-->
+  <div class="row mt-5 ">
+    <div class="card col-md-12 shadow-xs">
+      <div class="card-header">
+        <h2 class="text-info">2.ข้อมูลทางคลินิก</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class=" col-lg-6 col-md-6 ">
+            <label>วันที่เริ่มป่วย</label>
+            <input class="form-control" type="date" value="2011-08-19"/>
+          </div>
+
+          <div class="col-lg-6 col-md-6 ">
+            <label>วันที่เข้ารับการรักษาครั้งแรก</label>
+            <input class="form-control" type="date" value="2011-08-19"/>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class=" col-lg-6 col-md-6 col-lg-4">
+            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาครั้งแรก<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+          </div>
+          <div class=" col-lg-6 col-md-6 col-lg-4">
+            <label>จังหวัด<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+          </div>
+        </div>
+        <div class="row mt-5">
+
+          <div class=" col-lg-6 col-md-6 col-lg-4">
+            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาปัจจุบัน<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+          </div>
+          <div class=" col-lg-6 col-md-6 col-lg-4">
+            <label>จังหวัด<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col">
+            <label>อาการและอาการแสดงในวันพบผู้ป่วย</label>
+            <div class="radio-inline col-md-12">
+              <label class="radio ">
+                <input type="radio" name="radios5" value="ไข้"/>
+                <span></span>
+                ไข้
+                <input type="text" class="form-control" placeholder="องศาเซลเซียส"/>
+              </label>
+
+              <div class="col-md-5 col-lg-4">
+                <input type="text" class="form-control" placeholder="องศาเซลเซียส"/>
+              </div>
+              <div class="col-md-5 col-lg-4">
+                <input type="text" class="form-control" placeholder="%"/>
+              </div>
+            </div>
+            <div class="radio-inline col-md-12">
+              <label class="radio mt-4  ">
+                <input type="radio" name="radios6" value="ไอ"/>
+                <span></span>
+                ใส่เครื่องช่วยหายใจ
+              </label>
+              <label class="radio mt-4  ">
+                <input type="radio" name="radios6" value="ไอ"/>
+                <span></span>
+                ไอ
+              </label>
+              <label class="radio mt-4  ">
+                <input type="radio" name="radios7" value="เจ็บคอ"/>
+                <span></span>
+                เจ็บคอ
+              </label>
+              <label class="radio mt-4  ">
+                <input type="radio" name="radios8" value="ปวดกล้ามเนื้อ"/>
+                <span></span>
+                ปวดกล้ามเนื้อ
+              </label>
+
+              <label class="radio mt-4  ">
+                <input type="radio" name="radios9" value="มีน้ำมูก"/>
+                <span></span>
+                มีน้ำมูก
+              </label>
+
+              <label class="radio mt-4  ">
+                <input type="radio" name="radios10" value="มีเสมหะ"/>
+                <span></span>
+                มีเสมหะ
+              </label>
+
+
+              <label class="radio mt-4  ">
+                <input type="radio" name="radios11" value="หายใจลำบาก"/>
+                <span></span>
+                หายใจลำบาก
+              </label>
+
+              <label class="radio mt-4  ">
+                <input type="radio" name="radios12" value="ปวดศรีษะ"/>
+                <span></span>
+                ปวดศรีษะ
+              </label>
+
+              <label class="radio mt-4 ">
+                <input type="radio" name="radios13" value="ถ่ายเหลว"/>
+                <span></span>
+                ถ่ายเหลว
+              </label>
+
+              <label class="radio mt-4 ">
+                <input type="radio" name="radios14" value="จมูกไม่ได้กลิ่น"/>
+                <span></span>
+                จมูกไม่ได้กลิ่น
+              </label>
+
+              <label class="radio mt-4 ">
+                <input type="radio" name="radios15" value="ลิ้นไม่รับรส"/>
+                <span></span>
+                ลิ้นไม่รับรส
+              </label>
+
+              <label class="radio mt-4 ">
+                <input type="radio" name="radios16" value="ตาแดง"/>
+                <span></span>
+                ตาแดง
+              </label>
+
+              <label class="radio mt-4 ">
                 <input type="radio" name="radios17" value="ผื่น"/>
                 <span></span>
                 ผื่น
@@ -307,48 +312,33 @@
                   <input type="text" class="form-control" placeholder="โปรดระบุตำแหน่ง"/>
                 </div>
               </label>
-              <div class="radio-inline col-mt-6">
-                <label class="radio ">
-                  <input type="radio" name="radios18" value="อื่นๆ"/>
-                  <span></span>
-                  อื่นๆ
-                  <div class="form-inline  col-lg-5">
-                    <input type="text" class="form-control" placeholder="โปรดระบุ"/>
-                  </div>
-                </label>
-              </div>
+              <label class="radio ">
+                <input type="radio" name="radios18" value="อื่นๆ"/>
+                <span></span>
+                อื่นๆ
+                <div class="form-inline  col-lg-5">
+                  <input type="text" class="form-control" placeholder="โปรดระบุ"/>
+                </div>
+              </label>
             </div>
 
           </div>
-
-   <h2>
-     3.ประวัติความเสี่ยง
-   </h2>
- </div>
-  <div class="row   font-prompt-medium">
-
-       <label>● ช่วง 14 วันก่อนป่วยอาศัยอยู่หรือเดินทางมาจากพื้นที่ที่มีการระบาด</label>
-          <div class="col-6 col-md-4">
-          <input type="text" class="form-control" placeholder="โปรดระบุเมือง"/>
-          </div>
-        <div class=" col-6 col-md-4">
-          <input type="text" class="form-control" placeholder="โปรดระบุประเทศ"/>
         </div>
-        <div class="col-6 col-md-4">
-          <input type="text" class="form-control" placeholder="โปรดระบุวันที่เดินทางเข้าประเทศไทย"/>
-        </div>
-        <div class="col-6 col-md-4">
-          <input type="text" class="form-control" placeholder="โปรดระบุโดยสารการบิน"/>
-        </div>
-        <div class="col-6 col-md-4">
-          <input type="text" class="form-control" placeholder="โปรดระบุเที่ยวบินที่"/>
-        </div>
-        <div class="  col-lg-5 col-md-6">
-          <input type="text" class="form-control" placeholder="โปรดระบุเลขที่นั่ง"/>
-        </div>
+      </div>
+    </div>
+  </div>
 
 
-          <div class="radio-inline col-mt-6">
+  <!--  section3-->
+  <div class="row mt-5 ">
+    <div class="card col-md-12 shadow-xs">
+      <div class="card-header">
+        <h2 class="text-primary">3.ประวัติความเสี่ยง</h2>
+      </div>
+      <div class="card-body">
+        <div class="row font-prompt-medium fsize16">
+          <label>● ช่วง 14 วันก่อนป่วยอาศัยอยู่หรือเดินทางมาจากพื้นที่ที่มีการระบาด</label>
+          <div class="radio-inline col-md-6 offset-md-0">
 
             <label class="radio ">
               <input type="radio" name="radios21" value="ใช่"/>
@@ -361,124 +351,215 @@
               ไม่ใช่
             </label>
           </div>
-    </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-lg-2 col-md-4">
+            <input type="text" class="form-control" placeholder="โปรดระบุเมือง"/>
+          </div>
+          <div class=" col-lg-2 col-md-4">
+            <input type="text" class="form-control" placeholder="โปรดระบุประเทศ"/>
+          </div>
+          <div class="col-lg-2 col-md-4">
+            <input type="text" class="form-control" placeholder="โปรดระบุวันที่เดินทางเข้าประเทศไทย"/>
+          </div>
+          <div class="col-lg-2 col-md-4">
+            <input type="text" class="form-control" placeholder="โปรดระบุโดยสารการบิน"/>
+          </div>
+          <div class="col-lg-2 col-md-4">
+            <input type="text" class="form-control" placeholder="โปรดระบุเที่ยวบินที่"/>
+          </div>
+          <div class="col-lg-2 col-md-4">
+            <input type="text" class="form-control" placeholder="โปรดระบุเลขที่นั่ง"/>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● ช่วง 14 วันก่อนป่วยได้เข้ารับการรักษาหรือเยี่ยมผู้ป่วยในโรงพยาบาลของพื้นที่ที่มีการระบาด</label>
+          <div class="radio-inline col-md-6 ">
+            <label class="radio ">
+              <input type="radio" name="radios21" value="ใช่"/>
+              <span></span>
+              ใช่
+            </label>
+            <label class="radio  ">
+              <input type="radio" name="radios21" value="ไม่"/>
+              <span></span>
+              ไม่ใช่
+            </label>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ</label>
+          <div class="radio-inline col-md-4">
+            <label class="radio ">
+              <input type="radio" name="radios21" value="ใช่"/>
+              <span></span>
+              ใช่
+            </label>
+            <label class="radio  ">
+              <input type="radio" name="radios21" value="ไม่"/>
+              <span></span>
+              ไม่ใช่
+            </label>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ</label>
+          <div class="radio-inline col-md-4">
+            <label class="radio ">
+              <input type="radio" name="radios21" value="ใช่"/>
+              <span></span>
+              ใช่
+            </label>
+            <label class="radio  ">
+              <input type="radio" name="radios21" value="ไม่"/>
+              <span></span>
+              ไม่ใช่
+            </label>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● ช่วง 14 วันก่อนป่วยมีประวัติสัมผัสกับผู้ป่วยยืนยันโรคติดเชื้อไวรัสโคโรน่า 2019 ระบุ</label>
+          <div class="radio-inline col-md-4">
+            <label class="radio ">
+              <input type="radio" name="radios21" value="ใช่"/>
+              <span></span>
+              ใช่
+            </label>
+            <label class="radio  ">
+              <input type="radio" name="radios21" value="ไม่"/>
+              <span></span>
+              ไม่ใช่
+            </label>
+          </div>
+        </div>
 
-              <label>● ช่วง 14 วันก่อนป่วยได้เข้ารับการรักษาหรือเยี่ยมผู้ป่วยในโรงพยาบาลของพื้นที่ที่มีการระบาด</label>
-              <label class="radio ">
-                <input type="radio" name="radios21" value="ใช่"/>
-                <span></span>
-                ใช่
-              </label>
-              <label class="radio  ">
-                <input type="radio" name="radios21" value="ไม่"/>
-                <span></span>
-                ไม่ใช่
-              </label>
+        <div class="row mt-5">
+          <div class="col-lg-2 col-md-4">
+            <input type="text" class="form-control" placeholder="โปรดระบุ"/>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● ช่วง 14 วันก่อนป่วยประกอบอาชีพที่สัมผัสใกล้ชิดกับนักท่องเที่ยวต่างชาติหรือแรงงานต่างชาติ</label>
+          <div class="radio-inline col-md-4">
+            <label class="radio ">
+              <input type="radio" name="radios21" value="ใช่"/>
+              <span></span>
+              ใช่
+            </label>
+            <label class="radio  ">
+              <input type="radio" name="radios21" value="ไม่"/>
+              <span></span>
+              ไม่ใช่
+            </label>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช้น ผับ สนามมวย</label>
+          <div class="radio-inline col-md-4">
+            <label class="radio ">
+              <input type="radio" name="radios21" value="ใช่"/>
+              <span></span>
+              ใช่
+            </label>
+            <label class="radio  ">
+              <input type="radio" name="radios21" value="ไม่"/>
+              <span></span>
+              ไม่ใช่
+            </label>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● เป็นผู้ป่วยอาการทางเดินหายใจหรือปอดอักเสบเป็นกลุ่มก้อน</label>
+          <div class="radio-inline col-md-4">
+            <label class="radio ">
+              <input type="radio" name="radios21" value="ใช่"/>
+              <span></span>
+              ใช่
+            </label>
+            <label class="radio  ">
+              <input type="radio" name="radios21" value="ไม่"/>
+              <span></span>
+              ไม่ใช่
+            </label>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● เป็นผู้ป่วยปอดอักเสบรุนแรงหรือเสียชีวิตที่หาสาเหตุไม่ได้</label>
+          <div class="radio-inline col-md-4">
+            <label class="radio ">
+              <input type="radio" name="radios21" value="ใช่"/>
+              <span></span>
+              ใช่
+            </label>
+            <label class="radio  ">
+              <input type="radio" name="radios21" value="ไม่"/>
+              <span></span>
+              ไม่ใช่
+            </label>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● เป็นบุคลาการทางการแพทย์และสาธรณะสุขหรือเจ้าหน้าที่ห้องปฏิบัติการ</label>
+          <div class="radio-inline col-md-4">
+            <label class="radio ">
+              <input type="radio" name="radios21" value="ใช่"/>
+              <span></span>
+              ใช่
+            </label>
+            <label class="radio  ">
+              <input type="radio" name="radios21" value="ไม่"/>
+              <span></span>
+              ไม่ใช่
+            </label>
+          </div>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <label>● อื่นๆ</label>
+          <input type="text" class="form-control" placeholder="โปรดระบุ"/>
+        </div>
+        <div class="row mt-5 font-prompt-medium fsize16">
+          <div class="col-md-6">
 
-              <label>● ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ</label>
-              <label class="radio ">
-                <input type="radio" name="radios21" value="ใช่"/>
-                <span></span>
-                ใช่
-              </label>
-              <label class="radio  ">
-                <input type="radio" name="radios21" value="ไม่"/>
-                <span></span>
-                ไม่ใช่
-              </label>
-              <label>● ช่วง 14 วันก่อนป่วยมีประวัติสัมผัสกับผู้ป่วยยืนยันโรคติดเชื้อไวรัสโคโรน่า 2019 ระบุ</label>
-              <label class="radio ">
-                <input type="radio" name="radios21" value="ใช่"/>
-                <span></span>
-                ใช่
-              </label>
-              <label class="radio  ">
-                <input type="radio" name="radios21" value="ไม่"/>
-                <span></span>
-                ไม่ใช่
-              </label>
-              <div class="form-group col-lg-5 col-md-6">
-                <input type="text" class="form-control" placeholder="โปรดระบุ"/>
-              </div>
+            <label>ผู้รายงาน<span class="text-danger">*</span></label>
+            <input type="text" class="form-control"/>
+            <span class="form-text text-muted inli">หน่วยงานโรงพยาบาลราชบุรี</span>
+          </div>
+          <div class="col-md-3">
+            <label>วันที่สอบสวน<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="วัน/เดือน/ปี"/>
+          </div>
+          <div class="col-md-3">
+            <label>เวลา<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="เวลา(น.)"/>
+          </div>
+        </div>
 
-              <label>● ช่วง 14 วันก่อนป่วยประกอบอาชีพที่สัมผัสใกล้ชิดกับนักท่องเที่ยวต่างชาติหรือแรงงานต่างชาติ</label>
-              <label class="radio ">
-                <input type="radio" name="radios21" value="ใช่"/>
-                <span></span>
-                ใช่
-              </label>
-              <label class="radio  ">
-                <input type="radio" name="radios21" value="ไม่"/>
-                <span></span>
-                ไม่ใช่
-              </label>
-
-              <label>● ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช้น ผับ สนามมวย
-                <div class="form-group col-lg-5 col-md-6">
-                  <input type="text" class="form-control" placeholder="โปรดระบุ"/>
-                </div>
-              </label>
-              <label class="radio ">
-                <input type="radio" name="radios21" value="ใช่"/>
-                <span></span>
-                ใช่
-              </label>
-              <label class="radio  ">
-                <input type="radio" name="radios21" value="ไม่"/>
-                <span></span>
-                ไม่ใช่
-              </label>
-
-              <label>● เป็นผู้ป่วยอาการทางเดินหายใจหรือปอดอักเสบเป็นกลุ่มก้อน</label>
-              <label class="radio ">
-                <input type="radio" name="radios21" value="ใช่"/>
-                <span></span>
-                ใช่
-              </label>
-              <label class="radio  ">
-                <input type="radio" name="radios21" value="ไม่"/>
-                <span></span>
-                ไม่ใช่
-              </label>
-              <label>● เป็นผู้ป่วยปอดอักเสบรุนแรงหรือเสียชีวิตที่หาสาเหตุไม่ได้</label>
-              <label class="radio ">
-                <input type="radio" name="radios21" value="ใช่"/>
-                <span></span>
-                ใช่
-              </label>
-              <label class="radio  ">
-                <input type="radio" name="radios21" value="ไม่"/>
-                <span></span>
-                ไม่ใช่
-              </label>
-              <label>● เป็นบุคลาการทางการแพทย์และสาธรณะสุขหรือเจ้าหน้าที่ห้องปฏิบัติการ</label>
-              <label class="radio ">
-                <input type="radio" name="radios21" value="ใช่"/>
-                <span></span>
-                ใช่
-              </label>
-              <label class="radio  ">
-                <input type="radio" name="radios21" value="ไม่"/>
-                <span></span>
-                ไม่ใช่
-              </label>
-
-              <label class="form-inline">● อื่นๆ
-                <div class="form-group col-lg-5 col-md-6">
-                  <input type="text" class="form-control" placeholder="โปรดระบุ"/>
-                </div>
-              </label>
-    </div>
       </div>
+    </div>
+  </div>
+
+
+  <!--  section4-->
+  <div class="row mt-5 ">
+    <div class="card col-md-12 shadow-xs">
+      <div class="card-header">
+        <h2 class="text-warning">4.รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย</h2>
       </div>
-            </div>
-            <div class="form-group col-lg-6 col-md-6 col-lg-5">
-              <label>ผู้รายงาน<span class="text-danger">*</span></label>
-              <input type="text" class="form-control"/>
-              <span class="form-text text-muted inli">หน่วยงานโรงพยาบาลราชบุรี</span>
-            </div>
+      <div class="card-body">
+        <div class=" col">
 
-
+          <textarea class="form-control" id="exampleTextarea" rows="15"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-15">
+    <div class="col-md-2 offset-md-5">
+<!--      <button class="btn btn-outline-info form-control">บันทึก</button></div>-->
+    <button  class="btn btn-bg-primary mr-2"  >SAVE</button>
+    <button class="btn btn-secondary mr-2">Cancel</button>
+  </div>
+</div>
 
 
 
