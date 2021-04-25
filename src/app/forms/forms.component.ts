@@ -12,6 +12,19 @@ export class FormsComponent implements OnInit {
   radioCheck: any = 0;
   radioAddress: any = 0;
   radioSmoke: any = 0;
+  radiosymptom: any = 0 ;
+  radiofrom: any = 0;
+  radiorepair : any = 0;
+  radionear : any = 0;
+  radiotakecare : any = 0;
+  radiotouch : any = 0 ;
+  radiovisitor :any = 0;
+  radiocrowded : any = 0;
+  radiobreath :any =0;
+  radioinject :any =0;
+  radiolabtest:any=0;
+
+
 
 
   currentDate = new Date();
