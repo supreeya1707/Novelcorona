@@ -218,9 +218,9 @@
         <div class="row mt-5">
           <div class="col">
             <label>อาการและอาการแสดงในวันพบผู้ป่วย</label>
-            <div class="radio-inline col-md-12">
-              <label class="radio ">
-                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="ไข้"/>
+            <div class="checkbox-inline col-md-12">
+              <label class="checkbox checkbox-rounded ">
+                <input type="checkbox" name="radios5" [(ngModel)]="radiosymptom" value="ไข้"/>
                 <span></span>
                 ไข้
                 <input type="text" class="form-control" placeholder="องศาเซลเซียส"/>
@@ -230,12 +230,12 @@
                 <input type="text" class="form-control" placeholder="องศาเซลเซียส"/>
               </div>
               <div class="col-md-5 col-lg-4">
-                <input type="text" class="form-control" placeholder="%"/>
+                <input type="text" class="form-control" placeholder="ระดับออกซิเจนในเลือด(%)"/>
               </div>
             </div>
             <div class="radio-inline col-md-12">
-              <label class="radio mt-4  ">
-                <input type="radio" name="radios6" [(ngModel)]="radiosymptom" value="ไอ"/>
+              <label class="checkbox checkbox-rounded mt-4  ">
+                <input type="checkbox" name="radios6" [(ngModel)]="radiosymptom" value="2"/>
                 <span></span>
                 ใส่เครื่องช่วยหายใจ
               </label>
@@ -245,31 +245,31 @@
                 ไอ
               </label>
               <label class="radio mt-4  ">
-                <input type="radio" name="radios8" [(ngModel)]="radiosymptom" value="เจ็บคอ"/>
+                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="เจ็บคอ"/>
                 <span></span>
                 เจ็บคอ
               </label>
               <label class="radio mt-4  ">
-                <input type="radio" name="radios9" [(ngModel)]="radiosymptom" value="ปวดกล้ามเนื้อ"/>
+                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="ปวดกล้ามเนื้อ"/>
                 <span></span>
                 ปวดกล้ามเนื้อ
               </label>
 
               <label class="radio mt-4  ">
-                <input type="radio" name="radios10" [(ngModel)]="radiosymptom" value="มีน้ำมูก"/>
+                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="มีน้ำมูก"/>
                 <span></span>
                 มีน้ำมูก
               </label>
 
               <label class="radio mt-4  ">
-                <input type="radio" name="radios11" [(ngModel)]="radiosymptom" value="มีเสมหะ"/>
+                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="มีเสมหะ"/>
                 <span></span>
                 มีเสมหะ
               </label>
 
 
               <label class="radio mt-4  ">
-                <input type="radio" name="radios12" [(ngModel)]="radiosymptom" value="หายใจลำบาก"/>
+                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="หายใจลำบาก"/>
                 <span></span>
                 หายใจลำบาก
               </label>
@@ -313,7 +313,7 @@
                 </div>
               </label>
               <label class="radio ">
-                <input type="radio" name="radios19" [(ngModel)]="radiosymptom" value="อื่นๆ"/>
+                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="อื่นๆ"/>
                 <span></span>
                 อื่นๆ
                 <div class="form-inline  col-lg-5">
@@ -376,12 +376,12 @@
           <label>● ช่วง 14 วันก่อนป่วยได้เข้ารับการรักษาหรือเยี่ยมผู้ป่วยในโรงพยาบาลของพื้นที่ที่มีการระบาด</label>
           <div class="radio-inline col-md-6 ">
             <label class="radio ">
-              <input type="radio" name="radios21" [(ngModel)]="radiorepair" value="ใช่"/>
+              <input type="radio" name="radios22" [(ngModel)]="radiorepair" value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radiorepair" value="ไม่"/>
+              <input type="radio" name="radios22" [(ngModel)]="radiorepair" value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -391,12 +391,12 @@
           <label>● ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios21"[(ngModel)]="radionear" value="ใช่"/>
+              <input type="radio" name="radios23"[(ngModel)]="radionear" value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radionear"  value="ไม่"/>
+              <input type="radio" name="radios23" [(ngModel)]="radionear"  value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -406,12 +406,12 @@
           <label>● ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios21" [(ngModel)]="radiotakecare" value="ใช่"/>
+              <input type="radio" name="radios24" [(ngModel)]="radiotakecare" value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radiotakecare" value="ไม่"/>
+              <input type="radio" name="radios24" [(ngModel)]="radiotakecare" value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -421,12 +421,12 @@
           <label>● ช่วง 14 วันก่อนป่วยมีประวัติสัมผัสกับผู้ป่วยยืนยันโรคติดเชื้อไวรัสโคโรน่า 2019 ระบุ</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios21" [(ngModel)]="radiotouch" value="ใช่"/>
+              <input type="radio" name="radios25" [(ngModel)]="radiotouch" value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radiotouch"value="ไม่"/>
+              <input type="radio" name="radios25" [(ngModel)]="radiotouch"value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -442,12 +442,12 @@
           <label>● ช่วง 14 วันก่อนป่วยประกอบอาชีพที่สัมผัสใกล้ชิดกับนักท่องเที่ยวต่างชาติหรือแรงงานต่างชาติ</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios21" [(ngModel)]="radiovisitor" value="ใช่"/>
+              <input type="radio" name="radios26" [(ngModel)]="radiovisitor" value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radiovisitor" value="ไม่"/>
+              <input type="radio" name="radios26" [(ngModel)]="radiovisitor" value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -457,12 +457,12 @@
           <label>● ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช้น ผับ สนามมวย</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios21" [(ngModel)]="radiocrowded"  value="ใช่"/>
+              <input type="radio" name="radios27" [(ngModel)]="radiocrowded"  value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radiocrowded" value="ไม่"/>
+              <input type="radio" name="radios27" [(ngModel)]="radiocrowded" value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -472,12 +472,12 @@
           <label>● เป็นผู้ป่วยอาการทางเดินหายใจหรือปอดอักเสบเป็นกลุ่มก้อน</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios21" [(ngModel)]="radiobreath" value="ใช่"/>
+              <input type="radio" name="radios28" [(ngModel)]="radiobreath" value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radiobreath" value="ไม่"/>
+              <input type="radio" name="radios28" [(ngModel)]="radiobreath" value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -487,12 +487,12 @@
           <label>● เป็นผู้ป่วยปอดอักเสบรุนแรงหรือเสียชีวิตที่หาสาเหตุไม่ได้</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios21" [(ngModel)]="radioinject" value="ใช่"/>
+              <input type="radio" name="radios29" [(ngModel)]="radioinject" value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radioinject" value="ไม่"/>
+              <input type="radio" name="radios29" [(ngModel)]="radioinject" value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -502,12 +502,12 @@
           <label>● เป็นบุคลาการทางการแพทย์และสาธรณะสุขหรือเจ้าหน้าที่ห้องปฏิบัติการ</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios21" [(ngModel)]="radiolabtest" value="ใช่"/>
+              <input type="radio" name="radios30" [(ngModel)]="radiolabtest" value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radiolabtest" value="ไม่"/>
+              <input type="radio" name="radios30" [(ngModel)]="radiolabtest" value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -554,7 +554,7 @@
       </div>
     </div>
   </div>
-  <div class="row mt-15">
+  <div class="row mt-15 mb-15">
     <div class="col-md-2 offset-md-5 mt-8 ">
       <!--      <button class="btn btn-outline-info form-control">บันทึก</button></div>-->
       <button type="button" class="btn btn-primary btn-lg">บันทึก</button>
