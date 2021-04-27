@@ -215,12 +215,13 @@
             <input type="text" class="form-control"/>
           </div>
         </div>
-        <div class="row mt-5">
-          <div class="col">
+        <div class="form-check row mt-5">
+          <div class="col-form-label font-prompt-medium">
             <label>อาการและอาการแสดงในวันพบผู้ป่วย</label>
-            <div class="checkbox-inline col-md-12">
-              <label class="checkbox checkbox-rounded ">
-                <input type="checkbox" name="radios5" [(ngModel)]="radiosymptom" value="ไข้"/>
+
+            <div class="checkbox-inline col-md-auto">
+              <label class="checkbox ">
+                <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiosymptom.checked" value="1"/>
                 <span></span>
                 ไข้
                 <input type="text" class="form-control" placeholder="องศาเซลเซียส"/>
@@ -232,88 +233,89 @@
               <div class="col-md-5 col-lg-4">
                 <input type="text" class="form-control" placeholder="ระดับออกซิเจนในเลือด(%)"/>
               </div>
-            </div>
-            <div class="radio-inline col-md-12">
-              <label class="checkbox checkbox-rounded mt-4  ">
-                <input type="checkbox" name="radios6" [(ngModel)]="radiosymptom" value="2"/>
+
+<!--            </div>-->
+<!--            <div class="radio-inline col-md-12">-->
+              <label class="checkbox  mt-4  ">
+                <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiotest"  value="ใส่เครื่องช่วยหายใจ"/>
                 <span></span>
                 ใส่เครื่องช่วยหายใจ
               </label>
-              <label class="radio mt-4  ">
-                <input type="radio" name="radios7" [(ngModel)]="radiosymptom" value="ไอ"/>
+              <label class="checkbox mt-4  ">
+                <input type="checkbox" name="Checkboxes6"  value="ไอ"/>
                 <span></span>
                 ไอ
               </label>
-              <label class="radio mt-4  ">
-                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="เจ็บคอ"/>
+              <label class="checkbox mt-4  ">
+                <input type="checkbox" name="Checkboxes6"  value="เจ็บคอ"/>
                 <span></span>
                 เจ็บคอ
               </label>
-              <label class="radio mt-4  ">
-                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="ปวดกล้ามเนื้อ"/>
+              <label class="checkbox mt-4  ">
+                <input type="checkbox" name="Checkboxes6"  value="ปวดกล้ามเนื้อ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ปวดกล้ามเนื้อ
               </label>
 
-              <label class="radio mt-4  ">
-                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="มีน้ำมูก"/>
+              <label class="checkbox mt-4  ">
+                <input type="checkbox" name="Checkboxes6"  value="มีน้ำมูก" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 มีน้ำมูก
               </label>
 
-              <label class="radio mt-4  ">
-                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="มีเสมหะ"/>
+              <label class="checkbox mt-4  ">
+                <input type="checkbox" name="Checkboxes6"  value="มีเสมหะ"/>
                 <span></span>
                 มีเสมหะ
               </label>
 
 
-              <label class="radio mt-4  ">
-                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="หายใจลำบาก"/>
+              <label class="checkbox mt-4  ">
+                <input type="checkbox" name="Checkboxes6"  value="หายใจลำบาก"/>
                 <span></span>
                 หายใจลำบาก
               </label>
 
-              <label class="radio mt-4  ">
-                <input type="radio" name="radios13" [(ngModel)]="radiosymptom" value="ปวดศรีษะ"/>
+              <label class="checkbox mt-4  ">
+                <input type="checkbox" name="Checkboxes6"  value="ปวดศรีษะ"/>
                 <span></span>
                 ปวดศรีษะ
               </label>
 
-              <label class="radio mt-4 ">
-                <input type="radio" name="radios14" [(ngModel)]="radiosymptom" value="ถ่ายเหลว"/>
+              <label class="checkbox mt-4 ">
+                <input type="checkbox" name="Checkboxes6" value="ถ่ายเหลว"/>
                 <span></span>
                 ถ่ายเหลว
               </label>
 
-              <label class="radio mt-4 ">
-                <input type="radio" name="radios15" [(ngModel)]="radiosymptom" value="จมูกไม่ได้กลิ่น"/>
+              <label class="checkbox mt-4 ">
+                <input type="checkbox" name="Checkboxes6"  value="จมูกไม่ได้กลิ่น"/>
                 <span></span>
                 จมูกไม่ได้กลิ่น
               </label>
 
-              <label class="radio mt-4 ">
-                <input type="radio" name="radios16" [(ngModel)]="radiosymptom" value="ลิ้นไม่รับรส"/>
+              <label class="checkbox mt-4 ">
+                <input type="checkbox" name="Checkboxes6"  value="ลิ้นไม่รับรส"/>
                 <span></span>
                 ลิ้นไม่รับรส
               </label>
 
-              <label class="radio mt-4 ">
-                <input type="radio" name="radios17" [(ngModel)]="radiosymptom" value="ตาแดง"/>
+              <label class="checkbox mt-4 ">
+                <input type="checkbox" name="Checkboxes6" value="ตาแดง"/>
                 <span></span>
                 ตาแดง
               </label>
 
-              <label class="radio mt-4 ">
-                <input type="radio" name="radios18" [(ngModel)]="radiosymptom" value="ผื่น"/>
+              <label class="checkbox mt-4 ">
+                <input type="checkbox" name="Checkboxes6" value="ผื่น"/>
                 <span></span>
                 ผื่น
                 <div class="form-inline  col-lg-5">
                   <input type="text" class="form-control" placeholder="โปรดระบุตำแหน่ง"/>
                 </div>
               </label>
-              <label class="radio ">
-                <input type="radio" name="radios5" [(ngModel)]="radiosymptom" value="อื่นๆ"/>
+              <label class="checkbox ">
+                <input type="checkbox" name="Checkboxes6"  value="อื่นๆ"/>
                 <span></span>
                 อื่นๆ
                 <div class="form-inline  col-lg-5">
@@ -352,29 +354,29 @@
             </label>
           </div>
         </div>
-        <div class="row mt-5">
-          <div class="col-lg-2 col-md-4">
-            <input type="text" class="form-control" placeholder="โปรดระบุเมือง"/>
+        <div class="row mt-5 ">
+          <div class="col-lg-2 col-md-4 font-prompt-light ">
+            <input type="text " class="form-control fsize9" placeholder="โปรดระบุเมือง"/>
           </div>
           <div class=" col-lg-2 col-md-4">
-            <input type="text" class="form-control" placeholder="โปรดระบุประเทศ"/>
+            <input type="text" class="form-control fsize9" placeholder="โปรดระบุประเทศ"/>
           </div>
           <div class="col-lg-2 col-md-4">
-            <input type="text" class="form-control" placeholder="โปรดระบุวันที่เดินทางเข้าประเทศไทย"/>
+            <input type="text" class="form-control fsize4" placeholder="โปรดระบุวันที่เดินทางเข้าประเทศไทย"/>
           </div>
           <div class="col-lg-2 col-md-4">
-            <input type="text" class="form-control" placeholder="โปรดระบุโดยสารการบิน"/>
+            <input type="text" class="form-control fsize4" placeholder="โปรดระบุโดยสารการบิน"/>
           </div>
           <div class="col-lg-2 col-md-4">
-            <input type="text" class="form-control" placeholder="โปรดระบุเที่ยวบินที่"/>
+            <input type="text" class="form-control fsize9" placeholder="โปรดระบุเที่ยวบินที่"/>
           </div>
           <div class="col-lg-2 col-md-4">
-            <input type="text" class="form-control" placeholder="โปรดระบุเลขที่นั่ง"/>
+            <input type="text" class="form-control fsize9" placeholder="โปรดระบุเลขที่นั่ง"/>
           </div>
         </div>
         <div class="row mt-5 font-prompt-medium fsize16">
           <label>● ช่วง 14 วันก่อนป่วยได้เข้ารับการรักษาหรือเยี่ยมผู้ป่วยในโรงพยาบาลของพื้นที่ที่มีการระบาด</label>
-          <div class="radio-inline col-md-6 ">
+          <div class="radio-inline col-md-4">
             <label class="radio ">
               <input type="radio" name="radios22" [(ngModel)]="radiorepair" value="ใช่"/>
               <span></span>
@@ -402,21 +404,7 @@
             </label>
           </div>
         </div>
-        <div class="row mt-5 font-prompt-medium fsize16">
-          <label>● ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ</label>
-          <div class="radio-inline col-md-4">
-            <label class="radio ">
-              <input type="radio" name="radios24" [(ngModel)]="radiotakecare" value="ใช่"/>
-              <span></span>
-              ใช่
-            </label>
-            <label class="radio  ">
-              <input type="radio" name="radios24" [(ngModel)]="radiotakecare" value="ไม่"/>
-              <span></span>
-              ไม่ใช่
-            </label>
-          </div>
-        </div>
+
         <div class="row mt-5 font-prompt-medium fsize16">
           <label>● ช่วง 14 วันก่อนป่วยมีประวัติสัมผัสกับผู้ป่วยยืนยันโรคติดเชื้อไวรัสโคโรน่า 2019 ระบุ</label>
           <div class="radio-inline col-md-4">

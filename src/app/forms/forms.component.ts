@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -12,19 +12,18 @@ export class FormsComponent implements OnInit {
   radioCheck: any = 0;
   radioAddress: any = 0;
   radioSmoke: any = 0;
-  radiosymptom: any = 0 ;
+  radiosymptom: any = [];
   radiofrom: any = 0;
-  radiorepair : any = 0;
-  radionear : any = 0;
-  radiotakecare : any = 0;
-  radiotouch : any = 0 ;
-  radiovisitor :any = 0;
-  radiocrowded : any = 0;
-  radiobreath :any =0;
-  radioinject :any =0;
-  radiolabtest:any=0;
-
-
+  radiorepair: any = 0;
+  radionear: any = 0;
+  radiotakecare: any = 0;
+  radiotouch: any = 0;
+  radiovisitor: any = 0;
+  radiocrowded: any = 0;
+  radiobreath: any = 0;
+  radioinject: any = 0;
+  radiolabtest: any = 0;
+  radiotest: any = 0;
 
 
   currentDate = new Date();
@@ -45,6 +44,16 @@ export class FormsComponent implements OnInit {
   });
 
   ngOnInit(): void {
+  }
+
+  onCheckboxChange(e) {
+    if (e.target.checked) {
+      this.radiosymptom.push(e.target.value);
+    } else {
+      const index = this.radiosymptom.indexOf(e.target.value);
+      this.radiosymptom.splice(index,1);
+    }
+    console.log(this.radiosymptom);
   }
 
 }

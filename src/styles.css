@@ -75,7 +75,18 @@
 .fsize36 {
   font-size: 36px
 }
-
+.fsize4 {
+  font-size: 4px
+}
+.fsize6 {
+  font-size: 6px
+}
+.fsize9 {
+  font-size: 9px
+}
+.fsize12 {
+  font-size: 12px
+}
 .fsize16 {
   font-size: 16px;
 }
