@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-
+import * as moment from 'moment';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { listLocales } from 'ngx-bootstrap/chronos';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -24,12 +26,40 @@ export class FormsComponent implements OnInit {
   radioinject: any = 0;
   radiolabtest: any = 0;
   radiotest: any = 0;
+  dateStart = moment().format('yyyy-MM-DD');
+  // dateFirst = moment().format('yyyy-MM-DD');
 
+  name:string='';
+  cid:string='';
+  national:string='';
+  numPreg:string='';
+  pregAge:string='';
 
+  station:string='';
+  job:string='';
+  Telephone:string='';
+  Telephonedoc:string='';
+  treat:string='';
+  No:string='';
+  moo:string='';
+  mooban:string='';
+  soi:string='';
+  road:string='';
+  tumbon:string='';
+  amphur:string='';
+  symtomany:string='';
+  province:string='';
+  hos_first:string='';
+  province_first:string='';
+  hos_now:string='';
+  province_now:string='';
+  find_symtom:string='';
+  locale = 'th-be';
+  locales = listLocales();
   currentDate = new Date();
   datadate: any;
 
-  constructor() {
+  constructor(private localeService: BsLocaleService) {
   }
 
   form = new FormGroup({
@@ -44,6 +74,8 @@ export class FormsComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    console.log(this.dateStart);
+    this.localeService.use(this.locale);
   }
 
   onCheckboxChange(e) {

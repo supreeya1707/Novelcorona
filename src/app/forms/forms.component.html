@@ -9,15 +9,15 @@
         <div class="row">
           <div class="col-md-4">
             <label>ชื่อ-นามสกุล <span class="text-danger">*</span></label>
-            <input type="name" class="form-control" placeholder="ชื่อ-นามสกุล"/>
+            <input [(ngModel)]="name" type="name" class="form-control" placeholder="ชื่อ-นามสกุล"/>
           </div>
           <div class="col-md-4">
             <label>เลขบัตรประชาชน <span class="text-danger">*</span></label>
-            <input type="email" class="form-control" placeholder="เลขบัตรประชาชน" maxlength="13"/>
+            <input [(ngModel)]="cid" type="email" class="form-control" placeholder="เลขบัตรประชาชน" maxlength="13"/>
           </div>
           <div class="col-md-4">
-            <label for="ex1">สัญชาติ<span class="text-danger">*</span></label>
-            <input class="form-control" id="ex1" type="text" placeholder="สัญชาติ">
+            <label >สัญชาติ<span class="text-danger">*</span></label>
+            <input class="form-control" [(ngModel)]="national" type="text" placeholder="สัญชาติ">
           </div>
         </div>
         <div class="row mt-5">
@@ -54,10 +54,10 @@
           <div class="col-md-8 mt-8" *ngIf="radioPreg ==1">
             <div class="row">
               <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="ครรภ์ที่ "/>
+                <input type="text" [(ngModel)]="numPreg" class="form-control" placeholder="ครรภ์ที่ "/>
               </div>
               <div class="col-md-6">
-                <input type="email" class="form-control" placeholder="อายุครรภ์/สัปดาห์"/>
+                <input type="email" [(ngModel)]="pregAge" class="form-control" placeholder="อายุครรภ์/สัปดาห์"/>
               </div>
             </div>
           </div>
@@ -69,23 +69,23 @@
           </div>
           <div class="col">
             <label>สถานที่ทำงาน/สถานศึกษา<span class="text-danger">*</span></label>
-            <input type="station" class="form-control" placeholder="สถานที่ทำงาน/สถานศึกษา"/>
+            <input type="text" [(ngModel)]="station" class="form-control" placeholder="สถานที่ทำงาน/สถานศึกษา"/>
           </div>
           <div class="col">
             <label>เบอร์โทรศัพท์ที่ติดต่อได้<span class="text-danger">*</span></label>
-            <input type="Telephone" class="form-control" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้" maxlength="10"/>
+            <input type="text" [(ngModel)]="Telephone" class="form-control" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้" maxlength="10"/>
 
           </div>
         </div>
         <div class="row mt-5">
           <div class="col-lg-4 mt-4">
             <label>เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชั่น "หมอชนะ" <span class="text-danger">*</span></label>
-            <input type="Telephonedoc" class="form-control" maxlength="10"/>
+            <input type="text" [(ngModel)]="Telephonedoc" class="form-control" maxlength="10"/>
             <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
           </div>
           <div class="col-lg-4 mt-4">
             <label>สิทธิการรักษา <span class="text-danger">*</span></label>
-            <input type="treatment" class="form-control"/>
+            <input type="text" [(ngModel)]="treat" class="form-control"/>
             <!--    <span class="form-text text-muted">We'll never share your email with anyone else.</span>-->
           </div>
         </div>
@@ -113,7 +113,7 @@
         <div class="row mt-5">
           <div class="col-2 mt-2">
             <label>เลขที่ <span class="text-danger">*</span></label>
-            <input type="text" class="form-control"/>
+            <input type="text" [(ngModel)]="No" class="form-control"/>
 
           </div>
           <div class=" col-2 mt-2">
@@ -152,21 +152,21 @@
             <label>การสูบบุหรี่</label>
             <div class="col-md-12 radio-inline ">
               <label class="radio ">
-                <input type="radio" name="radios5" [(ngModel)]="radioGender" value="ไม่เคยสูบบุหรี่"/>
+                <input type="radio" name="radios5" [(ngModel)]="radioSmoke" value="ไม่เคยสูบบุหรี่"/>
                 <span></span>
                 ไม่เคยสูบบุหรี่
               </label>
             </div>
             <div class="radio-inline col-md-12">
               <label class="radio ">
-                <input type="radio" name="radios5" [(ngModel)]="radioGender" value="ยังคงสูบบุหรี่"/>
+                <input type="radio" name="radios5" [(ngModel)]="radioSmoke" value="ยังคงสูบบุหรี่"/>
                 <span></span>
                 ยังคงสูบบุหรี่
               </label>
             </div>
             <div class="radio-inline  col-md-12">
               <label class="radio ">
-                <input type="radio" name="radios5" [(ngModel)]="radioGender" value="เคยสูบแต่เลิกแล้ว"/>
+                <input type="radio" name="radios5" [(ngModel)]="radioSmoke" value="เคยสูบแต่เลิกแล้ว"/>
                 <span></span>
                 เคยสูบแต่เลิกแล้ว
               </label>
@@ -186,12 +186,13 @@
         <div class="row">
           <div class=" col-lg-6 col-md-6 ">
             <label>วันที่เริ่มป่วย</label>
-            <input class="form-control" type="date" value="2011-08-19"/>
+            <input class="form-control" type="date" value="{{dateStart}}"/>
+            <input placeholder="Datepicker" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
           </div>
 
           <div class="col-lg-6 col-md-6 ">
             <label>วันที่เข้ารับการรักษาครั้งแรก</label>
-            <input class="form-control" type="date" value="2011-08-19"/>
+            <input class="form-control" type="date" value="{{dateStart}}"/>
           </div>
         </div>
         <div class="row mt-5">
@@ -221,7 +222,7 @@
 
             <div class="checkbox-inline col-md-auto">
               <label class="checkbox ">
-                <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiosymptom.checked" value="1"/>
+                <input type="checkbox" name="Checkboxes6"  value=ไข้ (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ไข้
                 <input type="text" class="form-control" placeholder="องศาเซลเซียส"/>
@@ -237,17 +238,17 @@
 <!--            </div>-->
 <!--            <div class="radio-inline col-md-12">-->
               <label class="checkbox  mt-4  ">
-                <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiotest"  value="ใส่เครื่องช่วยหายใจ"/>
+                <input type="checkbox" name="Checkboxes6"  value="ใส่เครื่องช่วยหายใจ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ใส่เครื่องช่วยหายใจ
               </label>
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="ไอ"/>
+                <input type="checkbox" name="Checkboxes6"  value="ไอ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ไอ
               </label>
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="เจ็บคอ"/>
+                <input type="checkbox" name="Checkboxes6"  value="เจ็บคอ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 เจ็บคอ
               </label>
@@ -264,50 +265,50 @@
               </label>
 
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="มีเสมหะ"/>
+                <input type="checkbox" name="Checkboxes6"  value="มีเสมหะ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 มีเสมหะ
               </label>
 
 
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="หายใจลำบาก"/>
+                <input type="checkbox" name="Checkboxes6"  value="หายใจลำบาก" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 หายใจลำบาก
               </label>
 
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="ปวดศรีษะ"/>
+                <input type="checkbox" name="Checkboxes6"  value="ปวดศรีษะ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ปวดศรีษะ
               </label>
 
               <label class="checkbox mt-4 ">
-                <input type="checkbox" name="Checkboxes6" value="ถ่ายเหลว"/>
+                <input type="checkbox" name="Checkboxes6" value="ถ่ายเหลว" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ถ่ายเหลว
               </label>
 
               <label class="checkbox mt-4 ">
-                <input type="checkbox" name="Checkboxes6"  value="จมูกไม่ได้กลิ่น"/>
+                <input type="checkbox" name="Checkboxes6"  value="จมูกไม่ได้กลิ่น" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 จมูกไม่ได้กลิ่น
               </label>
 
               <label class="checkbox mt-4 ">
-                <input type="checkbox" name="Checkboxes6"  value="ลิ้นไม่รับรส"/>
+                <input type="checkbox" name="Checkboxes6"  value="ลิ้นไม่รับรส" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ลิ้นไม่รับรส
               </label>
 
               <label class="checkbox mt-4 ">
-                <input type="checkbox" name="Checkboxes6" value="ตาแดง"/>
+                <input type="checkbox" name="Checkboxes6" value="ตาแดง" (change)="onCheckboxChange($event)" />
                 <span></span>
                 ตาแดง
               </label>
 
               <label class="checkbox mt-4 ">
-                <input type="checkbox" name="Checkboxes6" value="ผื่น"/>
+                <input type="checkbox" name="Checkboxes6" value="ผื่น" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ผื่น
                 <div class="form-inline  col-lg-5">
@@ -315,7 +316,7 @@
                 </div>
               </label>
               <label class="checkbox ">
-                <input type="checkbox" name="Checkboxes6"  value="อื่นๆ"/>
+                <input type="checkbox" name="Checkboxes6"  value="อื่นๆ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 อื่นๆ
                 <div class="form-inline  col-lg-5">
@@ -343,34 +344,34 @@
           <div class="radio-inline col-md-6 offset-md-0">
 
             <label class="radio ">
-              <input type="radio" name="radios21" [(ngModel)]="radiofrom" value="ใช่"/>
+              <input type="radio" name="radios21" [(ngModel)]="radiofrom" value="1"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios21" [(ngModel)]="radiofrom" value="ไม่"/>
+              <input type="radio" name="radios21" [(ngModel)]="radiofrom" value="0"/>
               <span></span>
               ไม่ใช่
             </label>
           </div>
         </div>
         <div class="row mt-5 ">
-          <div class="col-lg-2 col-md-4 font-prompt-light ">
+          <div class="col-md-2 ">
             <input type="text " class="form-control fsize9" placeholder="โปรดระบุเมือง"/>
           </div>
-          <div class=" col-lg-2 col-md-4">
+          <div class=" col-md-2">
             <input type="text" class="form-control fsize9" placeholder="โปรดระบุประเทศ"/>
           </div>
-          <div class="col-lg-2 col-md-4">
+          <div class="col-md-2">
             <input type="text" class="form-control fsize4" placeholder="โปรดระบุวันที่เดินทางเข้าประเทศไทย"/>
           </div>
-          <div class="col-lg-2 col-md-4">
+          <div class="col-md-2">
             <input type="text" class="form-control fsize4" placeholder="โปรดระบุโดยสารการบิน"/>
           </div>
-          <div class="col-lg-2 col-md-4">
+          <div class="col-md-2">
             <input type="text" class="form-control fsize9" placeholder="โปรดระบุเที่ยวบินที่"/>
           </div>
-          <div class="col-lg-2 col-md-4">
+          <div class="col-md-2">
             <input type="text" class="form-control fsize9" placeholder="โปรดระบุเลขที่นั่ง"/>
           </div>
         </div>
