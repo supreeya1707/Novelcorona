@@ -16,7 +16,7 @@
             <input [(ngModel)]="cid" type="email" class="form-control" placeholder="เลขบัตรประชาชน" maxlength="13"/>
           </div>
           <div class="col-md-4">
-            <label >สัญชาติ<span class="text-danger">*</span></label>
+            <label>สัญชาติ<span class="text-danger">*</span></label>
             <input class="form-control" [(ngModel)]="national" type="text" placeholder="สัญชาติ">
           </div>
         </div>
@@ -73,7 +73,8 @@
           </div>
           <div class="col">
             <label>เบอร์โทรศัพท์ที่ติดต่อได้<span class="text-danger">*</span></label>
-            <input type="text" [(ngModel)]="Telephone" class="form-control" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้" maxlength="10"/>
+            <input type="text" [(ngModel)]="Telephone" class="form-control" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้"
+                   maxlength="10"/>
 
           </div>
         </div>
@@ -100,7 +101,7 @@
                 บ้าน
               </label>
               <label class="radio col-md-2">
-                <input type="radio" name="radios4"  [(ngModel)]="radioAddress" value="อื่นๆ"/>
+                <input type="radio" name="radios4" [(ngModel)]="radioAddress" value="อื่นๆ"/>
                 <span></span>
                 อื่นๆ
               </label>
@@ -176,7 +177,7 @@
       </div>
     </div>
   </div>
-<!--  section2-->
+  <!--  section2-->
   <div class="row mt-5 ">
     <div class="card col-md-12 shadow-xs">
       <div class="card-header">
@@ -186,13 +187,15 @@
         <div class="row">
           <div class=" col-lg-6 col-md-6 ">
             <label>วันที่เริ่มป่วย</label>
-            <input class="form-control" type="date" value="{{dateStart}}"/>
-            <input placeholder="Datepicker" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">
+            <input class="form-control"  type="text" value="{{dateStart}}" (bsValueChange)="selectDateStart($event)" bsDatepicker #dp="bsDatepicker"/>
+            <!--            <input placeholder="Datepicker" type="text" class="form-control" bsDatepicker #dp="bsDatepicker">-->
+
           </div>
 
           <div class="col-lg-6 col-md-6 ">
             <label>วันที่เข้ารับการรักษาครั้งแรก</label>
-            <input class="form-control" type="date" value="{{dateStart}}"/>
+            <input class="form-control" type="text" value="{{dateStart}}" bsDatepicker #dp="bsDatepicker"/>
+
           </div>
         </div>
         <div class="row mt-5">
@@ -222,7 +225,7 @@
 
             <div class="checkbox-inline col-md-auto">
               <label class="checkbox ">
-                <input type="checkbox" name="Checkboxes6"  value=ไข้ (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value=ไข้ (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ไข้
                 <input type="text" class="form-control" placeholder="องศาเซลเซียส"/>
@@ -235,50 +238,51 @@
                 <input type="text" class="form-control" placeholder="ระดับออกซิเจนในเลือด(%)"/>
               </div>
 
-<!--            </div>-->
-<!--            <div class="radio-inline col-md-12">-->
+              <!--            </div>-->
+              <!--            <div class="radio-inline col-md-12">-->
               <label class="checkbox  mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="ใส่เครื่องช่วยหายใจ" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="ใส่เครื่องช่วยหายใจ"
+                       (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ใส่เครื่องช่วยหายใจ
               </label>
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="ไอ" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="ไอ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ไอ
               </label>
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="เจ็บคอ" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="เจ็บคอ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 เจ็บคอ
               </label>
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="ปวดกล้ามเนื้อ" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="ปวดกล้ามเนื้อ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ปวดกล้ามเนื้อ
               </label>
 
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="มีน้ำมูก" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="มีน้ำมูก" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 มีน้ำมูก
               </label>
 
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="มีเสมหะ" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="มีเสมหะ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 มีเสมหะ
               </label>
 
 
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="หายใจลำบาก" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="หายใจลำบาก" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 หายใจลำบาก
               </label>
 
               <label class="checkbox mt-4  ">
-                <input type="checkbox" name="Checkboxes6"  value="ปวดศรีษะ" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="ปวดศรีษะ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ปวดศรีษะ
               </label>
@@ -290,19 +294,19 @@
               </label>
 
               <label class="checkbox mt-4 ">
-                <input type="checkbox" name="Checkboxes6"  value="จมูกไม่ได้กลิ่น" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="จมูกไม่ได้กลิ่น" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 จมูกไม่ได้กลิ่น
               </label>
 
               <label class="checkbox mt-4 ">
-                <input type="checkbox" name="Checkboxes6"  value="ลิ้นไม่รับรส" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="ลิ้นไม่รับรส" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ลิ้นไม่รับรส
               </label>
 
               <label class="checkbox mt-4 ">
-                <input type="checkbox" name="Checkboxes6" value="ตาแดง" (change)="onCheckboxChange($event)" />
+                <input type="checkbox" name="Checkboxes6" value="ตาแดง" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 ตาแดง
               </label>
@@ -316,7 +320,7 @@
                 </div>
               </label>
               <label class="checkbox ">
-                <input type="checkbox" name="Checkboxes6"  value="อื่นๆ" (change)="onCheckboxChange($event)"/>
+                <input type="checkbox" name="Checkboxes6" value="อื่นๆ" (change)="onCheckboxChange($event)"/>
                 <span></span>
                 อื่นๆ
                 <div class="form-inline  col-lg-5">
@@ -394,12 +398,12 @@
           <label>● ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios23"[(ngModel)]="radionear" value="ใช่"/>
+              <input type="radio" name="radios23" [(ngModel)]="radionear" value="ใช่"/>
               <span></span>
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios23" [(ngModel)]="radionear"  value="ไม่"/>
+              <input type="radio" name="radios23" [(ngModel)]="radionear" value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -415,7 +419,7 @@
               ใช่
             </label>
             <label class="radio  ">
-              <input type="radio" name="radios25" [(ngModel)]="radiotouch"value="ไม่"/>
+              <input type="radio" name="radios25" [(ngModel)]="radiotouch" value="ไม่"/>
               <span></span>
               ไม่ใช่
             </label>
@@ -446,7 +450,7 @@
           <label>● ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช้น ผับ สนามมวย</label>
           <div class="radio-inline col-md-4">
             <label class="radio ">
-              <input type="radio" name="radios27" [(ngModel)]="radiocrowded"  value="ใช่"/>
+              <input type="radio" name="radios27" [(ngModel)]="radiocrowded" value="ใช่"/>
               <span></span>
               ใช่
             </label>
@@ -510,19 +514,19 @@
           <div class="row">
             <div class="col-md-6 ">
 
-            <label>ผู้รายงาน<span class="text-danger">*</span></label>
-            <input type="text" class="form-control"/>
-            <span class="form-text text-muted inli">หน่วยงานโรงพยาบาลราชบุรี</span>
+              <label>ผู้รายงาน<span class="text-danger">*</span></label>
+              <input type="text" class="form-control"/>
+              <span class="form-text text-muted inli">หน่วยงานโรงพยาบาลราชบุรี</span>
+            </div>
+            <div class="col-md-3">
+              <label>วันที่สอบสวน<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" placeholder="วัน/เดือน/ปี"/>
+            </div>
+            <div class="col-md-3">
+              <label>เวลา<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" placeholder="เวลา(น.)"/>
+            </div>
           </div>
-          <div class="col-md-3">
-            <label>วันที่สอบสวน<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" placeholder="วัน/เดือน/ปี"/>
-          </div>
-          <div class="col-md-3">
-            <label>เวลา<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" placeholder="เวลา(น.)"/>
-          </div>
-        </div>
         </div>
       </div>
     </div>
@@ -536,10 +540,131 @@
         <h2 class="text-warning">4.รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย</h2>
       </div>
       <div class="card-body">
-        <div class=" col">
-
-          <textarea class="form-control" id="exampleTextarea" rows="15"></textarea>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[0]}} <input type="hidden" name="dateTimeLine0" value="{{dateTimeLineShort[0]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine0" id="textTimeLine0" rows="3"></textarea>
+          </div>
         </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[1]}} <input type="hidden" name="dateTimeLine1" value="{{dateTimeLineShort[1]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine1" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[2]}} <input type="hidden" name="dateTimeLine2" value="{{dateTimeLineShort[2]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine2" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[3]}} <input type="hidden" name="dateTimeLine3" value="{{dateTimeLineShort[3]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine3" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[4]}} <input type="hidden" name="dateTimeLine4" value="{{dateTimeLineShort[4]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine4" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[5]}} <input type="hidden" name="dateTimeLine5" value="{{dateTimeLineShort[5]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine5" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[6]}} <input type="hidden" name="dateTimeLine6" value="{{dateTimeLineShort[6]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine6" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[7]}} <input type="hidden" name="dateTimeLine7" value="{{dateTimeLineShort[7]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine7" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[8]}} <input type="hidden" name="dateTimeLine8" value="{{dateTimeLineShort[8]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine0" id="textTimeLine8" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[9]}} <input type="hidden" name="dateTimeLine9" value="{{dateTimeLineShort[9]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine9" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[10]}} <input type="hidden" name="dateTimeLine10" value="{{dateTimeLineShort[10]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine10" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[11]}} <input type="hidden" name="dateTimeLine11" value="{{dateTimeLineShort[11]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine0" id="textTimeLine11" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[12]}} <input type="hidden" name="dateTimeLine12" value="{{dateTimeLineShort[12]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine12" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            วันที่ {{dateTimeLine[13]}} <input type="hidden" name="dateTimeLine13" value="{{dateTimeLineShort[13]}}">
+          </div>
+          <div class="col-md-10">
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine13" rows="3"></textarea>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
       </div>
     </div>
   </div>
