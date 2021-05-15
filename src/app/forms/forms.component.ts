@@ -13,80 +13,80 @@ import {ApiService} from "../services/api.service";
   templateUrl: './forms.component.html',
 })
 export class FormsComponent implements OnInit {
-  radioGender: any = 0;
-  radioPreg: any = 0;
-  radioCheck: any = 0;
+  radioGender: any ;
+  radioPreg: any ;
+  radioCheck: any ;
   // radioAddress: any = 0;
-  radioSmoke: any = 0;
+  radioSmoke: any;
   radiosymptom: any = [];
-  radiofrom: any = 0;
-  radiorepair: any = 0;
-  radionear: any = 0;
-  radiotakecare: any = 0;
-  radiotouch: any = 0;
-  radiovisitor: any = 0;
-  radiocrowded: any = 0;
-  radiobreath: any = 0;
-  radioinject: any = 0;
-  radiolabtest: any = 0;
+  radiofrom: any;
+  radiorepair: any ;
+  radionear: any ;
+  radiotakecare: any ;
+  radiotouch: any ;
+  radiovisitor: any;
+  radiocrowded: any;
+  radiobreath: any ;
+  radioinject: any ;
+  radiolabtest: any ;
   radiotest: any = 0;
   dateTimeLine: any = [];
   dateTimeLineShort: any = [];
-  Addressetc:string='';
+  Addressetc:any;
   sDate: any;
-  // dateStart = moment().format('yyyy-MM-DD');
+   dateselect = moment().format('yyyy-MM-DD');
   dateStart = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
 
   // dateFirst = moment().format('yyyy-MM-DD');
-hosp_fist='โรงพยาบาลราชบุรี';
-provin_first='ราชบุรี';
+  hosp_fist='โรงพยาบาลราชบุรี';
+  provin_first='ราชบุรี';
   hosp_now='โรงพยาบาลราชบุรี';
   provin_now='ราชบุรี';
 
-name: string = '';
-  cid: string = '';
-  age:number;
-  national: string = '';
-  numPreg: string = '';
-  pregAge: string = '';
+  name:any;
+  cid: any ;
+  age:any;
+  national:any;
+  numPreg: any ;
+  pregAge: any;
 
-  station: string = '';
-  job: string = '';
-  Telephone: string = '';
-  Telephonedoc: string = '';
-  treat: string = '';
-  No: string = '';
-  moo: string = '';
-  mooban: string = '';
-  soi: string = '';
-  road: string = '';
-  tumbon: string = '';
-  amphur: string = '';
-  disaese: string = '';
-  province: string = '';
-  hos_first: string = '';
-  province_first: string = '';
-  hos_now: string = '';
-  province_now: string = '';
-  assign_fever:string='';
-  assign_oxygen:string='';
-  find_symtom: string = '';
-  come_city:string='';
-  come_region:string='';
-  come_day:string='';
-  come_plane:string='';
-  come_round:string='';
-  come_seat:string='';
-  assign_touch:string=''
-  assign_employ:string='';
-  assign_station:string='';
-  assign_position:string='';
-  radioAddress:string='';
-  symtom_etc: string='';
+  station: any;
+  job: any;
+  Telephone: any;
+  Telephonedoc:any;
+  treat: any;
+  No: any;
+  moo: any;
+  mooban: any;
+  soi: any;
+  road: any;
+  tumbon: any;
+  amphur: any;
+  disaese:any;
+  province: any;
+  hos_first: any;
+  province_first: any;
+  hos_now: any;
+  province_now: any;
+  assign_fever:any;
+  assign_oxygen:any;
+  find_symtom: any;
+  come_city:any;
+  come_region:any;
+  come_day:any;
+  come_plane:any;
+  come_round:any;
+  come_seat:any;
+  assign_touch:any;
+  assign_employ:any;
+  assign_station:any;
+  assign_position:any;
+  radioAddress:any;
+  symtom_etc: any;
   locale = 'th-be';
   locales = listLocales();
   currentDate = new Date();
-  assign_des:string='';
+  assign_des:any;
   datadate: any;
 
   successNotification() {
@@ -105,7 +105,6 @@ name: string = '';
   }
 
   constructor(private localeService: BsLocaleService,
-              private router: Router,
               private api: ApiService,
               @Inject('baseURL') private baseURL: any) {
   }
@@ -225,12 +224,21 @@ name: string = '';
     data.novel_doc= this.radiolabtest;
     data.novel_des= this.assign_employ;
     data.novel_input_datetime = moment().format('yyyy-MM-DD HH:mm:ss');
+
+
+
+
+
+
+
+
+
     info.push(data);
     const rs: any = await this.api.insRec(info);
-    if (rs.ok) {
-      this.successNotification();
-    } else {
-      this.errorNotification();
-    }
+    // if (rs.ok) {
+    //   this.successNotification();
+    // } else {
+    //   this.errorNotification();
+    // }
   }
 }
