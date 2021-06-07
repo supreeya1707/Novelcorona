@@ -19,6 +19,22 @@ export class ApiService {
     };
 
     const url = `${this.baseURL}/novelcorona`;
+
+    console.log(url);
+    return this.http.post(url, {data: insRecord},
+      this.httpOptions
+    ).toPromise();
+  }
+  insData(insRecord: any): any {
+    const token = sessionStorage.getItem('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer ' + token
+      })
+    };
+
+    const url = `${this.baseURL}/noveltimeline`;
     console.log(url);
     return this.http.post(url, {data: insRecord},
       this.httpOptions

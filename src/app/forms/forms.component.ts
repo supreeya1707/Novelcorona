@@ -20,6 +20,25 @@ export class FormsComponent implements OnInit {
   radioSmoke: any;
   radiosymptom: any = [];
   radiofrom: any;
+
+  radiofever:any;
+  radiocough:any;
+  radiosorethroat:any;
+  radiorespirator:any;
+
+  radiomusclepain:any;
+  radiomucous:any;
+  radiophlegm:any;
+  radioheadache:any;
+  radiodifficulbreathing:any;
+  radiopurify:any;
+  radiosmell:any;
+  radiotaste:any;
+  radioredeye:any;
+  radiorash:any;
+
+
+
   radiorepair: any ;
   radionear: any ;
   radiotakecare: any ;
@@ -34,13 +53,15 @@ export class FormsComponent implements OnInit {
   dateTimeLineShort: any = [];
   Addressetc:any;
   sDate: any;
-   dateselect = moment().format('yyyy-MM-DD');
+  dateselect = moment().format('yyyy-MM-DD');
   dateStart = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
-
+  datadate =moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
+  datatreat=moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
+  datacome:any;
   // dateFirst = moment().format('yyyy-MM-DD');
   hosp_fist='โรงพยาบาลราชบุรี';
   provin_first='ราชบุรี';
-  hosp_now='โรงพยาบาลราชบุรี';
+  hosp_now ='โรงพยาบาลราชบุรี';
   provin_now='ราชบุรี';
 
   name:any;
@@ -87,7 +108,27 @@ export class FormsComponent implements OnInit {
   locales = listLocales();
   currentDate = new Date();
   assign_des:any;
-  datadate: any;
+
+  des_day1:any;
+  des_day2:any;
+  des_day3:any;
+  des_day4:any;
+  des_day5:any;
+  des_day6:any;
+  des_day7:any;
+  des_day8:any;
+  des_day9:any;
+  des_day10:any;
+  des_day11:any;
+  des_day12:any;
+  des_day13:any;
+  des_day14:any;
+
+
+
+
+
+
 
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
@@ -119,22 +160,29 @@ export class FormsComponent implements OnInit {
 
     ])
   });
+  date: any;
 
   ngOnInit(): void {
     console.log(this.dateStart);
     this.localeService.use(this.locale);
-    this.genDateTimeLine(this.dateStart);
+    this.genDateTimeLine(this.datadate);
     console.log(this.dateTimeLine);
-  }
 
-  onCheckboxChange(e) {
-    if (e.target.checked) {
-      this.radiosymptom.push(e.target.value);
-    } else {
-      const index = this.radiosymptom.indexOf(e.target.value);
-      this.radiosymptom.splice(index, 1);
-    }
-    console.log(this.radiosymptom);
+  }
+  getDate(e: any): any {
+    console.log(e);
+    this.datadate = moment(e).format('yyyy-MM-DD');
+    console.log(this.datadate);
+  }
+  getDatetreat(e: any): any {
+    console.log(e);
+    this.datatreat = moment(e).format('yyyy-MM-DD');
+    console.log(this.datatreat);
+  }
+  getDatecome(e: any): any {
+    console.log(e);
+    this.datacome = moment(e).format('yyyy-MM-DD');
+    console.log(this.datacome);
   }
 
   convertDate(d: any, i: any): any {
@@ -155,13 +203,14 @@ export class FormsComponent implements OnInit {
 
   selectDateStart(e: any): any {
     console.log(e);
-    this.dateStart = moment(e).add(543, 'year').format('DD/MM/YYYY');
+    // this.datatreat = moment(e).add(543, 'year').format('DD/MM/YYYY');
     this.sDate = moment(e).format('YYYY-MM-DD');
-    console.info(this.dateStart);
+    console.info(this.datadate);
     this.dateTimeLine = [];
     this.dateTimeLineShort = [];
-    this.genDateTimeLine(this.dateStart);
-    console.warn(this.dateTimeLineShort);
+    this.genDateTimeLine(this.datadate);
+
+
 
   }
 
@@ -189,33 +238,52 @@ export class FormsComponent implements OnInit {
     data.novel_soi= this.soi;
     data.novel_road= this.road;
     data.novel_district= this.tumbon;
-    data.novel_anphur= this.amphur;
+    data.novel_amphur= this.amphur;
     data.novel_disease= this.disaese;
     data.novel_province= this.province;
     data.novel_smoke= this.radioSmoke;
 
-    data.novel_start_sick=this.dateStart;
-    data.novel_start_treat= this.dateStart;
-    data.novel_hospital_first= this.hos_first;
-    data.novel_province_first= this.province_first;
-    data.novel_hospital_now= this.hos_now;
-    data.novel_province_now= this.province_now;
-    data.novel_symstom_any= this.radiosymptom;
-     data.novel_assign_fever=this.assign_fever;
-     data.novel_assign_oxygen=this.assign_oxygen;
+    data.novel_start_sick=this.datadate;
+    data.novel_start_treat= this.datatreat;
+    data.novel_hospital_first= this.hosp_fist;
+    data.novel_province_first= this.provin_first;
+    data.novel_hospital_now= this.hosp_now;
+    data.novel_province_now= this.provin_now;
+    data.novel_assign_fever=this.assign_fever;
+    data.novel_assign_oxygen=this.assign_oxygen;
+    data.novel_fever=this.radiofever;
+    data.novel_respirator=this.radiorespirator;
+    data.novel_cough=this.radiocough;
+    data.novel_sorethroat=this.radiosorethroat;
+    data.novel_musclepain=this.radiomusclepain;
+    data.novel_mucous=this.radiomucous;
+    data.novel_phlegm=this.radiophlegm;
+    data.novel_difficulbreathing=this.radiodifficulbreathing;
+    data.novel_headache=this.radioheadache;
+    data.novel_purify=this.radiopurify;
+    data.novel_smell=this.radiosmell;
+    data.novel_taste=this.radiotaste;
+    data.novel_redeye=this.radioredeye;
+    data.novel_rash=this.radiorash;
+    data.novel_position=this.assign_position;
+    data.novel_symtom_etc=this.symtom_etc;
 
-    data.novel_comeform= this.radiofrom;
+
+
+
+    data.novel_comefrom= this.radiofrom;
     data.novel_come_city= this.come_city;
     data.novel_come_country= this.come_region;
-    data.novel_date_come= this.come_day;
+    data.novel_date_come= this.datacome;
     data.novel_transportation= this.come_plane;
-
     data.novel_round_tran= this.come_round;
     data.novel_number_seat= this.come_seat;
+
     data.novel_takecare_hos= this.radiorepair;
     data.novel_touch_hos=this.radionear;
     data.novel_his_touch= this.radiotouch;
-    data.assign_touch=this.assign_touch
+    data.novel_assign_touch=this.assign_touch;
+    data.novel_assign_station=this.assign_station;
 
     data.novel_tourist= this.radiovisitor;
     data.novel_manyperson= this.radiocrowded;
@@ -226,19 +294,58 @@ export class FormsComponent implements OnInit {
     data.novel_input_datetime = moment().format('yyyy-MM-DD HH:mm:ss');
 
 
+    info.push(data);
+
+    const rs: any = await this.api.insRec(info);
+    if (rs.ok) {
+      this.successNotification();
+      console.log(rs.message[0]);
+      const rsins: any = await this.insertRec(rs.message[0]);
+    } else {
+      this.errorNotification();
+    }
+  }
+  async insertRec(id): Promise<any> {
+    const data: any = {};
+    const info: any = [];
+    data.novel_id = id;
+    data.day1=this.dateTimeLineShort[0];
+    data.day2=this.dateTimeLineShort[1];
+    data.day3=this.dateTimeLineShort[2];
+    data.day4=this.dateTimeLineShort[3];
+    data.day5=this.dateTimeLineShort[4];
+    data.day6=this.dateTimeLineShort[5];
+    data.day7=this.dateTimeLineShort[6];
+    data.day8=this.dateTimeLineShort[7];
+    data.day9=this.dateTimeLineShort[8];
+    data.day10=this.dateTimeLineShort[9];
+    data.day11=this.dateTimeLineShort[10];
+    data.day12=this.dateTimeLineShort[11];
+    data.day13=this.dateTimeLineShort[12];
+    data.day14=this.dateTimeLineShort[13];
 
 
 
 
-
-
+    data.timeline_date1=this.des_day1;
+    data.timeline_date2=this.des_day2;
+    data.timeline_date3=this.des_day3;
+    data.timeline_date4=this.des_day4;
+    data.timeline_date5=this.des_day5;
+    data.timeline_date6=this.des_day6;
+    data.timeline_date7=this.des_day7;
+    data.timeline_date8=this.des_day8;
+    data.timeline_date9=this.des_day9;
+    data.timeline_date10=this.des_day10;
+    data.timeline_date11=this.des_day11;
+    data.timeline_date12=this.des_day12;
+    data.timeline_date13=this.des_day13;
+    data.timeline_date14=this.des_day14;
 
     info.push(data);
-    const rs: any = await this.api.insRec(info);
-    // if (rs.ok) {
-    //   this.successNotification();
-    // } else {
-    //   this.errorNotification();
-    // }
+
+    const rs: any = await this.api.insData(info);
+
   }
+
 }
