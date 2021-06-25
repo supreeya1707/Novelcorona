@@ -40,4 +40,17 @@ export class ApiService {
       this.httpOptions
     ).toPromise();
   }
+
+  getData(cid:any): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelcorona/${cid}/cid`;
+
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
 }

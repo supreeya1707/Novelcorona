@@ -1,79 +1,51 @@
-<!--<div class="content-wrapper bg-white font-prompt-medium mt-6 bg-gray">-->
-<!--  <div class="content font-prompt-medium mt-6">-->
-<!--    <div class="container font-prompt-medium mt-6  ">-->
-<!--      <div class="row mb-2">-->
-<!--        <div class="col-lg-12 text-center">-->
-<!--          <img src="assets/picture/14DD.jpg ">-->
-<!--        </div>-->
-<!--        <div class="col-md-6 offset-md-3 ">-->
-<!--          <div class="form-group">-->
-<!--            <label class="control-label">เลขบัตรประจำตัวประชาชน</label>-->
-<!--            <input type="text" name="cid" id="cid" maxlength="13" class="form-control">-->
-<!--            <label class="text-danger font-prompt-medium mt-6" id="error">กรุณาใส่เลขบัตรประจำตัว/Passport-->
-<!--              Number</label>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="row justify-content-center fsize16">-->
-<!--        <button class="btn btn-bg-success  " style="width: 250px; height:50px;" id="btnView">ดูข้อมูล</button>-->
-<!--      </div>-->
-
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 <div class="container font-prompt-medium bg-">
-<!--  <nav class="navbar navbar-expand-lg bg-dark-o-40 text-uppercase fixed-top" id="mainNav" >-->
-    <div class="card-header card-info text-center">
-      <div class="col-md-4 offset-md-3 ">
-        <label class="control-label">เลขบัตรประจำตัวประชาชน/Passport Number</label>
-
-        <div class="input-group ">
-          <input type="text" name="cid" id="cid" inputmode="numeric" pattern="[0-9]" maxlength="13" class="form-control">
+  <div class="card-header card-info text-center">
+    <form [formGroup]="registerFrm">
+      <div class="form-group">
+        <label class="form-label">เลขประจำตัวประชาชน</label>
+        <div class="input-group mb-3">
+          <input name="cid" id="cid" formControlName="cid" (keyup.enter)="getonclick()"
+                 maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly
+                 [ngClass]="{ 'is-invalid': submitted && f.cid.errors  || ((f.cid.touched || f.cid.dirty) && f.cid.invalid) }"
+                 class="form-control" type="text" placeholder="ใส่เลขประจำตัวประชาชน 13 หลัก">
           <div class="input-group-append">
-<!--            <div class="input-group-text">-->
-<!--              <span class="fa fa-search"></span>-->
-<!--            </div>-->
-            <button type="button" class="btn btn-outline-secondary">ค้นหา</button>
+            <button class="btn btn-outline-secondary" type="button" (click)="getonclick()">ค้นหา</button>
+          </div>
+          <div *ngIf="submitted && f.cid.errors  || ((f.cid.touched || f.cid.dirty) && f.cid.invalid)"
+               class="invalid-feedback">
+            <div class="text-left fSize12" *ngIf="f.cid.errors.required">กรุณาใส่เลขประจำตัวประชาชน</div>
+            <div class="text-left fSize12" *ngIf="f.cid.errors.minlength">กรุณาใส่เลขประจำตัวประชาชน 13 หลัก</div>
           </div>
         </div>
-        <div class="invalid-feedback">
 
-        </div>
-        <label class="text-danger font-prompt-medium mt-6" id="error">กรุณาใส่เลขบัตรประจำตัว/Passport
-        Number</label>
       </div>
-    </div>
-
-
-
-
-<!--  </nav>-->
-
+    </form>
+  </div>
 </div>
-<div class="container font-prompt-medium ">
-
+<div class="container font-prompt-medium fSize20 ">
     <div class=" card-info text-center">
       <div class="row justify-content-center">
-        <div class="container  table-responsive font-prompt-medium">
+        <div class="container  table-responsive font-prompt-medium fSize20">
           <div id="tableData_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
             <div class="row">
               <table class="table table-bordered table-hover dataTable no-footer" id="tableData"
                      role="grid" aria-describedby="tableData_info">
-
                 <thead>
-                <tr class="text-center bg-info" role="row">
+                <tr class="text-center bg-info-o-90" role="row">
                   <th>เลขบัตรประจำตัวประชาชน</th>
                   <th>ชื่อ</th>
+                  <th>เบอร์โทรศัพท์</th>
                   <th>วันที่เข้ารับการรักษา</th>
-                  <th><span class="fa fa-video"></span></th>
-
+                  <th></th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody *ngFor="let novel of dataNovel">
                 <tr>
-                  <td>
-                    <div align="center"></div>
-                  </td>
+                  <td>{{novel.novel_cid}}</td>
+                  <td>{{novel.novel_name}}</td>
+                  <td>{{novel.novel_phone}}</td>
+                  <td>{{novel.novel_start_treat}}</td>
+                  <td><span class="fa fa-print" (click)="printReport(novel.novel_id)"></span></td>
                 </tr>
                 </tbody>
               </table>
@@ -81,8 +53,6 @@
           </div>
         </div>
       </div>
-
-
   </div>
 </div>
 

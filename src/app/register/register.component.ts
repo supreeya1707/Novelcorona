@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../services/api.service";
 import {FormBuilder, Validators} from "@angular/forms";
-import 'dayjs/locale/th';
-import * as dayjs from 'dayjs';
+
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html',
+  selector: 'app-register',
+  templateUrl: './register.component.html',
 
 })
-export class ReportComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   navbarOpen = false;
   cid:any;
   dataNovel:any;
+  NumberJ:any;
+  HN:any;
+  fname
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
   data:any=[];
   registerFrm: any=[];
   submitted=false;
-
-
   constructor(private api: ApiService,private formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
@@ -28,12 +28,9 @@ export class ReportComponent implements OnInit {
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])]
     });
   }
-
-  //function call registerFrm
   get f() {
     return this.registerFrm.controls;
   }
-
   async getonclick():Promise<any>{
     this.submitted = true;
     // stop here if form is invalid
@@ -51,7 +48,7 @@ export class ReportComponent implements OnInit {
     //print on success
     if( rs.ok===true){
       this.dataNovel=rs.message;
-     console.log(this.dataNovel);
+      console.log(this.dataNovel);
     }else {
       console.log('error');
     }
@@ -61,10 +58,10 @@ export class ReportComponent implements OnInit {
   printReport(novel_id: any) {
 
   }
-  async insertData(): Promise<any> {
+  async insertRec(id): Promise<any> {
     const data: any = {};
     const info: any = [];
-    // data.novel_id = ;
+    data.novel_id = id;
 
 
     info.push(data);
@@ -72,4 +69,7 @@ export class ReportComponent implements OnInit {
     const rs: any = await this.api.insData(info);
 
   }
+
 }
+
+

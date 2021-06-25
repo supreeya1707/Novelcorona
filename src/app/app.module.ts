@@ -14,6 +14,7 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import { ReportComponent } from './report/report.component';
+import { RegisterComponent } from './register/register.component';
 
 
 defineLocale('th-be', thBeLocale);
@@ -22,7 +23,8 @@ defineLocale('th-be', thBeLocale);
   declarations: [
     AppComponent,
     FormsComponent,
-    ReportComponent
+    ReportComponent,
+    RegisterComponent
 
   ],
   imports: [
