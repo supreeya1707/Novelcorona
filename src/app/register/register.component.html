@@ -24,7 +24,7 @@
         </form>
       </div>
 
-    </div>
+    </div>t
   </div>
 
   <!--</div>-->
@@ -39,47 +39,47 @@
         <div class="row">
           <div class="col-md-2">
             <label>เลขที่ จพต. </label>
-            <input type="text" class="form-control" name="Numberbook"/>
+            <input type="text" class="form-control" name="Numberbook" [(ngModel)]="numberJ" value="{{numberJ}}"/>
           </div>
           <div class="col-md-2">
             <label>เลขบัตรประจำตัวประชาชน </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="cid" maxlength="13"/>
           </div>
           <div class="col-md-2">
             <label> HN </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="HN" maxlength="7"/>
           </div>
           <div class="col-md-2">
             <label> คำนำหน้าชื่อ </label>
-            <input type="text" class="form-control" placeholder="นาย/ นาง/ น.ส." name="name"/>
+            <input type="text" class="form-control" placeholder="นาย/ นาง/ น.ส." name="name" [(ngModel)]="prename"/>
           </div>
           <div class="col-md-2">
             <label> ชื่อ </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="fname"/>
           </div>
           <div class="col-md-2">
             <label>นามสกุล</label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="lname"/>
           </div>
           <div class="col-md-1 mt-4">
             <label>อายุ</label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="age"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>เพศ</label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="sex"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>เชื้อชาติ</label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="nation"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>สัญชาติ</label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="national"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>อาชีพ</label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="career"/>
           </div>
         </div>
         <div class="row mt-4">
@@ -91,31 +91,31 @@
         <div class="row mt-4">
           <div class="col-md-2 mt-4">
             <label>เลขที่ </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="numberadd"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>หมู่ที่ </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="moo"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>ตำบล </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="tumbon"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>อำเภอ </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="amphur"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>จังหวัด </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="province"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>เบอร์โทรศัพท์ </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="phone" maxlength="10"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>วันที่มาโรงพยาบาล </label>
-            <input type="text" class="form-control" placeholder="วว/ดด/ปปปป">
+            <input type="text" class="form-control" placeholder="วว/ดด/ปปปป" [(ngModel)]="datecome">
             <!--                   data-date-format="dd-mm-yyyy" name="dateSelect" data-provide="datepicker" data-date-language="th-th"/>-->
             <!--            <input type="text" class="form-control monthPicker datepicker" id="dateSelect" placeholder="เลือกวันที่มาตรวจ" autocomplete="off" data-date-autoclose="true"-->
             <!--                   name="dateSelect" data-date-format="dd-mm-yyyy" data-provide="datepicker"-->
@@ -123,45 +123,45 @@
           </div>
           <div class="col-md-2 mt-4">
             <label>วันที่เก็บตัวอย่าง </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="dategivetest"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>สถานที่ส่งตรวจ </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="placesendtest" />
           </div>
           <div class="col-md-2 mt-4">
             <label>วันที่สัมผัส </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="datetouch"/>
           </div>
           <div class="col-md-4 mt-4">
             <label>สถานที่เสี่ยง </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="placerisk"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>การกักตัว HQ / LQ </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="quarentine"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>วันที่เริ่มกักตัว </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="datequarentine"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>swab ครั้งที่ 2 </label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="swab2"/>
           </div>
           <div class="col-md-4 mt-4">
             <label>ผู้รายงาน</label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="reporter"/>
           </div>
           <div class="col-md-2 mt-4">
             <label>หมายเหตุอื่นๆ</label>
-            <input type="text" class="form-control" name="name"/>
+            <input type="text" class="form-control" name="name" [(ngModel)]="noteetc"/>
           </div>
         </div>
         <div class="card-footer mt-10">
           <div class="row-cols-md-6 mt-3">
             <div class="col md-5 offset-md-5">
-              <button type="submit" class="btn btn-primary btn-lg  mr-3">บันทึก</button>
+              <button type="submit" class="btn btn-primary btn-lg  mr-3" (click)="insertRegis()">บันทึก</button>
               <button type="submit" class="btn btn-secondary btn-lg ">ยกเลิก</button>
             </div>
           </div>

@@ -40,6 +40,22 @@ export class ApiService {
       this.httpOptions
     ).toPromise();
   }
+  insRegis(insRecord: any): any {
+    const token = sessionStorage.getItem('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer ' + token
+      })
+    };
+
+    const url = `${this.baseURL}/novelregis`;
+
+    console.log(url);
+    return this.http.post(url, {data: insRecord},
+      this.httpOptions
+    ).toPromise();
+  }
 
   getData(cid:any): any {
     // const token = sessionStorage.getByCid('token');
