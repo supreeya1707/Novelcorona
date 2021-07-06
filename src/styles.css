@@ -7139,6 +7139,8 @@ a.close.disabled {
   min-height: calc(100% - 1rem)
 }
 
+
+
 .modal-dialog-centered::before {
   display: block;
   height: calc(100vh - 1rem);
@@ -27472,6 +27474,7 @@ a.text-white:focus, a.text-white:hover {
   transition: all .15s ease;
   background-color: #f3f6f9 !important
 }
+
 
 .bg-light-o-90 {
   background-color: rgba(243, 246, 249, .36) !important
