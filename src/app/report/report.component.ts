@@ -103,6 +103,9 @@ export class ReportComponent implements OnInit {
       }
   }
 
+  testReport(){
+    this.generatePdf('open');
+  }
 
   async insertData(): Promise<any> {
     const data: any = {};
@@ -135,25 +138,53 @@ export class ReportComponent implements OnInit {
       pageSize: 'A4',
       pageOrientation: 'portrait',
       // [left, top, right, bottom]
-      pageMargins: [35, 50, 35, 50],
+      pageMargins: [30, 40, 30, 40],
       content: [
-        {text:  this.dataNovelByID[0].novel_cid, absolutePosition: {x: 435, y: 80}, bold : true},
+        /*{text:  this.dataNovelByID[0].novel_cid, absolutePosition: {x: 435, y: 80}, bold : true},
         {text:  '✓', absolutePosition: {x:  this.dataNovelByID[0].novel_preg ? 190: 95, y: 120}, bold : true},
         {text:  this.dataNovelByID[0].novel_name, absolutePosition: {x: 140, y: 100}, bold : true},
         {text:  this.dataNovelByID[0].novel_numpreg, absolutePosition: {x: 285, y: 120}, bold : true},
         {text:  this.dataNovelByID[0].novel_agepreg, absolutePosition: {x: 375, y: 120}, bold : true},
         {text:  this.dataNovelByID[0].novel_worker, absolutePosition: {x: 390, y: 140}, bold : true},
         {text:  moment(this.dataNovelByID[0].novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 100, y: 300}, bold : true},
-
+*/
+        {
+          columns: [
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'PUI'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'Amit ตึก......................'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'HR contact'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'LR contact นัด'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'Swab 2......................'},
+            {width: 'auto', text: 'จพต 14 วัน'},
+            {width: 'auto', text: '(วันที่..........ถึง..................)'}
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'โทรแจ้งผู้ป่วย'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'โทรแจ้ง 1733 รับผู้ป่วย Admit แจ้ง ชื่อ-สกุล HN ส่งมาจาก...............................'},
+            {width: 'auto', text: 'รายที่................'},
+            {width: 'auto', text: 'วันที่..................................'}
+          ],
+          columnGap: 5
+        },
         {
           columns: [
             {width: '25%', text: 'Code .............................................', fontsize: 16, alignment: 'left'},
             {width: '50%', text: 'แบบสอบสวนผู้ป่วยโรคติดเชื้อไวรัสโคโรนา 2019',  fontsize: 18, bold: true, alignment: 'center'},
-            {width: '25%', text: 'Novelcorona 2', fontsize: 16, alignment: 'right'},
+            {width: '25%', text: 'HN ...........................', fontsize: 16, alignment: 'right'},
           ],
           columnGap: 5
         },
-        {table : {widths: [520],
+        {table : {widths: [525],
             body: [
               [{text: '', border: [false, false, false, true], alignment: 'center'}],
               [{text: '', border: [false, false, false, false], alignment: 'center'}]
@@ -162,16 +193,17 @@ export class ReportComponent implements OnInit {
         },
         {
           columns: [
-            {width: '45%', text: '1. ข้อมูลทั่วไป', style: 'title'},
-            {width: '55%', text: 'เลขบัตรประชาชน/Passport ......................................................................', alignment: 'right'}
+            {width: '20%', text: '1. ข้อมูลทั่วไป', style: 'title'},
+            {width: 'auto', text: 'เลขบัตรประชาชน/Passport ...............................................'},
+            {width: 'auto', text: 'สิทธิการรักษา ..................................................................'},
           ],
           columnGap: 5
         },
         {
           columns: [
-            {width: '55%', text: 'ชื่อ -  นามสกุล ..............................................................................................'},
-            {width: '10%', text: 'เพศ ..............'},
-            {width: '20%', text: 'อายุ .......... ปี .......... เดือน'},
+            {width: '55%', text: 'ชื่อ - นามสกุล .....................................................................................................'},
+            {width: '10%', text: 'เพศ ...............'},
+            {width: '20%', text: 'อายุ ........... ปี .......... เดือน'},
             {width: '15%', text: 'สัญชาติ ....................', alignment: 'right'},
           ],
           columnGap: 5
@@ -188,7 +220,7 @@ export class ReportComponent implements OnInit {
                 ]
               }
             },
-            {width: '15%', text: 'ไม่ได้ตั้งครรภ์'},
+            {width: 'auto', text: 'ไม่ได้ตั้งครรภ์'},
             {width: 'auto',
               table: {
                 widths: [3],
@@ -199,10 +231,41 @@ export class ReportComponent implements OnInit {
               }
             },
             {width: 'auto', text: 'ตั้งครรภ์'},
-            {width: 'auto', text: 'ครรภ์ที่ ...................'},
-            {width: 'auto', text: 'อายุครรภ์ ................... สัปดาห์'},
+            {width: 'auto', text: 'ครรภ์ที่ ........'},
+            {width: 'auto', text: 'อายุครรภ์ ........... สัปดาห์'},
+            {width: 'auto', text: 'การสูบบุหรี่'},
+            {width: 'auto',
+              table: {
+                widths: [3],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ไม่เคยสูบ'},
+            {width: 'auto',
+              table: {
+                widths: [3],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ยังสูบ'},
+            {width: 'auto',
+              table: {
+                widths: [3],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'เคยสูบแต่เลิกแล้ว'}
           ],
-          columnGap: 5
+          columnGap: 3
         },
         {
           columns: [
@@ -221,8 +284,7 @@ export class ReportComponent implements OnInit {
         },
         {
           columns: [
-            {width: '60%', text: 'เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชัน "หมอชนะ" ...............................................................'},
-            {width: '40%', text: 'สิทธิการรักษา ....................................................................'},
+            {width: '60%', text: 'เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชัน "หมอชนะ" ...............................................................'}
           ],
           columnGap: 5
         },
@@ -661,7 +723,8 @@ export class ReportComponent implements OnInit {
           ],
           columnGap: 5
         },
-        {text: '4. ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019', style: 'title'},
+        {text: '4. รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย/เริ่มสัมผัสกลุ่มเสี่ยง/พื้นที่เสี่ยง', style: 'title', pageBreak: 'before'},
+        {text: '5. ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019', style: 'title'},
         {
           columns: [
             {width: 'auto', table: {
@@ -690,12 +753,11 @@ export class ReportComponent implements OnInit {
         },
         {text: 'ครั้งที่ 1 วันที่ได้รับ...................................................ชื่อวัคซีน......................................................สถานที่ได้รับ............................................................'},
         {text: 'ครั้งที่ 2 วันที่ได้รับ...................................................ชื่อวัคซีน......................................................สถานที่ได้รับ............................................................'},
-        {text: '5. รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย/เริ่มสัมผัสกลุ่มเสี่ยง/พื้นที่เสี่ยง', style: 'title', pageBreak: 'before'},
       ],
       defaultStyle: {
         font: 'THSarabunNew',
         fontSize: 14,
-        lineHeight: 1.1
+        lineHeight: 1
       },
       styles: {
         title: {
