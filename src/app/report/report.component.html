@@ -24,7 +24,6 @@
 </div>
 <div class="container font-prompt-medium fSize20 ">
     <div class=" card-info text-center">
-      <div><button class="btn" (click)="testReport()">TEST</button></div>
       <div class="row justify-content-center">
         <div class="container  table-responsive font-prompt-medium fSize20">
           <div id="tableData_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -46,7 +45,7 @@
                   <td>{{novel.novel_name}}</td>
                   <td>{{novel.novel_phone}}</td>
                   <td>{{novel.novel_start_treat}}</td>
-                  <td><span class="fa fa-print" (click)="printReport(novel.novel_id)"></span></td>
+                  <td><button (click)="printReport(novel.novel_id)" class="btn btn-xs btn-outline-secondary"><i class="fa fa-print"></i>Corona</button></td>
                 </tr>
                 </tbody>
               </table>

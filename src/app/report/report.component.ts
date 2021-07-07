@@ -4,7 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
-
+import * as moment from 'moment';
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -38,6 +38,7 @@ export class ReportComponent implements OnInit {
   navbarOpen = false;
   cid: any;
   dataNovel: any;
+  dataNovelByID: any;
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
@@ -46,6 +47,7 @@ export class ReportComponent implements OnInit {
   data: any = [];
   registerFrm: any = [];
   submitted = false;
+
 
 
   constructor(private api: ApiService, private formBuilder: FormBuilder) {
@@ -87,24 +89,28 @@ export class ReportComponent implements OnInit {
 
   }
 
-  printReport(novel_id: any) {
 
+
+  async printReport(novel_id: any) {
+      // console.log(novel_id);
+      const res: any = await this.api.getDataById(novel_id);
+      console.log(res);
+      if (res.ok === true) {
+        this.dataNovelByID = res.message;
+        this.generatePdf('open');
+      } else {
+        console.log('error');
+      }
   }
 
-  testReport(){
-    this.generatePdf('open');
-  }
 
   async insertData(): Promise<any> {
     const data: any = {};
     const info: any = [];
     // data.novel_id = ;
 
-
     info.push(data);
-
     const rs: any = await this.api.insData(info);
-
   }
 
   generatePdf(action) {
@@ -131,6 +137,14 @@ export class ReportComponent implements OnInit {
       // [left, top, right, bottom]
       pageMargins: [35, 50, 35, 50],
       content: [
+        {text:  this.dataNovelByID[0].novel_cid, absolutePosition: {x: 435, y: 80}, bold : true},
+        {text:  '✓', absolutePosition: {x:  this.dataNovelByID[0].novel_preg ? 190: 95, y: 120}, bold : true},
+        {text:  this.dataNovelByID[0].novel_name, absolutePosition: {x: 140, y: 100}, bold : true},
+        {text:  this.dataNovelByID[0].novel_numpreg, absolutePosition: {x: 285, y: 120}, bold : true},
+        {text:  this.dataNovelByID[0].novel_agepreg, absolutePosition: {x: 375, y: 120}, bold : true},
+        {text:  this.dataNovelByID[0].novel_worker, absolutePosition: {x: 390, y: 140}, bold : true},
+        {text:  moment(this.dataNovelByID[0].novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 100, y: 300}, bold : true},
+
         {
           columns: [
             {width: '25%', text: 'Code .............................................', fontsize: 16, alignment: 'left'},

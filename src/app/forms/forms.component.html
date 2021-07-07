@@ -571,106 +571,13 @@
 
     </div>
 
+<!--section 4 -->
+
 
     <div class="row mt-5 font-prompt-medium">
       <div class="card col-md-12 shadow-xs">
         <div class="card-header">
-          <h2 class="text-warning">4.ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019 </h2>
-        </div>
-        <div class="card-body">
-          <div class="row mt-4">
-            <div class="col font-prompt-medium">
-              <div class="checkbox-inline  ">
-                <label class="checkbox checkbox-square checkbox-lg font-size-h5 ">
-                  <input type="checkbox" name="Checkboxes13_1"/>
-                  <span></span>
-                  ไม่เคยได้รับ
-                </label>
-                <label class="checkbox checkbox-square checkbox-lg font-size-h5">
-                  <input type="checkbox" name="Checkboxes13_1"/>
-                  <span></span>
-                  เคยได้รับ สมุดบันทึกหรือหลักฐานการรับวัคซีนหรือไม่
-                </label>
-                <label class="checkbox checkbox-circle  font-size-h6">
-                  <input type="checkbox" name="Checkboxes13_2"/>
-                  <span></span>
-                  มี
-                </label>
-                <label class="checkbox checkbox-circle  font-size-h6">
-                  <input type="checkbox" name="Checkboxes13_2"/>
-                  <span></span>
-                  ไม่มี
-                </label>
-              </div>
-            </div>
-
-          </div>
-          <div class="row mt-5">
-            <div class=" col-md-4 ">
-              <form [formGroup]="form">
-                <label>ครั้งที่ 1 วันที่ได้รับ </label>
-                <div class="input-group">
-                  <input class="form-control" #datepickerMDY="bsDatepicker"
-                         bsDatepicker formControlName="dateMDY" (ngModelChange)="getDate($event)"
-                         (bsValueChange)="selectDateStart($event)"
-                         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-                  <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i>
-                </span>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="col-md-4">
-              <label>ชื่อวัคซีน </label>
-
-              <input type="text " class="form-control" id="vaccine">
-            </div>
-            <div class="col-md-4">
-              <label>สถานที่ได้รับ </label>
-              <input type="text " class="form-control" id="placevaccine">
-            </div>
-          </div>
-          <div class="row mt-5">
-            <div class=" col-md-4 ">
-              <form [formGroup]="form">
-                <label>ครั้งที่ 2 วันที่ได้รับ </label>
-                <div class="input-group">
-                  <input class="form-control" #datepickerMDY="bsDatepicker"
-                         bsDatepicker formControlName="dateMDY" (ngModelChange)="getDate($event)"
-                         (bsValueChange)="selectDateStart($event)"
-                         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-                  <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i>
-                </span>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="col-md-4">
-              <label>ชื่อวัคซีน </label>
-
-              <input type="text " class="form-control" id="vaccine2">
-            </div>
-            <div class="col-md-4">
-              <label>สถานที่ได้รับ </label>
-              <input type="text " class="form-control" id="placevaccine2">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!--  section5-->
-    <div class="row mt-5 font-prompt-medium">
-      <div class="card col-md-12 shadow-xs">
-        <div class="card-header">
-          <h2 class="text-warning">5.รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย</h2>
+          <h2 class="text-warning">4.รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย</h2>
         </div>
         <div class="card-body">
           <div class="row mt-4">
@@ -800,6 +707,99 @@
             <div class="col-md-10">
             <textarea class="form-control" name="textTimeLine1" id="textTimeLine13" rows="3" [(ngModel)]="des_day14"
                       value="{{des_day14}}"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  section5-->
+    <div class="row mt-5 font-prompt-medium">
+      <div class="card col-md-12 shadow-xs">
+        <div class="card-header">
+          <h2 class="text-warning">5.ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019 </h2>
+        </div>
+        <div class="card-body">
+          <div class="row mt-4">
+            <div class="col font-prompt-medium">
+              <div class="checkbox-inline  ">
+                <label class="checkbox checkbox-square checkbox-lg font-size-h5 ">
+                  <input type="checkbox" name="Checkboxes13_1"/>
+                  <span></span>
+                  ไม่เคยได้รับ
+                </label>
+                <label class="checkbox checkbox-square checkbox-lg font-size-h5">
+                  <input type="checkbox" name="Checkboxes13_1"/>
+                  <span></span>
+                  เคยได้รับ สมุดบันทึกหรือหลักฐานการรับวัคซีนหรือไม่
+                </label>
+                <label class="checkbox checkbox-circle  font-size-h6">
+                  <input type="checkbox" name="Checkboxes13_2"/>
+                  <span></span>
+                  มี
+                </label>
+                <label class="checkbox checkbox-circle  font-size-h6">
+                  <input type="checkbox" name="Checkboxes13_2"/>
+                  <span></span>
+                  ไม่มี
+                </label>
+              </div>
+            </div>
+
+          </div>
+          <div class="row mt-5">
+            <div class=" col-md-4 ">
+              <form [formGroup]="form">
+                <label>ครั้งที่ 1 วันที่ได้รับ </label>
+                <div class="input-group">
+                  <input class="form-control" #datepickerMDY="bsDatepicker"
+                         bsDatepicker formControlName="dateMDY" (ngModelChange)="getDate($event)"
+                         (bsValueChange)="selectDateStart($event)"
+                         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                  <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i>
+                </span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-4">
+              <label>ชื่อวัคซีน </label>
+
+              <input type="text " class="form-control" id="vaccine">
+            </div>
+            <div class="col-md-4">
+              <label>สถานที่ได้รับ </label>
+              <input type="text " class="form-control" id="placevaccine">
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class=" col-md-4 ">
+              <form [formGroup]="form">
+                <label>ครั้งที่ 2 วันที่ได้รับ </label>
+                <div class="input-group">
+                  <input class="form-control" #datepickerMDY="bsDatepicker"
+                         bsDatepicker formControlName="dateMDY" (ngModelChange)="getDate($event)"
+                         (bsValueChange)="selectDateStart($event)"
+                         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                  <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i>
+                </span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-4">
+              <label>ชื่อวัคซีน </label>
+
+              <input type="text " class="form-control" id="vaccine2">
+            </div>
+            <div class="col-md-4">
+              <label>สถานที่ได้รับ </label>
+              <input type="text " class="form-control" id="placevaccine2">
             </div>
           </div>
         </div>

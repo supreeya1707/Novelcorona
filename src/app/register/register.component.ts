@@ -132,14 +132,14 @@ export class RegisterComponent implements OnInit {
     info.push(data);
 
     const rs: any = await this.api.insRegis(info);
-    // if (rs.ok) {
-    //   this.successNotification();
-    //   console.log(rs.message[0]);
-    //   // @ts-ignore
-    //   const rsins: any = await this.insertRegis(rs.message[0]);
-    // } else {
-    //   this.errorNotification();
-    // }
+    if (rs.ok) {
+      this.successNotification();
+      console.log(rs.message[0]);
+      // @ts-ignore
+      const rsins: any = await this.insertRegis(rs.message[0]);
+    } else {
+      this.errorNotification();
+    }
 
   }
 
