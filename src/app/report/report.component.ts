@@ -141,7 +141,7 @@ export class ReportComponent implements OnInit {
       pageMargins: [30, 35, 30, 35],
       content: [
         {text:  this.dataNovelByID[0].novel_cid, absolutePosition: {x: 260, y: 93}, bold : true},
-        {text:  this.dataNovelByID[0].novel_treat, absolutePosition: {x: 470, y: 93}, bold : true},
+        {text:  this.dataNovelByID[0].novel_treat, absolutePosition: {x: 450, y: 93}, bold : true},
         {text:  this.dataNovelByID[0].novel_name, absolutePosition: {x: 140, y: 110}, bold : true},
         {text:  this.dataNovelByID[0].novel_gender === 1 ? 'หญิง' : 'ชาย', absolutePosition: {x: 345, y: 110}, bold : true},
         {text:  this.dataNovelByID[0].novel_age, absolutePosition: {x: 403, y: 110}, bold : true},
@@ -150,7 +150,22 @@ export class ReportComponent implements OnInit {
         {text:  this.dataNovelByID[0].novel_numpreg, absolutePosition: {x: 232, y: 126}, bold : true},
         {text:  this.dataNovelByID[0].novel_agepreg, absolutePosition: {x: 292, y: 126}, bold : true},
         {text:  '✕', absolutePosition: {x:  this.dataNovelByID[0].novel_smoke === 0  ? 390 : this.dataNovelByID[0].novel_smoke === 1 ? 443 : 482, y: 128}, bold : true},
-        // {text:  this.dataNovelByID[0].novel_worker, absolutePosition: {x: 390, y: 140}, bold : true},
+        {text:  this.dataNovelByID[0].novel_worker, absolutePosition: {x: 370, y: 142}, bold : true},
+        {text:  this.dataNovelByID[0].novel_station, absolutePosition: {x: 210, y: 159}, bold : true},
+        {text:  this.dataNovelByID[0].novel_phone, absolutePosition: {x: 480, y: 159}, bold : true},
+        {text:  this.dataNovelByID[0].novel_phonedoc, absolutePosition: {x: 217, y: 175}, bold : true},
+        {text:  moment(this.dataNovelByID[0].novel_birthday).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 400, y: 175}, bold : true},
+        {text:  this.dataNovelByID[0].novel_number_address, absolutePosition: {x: 118, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_moo, absolutePosition: {x: 175, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_mooban, absolutePosition: {x: 270, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_soi, absolutePosition: {x: 400, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_road, absolutePosition: {x: 520, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_district, absolutePosition: {x: 112, y: 208}, bold : true},
+        {text:  this.dataNovelByID[0].novel_amphur, absolutePosition: {x: 275, y: 208}, bold : true},
+        {text:  this.dataNovelByID[0].novel_province, absolutePosition: {x: 445, y: 208}, bold : true},
+        {text:  this.dataNovelByID[0].novel_weight, absolutePosition: {x: 85, y: 240}, bold : true},
+        {text:  this.dataNovelByID[0].novel_high, absolutePosition: {x: 180, y: 240}, bold : true},
+        {text:  this.dataNovelByID[0].novel_bmi, absolutePosition: {x: 260, y: 240}, bold : true},
         // {text:  moment(this.dataNovelByID[0].novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 100, y: 300}, bold : true},
 
         {
@@ -297,11 +312,11 @@ export class ReportComponent implements OnInit {
         {
           columns: [
             {width: 'auto', text: 'ที่อยู่ที่ติดต่อได้'},
-            {width: 'auto', text: 'เลขที่ ......................'},
-            {width: 'auto', text: 'หมู่ที่ .......................'},
+            {width: 'auto', text: 'เลขที่ ............'},
+            {width: 'auto', text: 'หมู่ที่ .............'},
             {width: 'auto', text: 'หมู่บ้าน ...........................................'},
-            {width: 'auto', text: 'ซอย ..............'},
-            {width: 'auto', text: 'ถนน .................................................'},
+            {width: 'auto', text: 'ซอย .............................................'},
+            {width: 'auto', text: 'ถนน ......................................'},
           ],
           columnGap: 5
         },
@@ -309,7 +324,7 @@ export class ReportComponent implements OnInit {
           columns: [
             {width: '33%', text: 'ตำบล ................................................................'},
             {width: '33%', text: 'อำเภอ ..............................................................'},
-            {width: '34%', text: 'จังหวัด ..................................................................'},
+            {width: '34%', text: 'จังหวัด ................................................................'},
           ],
           columnGap: 5
         },
