@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
@@ -15,7 +15,6 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import { ReportComponent } from './report/report.component';
 import { RegisterComponent } from './register/register.component';
-
 
 defineLocale('th-be', thBeLocale);
 
@@ -36,10 +35,12 @@ defineLocale('th-be', thBeLocale);
     AppRoutingModule,
     HttpClientModule,
 
+
   ],
   providers: [
     {provide: 'baseURL', useValue: environment.baseURL},
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    { provide: LOCALE_ID, useValue: "th-TH" }
   ],
   bootstrap: [AppComponent]
 })

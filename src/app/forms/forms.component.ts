@@ -6,11 +6,14 @@ import {listLocales} from 'ngx-bootstrap/chronos';
 import Swal from 'sweetalert2';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 import {ApiService} from "../services/api.service";
-
+// @ts-ignore
+import { DateAdapter } from '@angular/material';
 
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
+
+
 })
 export class FormsComponent implements OnInit {
   radioGender: any ;
@@ -57,6 +60,8 @@ export class FormsComponent implements OnInit {
   dateStart = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
   datadate =moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
   datatreat=moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
+  datevac1=moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
+  datevac2=moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
   datacome:any;
   // dateFirst = moment().format('yyyy-MM-DD');
   hosp_fist='โรงพยาบาลราชบุรี';
@@ -64,7 +69,9 @@ export class FormsComponent implements OnInit {
   hosp_now ='โรงพยาบาลราชบุรี';
   provin_now='ราชบุรี';
 
-  name:any;
+  pname:any[];
+  fname:any;
+  lname:any;
   cid: any ;
   age:any;
   national:any;
@@ -76,6 +83,7 @@ export class FormsComponent implements OnInit {
   Telephone: any;
   Telephonedoc:any;
   treat: any;
+  birthday:any;
   No: any;
   moo: any;
   mooban: any;
@@ -85,6 +93,20 @@ export class FormsComponent implements OnInit {
   amphur: any;
   disaese:any;
   province: any;
+  congential:any;
+  congential_etc:any;
+  weight:any;
+  high:any;
+  bmi:any;
+  checkcopd:any;
+  checkckd:any;
+  checkcad:any;
+  checkcva:any;
+  checkundm:any;
+  checkpids:any;
+
+
+
   hos_first: any;
   province_first: any;
   hos_now: any;
@@ -173,6 +195,14 @@ export class FormsComponent implements OnInit {
     console.log(e);
     this.datadate = moment(e).format('yyyy-MM-DD');
     console.log(this.datadate);
+  }getDatevac1(e: any): any {
+    console.log(e);
+    this.datevac1 = moment(e).format('yyyy-MM-DD');
+    console.log(this.datadate);
+  }getDatevac2(e: any): any {
+    console.log(e);
+    this.datevac2 = moment(e).format('yyyy-MM-DD');
+    console.log(this.datadate);
   }
   getDatetreat(e: any): any {
     console.log(e);
@@ -217,7 +247,9 @@ export class FormsComponent implements OnInit {
   async insertData(): Promise<any> {
     const data: any = {};
     const info: any = [];
-    data.novel_name=this.name;
+    data.novel_prename=this.pname;
+    data.novel_fname=this.fname;
+    data.novel_lname=this.lname;
     data.novel_cid=this.cid;
     data.novel_age=this.age
     data.novel_national=this.national;
@@ -230,6 +262,10 @@ export class FormsComponent implements OnInit {
     data.novel_phone = this.Telephone;
     data.novel_phonedoc = this.Telephonedoc;
     data.novel_treat = this.treat;
+
+
+
+
     data.novel_address = this.radioAddress;
     data.novel_address_etc = this.Addressetc;
     data.novel_number_address = this.No;
@@ -241,7 +277,28 @@ export class FormsComponent implements OnInit {
     data.novel_amphur= this.amphur;
     data.novel_disease= this.disaese;
     data.novel_province= this.province;
+    // data.novel_congential=this.disaese;
+    //congential fail
     data.novel_smoke= this.radioSmoke;
+    data.novel_copd=this.checkcopd;
+    data.novel_ckd=this.checkckd;
+    data.novel_cad=this.checkcad;
+    data.novel_cva=this.checkcva;
+    data.novel_undm=this.checkundm;
+    data.novel_pids=this.checkpids;
+    data.novel_congential_etc=this.congential_etc;
+    data.novel_weight=this.weight;
+    data.novel_high=this.high;
+    data.novel_bmi=this.bmi;
+
+
+
+
+
+
+
+
+
 
     data.novel_start_sick=this.datadate;
     data.novel_start_treat= this.datatreat;
