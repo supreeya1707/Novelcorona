@@ -134,6 +134,7 @@ export class ReportComponent implements OnInit {
   }
 
   getDocumentDefinition() {
+    const ptfullname = this.dataNovelByID[0].novel_prename + this.dataNovelByID[0].novel_fname + '  ' + this.dataNovelByID[0].novel_lname;
     const docDefinition = {
       pageSize: 'A4',
       pageOrientation: 'portrait',
@@ -142,14 +143,14 @@ export class ReportComponent implements OnInit {
       content: [
         {text:  this.dataNovelByID[0].novel_cid, absolutePosition: {x: 260, y: 93}, bold : true},
         {text:  this.dataNovelByID[0].novel_treat, absolutePosition: {x: 450, y: 93}, bold : true},
-        {text:  this.dataNovelByID[0].novel_name, absolutePosition: {x: 140, y: 110}, bold : true},
+        {text:  ptfullname, absolutePosition: {x: 140, y: 110}, bold : true},
         {text:  this.dataNovelByID[0].novel_gender === 1 ? 'หญิง' : 'ชาย', absolutePosition: {x: 345, y: 110}, bold : true},
         {text:  this.dataNovelByID[0].novel_age, absolutePosition: {x: 403, y: 110}, bold : true},
         {text:  this.dataNovelByID[0].novel_national, absolutePosition: {x: 535, y: 110}, bold : true},
-        {text:  '✓', absolutePosition: {x:  this.dataNovelByID[0].novel_preg ? 150  : 85, y: 128}, bold : true},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_preg ? 150  : 85, y: 120}, style: 'fSize24'},
         {text:  this.dataNovelByID[0].novel_numpreg, absolutePosition: {x: 232, y: 126}, bold : true},
         {text:  this.dataNovelByID[0].novel_agepreg, absolutePosition: {x: 292, y: 126}, bold : true},
-        {text:  '✕', absolutePosition: {x:  this.dataNovelByID[0].novel_smoke === 0  ? 390 : this.dataNovelByID[0].novel_smoke === 1 ? 443 : 482, y: 128}, bold : true},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_smoke === 0  ? 390 : this.dataNovelByID[0].novel_smoke === 1 ? 443 : 482, y: 120}, style: 'fSize24'},
         {text:  this.dataNovelByID[0].novel_worker, absolutePosition: {x: 370, y: 142}, bold : true},
         {text:  this.dataNovelByID[0].novel_station, absolutePosition: {x: 210, y: 159}, bold : true},
         {text:  this.dataNovelByID[0].novel_phone, absolutePosition: {x: 480, y: 159}, bold : true},
@@ -163,10 +164,29 @@ export class ReportComponent implements OnInit {
         {text:  this.dataNovelByID[0].novel_district, absolutePosition: {x: 112, y: 208}, bold : true},
         {text:  this.dataNovelByID[0].novel_amphur, absolutePosition: {x: 275, y: 208}, bold : true},
         {text:  this.dataNovelByID[0].novel_province, absolutePosition: {x: 445, y: 208}, bold : true},
-        {text:  this.dataNovelByID[0].novel_weight, absolutePosition: {x: 85, y: 240}, bold : true},
-        {text:  this.dataNovelByID[0].novel_high, absolutePosition: {x: 180, y: 240}, bold : true},
-        {text:  this.dataNovelByID[0].novel_bmi, absolutePosition: {x: 260, y: 240}, bold : true},
-        // {text:  moment(this.dataNovelByID[0].novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 100, y: 300}, bold : true},
+        (this.dataNovelByID[0].novel_copd = 1) ?  {text:  '√', absolutePosition: {x: 83, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_ckd = 1) ?  {text:  '√', absolutePosition: {x: 127, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_cad = 1) ?  {text:  '√', absolutePosition: {x: 165, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_cva = 1) ?  {text:  '√', absolutePosition: {x: 202, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_undm = 1) ?  {text:  '√', absolutePosition: {x: 237, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_pids = 1) ?  {text:  '√', absolutePosition: {x: 330, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_congential = 1) ?  {text:  '√', absolutePosition: {x: 417, y: 218}, style: 'fSize24'} : null,
+        {text:  this.dataNovelByID[0].novel_congential_etc, absolutePosition: {x: 460, y: 225}, bold : true},
+        {text:  this.dataNovelByID[0].novel_weight, absolutePosition: {x: 85, y: 241}, bold : true},
+        {text:  this.dataNovelByID[0].novel_high, absolutePosition: {x: 180, y: 241}, bold : true},
+        {text:  this.dataNovelByID[0].novel_bmi, absolutePosition: {x: 262, y: 241}, bold : true},
+
+        // ข้อมูลทางคลินิก
+        {text:  moment(this.dataNovelByID[0].novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 150, y: 274}, bold : true},
+        {text:  moment(this.dataNovelByID[0].novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 450, y: 274}, bold : true},
+        {text:  this.dataNovelByID[0].novel_hospital_first, absolutePosition: {x: 200, y: 290}, bold : true},
+        {text:  this.dataNovelByID[0].novel_province_first, absolutePosition: {x: 430, y: 290}, bold : true},
+        {text:  this.dataNovelByID[0].novel_hospital_now, absolutePosition: {x: 210, y: 306}, bold : true},
+        {text:  this.dataNovelByID[0].novel_province_now, absolutePosition: {x: 430, y: 306}, bold : true},
+        (this.dataNovelByID[0].novel_fever = 1) ?  {text:  '√', absolutePosition: {x: 180, y: 317}, style: 'fSize24'} : null,
+        {text:  this.dataNovelByID[0].novel_assign_fever, absolutePosition: {x: 290, y: 323}, bold : true},
+        {text:  this.dataNovelByID[0].novel_assign_oxygen, absolutePosition: {x: 400, y: 323}, bold : true},
+        (this.dataNovelByID[0].novel_respirator = 1) ?  {text:  '√', absolutePosition: {x: 467, y: 317}, style: 'fSize24'} : null,
 
         {
           columns: [
@@ -1383,7 +1403,8 @@ export class ReportComponent implements OnInit {
           bold: true
         },
         small: {fontSize: 12},
-        fontMid: {fontSize: 13}
+        fontMid: {fontSize: 13},
+        fSize24: {fontSize: 24, bold: true}
       }
     };
     return docDefinition;
