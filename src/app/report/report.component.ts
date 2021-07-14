@@ -103,6 +103,9 @@ export class ReportComponent implements OnInit {
       }
   }
 
+  testReport(){
+    this.generatePdf('open');
+  }
 
   async insertData(): Promise<any> {
     const data: any = {};
@@ -135,25 +138,73 @@ export class ReportComponent implements OnInit {
       pageSize: 'A4',
       pageOrientation: 'portrait',
       // [left, top, right, bottom]
-      pageMargins: [35, 50, 35, 50],
+      pageMargins: [30, 35, 30, 35],
       content: [
-        {text:  this.dataNovelByID[0].novel_cid, absolutePosition: {x: 435, y: 80}, bold : true},
-        {text:  '✓', absolutePosition: {x:  this.dataNovelByID[0].novel_preg ? 190: 95, y: 120}, bold : true},
-        {text:  this.dataNovelByID[0].novel_name, absolutePosition: {x: 140, y: 100}, bold : true},
-        {text:  this.dataNovelByID[0].novel_numpreg, absolutePosition: {x: 285, y: 120}, bold : true},
-        {text:  this.dataNovelByID[0].novel_agepreg, absolutePosition: {x: 375, y: 120}, bold : true},
-        {text:  this.dataNovelByID[0].novel_worker, absolutePosition: {x: 390, y: 140}, bold : true},
-        {text:  moment(this.dataNovelByID[0].novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 100, y: 300}, bold : true},
+        {text:  this.dataNovelByID[0].novel_cid, absolutePosition: {x: 260, y: 93}, bold : true},
+        {text:  this.dataNovelByID[0].novel_treat, absolutePosition: {x: 450, y: 93}, bold : true},
+        {text:  this.dataNovelByID[0].novel_name, absolutePosition: {x: 140, y: 110}, bold : true},
+        {text:  this.dataNovelByID[0].novel_gender === 1 ? 'หญิง' : 'ชาย', absolutePosition: {x: 345, y: 110}, bold : true},
+        {text:  this.dataNovelByID[0].novel_age, absolutePosition: {x: 403, y: 110}, bold : true},
+        {text:  this.dataNovelByID[0].novel_national, absolutePosition: {x: 535, y: 110}, bold : true},
+        {text:  '✓', absolutePosition: {x:  this.dataNovelByID[0].novel_preg ? 150  : 85, y: 128}, bold : true},
+        {text:  this.dataNovelByID[0].novel_numpreg, absolutePosition: {x: 232, y: 126}, bold : true},
+        {text:  this.dataNovelByID[0].novel_agepreg, absolutePosition: {x: 292, y: 126}, bold : true},
+        {text:  '✕', absolutePosition: {x:  this.dataNovelByID[0].novel_smoke === 0  ? 390 : this.dataNovelByID[0].novel_smoke === 1 ? 443 : 482, y: 128}, bold : true},
+        {text:  this.dataNovelByID[0].novel_worker, absolutePosition: {x: 370, y: 142}, bold : true},
+        {text:  this.dataNovelByID[0].novel_station, absolutePosition: {x: 210, y: 159}, bold : true},
+        {text:  this.dataNovelByID[0].novel_phone, absolutePosition: {x: 480, y: 159}, bold : true},
+        {text:  this.dataNovelByID[0].novel_phonedoc, absolutePosition: {x: 217, y: 175}, bold : true},
+        {text:  moment(this.dataNovelByID[0].novel_birthday).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 400, y: 175}, bold : true},
+        {text:  this.dataNovelByID[0].novel_number_address, absolutePosition: {x: 118, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_moo, absolutePosition: {x: 175, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_mooban, absolutePosition: {x: 270, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_soi, absolutePosition: {x: 400, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_road, absolutePosition: {x: 520, y: 192}, bold : true},
+        {text:  this.dataNovelByID[0].novel_district, absolutePosition: {x: 112, y: 208}, bold : true},
+        {text:  this.dataNovelByID[0].novel_amphur, absolutePosition: {x: 275, y: 208}, bold : true},
+        {text:  this.dataNovelByID[0].novel_province, absolutePosition: {x: 445, y: 208}, bold : true},
+        {text:  this.dataNovelByID[0].novel_weight, absolutePosition: {x: 85, y: 240}, bold : true},
+        {text:  this.dataNovelByID[0].novel_high, absolutePosition: {x: 180, y: 240}, bold : true},
+        {text:  this.dataNovelByID[0].novel_bmi, absolutePosition: {x: 260, y: 240}, bold : true},
+        // {text:  moment(this.dataNovelByID[0].novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 100, y: 300}, bold : true},
 
+        {
+          columns: [
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'PUI'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'Amit ตึก......................'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'HR contact'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'LR contact นัด'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'Swab 2......................'},
+            {width: 'auto', text: 'จพต 14 วัน'},
+            {width: 'auto', text: '(วันที่..........ถึง..................)'}
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'โทรแจ้งผู้ป่วย'},
+            {width: 'auto', text: '[  ]'},
+            {width: 'auto', text: 'โทรแจ้ง 1733 รับผู้ป่วย Admit แจ้ง ชื่อ-สกุล HN ส่งมาจาก...............................'},
+            {width: 'auto', text: 'รายที่................'},
+            {width: 'auto', text: 'วันที่..................................'}
+          ],
+          columnGap: 5
+        },
         {
           columns: [
             {width: '25%', text: 'Code .............................................', fontsize: 16, alignment: 'left'},
             {width: '50%', text: 'แบบสอบสวนผู้ป่วยโรคติดเชื้อไวรัสโคโรนา 2019',  fontsize: 18, bold: true, alignment: 'center'},
-            {width: '25%', text: 'Novelcorona 2', fontsize: 16, alignment: 'right'},
+            {width: '25%', text: 'HN ..................................', fontsize: 16, alignment: 'right'},
           ],
           columnGap: 5
         },
-        {table : {widths: [520],
+        {table : {widths: [525],
             body: [
               [{text: '', border: [false, false, false, true], alignment: 'center'}],
               [{text: '', border: [false, false, false, false], alignment: 'center'}]
@@ -162,16 +213,17 @@ export class ReportComponent implements OnInit {
         },
         {
           columns: [
-            {width: '45%', text: '1. ข้อมูลทั่วไป', style: 'title'},
-            {width: '55%', text: 'เลขบัตรประชาชน/Passport ......................................................................', alignment: 'right'}
+            {width: '20%', text: '1. ข้อมูลทั่วไป', style: 'title'},
+            {width: 'auto', text: 'เลขบัตรประชาชน/Passport ...............................................'},
+            {width: 'auto', text: 'สิทธิการรักษา ..................................................................'},
           ],
           columnGap: 5
         },
         {
           columns: [
-            {width: '55%', text: 'ชื่อ -  นามสกุล ..............................................................................................'},
-            {width: '10%', text: 'เพศ ..............'},
-            {width: '20%', text: 'อายุ .......... ปี .......... เดือน'},
+            {width: '55%', text: 'ชื่อ - นามสกุล .....................................................................................................'},
+            {width: '10%', text: 'เพศ ...............'},
+            {width: '20%', text: 'อายุ ........... ปี .......... เดือน'},
             {width: '15%', text: 'สัญชาติ ....................', alignment: 'right'},
           ],
           columnGap: 5
@@ -181,17 +233,17 @@ export class ReportComponent implements OnInit {
             {width: 'auto', text: 'กรณีเพศหญิง'},
             {width: 'auto',
               table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: '15%', text: 'ไม่ได้ตั้งครรภ์'},
+            {width: 'auto', text: 'ไม่ได้ตั้งครรภ์'},
             {width: 'auto',
               table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
@@ -199,41 +251,72 @@ export class ReportComponent implements OnInit {
               }
             },
             {width: 'auto', text: 'ตั้งครรภ์'},
-            {width: 'auto', text: 'ครรภ์ที่ ...................'},
-            {width: 'auto', text: 'อายุครรภ์ ................... สัปดาห์'},
+            {width: 'auto', text: 'ครรภ์ที่ ........'},
+            {width: 'auto', text: 'อายุครรภ์ ........... สัปดาห์'},
+            {width: 'auto', text: 'การสูบบุหรี่'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ไม่เคยสูบ'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ยังสูบ'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'เคยสูบแต่เลิกแล้ว'}
           ],
-          columnGap: 5
+          columnGap: 3
         },
         {
           columns: [
             {width: 'auto', text: 'อาชีพ'},
             {width: 'auto', text: '(ระบุลักษณะงานที่ทำอย่างละเอียด เช่น บุคลกรทางการแพทย์ เจ้าหน้าที่ที่สัมผัสนักท่องเที่ยว)', style: 'small', margin: [ 0, 1]},
-            {width: 'auto', text: ' .............................................................................................'}
+            {width: 'auto', text: ' .................................................................................................'}
           ],
           columnGap: 1
         },
         {
           columns: [
             {width: '60%', text: 'สถานที่ทำงาน/ สถานศึกษา ...........................................................................................'},
-            {width: '40%', text: 'เบอร์โทรศัพท์ที่ติดต่อได้  ..................................................'},
+            {width: '40%', text: 'เบอร์โทรศัพท์ที่ติดต่อได้  ....................................................'},
           ],
           columnGap: 5
         },
         {
           columns: [
-            {width: '60%', text: 'เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชัน "หมอชนะ" ...............................................................'},
-            {width: '40%', text: 'สิทธิการรักษา ....................................................................'},
+            {width: '50%', text: 'เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชัน "หมอชนะ" ...........................................'},
+            {width: '50%', text: 'วัน/เดือน/ปีเกิด ..........................................................................................'}
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', text: 'ที่อยู่ที่ติดต่อได้'},
-            {width: 'auto', text: 'เลขที่ ......................'},
-            {width: 'auto', text: 'หมู่ที่ .......................'},
+            {width: 'auto', text: 'เลขที่ ............'},
+            {width: 'auto', text: 'หมู่ที่ .............'},
             {width: 'auto', text: 'หมู่บ้าน ...........................................'},
-            {width: 'auto', text: 'ซอย ..............'},
-            {width: 'auto', text: 'ถนน .............................................'},
+            {width: 'auto', text: 'ซอย .............................................'},
+            {width: 'auto', text: 'ถนน ......................................'},
           ],
           columnGap: 5
         },
@@ -247,8 +330,86 @@ export class ReportComponent implements OnInit {
         },
         {
           columns: [
-            {width: '65%', text: 'โรคประจำตัว ..............................................................................................................................'},
-            {width: '35%', text: 'การสูบบุหรี่ .........................................................', alignment: 'right'}
+            {width: 'auto', text: 'โรคประจำตัว'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'COPD'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'CKD'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'CAD'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'CVA'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'Uncontrolled DM'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ภูมิคุ้มกันบกพร่อง'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'อื่น ๆ ..............................................'}
+
+          ],
+          columnGap: 4
+        },
+        {
+          columns: [
+            {width: 'auto', text: 'น้ำหนัก..........................กก.'},
+            {width: 'auto', text: 'ส่วนสูง..........................ซม.'},
+            {width: 'auto', text: 'BMI..........................'}
           ],
           columnGap: 5
         },
@@ -260,7 +421,7 @@ export class ReportComponent implements OnInit {
             {width: '25%', text: '.......................................................'},
             {width: 'auto', text: 'วันที่เข้ารับการรักษาครั้งแรก'},
             {width: 'auto', text: '(วัน/เดือน/ปี)', fontsize: 12},
-            {width: '25%', text: '.......................................................'},
+            {width: '25%', text: '........................................................'},
           ],
           columnGap: 5
         },
@@ -283,7 +444,7 @@ export class ReportComponent implements OnInit {
             {width: 'auto', text: 'อาการและอาการแสดงในวันพบผู้ป่วย :'},
             {width: 'auto',
               table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
@@ -300,7 +461,7 @@ export class ReportComponent implements OnInit {
             },
             {width: 'auto',
               table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
@@ -314,358 +475,719 @@ export class ReportComponent implements OnInit {
         {
           columns: [
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '12%', text: 'ไอ'},
+            {width: '7%', text: 'ไอ'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '11%', text: 'เจ็บคอ'},
+            {width: '15%', text: 'เจ็บคอ '},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '14%', text: 'ปวดกล้ามเนื้อ'},
+            {width: '13%', text: 'ปวดกล้ามเนื้อ'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '13%', text: 'มีน้ำมูก'},
+            {width: '7%', text: 'มีน้ำมูก'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '11%', text: 'มีเสมหะ'},
+            {width: '9%', text: 'มีเสมหะ'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: 'auto', text: 'หายใจลำบาก'}
-          ],
-          columnGap: 5
-        },
-        {
-          columns: [
+            {width: '12%', text: 'หายใจลำบาก'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
             {width: '12%', text: 'ปวดศีรษะ'},
+          ],
+          columnGap: 4
+        },
+        {columns: [
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '11%', text: 'ถ่ายเหลว'},
+            {width: 'auto', text: 'ถ่ายเหลว'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '14%', text: 'จมูกไม่ได้กลิ่น'},
+            {width: '15%', text: 'สูญเสียการได้กลิ่น'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '13%', text: 'ลิ้นไม่รับรส'},
+            {width: '13%', text: 'สูญเสียการรับรส'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '11%', text: 'ตาแดง'},
+            {width: '6%', text: 'ตาแดง'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: 'auto', text: 'ผื่น ตำแหน่ง ........................'}
+            {width: 'auto', text: 'ผื่น บริเวณ........................'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'อื่น ๆ ระบุ ...................................'},
+          ],
+          columnGap: 4
+        },
+        {
+          columns: [
+            {width: 'auto', text: 'เอ็กซเรย์ปอด (ครั้งแรก) : วันที่ ..............................................'},
+            {width: 'auto', text: 'ผล Hb .................... g/dL'},
+            {width: 'auto', text: 'Hct .................... %'},
+            {width: 'auto', text: 'Platelet count ....................'},
+            {width: 'auto', text:  [
+                {text: 'x'},
+                {text: '10'},
+                {text: '3', sup: {  fontSize: 8 }}
+              ]
+            },
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: 'auto', text: 'WBC..............................'},
+            {width: 'auto', text: '(N ..................... %'},
+            {width: 'auto', text: 'L ...................... %'},
+            {width: 'auto', text: 'Atyp lymph ...................... %'},
+            {width: 'auto', text: 'Mono ...................... %'},
+            {width: 'auto', text: 'อื่น ๆ ......................)'}
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: 'auto', text: 'ผลการตรวจ Influenza test วิธีการตรวจ ............................................................................'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'Negative'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'Positive'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'Flu A'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'Flu B'}
+          ],
+          columnGap: 5
+        },
+        {text: 'ผลการตรวจ SARS - CoV-2'},
+        {
+          table: {
+            headerRows: 1,
+            widths: [ 30, 70, 100, 100, 190 ],
+            body: [
+              [ {text: 'ครั้งที่', alignment: 'center' },
+                {text: 'วันที่เก็บ', alignment: 'center' },
+                {text: 'ชนิดตัวอย่าง', alignment: 'center' },
+                {text: 'สถานที่ส่งตรวจ', alignment: 'center' },
+                {text: 'ผลตรวจ', alignment: 'center' } ],
+              [ {text: '1', alignment: 'center', style : 'fontMid' }, '', '', '',
+                {
+                  columns: [
+                    {width: '3%', text: ' ', style : 'fontMid'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: '40%', text: 'Detected', style : 'fontMid'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: 'auto', text: 'Not detected', style : 'fontMid'}
+                  ],
+                  columnGap: 5
+                }
+              ],
+              [ ' ', '', '', '',
+                {
+                  columns: [
+                    {width: '3%', text: ' ', style : 'fontMid'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: '40%', text: 'Detected', style : 'fontMid'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: 'auto', text: 'Not detected', style : 'fontMid'}
+                  ],
+                  columnGap: 5
+                }
+              ],
+            ]
+          }
+        },
+        {
+          margin: [0, 2],
+          columns: [
+            {width: 'auto', text: 'ประเภทผู้ป่วย'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'ผู้ป่วยนอก'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'ผู้ป่วยใน Admit วันที่..................................'},
+            {width: 'auto', text: 'การวินิฉัยเบื้องต้น.............................................................................'}
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: '40%', text: 'การให้ยารักษาโรคติดเชื้อไวรัสโคโรนา 2019', style : 'fontMid'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'ไม่ให้',  style : 'fontMid'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'ให้ วันที่รับยาโดสแรก ..........................................................................................',  style : 'fontMid'},
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: 'auto', text: 'อื่น ๆ ระบุ ........................................'},
+            {width: 'auto', text: 'Darunavir/Ritonavir (DRV/r)',  style : 'small', margin: [0, 2]},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'Lopinavir/Ritonavir (LRV/r)',  style : 'small', margin: [0, 2]},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'Favipiravir',  style : 'small', margin: [0, 2]},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'Chloroquine',  style : 'small', margin: [0, 2]},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'Hydroxychloroquine',  style : 'small', margin: [0, 2]},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'ยาอื่น ๆ .............................',  style : 'small', margin: [0, 2]},
           ],
-          columnGap: 5
+          columnGap: 3
+        },
+        {
+          columns: [
+            {width: '15%', text: 'สถานะผู้ป่วย', style : 'small'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'หาย',  style : 'small', margin: [0, 2]},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'ยังรักษาอยู่',  style : 'small', margin: [0, 2]},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'เสียชีวิต',  style : 'small', margin: [0, 2]},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'ส่งตัวไป รพ. ...............................................................',  style : 'small', margin: [0, 2]},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'อื่น ๆ ระบุ ...............................................',  style : 'small', margin: [0, 2]},
+          ],
+          columnGap: 3
         },
         {text: '3. ประวัติเสี่ยง', style: 'title'},
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยอาศัยอยู่หรือเดินทางมาจากพื้นที่ที่มีการระบาด'},
+            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยอาศัยอยู่หรือเดินทางมาจากพื้นที่ที่มีการระบาด', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ไม่ใช่'},
+            {width: '5%', text: 'ไม่ใช่', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ใช่'}
+            {width: '5%', text: 'ใช่', style : 'fontMid'}
           ],
           columnGap: 5
         },
         {
           columns: [
-            {width: '33%', text: 'เมือง .................................................................'},
-            {width: '33%', text: 'ประเทศ ...........................................................'},
-            {width: '34%', text: 'เดินทางเข้าประเทศไทยวันที่ ..............................'},
+            {width: '1%', text: ' ', style : 'fontMid'},
+            {width: '33%', text: 'เมือง ........................................................................', style : 'fontMid'},
+            {width: '33%', text: 'ประเทศ ..................................................................', style : 'fontMid'},
+            {width: '31%', text: 'เดินทางเข้าประเทศไทยวันที่ ..............................', style : 'fontMid'},
           ],
           columnGap: 5
         },
         {
           columns: [
-            {width: '34%', text: 'โดยสายการบิน ...................................................'},
-            {width: '33%', text: 'เที่ยวบินที่ ........................................................'},
-            {width: '33%', text: 'เลขที่นั่ง ...........................................................'}
-          ],
-          columnGap: 5
-        },
-        {
-          columns: [
-            {width: 'auto', text: '•'},
-            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยได้เข้ารับการรักษาหรือเยี่ยมผู้ป่วยในโรงพยาบาลของพื้นที่ที่มีการระบาด'},
-            {width: 'auto', table: {
-                widths: [3],
-                body: [
-                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
-                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }},
-            {width: '5%', text: 'ไม่ใช่'},
-            {width: 'auto', table: {
-                widths: [3],
-                body: [
-                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
-                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }},
-            {width: '5%', text: 'ใช่'}
+            {width: '1%', text: ' ', style : 'fontMid'},
+            {width: '34%', text: 'โดยสายการบิน ........................................................', style : 'fontMid'},
+            {width: '33%', text: 'เที่ยวบินที่ ................................................................', style : 'fontMid'},
+            {width: '30%', text: 'เลขที่นั่ง ...........................................................', style : 'fontMid'}
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ'},
+            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยได้เข้ารับการรักษาหรือเยี่ยมผู้ป่วยในโรงพยาบาลของพื้นที่ที่มีการระบาด', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ไม่ใช่'},
+            {width: '5%', text: 'ไม่ใช่' , style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ใช่'}
+            {width: '5%', text: 'ใช่' , style : 'fontMid'}
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยมีประวัติสัมผัสกับผู้ป่วยยืนยันโรคติดเชื้อไวรัสโคโรน่า 2019 ระบุ ......................................'},
+            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ' , style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ไม่ใช่'},
+            {width: '5%', text: 'ไม่ใช่', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ใช่'}
+            {width: '5%', text: 'ใช่', style : 'fontMid'}
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยประกอบอาชีพที่สัมผัสใกล้ชิดกับนักท่องเที่ยวต่างชาติหรือแรงงานต่างชาติ'},
+            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยมีประวัติสัมผัสกับผู้ป่วยยืนยันโรคติดเชื้อไวรัสโคโรน่า 2019 ระบุ ...................................................', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ไม่ใช่'},
+            {width: '5%', text: 'ไม่ใช่', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ใช่'}
+            {width: '5%', text: 'ใช่', style : 'fontMid'}
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช้น ผับ สนามมวย'},
+            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยประกอบอาชีพที่สัมผัสใกล้ชิดกับนักท่องเที่ยวต่างชาติหรือแรงงานต่างชาติ', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ไม่ใช่'},
+            {width: '5%', text: 'ไม่ใช่', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ใช่'}
+            {width: '5%', text: 'ใช่', style : 'fontMid'}
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'เป็นผู้ป่วยอาการทางเดินหายใจหรือปอดอักเสบเป็นกลุ่มก้อน'},
+            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช้น ผับ สนามมวย', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ไม่ใช่'},
+            {width: '5%', text: 'ไม่ใช่', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ใช่'}
+            {width: '5%', text: 'ใช่', style : 'fontMid'}
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'เป็นผู้ป่วยปอดอักเสบรุนแรงหรือเสียชีวิตที่หาสาเหตุไม่ได้'},
+            {width: '87%', text: 'เป็นผู้ป่วยอาการทางเดินหายใจหรือปอดอักเสบเป็นกลุ่มก้อน', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ไม่ใช่'},
+            {width: '5%', text: 'ไม่ใช่', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ใช่'}
+            {width: '5%', text: 'ใช่', style : 'fontMid'}
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'เป็นบุคลาการทางการแพทย์และสาธรณะสุขหรือเจ้าหน้าที่ห้องปฏิบัติการ'},
+            {width: '87%', text: 'เป็นผู้ป่วยปอดอักเสบรุนแรงหรือเสียชีวิตที่หาสาเหตุไม่ได้', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ไม่ใช่'},
+            {width: '5%', text: 'ไม่ใช่', style : 'fontMid'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: '5%', text: 'ใช่'}
+            {width: '5%', text: 'ใช่', style : 'fontMid'}
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: 'auto', text: 'อื่น ๆ ระบุ ...............................................................................................................................................................................................................'}
+            {width: '87%', text: 'เป็นบุคลาการทางการแพทย์และสาธรณะสุขหรือเจ้าหน้าที่ห้องปฏิบัติการ', style : 'fontMid'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: '5%', text: 'ไม่ใช่', style : 'fontMid'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: '5%', text: 'ใช่', style : 'fontMid'}
           ],
           columnGap: 5
         },
-        {text: '4. ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019', style: 'title'},
+        {
+          columns: [
+            {width: 'auto', text: '•'},
+            {width: 'auto', text: 'อื่น ๆ ระบุ .......................................................................................................................................................................................................................................', style : 'fontMid'}
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: '1%', text: ' ', style : 'fontMid'},
+            {width: 'auto', text: 'ผู้รายงาน ..................................................................................', style : 'fontMid'},
+            {width: 'auto', text: 'หน่วยงาน โรงพยาบาลราชบุรี', style : 'fontMid'},
+            {width: 'auto', text: 'วันที่สอบสวน ................................', style : 'fontMid'},
+            {width: 'auto', text: 'เวลา ......................... น.', style : 'fontMid'}
+          ],
+          columnGap: 5
+        },
+        {text: 'ชื่อ - นามสกุล.................................................................................................................... HN .........................................................', alignment: 'center',  pageBreak: 'before'},
+        {text: '4. รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย/เริ่มสัมผัสกลุ่มเสี่ยง/พื้นที่เสี่ยง', style: 'title',  margin: [0, 2]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {
+          margin: [0, 3],
+          table: {
+            widths: [ 259, 259 ],
+            body: [
+              [ {text: 'สรุปความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยงกลุ่มใด', alignment: 'center' },
+                {columns: [
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: '35%', text: 'ใส่ Mask ตลอดเวลา'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: 'auto', text: 'ห้องปรับอากาศ'}
+                  ], columnGap: 5, border: [true, true, true, false], margin : [0, 2]}],
+              [ {text: '.............................................................................................................', border: [true, false, true, false], alignment: 'center' },
+                {columns: [
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: '35%', text: 'ใส่บางครั้ง'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: 'auto', text: 'ห้องพัดลม'}
+                  ], columnGap: 5, border: [true, false, true, false]}],
+              [ {text: '.............................................................................................................', border: [true, false, true, true], alignment: 'center' },
+                {columns: [
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: '35%', text: 'ไม่ใส่'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: 'auto', text: 'นอกอาคาร'}
+                  ], columnGap: 5, border: [true, false, true, true]}],
+            ]
+          }
+        },
+        {text: '5. ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019', style: 'title', margin: [0, 2]},
         {
           columns: [
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
@@ -673,7 +1195,7 @@ export class ReportComponent implements OnInit {
               }},
             {width: '15%', text: 'ไม่เคยได้รับ'},
             {width: 'auto', table: {
-                widths: [3],
+                widths: [2],
                 body: [
                   [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
@@ -690,19 +1212,178 @@ export class ReportComponent implements OnInit {
         },
         {text: 'ครั้งที่ 1 วันที่ได้รับ...................................................ชื่อวัคซีน......................................................สถานที่ได้รับ............................................................'},
         {text: 'ครั้งที่ 2 วันที่ได้รับ...................................................ชื่อวัคซีน......................................................สถานที่ได้รับ............................................................'},
-        {text: '5. รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย/เริ่มสัมผัสกลุ่มเสี่ยง/พื้นที่เสี่ยง', style: 'title', pageBreak: 'before'},
-      ],
+        {text: 'ผลการตรวจ SARS - CoV-2 Antibody', margin: [0, 2]},
+        {
+          table: {
+            headerRows: 1,
+            widths: [ 30, 70, 100, 100, 190 ],
+            body: [
+              [ {text: 'ครั้งที่', alignment: 'center' },
+                {text: 'วันที่เก็บ', alignment: 'center' },
+                {text: 'ชนิดตัวอย่าง', alignment: 'center' },
+                {text: 'สถานที่ส่งตรวจ', alignment: 'center' },
+                {text: 'ผลตรวจ', alignment: 'center' } ],
+              [ {text: ' ', alignment: 'center', style : 'fontMid' }, '', '', '',
+                {
+                  columns: [
+                    {width: '3%', text: ' ', style : 'fontMid'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: '40%', text: 'Detected', style : 'fontMid'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: 'auto', text: 'Not detected', style : 'fontMid'}
+                  ],
+                  columnGap: 5
+                }
+              ],
+              [ ' ', '', '', '',
+                {
+                  columns: [
+                    {width: '3%', text: ' ', style : 'fontMid'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: '40%', text: 'Detected', style : 'fontMid'},
+                    {width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                          [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }},
+                    {width: 'auto', text: 'Not detected', style : 'fontMid'}
+                  ],
+                  columnGap: 5
+                }
+              ],
+            ]
+          }
+        },
+        {
+          margin: [0, 3],
+          columns: [
+            {width: 'auto', text: 'รายงานแพทย์'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'ปิยะณัฐ  บุญประดิษฐ์'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'สุดารัตน์ วิจิตรเศรษฐกุล'},
+            {width: 'auto', text: 'เวลา........................น.'}
+          ],
+          columnGap: 5
+        },
+        {text: 'แพทย์ลงความเห็น..............................................................................................................................................................................................................'},
+        {
+          columns: [
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'PUI Admit ตึก...........................'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'HR contact'},
+            {width: 'auto', text: 'นัด'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'Swab'},
+            {width: 'auto', text: 'ครั้งที่ 1.............................................'},
+            {width: 'auto', text: 'ครั้งที่ 1.............................................'},
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: 'auto', text: 'จพต.14 (วันที่.............................ถึง.............................)'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'LR contact'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'แนะนำ DMHT'},
+            {width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }},
+            {width: 'auto', text: 'ไม่เข้าเกณฑ์ PUI'},
+          ],
+          columnGap: 5
+        },
+        {text: 'ที่อยู่สำหรับการกักตัว.........................................................................................................................................................................................................'},
+        {
+          columns: [
+            {width: 'auto', text: 'ผู้รายงาน .......................................................................................', style : 'fontMid'},
+            {width: 'auto', text: 'หน่วยงาน โรงพยาบาลราชบุรี', style : 'fontMid'},
+            {width: 'auto', text: 'วันที่สอบสวน ................................', style : 'fontMid'},
+            {width: 'auto', text: 'เวลา ......................... น.', style : 'fontMid'}
+          ],
+          columnGap: 5
+        }
+        ],
       defaultStyle: {
         font: 'THSarabunNew',
         fontSize: 14,
-        lineHeight: 1.1
+        lineHeight: 0.9
       },
       styles: {
         title: {
           fontSize: 14,
           bold: true
         },
-        small: {fontSize: 12}
+        small: {fontSize: 12},
+        fontMid: {fontSize: 13}
       }
     };
     return docDefinition;
