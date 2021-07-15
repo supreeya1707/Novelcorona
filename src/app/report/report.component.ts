@@ -39,6 +39,7 @@ export class ReportComponent implements OnInit {
   cid: any;
   dataNovel: any;
   dataNovelByID: any;
+  dataTimeLineByID: any;
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
@@ -94,10 +95,14 @@ export class ReportComponent implements OnInit {
   async printReport(novel_id: any) {
       // console.log(novel_id);
       const res: any = await this.api.getDataById(novel_id);
-      console.log(res);
+      const resTimeLine: any = await this.api.getTimeLineById(novel_id);
+      console.log(resTimeLine);
       if (res.ok === true) {
-        this.dataNovelByID = res.message;
-        this.generatePdf('open');
+        if (resTimeLine.ok === true){
+          this.dataNovelByID = res.message;
+          this.dataTimeLineByID = resTimeLine.message;
+          this.generatePdf('open');
+        }
       } else {
         console.log('error');
       }
@@ -134,7 +139,7 @@ export class ReportComponent implements OnInit {
   }
 
   getDocumentDefinition() {
-    const ptfullname = this.dataNovelByID[0].novel_prename + this.dataNovelByID[0].novel_fname + '  ' + this.dataNovelByID[0].novel_lname;
+    const ptfullname = this.dataNovelByID[0].novel_pname + this.dataNovelByID[0].novel_fname + '  ' + this.dataNovelByID[0].novel_lname;
     const docDefinition = {
       pageSize: 'A4',
       pageOrientation: 'portrait',
@@ -208,7 +213,8 @@ export class ReportComponent implements OnInit {
         {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_comefrom_31 === 0 ?  488 : 536 , y: 583}, style: 'fSize24'},
         {text:  this.dataNovelByID[0].novel_come_city, absolutePosition: {x: 115, y: 605}, bold : true},
         {text:  this.dataNovelByID[0].novel_come_country, absolutePosition: {x: 280, y: 605}, bold : true},
-        {text:  moment(this.dataNovelByID[0].novel_date_come).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 480, y: 605}, bold : true},
+        {text:  moment(this.dataNovelByID[0].novel_date_come).locale('th').add(543, 'year').format('D MMMM YYYY'),
+                absolutePosition: {x: 480, y: 605}, bold : true},
         {text:  this.dataNovelByID[0].novel_transportation, absolutePosition: {x: 120, y: 620}, bold : true},
         {text:  this.dataNovelByID[0].novel_round_tran, absolutePosition: {x: 315, y: 620}, bold : true},
         {text:  this.dataNovelByID[0].novel_number_seat, absolutePosition: {x: 480, y: 620}, bold : true},
@@ -218,11 +224,11 @@ export class ReportComponent implements OnInit {
         {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_his_touch_34 === 0 ?  488 : 536 , y: 663}, style: 'fSize24'},
         {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_tourist_35 === 0 ?  488 : 536 , y: 679}, style: 'fSize24'},
         {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_manyperson_36 === 0 ?  488 : 536 , y: 695}, style: 'fSize24'},
+        {text:  this.dataNovelByID[0].novel_assign_station_36, absolutePosition: {x: 350, y: 701}, bold : true},
         {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_ari_37 === 0 ?  488 : 536 , y: 712}, style: 'fSize24'},
         {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_inject_38 === 0 ?  488 : 536 , y: 729}, style: 'fSize24'},
         {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_doc_39 === 0 ?  488 : 536 , y: 745}, style: 'fSize24'},
         {text:  this.dataNovelByID[0].novel_etc_310, absolutePosition: {x: 80, y: 767}, bold : true},
-        {text:  ptfullname, absolutePosition: {x: 150, y: 791}, bold : true},
 
         {
           columns: [
@@ -1003,7 +1009,7 @@ export class ReportComponent implements OnInit {
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยมีประวัติสัมผัสกับผู้ป่วยยืนยันโรคติดเชื้อไวรัสโคโรน่า 2019 ระบุ ...................................................', style : 'fontMid'},
+            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยมีประวัติสัมผัสกับผู้ป่วยยืนยันโรคติดเชื้อไวรัสโคโรน่า 2019 ระบุ .............................................................', style : 'fontMid'},
             {width: 'auto', table: {
                 widths: [2],
                 body: [
@@ -1049,7 +1055,7 @@ export class ReportComponent implements OnInit {
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช้น ผับ สนามมวย', style : 'fontMid'},
+            {width: '87%', text: 'ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช่น ผับ สนามมวย ระบุ ........................................................', style : 'fontMid'},
             {width: 'auto', table: {
                 widths: [2],
                 body: [
@@ -1174,6 +1180,43 @@ export class ReportComponent implements OnInit {
         {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
         {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
         {text: '............................................................................................................................................................................................................................................',  margin: [0, 3]},
+        {text:  ptfullname, absolutePosition: {x: 150, y: 33}, bold : true},
+        {text:  moment(this.dataTimeLineByID[0].day1).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 73}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date1, absolutePosition: {x: 130, y: 73}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day2).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 95}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date2, absolutePosition: {x: 130, y: 95}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day3).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 117}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date3, absolutePosition: {x: 130, y: 117}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day4).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 140}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date4, absolutePosition: {x: 130, y: 140}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day5).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 162}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date5, absolutePosition: {x: 130, y: 162}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day6).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 185}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date6, absolutePosition: {x: 130, y: 185}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day7).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 207}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date7, absolutePosition: {x: 130, y: 207}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day8).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 230}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date8, absolutePosition: {x: 130, y: 230}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day9).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 252}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date9, absolutePosition: {x: 130, y: 252}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day10).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 274}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date10, absolutePosition: {x: 130, y: 274}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day11).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 297}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date11, absolutePosition: {x: 130, y: 297}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day12).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 319}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date12, absolutePosition: {x: 130, y: 319}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day13).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 341}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date13, absolutePosition: {x: 130, y: 341}, noWrap: true},
+        {text:  moment(this.dataTimeLineByID[0].day14).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 40, y: 364}, bold : true},
+        {text:  this.dataTimeLineByID[0].timeline_date14, absolutePosition: {x: 130, y: 364}, noWrap: true},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_havevac === 0 ?  32 : 128 , y: 540}, style: 'fSize24'},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_certificate === 0 ?  501 : 409 , y: 540}, style: 'fSize24'},
+        {text:  moment(this.dataNovelByID[0].novel_getvac1).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 105, y: 562}, bold : true},
+        {text:  this.dataNovelByID[0].novel_namevac1, absolutePosition: {x: 280, y: 562}, bold : true},
+        {text:  this.dataNovelByID[0].novel_placevac1, absolutePosition: {x: 420, y: 562}, bold : true},
+        {text:  moment(this.dataNovelByID[0].novel_getvac2).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 105, y: 579}, bold : true},
+        {text:  this.dataNovelByID[0].novel_namevac2, absolutePosition: {x: 280, y: 579}, bold : true},
+        {text:  this.dataNovelByID[0].novel_placevac2, absolutePosition: {x: 420, y: 579}, bold : true},
         {
           margin: [0, 3],
           table: {

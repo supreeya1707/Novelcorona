@@ -266,7 +266,7 @@ export class FormsComponent implements OnInit {
   async insertData(): Promise<any> {
     const data: any = {};
     const info: any = [];
-    data.novel_prename = this.pname;
+    data.novel_pname = this.pname;
     data.novel_fname = this.fname;
     data.novel_lname = this.lname;
     data.novel_cid = this.cid;

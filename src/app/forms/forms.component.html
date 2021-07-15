@@ -12,37 +12,34 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-md-1 ">
-            <label>คำนำหน้าชื่อ <span class="text-danger">*</span></label>
-            <select class="form-control" aria-label="Default select example" [(ngModel)]="pname"
-                    (change)="selectPname($event)">
-              <option value="1">นาย</option>
-              <option value="2">นาง</option>
-              <option value="3">นางสาว</option>
-            </select>
-          </div>
           <div class="col-md-2">
+            <label>คำนำหน้าชื่อ <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="คำนำหน้าชื่อ" [(ngModel)]="pname" value="{{pname}}"/>
+          </div>
+          <div class="col-md-5">
             <label>ชื่อ <span class="text-danger">*</span></label>
             <input type="text" class="form-control" placeholder="ชื่อ" [(ngModel)]="fname"
                    value="{{fname}}"/>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-5">
             <label>นามสกุล <span class="text-danger">*</span></label>
             <input type="text" class="form-control" placeholder="นามสกุล" id="lname" name="lname"
                    [(ngModel)]="lname"
                    value="{{lname}}"/>
           </div>
-          <div class="col-md-3">
+        </div>
+        <div class="row mt-5">
+          <div class="col-md-4">
             <label>เลขบัตรประชาชน <span class="text-danger">*</span></label>
             <input [(ngModel)]="cid" type="text" class="form-control" placeholder="เลขบัตรประชาชน" value="{{cid}}"
                    maxlength="13"/>
           </div>
-          <div class="col-md-2">
-            <label>อายุ<span class="text-danger">*</span></label>
+          <div class="col-md-4">
+            <label>อายุ <span class="text-danger">*</span></label>
             <input class="form-control" [(ngModel)]="age" type="text" placeholder="ปี" id="age" value="{{age}}">
           </div>
-          <div class="col-md-2">
-            <label>สัญชาติ<span class="text-danger">*</span></label>
+          <div class="col-md-4">
+            <label>สัญชาติ <span class="text-danger">*</span></label>
             <input class="form-control" [(ngModel)]="national" type="text" id="national"
                    value="{{national}}">
           </div>
@@ -51,7 +48,7 @@
           <div class="col-md-2">
             <label>เพศ</label>
             <div class="radio-inline col-md-2">
-              <label class="radio ">
+              <label class="radio">
                 <input type="radio" name="radios3" [(ngModel)]="radioGender" value="1"/>
                 <span></span>
                 หญิง
