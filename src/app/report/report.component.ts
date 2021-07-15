@@ -164,12 +164,12 @@ export class ReportComponent implements OnInit {
         {text:  this.dataNovelByID[0].novel_district, absolutePosition: {x: 112, y: 208}, bold : true},
         {text:  this.dataNovelByID[0].novel_amphur, absolutePosition: {x: 275, y: 208}, bold : true},
         {text:  this.dataNovelByID[0].novel_province, absolutePosition: {x: 445, y: 208}, bold : true},
-        (this.dataNovelByID[0].novel_copd = 1) ?  {text:  '√', absolutePosition: {x: 83, y: 218}, style: 'fSize24'} : null,
-        (this.dataNovelByID[0].novel_ckd = 1) ?  {text:  '√', absolutePosition: {x: 127, y: 218}, style: 'fSize24'} : null,
-        (this.dataNovelByID[0].novel_cad = 1) ?  {text:  '√', absolutePosition: {x: 165, y: 218}, style: 'fSize24'} : null,
-        (this.dataNovelByID[0].novel_cva = 1) ?  {text:  '√', absolutePosition: {x: 202, y: 218}, style: 'fSize24'} : null,
-        (this.dataNovelByID[0].novel_undm = 1) ?  {text:  '√', absolutePosition: {x: 237, y: 218}, style: 'fSize24'} : null,
-        (this.dataNovelByID[0].novel_pids = 1) ?  {text:  '√', absolutePosition: {x: 330, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_copd === 1) ?  {text:  '√', absolutePosition: {x: 83, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_ckd === 1) ?  {text:  '√', absolutePosition: {x: 127, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_cad === 1) ?  {text:  '√', absolutePosition: {x: 165, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_cva === 1) ?  {text:  '√', absolutePosition: {x: 202, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_undm === 1) ?  {text:  '√', absolutePosition: {x: 237, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_pids === 1) ?  {text:  '√', absolutePosition: {x: 330, y: 218}, style: 'fSize24'} : null,
         (this.dataNovelByID[0].novel_congential = 1) ?  {text:  '√', absolutePosition: {x: 417, y: 218}, style: 'fSize24'} : null,
         {text:  this.dataNovelByID[0].novel_congential_etc, absolutePosition: {x: 460, y: 225}, bold : true},
         {text:  this.dataNovelByID[0].novel_weight, absolutePosition: {x: 85, y: 241}, bold : true},
@@ -183,10 +183,46 @@ export class ReportComponent implements OnInit {
         {text:  this.dataNovelByID[0].novel_province_first, absolutePosition: {x: 430, y: 290}, bold : true},
         {text:  this.dataNovelByID[0].novel_hospital_now, absolutePosition: {x: 210, y: 306}, bold : true},
         {text:  this.dataNovelByID[0].novel_province_now, absolutePosition: {x: 430, y: 306}, bold : true},
-        (this.dataNovelByID[0].novel_fever = 1) ?  {text:  '√', absolutePosition: {x: 180, y: 317}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_fever === 1) ?  {text:  '√', absolutePosition: {x: 180, y: 317}, style: 'fSize24'} : null,
         {text:  this.dataNovelByID[0].novel_assign_fever, absolutePosition: {x: 290, y: 323}, bold : true},
         {text:  this.dataNovelByID[0].novel_assign_oxygen, absolutePosition: {x: 400, y: 323}, bold : true},
-        (this.dataNovelByID[0].novel_respirator = 1) ?  {text:  '√', absolutePosition: {x: 467, y: 317}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_respirator === 1) ?  {text:  '√', absolutePosition: {x: 467, y: 317}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_cough = 1) ?  {text:  '√', absolutePosition: {x: 32, y: 333}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_sorethroat === 1) ?  {text:  '√', absolutePosition: {x: 86, y: 333}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_musclepain === 1) ?  {text:  '√', absolutePosition: {x: 178, y: 333}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_mucous === 1) ?  {text:  '√', absolutePosition: {x: 261, y: 333}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_phlegm === 1) ?  {text:  '√', absolutePosition: {x: 315, y: 333}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_difficulbreathing === 1) ?  {text:  '√', absolutePosition: {x: 379, y: 333}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_headache === 1) ?  {text:  '√', absolutePosition: {x: 455, y: 333}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_purify === 1) ?  {text:  '√', absolutePosition: {x: 32, y: 349}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_smell === 1) ?  {text:  '√', absolutePosition: {x: 86, y: 349}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_taste === 1) ?  {text:  '√', absolutePosition: {x: 179, y: 349}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_redeye === 1) ?  {text:  '√', absolutePosition: {x: 263, y: 349}, style: 'fSize24'} : null,
+        (this.dataNovelByID[0].novel_rash === 1) ?  {text:  '√', absolutePosition: {x: 312, y: 349}, style: 'fSize24'} : null,
+        {text:  this.dataNovelByID[0].novel_position, absolutePosition: {x: 380, y: 356}, bold : true},
+        (this.dataNovelByID[0].novel_symtom === 1) ?  {text:  '√', absolutePosition: {x: 428, y: 349}, style: 'fSize24'} : null,
+        {text:  this.dataNovelByID[0].novel_symtom_etc, absolutePosition: {x: 483, y: 356}, bold : true},
+
+
+        //ประวัติเสี่ยง
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_comefrom_31 === 0 ?  488 : 536 , y: 583}, style: 'fSize24'},
+        {text:  this.dataNovelByID[0].novel_come_city, absolutePosition: {x: 115, y: 605}, bold : true},
+        {text:  this.dataNovelByID[0].novel_come_country, absolutePosition: {x: 280, y: 605}, bold : true},
+        {text:  moment(this.dataNovelByID[0].novel_date_come).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 480, y: 605}, bold : true},
+        {text:  this.dataNovelByID[0].novel_transportation, absolutePosition: {x: 120, y: 620}, bold : true},
+        {text:  this.dataNovelByID[0].novel_round_tran, absolutePosition: {x: 315, y: 620}, bold : true},
+        {text:  this.dataNovelByID[0].novel_number_seat, absolutePosition: {x: 480, y: 620}, bold : true},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_takecare_32 === 0 ?  488 : 536 , y: 630}, style: 'fSize24'},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_touch_his33 === 0 ?  488 : 536 , y: 647}, style: 'fSize24'},
+        {text:  this.dataNovelByID[0].novel_assigntouch_34, absolutePosition: {x: 330, y: 668}, bold : true},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_his_touch_34 === 0 ?  488 : 536 , y: 663}, style: 'fSize24'},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_tourist_35 === 0 ?  488 : 536 , y: 679}, style: 'fSize24'},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_manyperson_36 === 0 ?  488 : 536 , y: 695}, style: 'fSize24'},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_ari_37 === 0 ?  488 : 536 , y: 712}, style: 'fSize24'},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_inject_38 === 0 ?  488 : 536 , y: 729}, style: 'fSize24'},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID[0].novel_doc_39 === 0 ?  488 : 536 , y: 745}, style: 'fSize24'},
+        {text:  this.dataNovelByID[0].novel_etc_310, absolutePosition: {x: 80, y: 767}, bold : true},
+        {text:  ptfullname, absolutePosition: {x: 150, y: 791}, bold : true},
 
         {
           columns: [
@@ -680,7 +716,7 @@ export class ReportComponent implements OnInit {
                 {text: 'ชนิดตัวอย่าง', alignment: 'center' },
                 {text: 'สถานที่ส่งตรวจ', alignment: 'center' },
                 {text: 'ผลตรวจ', alignment: 'center' } ],
-              [ {text: '1', alignment: 'center', style : 'fontMid' }, '', '', '',
+              [ {text: ' ', alignment: 'center', style : 'fontMid' }, '', '', '',
                 {
                   columns: [
                     {width: '3%', text: ' ', style : 'fontMid'},
@@ -903,18 +939,18 @@ export class ReportComponent implements OnInit {
         {
           columns: [
             {width: '1%', text: ' ', style : 'fontMid'},
-            {width: '33%', text: 'เมือง ........................................................................', style : 'fontMid'},
-            {width: '33%', text: 'ประเทศ ..................................................................', style : 'fontMid'},
-            {width: '31%', text: 'เดินทางเข้าประเทศไทยวันที่ ..............................', style : 'fontMid'},
+            {width: 'auto', text: 'เมือง ...................................................................', style : 'fontMid'},
+            {width: 'auto', text: 'ประเทศ .............................................................', style : 'fontMid'},
+            {width: 'auto', text: 'เดินทางเข้าประเทศไทยวันที่ ............................................', style : 'fontMid'},
           ],
           columnGap: 5
         },
         {
           columns: [
             {width: '1%', text: ' ', style : 'fontMid'},
-            {width: '34%', text: 'โดยสายการบิน ........................................................', style : 'fontMid'},
-            {width: '33%', text: 'เที่ยวบินที่ ................................................................', style : 'fontMid'},
-            {width: '30%', text: 'เลขที่นั่ง ...........................................................', style : 'fontMid'}
+            {width: '37%', text: 'โดยสายการบิน .................................................................', style : 'fontMid'},
+            {width: '35%', text: 'เที่ยวบินที่ ....................................................................', style : 'fontMid'},
+            {width: '27%', text: 'เลขที่นั่ง ..................................................', style : 'fontMid'}
           ],
           columnGap: 5
         },
