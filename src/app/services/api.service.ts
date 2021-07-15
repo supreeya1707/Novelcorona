@@ -82,4 +82,16 @@ export class ApiService {
 
     return this.http.get(url, this.httpOptions).toPromise();
   }
+  getTimeLineById(id:any): any {
+    // const token = sessionStorage.getTimeLineById('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/noveltimeline/${id}/id`;
+
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
 }

@@ -57,7 +57,8 @@ export class FormsComponent implements OnInit {
   sDate: any;
   dateselect = moment().format('yyyy-MM-DD');
   dateStart = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
-  datadate = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
+  // datadate = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
+  datadate : any;
   datatreat = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
   datevac1 = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
   datevac2 = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
@@ -103,6 +104,10 @@ export class FormsComponent implements OnInit {
   checkcva: any;
   checkundm: any;
   checkpids: any;
+  namevac1: any;
+  namevac2: any;
+  placevac1: any;
+  placevac2: any;
 
 
   hos_first: any;
@@ -119,7 +124,7 @@ export class FormsComponent implements OnInit {
   come_round: any;
   come_seat: any;
   assign_touch: any;
-  assign_employ: any;
+  assign_etc: any;
   assign_station: any;
   assign_position: any;
   radioAddress: any;
@@ -188,8 +193,8 @@ export class FormsComponent implements OnInit {
   getBirthDate(e: any): any {
     // console.log('e');
     // console.log(e);
-    this.birthday = e;
-    // this.birthday = moment(e).format('yyyy-MM-DD');
+    // this.birthday = e;
+     this.birthday = moment(e).format('yyyy-MM-DD');
     // console.log('this.birthday');
     // console.log(this.birthday);
   }
@@ -200,9 +205,9 @@ export class FormsComponent implements OnInit {
   }
 
   getDate(e: any): any {
-    console.log(e);
+    // console.log(e);
     this.datadate = moment(e).format('yyyy-MM-DD');
-    console.log(this.datadate);
+    // console.log(this.datadate);
   }
 
   getDatevac1(e: any): any {
@@ -289,8 +294,7 @@ export class FormsComponent implements OnInit {
     data.novel_amphur = this.amphur;
     data.novel_disease = this.disaese;
     data.novel_province = this.province;
-    // data.novel_congential=this.disaese;
-    //congential fail
+    data.novel_congential=this.disaese;
     data.novel_smoke = this.radioSmoke;
     data.novel_copd = this.checkcopd;
     data.novel_ckd = this.checkckd;
@@ -303,7 +307,7 @@ export class FormsComponent implements OnInit {
     data.novel_high = this.high;
     data.novel_bmi = this.bmi;
 
-
+    data.novel_birthday=this.birthday;
     data.novel_start_sick = this.datadate;
     data.novel_start_treat = this.datatreat;
     data.novel_hospital_first = this.hosp_fist;
@@ -330,7 +334,7 @@ export class FormsComponent implements OnInit {
     data.novel_symtom_etc = this.symtom_etc;
 
 
-    data.novel_comefrom = this.radiofrom;
+    data.novel_comefrom_31= this.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
     data.novel_date_come = this.datacome;
@@ -338,19 +342,27 @@ export class FormsComponent implements OnInit {
     data.novel_round_tran = this.come_round;
     data.novel_number_seat = this.come_seat;
 
-    data.novel_takecare_hos = this.radiorepair;
-    data.novel_touch_hos = this.radionear;
-    data.novel_his_touch = this.radiotouch;
-    data.novel_assign_touch = this.assign_touch;
-    data.novel_assign_station = this.assign_station;
+    data.novel_takecare_32 = this.radiorepair;
+    data.novel_touch_hs_33 = this.radionear;
+    data.novel_his_touch_34 = this.radiotouch;
+    data.novel_assigntouch_34 = this.assign_touch;
+    data.novel_assign_station_36 = this.assign_station;
 
-    data.novel_tourist = this.radiovisitor;
-    data.novel_manyperson = this.radiocrowded;
-    data.novel_ari = this.radiobreath;
-    data.novel_inject = this.radioinject;
-    data.novel_doc = this.radiolabtest;
-    data.novel_des = this.assign_employ;
+    data.novel_tourist_35 = this.radiovisitor;
+    data.novel_manyperson_36 = this.radiocrowded;
+    data.novel_ari_37 = this.radiobreath;
+    data.novel_inject_38 = this.radioinject;
+    data.novel_doc_39= this.radiolabtest;
+    data.novel_etc_310 = this.assign_etc;
     data.novel_input_datetime = moment().format('yyyy-MM-DD HH:mm:ss');
+    data.novel_getvac1=this.datevac1;
+    data.novel_namevac1=this.namevac1;
+    data.novel_namevac2=this.namevac2;
+    data.novel_getvac2=this.datevac2;
+    data.novel_placevac1=this.placevac1;
+    data.novel_placevac2=this.placevac2;
+
+
 
 
     info.push(data);
