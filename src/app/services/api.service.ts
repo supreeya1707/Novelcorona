@@ -57,7 +57,7 @@ export class ApiService {
     ).toPromise();
   }
 
-  getData(cid:any): any {
+  getData(cid: any): any {
     // const token = sessionStorage.getByCid('token');
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -70,7 +70,7 @@ export class ApiService {
     return this.http.get(url, this.httpOptions).toPromise();
   }
 
-  getDataById(id:any): any {
+  getDataById(id: any): any {
     // const token = sessionStorage.getByCid('token');
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -82,7 +82,8 @@ export class ApiService {
 
     return this.http.get(url, this.httpOptions).toPromise();
   }
-  getTimeLineById(id:any): any {
+
+  getTimeLineById(novelid: any): any {
     // const token = sessionStorage.getTimeLineById('token');
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -90,7 +91,7 @@ export class ApiService {
         Authorization: 'Bearer '
       })
     };
-    const url = `${this.baseURL}/noveltimeline/${id}/id`;
+    const url = `${this.baseURL}/noveltimeline/${novelid}/novelid`;
 
     return this.http.get(url, this.httpOptions).toPromise();
   }

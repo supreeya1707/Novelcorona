@@ -21,27 +21,27 @@ export class RegisterComponent implements OnInit {
   nation:any;
   national:any;
   career:any;
-  numberadd:any;
-  moo:any;
-  tumbon:any;
-  amphur:any;
-  province:any;
-  phone:any;
-  datecome:any;
-  dategivetest:any;
-  placesendtest:any;
-  datetouch:any;
-  placerisk:any;
-  quarentine:any;
-  datequarentine:any;
-  swab2:any;
-  reporter:any;
-  noteetc:any;
+  numberadd: any;
+  moo: any;
+  tumbon: any;
+  amphur: any;
+  province: any;
+  phone: any;
+  datecome: any;
+  dategivetest: any;
+  placesendtest: any;
+  datetouch: any;
+  placerisk: any;
+  quarentine: any;
+  datequarentine: any;
+  swab2: any;
+  reporter:  any;
+  noteetc: any;
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
   data:any=[];
-  registerFrm: any=[];
+  registerFrm: any = [];
   submitted=false;
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
         // this.router.navigateByUrl('/date');
       });
   }
-  constructor(private api: ApiService,private formBuilder: FormBuilder ) { }
+  constructor(private api: ApiService, private formBuilder: FormBuilder ) { }
 
   ngOnInit(): void {
     this.registerFrm = this.formBuilder.group({
@@ -83,8 +83,8 @@ export class RegisterComponent implements OnInit {
     const rs: any = await this.api.getData(this.cid);
     // console.log(rs);
     //print on success
-    if( rs.ok===true){
-      this.dataNovel=rs.message;
+    if(rs.ok === true){
+      this.dataNovel = rs.message;
       console.log(this.dataNovel);
     }else {
       console.log('error');
