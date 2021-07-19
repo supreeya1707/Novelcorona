@@ -352,8 +352,8 @@ export class ReportComponent implements OnInit {
         {
           columns: [
             {width: 'auto', text: 'อาชีพ'},
-            {width: 'auto', text: '(ระบุลักษณะงานที่ทำอย่างละเอียด เช่น บุคลกรทางการแพทย์ เจ้าหน้าที่ที่สัมผัสนักท่องเที่ยว)', style: 'small', margin: [ 0, 1]},
-            {width: 'auto', text: ' .................................................................................................'}
+            {width: 'auto', text: '(ระบุลักษณะงานที่ทำอย่างละเอียด เช่น บุคลากรทางการแพทย์ เจ้าหน้าที่ที่สัมผัสนักท่องเที่ยว)', style: 'small', margin: [ 0, 1]},
+            {width: 'auto', text: ' ................................................................................................'}
           ],
           columnGap: 1
         },
@@ -503,7 +503,7 @@ export class ReportComponent implements OnInit {
         },
         {
           columns: [
-            {width: 'auto', text: 'อาการและอาการแสดงในวันพบผู้ป่วย :'},
+            {width: 'auto', text: 'อาการและอาการแสดง ในวันพบผู้ป่วย :'},
             {width: 'auto',
               table: {
                 widths: [2],
@@ -1124,7 +1124,7 @@ export class ReportComponent implements OnInit {
         {
           columns: [
             {width: 'auto', text: '•'},
-            {width: '87%', text: 'เป็นบุคลาการทางการแพทย์และสาธรณะสุขหรือเจ้าหน้าที่ห้องปฏิบัติการ', style : 'fontMid'},
+            {width: '87%', text: 'เป็นบุคลากรทางการแพทย์และสาธารณสุขหรือเจ้าหน้าที่ห้องปฏิบัติการ', style : 'fontMid'},
             {width: 'auto', table: {
                 widths: [2],
                 body: [

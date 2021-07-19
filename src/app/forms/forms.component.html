@@ -810,27 +810,27 @@
         <h2 class="text-warning">5.ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019 </h2>
       </div>
       <div class="card-body">
-        <div class="row mt-4">
+        <div class="row ">
           <div class="col font-prompt-medium">
-            <div class="checkbox-inline ">
-              <label class="checkbox checkbox-square checkbox-lg font-size-h5 ">
-                <input type="checkbox" name="Checkboxes13_1"/>
+            <div class="radio-inline">
+              <label class="radio font-size-h4 ">
+                <input type="radio" name="radio_1"/>
                 <span></span>
                 ไม่เคยได้รับ
               </label>
-              <label class="checkbox checkbox-square checkbox-lg font-size-h5">
-                <input type="checkbox" name="Checkboxes13_1"/>
+              <label class="radio font-size-h4">
+                <input type="radio" name="radio_1"/>
                 <span></span>
                 เคยได้รับ สมุดบันทึกหรือหลักฐานการรับวัคซีนหรือไม่
               </label>
 
-              <label class="checkbox checkbox-circle  font-size-h6">
-                <input type="checkbox" name="Checkboxes13_3"/>
+              <label class="radio font-size-h6">
+                <input type="radio" name="radio_2"/>
                 <span></span>
                 มี
               </label>
-              <label class="checkbox checkbox-circle  font-size-h6">
-                <input type="checkbox" name="Checkboxes13_3"/>
+              <label class="radio  font-size-h6">
+                <input type="radio" name="radio_2"/>
                 <span></span>
                 ไม่มี
               </label>
@@ -839,9 +839,9 @@
         </div>
 
         <form [formGroup]="form">
-          <div class="row">
+          <div class="row mt-4">
             <div class="col-md-4 ">
-              <label>วันที่ได้รับ</label>
+              <label>ครั้งที่ 1 วันที่ได้รับ </label>
               <div class="input-group">
                 <input class="form-control" #datepickerMDY="bsDatepicker"
                        bsDatepicker formControlName="dateMDY"
@@ -900,9 +900,9 @@
 
 
 <!--      section bottom-->
-<div class="row-cols-md-4 offset-md-5  mt-6 mb-6">
+<div class="row justify-content-center mt-5 mb-6  ">
   <button type="submit" class="btn btn-primary btn-lg" (click)="insertData()">บันทึก</button>
-  &nbsp;
+  &nbsp;&nbsp;  &nbsp;&nbsp;
   <button type="button" class="btn btn-secondary btn-lg ">ยกเลิก</button>
 
 </div>
