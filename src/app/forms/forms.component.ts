@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup,FormsModule } from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {listLocales} from 'ngx-bootstrap/chronos';
@@ -14,11 +14,14 @@ import {ApiService} from "../services/api.service";
   templateUrl: './forms.component.html',
 
 
+
+
 })
 export class FormsComponent implements OnInit {
   radioGender: any;
   radioPreg: any;
   radioCheck: any;
+
   // radioAddress: any = 0;
   radioSmoke: any;
   radiosymptom: any = [];
@@ -59,10 +62,11 @@ export class FormsComponent implements OnInit {
   dateStart = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
   // datadate = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
   datadate : any;
-  datatreat = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
-  datevac1 = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
-  datevac2 = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
+  datatreat :any;
+  datevac1 : any;
+  datevac2 : any;
   datacome: any;
+  d :any;
   // dateFirst = moment().format('yyyy-MM-DD');
   hosp_fist = 'โรงพยาบาลราชบุรี';
   provin_first = 'ราชบุรี';
@@ -83,7 +87,7 @@ export class FormsComponent implements OnInit {
   Telephone: any;
   Telephonedoc: any;
   treat: any;
-  birthday:any =  moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
+  birthday:any ;
   No: any;
   moo: any;
   mooban: any;
@@ -148,7 +152,7 @@ export class FormsComponent implements OnInit {
   des_day12: any;
   des_day13: any;
   des_day14: any;
-
+  Date
 
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
@@ -164,6 +168,7 @@ export class FormsComponent implements OnInit {
         // this.router.navigateByUrl('/date');
       });
   }
+
 
   constructor(private localeService: BsLocaleService,
               private api: ApiService,
@@ -187,6 +192,8 @@ export class FormsComponent implements OnInit {
     this.localeService.use(this.locale);
     this.genDateTimeLine(this.datadate);
     console.log(this.dateTimeLine);
+    this.birthday=new Date();
+
 
   }
 
@@ -196,7 +203,7 @@ export class FormsComponent implements OnInit {
     // this.birthday = e;
      this.birthday = moment(e).format('yyyy-MM-DD');
     // console.log('this.birthday');
-    // console.log(this.birthday);
+     console.log(this.birthday);
   }
 
   selectPname(e: any):any{
@@ -207,23 +214,23 @@ export class FormsComponent implements OnInit {
   getDate(e: any): any {
     // console.log(e);
     this.datadate = moment(e).format('yyyy-MM-DD');
-    // console.log(this.datadate);
+     console.log(this.datadate);
   }
 
   getDatevac1(e: any): any {
-    console.log(e);
+    // console.log(e);
     this.datevac1 = moment(e).format('yyyy-MM-DD');
     console.log(this.datevac1);
   }
 
   getDatevac2(e: any): any {
-    console.log(e);
+    // console.log(e);
     this.datevac2 = moment(e).format('yyyy-MM-DD');
     console.log(this.datevac2);
   }
 
   getDatetreat(e: any): any {
-    console.log(e);
+    // console.log(e);
     this.datatreat = moment(e).format('yyyy-MM-DD');
     console.log(this.datatreat);
   }
@@ -292,7 +299,7 @@ export class FormsComponent implements OnInit {
     data.novel_road = this.road;
     data.novel_district = this.tumbon;
     data.novel_amphur = this.amphur;
-    data.novel_disease = this.disaese;
+
     data.novel_province = this.province;
     data.novel_congential=this.disaese;
     data.novel_smoke = this.radioSmoke;
@@ -308,7 +315,7 @@ export class FormsComponent implements OnInit {
     data.novel_bmi = this.bmi;
 
     data.novel_birthday=this.birthday;
-    data.novel_start_sick = this.datadate;
+    data.novel_start_sick = moment(this.datadate).format('YYYY-MM-DD');
     data.novel_start_treat = this.datatreat;
     data.novel_hospital_first = this.hosp_fist;
     data.novel_province_first = this.provin_first;
@@ -343,7 +350,7 @@ export class FormsComponent implements OnInit {
     data.novel_number_seat = this.come_seat;
 
     data.novel_takecare_32 = this.radiorepair;
-    data.novel_touch_hs_33 = this.radionear;
+    data.novel_touch_his33 = this.radionear;
     data.novel_his_touch_34 = this.radiotouch;
     data.novel_assigntouch_34 = this.assign_touch;
     data.novel_assign_station_36 = this.assign_station;

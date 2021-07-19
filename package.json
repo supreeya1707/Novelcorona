@@ -26,6 +26,7 @@
     "dayjs": "^1.10.5",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
+    "ng2-date-picker": "^11.0.0",
     "ngx-bootstrap": "^6.2.0",
     "ngx-datatable-bootstrap4": "^1.0.0",
     "pdfmake-unicode": "0.0.1",

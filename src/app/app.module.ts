@@ -22,7 +22,7 @@ defineLocale('th-be', thBeLocale);
   declarations: [
     AppComponent,
     FormsComponent,
-    ReportComponent
+    ReportComponent,
     // RegisterComponent
 
   ],

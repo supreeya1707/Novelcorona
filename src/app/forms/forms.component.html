@@ -47,14 +47,14 @@
         <div class="row mt-5">
           <div class="col-md-2">
             <label>เพศ</label>
-            <div class="radio-inline col-md-2">
+            <div class="radio-inline col-md-3">
               <label class="radio">
-                <input type="radio" name="radios3" [(ngModel)]="radioGender" value="1"/>
+                <input type="radio" name="radios3" [(ngModel)]="radioGender" (ngModelChange)="radioGender"  value="1"/>
                 <span></span>
                 หญิง
               </label>
               <label class="radio ">
-                <input type="radio" name="radios3" [(ngModel)]="radioGender" value="2"/>
+                <input type="radio" name="radios3" [(ngModel)]="radioGender" (ngModelChange)="radioGender" value="2"/>
                 <span></span>
                 ชาย
               </label>
@@ -115,29 +115,48 @@
             <label>สิทธิการรักษา <span class="text-danger">*</span></label>
             <input type="text" class="form-control" [(ngModel)]="treat" value="{{treat}}"/>
           </div>
-          <!--            <form [formGroup]="form">-->
-          <div class="col-lg-4 mt-4">
-            <label>วัน/ เดือน / ปีเกิด</label>
-            <!--              <div class="input-group">-->
-            <!--                <input class="form-control" placeholder="yyyy-mm-dd"-->
-            <!--                       name="dp" [(ngModel)]="birthday" bsDatepicker >-->
-            <!--                <div class="input-group-append">-->
-            <!--                  <span class="input-group-text bg-white"><i class="fa fa-calendar"></i></span>-->
-            <!--                </div>-->
-            <!--              </div>-->
-            <input class="form-control" #datepickerMDY="bsDatepicker"
-                   bsDatepicker formControlName="dateMDY"
-                   (ngModelChange)="getBirthDate($event)"
-                   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-            <div class="input-group-append">
-                <span class="input-group-text">F
+          <div class="col-md-4 mt-4">
+            <form [formGroup]="form">
+
+              <label>วัน /เดือน/ ปีเกิด</label>
+              <div class="input-group">
+                <input class="form-control" #datepickerMDY="bsDatepicker"
+                       bsDatepicker formControlName="dateMDY"
+                       (ngModelChange)="getBirthDate($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                <div class="input-group-append">
+                <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-            </div>
+                </div>
+              </div>
+            </form>
           </div>
-          <!--            </form>-->
         </div>
-        <!--        </div>-->
+
+
+        <!--                      <form [formGroup]="form">-->
+<!--          <div class="col-lg-4 mt-4">-->
+<!--            <label>วัน/ เดือน / ปีเกิด</label>-->
+<!--            &lt;!&ndash;              <div class="input-group">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <input class="form-control" placeholder="yyyy-mm-dd"&ndash;&gt;-->
+<!--            &lt;!&ndash;                       name="dp" [(ngModel)]="birthday" bsDatepicker >&ndash;&gt;-->
+<!--            &lt;!&ndash;                <div class="input-group-append">&ndash;&gt;-->
+<!--            &lt;!&ndash;                  <span class="input-group-text bg-white"><i class="fa fa-calendar"></i></span>&ndash;&gt;-->
+<!--            &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--            <input class="form-control" #datepickerMDY="bsDatepicker"-->
+<!--                   bsDatepicker formControlName="dateMDY"-->
+<!--                   (ngModelChange)="getBirthDate($event)"-->
+<!--                   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">-->
+<!--            <div class="input-group-append">-->
+<!--                <span class="input-group-text">-->
+<!--                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"-->
+<!--                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--                   </form>-->
+<!--        </div>-->
+<!--                </div>-->
         <div class="row mt-5">
           <div class="col">
             <label>ที่อยู่ที่สามารถติดต่อได้ <span class="text-danger">*</span></label>
@@ -275,56 +294,41 @@
         <h2 class="text-info">2.ข้อมูลทางคลินิก</h2>
       </div>
       <div class="card-body">
-        <form [formGroup]="form">
-          <div class="row">
-            <div class="col-lg-5 col-md-5 col-lg-4 form-group">
+        <div class="row">
+          <div class="col-md-6 mt-4">
+            <form [formGroup]="form">
+
               <label>วันที่เริ่มป่วย</label>
               <div class="input-group">
-                <input class="form-control" #datepickerMDY="bsDatepicker"
+                <input class="form-control"(bsValueChange)="selectDateStart($event)" #datepickerMDY="bsDatepicker"
                        bsDatepicker formControlName="dateMDY"
-                       (ngModelChange)="getDate($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                       (ngModelChange)="getDate($event)"
+                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
                 <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
                 </div>
               </div>
-            </div>
-
+            </form>
           </div>
-        </form>
-        <!--        <form [formGroup]="form">-->
-<!--        <div class="row ">-->
-<!--          <div class=" col-md-6   ">-->
-<!--            <label>วันที่เริ่มป่วย</label>-->
-<!--            <div class="input-group">-->
-<!--              <input class="form-control" #datepickerMDY="bsDatepicker"-->
-<!--                     bsDatepicker formControlName="dateMDY"-->
-<!--                     (ngModelChange)="getDate($event)" (bsValueChange)="selectDateStart($event)"-->
-<!--                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">-->
-<!--              <div class="input-group-append">-->
-<!--                <span class="input-group-text">-->
-<!--                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"-->
-<!--                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
+          <div class="col-md-6 mt-4">
+            <form [formGroup]="form">
 
-<!--          <div class="col-md-6  ">-->
-<!--            <label>วันที่เข้ารับการรักษา</label>-->
-<!--            <div class="input-group">-->
-<!--              <input class="form-control" #datepickerMDY="bsDatepicker"-->
-<!--                     bsDatepicker formControlName="dateMDY" (ngModelChange)="getDatetreat($event)"-->
-<!--                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">-->
-<!--              <div class="input-group-append">-->
-<!--                              <span class="input-group-text">-->
-<!--                                <i class=" fa fa-calendar" (click)="datepickerMDY.toggle()"-->
-<!--                                   [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-        <!--        </form>-->
+              <label>วันที่เริ่มรักษา</label>
+              <div class="input-group">
+                <input class="form-control" #datepickerMDY="bsDatepicker"
+                       bsDatepicker formControlName="dateMDY"
+                       (ngModelChange)="getDatetreat($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
         <div class="row ">
           <div class=" col-md-6 mt-4">
             <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาครั้งแรก<span class="text-danger">*</span></label>
@@ -834,61 +838,65 @@
           </div>
         </div>
 
-        <div class="row mt-5">
-          <div class=" col-md-4 ">
-            <label>ครั้งที่ 1 วันที่ได้รับ </label>
-            <div class="input-group">
-              <input class="form-control" #datepickerMDY="bsDatepicker"
-                     bsDatepicker formControlName="dateMDY"
-                     (ngModelChange)="getDatevac1($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-              <div class="input-group-append">
+        <form [formGroup]="form">
+          <div class="row">
+            <div class="col-md-4 ">
+              <label>วันที่ได้รับ</label>
+              <div class="input-group">
+                <input class="form-control" #datepickerMDY="bsDatepicker"
+                       bsDatepicker formControlName="dateMDY"
+                       (ngModelChange)="getDatevac1($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                </div>
               </div>
             </div>
+            <div class="col-md-4">
+              <label>ชื่อวัคซีน </label>
+
+              <input type="text " class="form-control" id="vaccine" [(ngModel)]="namevac1">
+            </div>
+            <div class="col-md-4">
+              <label>สถานที่ได้รับ </label>
+              <input type="text " class="form-control" id="placevaccine" [(ngModel)]="placevac1">
+            </div>
           </div>
-        </div>
+        </form>
 
-        <div class="col-md-4">
-          <label>ชื่อวัคซีน </label>
 
-          <input type="text " class="form-control" id="vaccine" [(ngModel)]="namevac1">
-        </div>
-        <div class="col-md-4">
-          <label>สถานที่ได้รับ </label>
-          <input type="text " class="form-control" id="placevaccine" [(ngModel)]="placevac1">
-        </div>
-      </div>
-
-      <div class="row mt-5">
-        <div class=" col-md-4 ">
-          <label>ครั้งที่ 2 วันที่ได้รับ </label>
-          <div class="input-group">
-            <input class="form-control" #datepickerMDY="bsDatepicker"
-                   bsDatepicker formControlName="dateMDY"
-                   (ngModelChange)="getDatevac2($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-            <div class="input-group-append">
+        <form [formGroup]="form">
+          <div class="row mt-5">
+            <div class=" col-md-4 ">
+              <label>ครั้งที่ 2 วันที่ได้รับ </label>
+              <div class="input-group">
+                <input class="form-control" #datepickerMDY="bsDatepicker"
+                       bsDatepicker formControlName="dateMDY"
+                       (ngModelChange)="getDatevac2($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label>ชื่อวัคซีน </label>
+
+              <input type="text " class="form-control" id="vaccine2" [(ngModel)]="namevac2">
+            </div>
+            <div class="col-md-4">
+              <label>สถานที่ได้รับ </label>
+              <input type="text " class="form-control" id="placevaccine2" [(ngModel)]="placevac2">
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <label>ชื่อวัคซีน </label>
-
-          <input type="text " class="form-control" id="vaccine2" [(ngModel)]="namevac2">
-        </div>
-        <div class="col-md-4">
-          <label>สถานที่ได้รับ </label>
-          <input type="text " class="form-control" id="placevaccine2" [(ngModel)]="placevac2">
-        </div>
+        </form>
       </div>
-
     </div>
   </div>
-</div>
+  </div>
+
 
 
 <!--      section bottom-->
@@ -899,5 +907,9 @@
 
 </div>
 
+
 <!--</div>-->
+
+
+
 
