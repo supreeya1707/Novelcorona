@@ -152,7 +152,6 @@ export class FormsComponent implements OnInit {
   des_day12: any;
   des_day13: any;
   des_day14: any;
-  Date
 
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
@@ -192,8 +191,7 @@ export class FormsComponent implements OnInit {
     this.localeService.use(this.locale);
     this.genDateTimeLine(this.datadate);
     console.log(this.dateTimeLine);
-    this.birthday=new Date();
-
+    this.birthday = new Date();
 
   }
 
@@ -254,7 +252,7 @@ export class FormsComponent implements OnInit {
       this.dateTimeLine.push(this.convertDate(e, i));
       this.dateTimeLineShort.push(moment(this.sDate).add(-i, 'day').format('YYYY-MM-DD'));
     }
-    console.log(this.dateStart)
+    console.log(this.dateStart);
   }
 
   selectDateStart(e: any): any {
