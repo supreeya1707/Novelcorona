@@ -24,7 +24,7 @@ export class FormsComponent implements OnInit {
 
   // radioAddress: any = 0;
   radioSmoke: any;
-  radiosymptom: any = [];
+  radiosymptom: any;
   radiofrom: any;
 
   radiofever: any;
@@ -60,18 +60,21 @@ export class FormsComponent implements OnInit {
   sDate: any;
   dateselect = moment().format('yyyy-MM-DD');
   dateStart = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
-  // datadate = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
-  datadate : any;
-  datatreat :any;
-  datevac1 : any;
-  datevac2 : any;
+  datadate: any =  moment();
+  // datadate: any ;
+  datatreat: any;
+  datevac1: any;
+  datevac2: any;
   datacome: any;
-  d :any;
+  d: any;
   // dateFirst = moment().format('yyyy-MM-DD');
   hosp_fist = 'โรงพยาบาลราชบุรี';
   provin_first = 'ราชบุรี';
   hosp_now = 'โรงพยาบาลราชบุรี';
   provin_now = 'ราชบุรี';
+
+  havevac: any;
+  havecertificate: any;
 
   pname: any[];
   fname: any;
@@ -152,6 +155,30 @@ export class FormsComponent implements OnInit {
   des_day12: any;
   des_day13: any;
   des_day14: any;
+  date: any;
+
+  constructor(private localeService: BsLocaleService, private api: ApiService,
+              @Inject('baseURL') private baseURL: any) {
+  }
+
+  // form = new FormGroup({
+  //   dateYMD: new FormControl(new Date()),
+  //   dateFull: new FormControl(new Date()),
+  //   dateMDY: new FormControl(new Date()),
+  //   dateRange: new FormControl([
+  //     new Date(),
+  //     new Date(this.currentDate.setDate(this.currentDate.getDate() + 7))
+  //   ])
+  // });
+
+
+  ngOnInit(): void {
+    console.log('this.currentDate');
+    console.log(this.currentDate);
+    this.localeService.use(this.locale);
+    this.genDateTimeLine(moment().format('YYYY-MM-DD'));
+    /*console.log(this.dateTimeLine);*/
+  }
 
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
@@ -168,63 +195,10 @@ export class FormsComponent implements OnInit {
       });
   }
 
-
-  constructor(private localeService: BsLocaleService,
-              private api: ApiService,
-              @Inject('baseURL') private baseURL: any) {
-  }
-
-  form = new FormGroup({
-    dateYMD: new FormControl(new Date()),
-    dateFull: new FormControl(new Date()),
-    dateMDY: new FormControl(new Date()),
-    dateRange: new FormControl([
-      new Date(),
-      new Date(this.currentDate.setDate(this.currentDate.getDate() + 7))
-
-    ])
-  });
-  date: any;
-
-  ngOnInit(): void {
-    console.log(this.dateStart);
-    this.localeService.use(this.locale);
-    this.genDateTimeLine(this.datadate);
-    console.log(this.dateTimeLine);
-    this.birthday = new Date();
-
-  }
-
-  getBirthDate(e: any): any {
-    // console.log('e');
-    // console.log(e);
-    // this.birthday = e;
-     this.birthday = moment(e).format('yyyy-MM-DD');
-    // console.log('this.birthday');
-     console.log(this.birthday);
-  }
-
-  selectPname(e: any):any{
-    console.log(e.target.value);
-    console.log(this.pname);
-  }
-
   getDate(e: any): any {
     // console.log(e);
-    this.datadate = moment(e).format('yyyy-MM-DD');
-     console.log(this.datadate);
-  }
-
-  getDatevac1(e: any): any {
-    // console.log(e);
-    this.datevac1 = moment(e).format('yyyy-MM-DD');
-    console.log(this.datevac1);
-  }
-
-  getDatevac2(e: any): any {
-    // console.log(e);
-    this.datevac2 = moment(e).format('yyyy-MM-DD');
-    console.log(this.datevac2);
+    this.datadate = moment(e).format('YYYY-MM-DD');
+    this.genDateTimeLine(this.datadate);
   }
 
   getDatetreat(e: any): any {
@@ -241,19 +215,20 @@ export class FormsComponent implements OnInit {
 
   convertDate(d: any, i: any): any {
     const ss: any = d.toString().split('/');
-    const dataDate: any = (ss[2] - 543) + '-' + ss[1] + '-' + ss[0];
+    const dataDate: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
+    console.log('dataDate' , dataDate);
     const datai: any = -i;
     return moment(dataDate).locale('th').add(datai, 'day').format('DD MMMM YYYY');
   }
 
   genDateTimeLine(e: any): any {
-
+    this.dateTimeLine = [];
     for (let i = 1; i <= 14; i++) {
       this.dateTimeLine.push(this.convertDate(e, i));
-      this.dateTimeLineShort.push(moment(this.sDate).add(-i, 'day').format('YYYY-MM-DD'));
+      this.dateTimeLineShort.push(moment(e).add(-i, 'day').format('YYYY-MM-DD'));
     }
-    console.log(this.dateStart);
   }
+
 
   selectDateStart(e: any): any {
     // console.log(e);
@@ -264,8 +239,6 @@ export class FormsComponent implements OnInit {
     this.dateTimeLine = [];
     this.dateTimeLineShort = [];
     this.genDateTimeLine(this.datadate);
-
-
   }
 
   async insertData(): Promise<any> {
@@ -275,7 +248,7 @@ export class FormsComponent implements OnInit {
     data.novel_fname = this.fname;
     data.novel_lname = this.lname;
     data.novel_cid = this.cid;
-    data.novel_age = this.age
+    data.novel_age = this.age;
     data.novel_national = this.national;
     data.novel_gender = this.radioGender;
     data.novel_preg = this.radioPreg;
@@ -299,7 +272,7 @@ export class FormsComponent implements OnInit {
     data.novel_amphur = this.amphur;
 
     data.novel_province = this.province;
-    data.novel_congential=this.disaese;
+    data.novel_congential = this.congential;
     data.novel_smoke = this.radioSmoke;
     data.novel_copd = this.checkcopd;
     data.novel_ckd = this.checkckd;
@@ -312,13 +285,14 @@ export class FormsComponent implements OnInit {
     data.novel_high = this.high;
     data.novel_bmi = this.bmi;
 
-    data.novel_birthday=this.birthday;
+    data.novel_birthday = moment(this.birthday).format('YYYY-MM-DD');
     data.novel_start_sick = moment(this.datadate).format('YYYY-MM-DD');
-    data.novel_start_treat = this.datatreat;
+    data.novel_start_treat = moment(this.datatreat).format('YYYY-MM-DD');;
     data.novel_hospital_first = this.hosp_fist;
     data.novel_province_first = this.provin_first;
     data.novel_hospital_now = this.hosp_now;
     data.novel_province_now = this.provin_now;
+    data.novel_fever = this.radiofever;
     data.novel_assign_fever = this.assign_fever;
     data.novel_assign_oxygen = this.assign_oxygen;
     data.novel_fever = this.radiofever;
@@ -336,10 +310,11 @@ export class FormsComponent implements OnInit {
     data.novel_redeye = this.radioredeye;
     data.novel_rash = this.radiorash;
     data.novel_position = this.assign_position;
+    data.novel_symtom = this.radiosymptom;
     data.novel_symtom_etc = this.symtom_etc;
 
 
-    data.novel_comefrom_31= this.radiofrom;
+    data.novel_comefrom_31 = this.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
     data.novel_date_come = this.datacome;
@@ -357,31 +332,32 @@ export class FormsComponent implements OnInit {
     data.novel_manyperson_36 = this.radiocrowded;
     data.novel_ari_37 = this.radiobreath;
     data.novel_inject_38 = this.radioinject;
-    data.novel_doc_39= this.radiolabtest;
+    data.novel_doc_39 = this.radiolabtest;
     data.novel_etc_310 = this.assign_etc;
-    data.novel_input_datetime = moment().format('yyyy-MM-DD HH:mm:ss');
-    data.novel_getvac1=this.datevac1;
-    data.novel_namevac1=this.namevac1;
-    data.novel_namevac2=this.namevac2;
-    data.novel_getvac2=this.datevac2;
-    data.novel_placevac1=this.placevac1;
-    data.novel_placevac2=this.placevac2;
-
-
-
+    data.novel_input_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
+    data.novel_havevac = this.havevac;
+    data.novel_certificate = this.havecertificate;
+    data.novel_getvac1 = moment(this.datevac1).format('YYYY-MM-DD');
+    data.novel_namevac1 = this.namevac1;
+    data.novel_placevac1 = this.placevac1;
+    data.novel_getvac2 = moment(this.datevac2).format('YYYY-MM-DD');
+    data.novel_namevac2 = this.namevac2;
+    data.novel_placevac2 = this.placevac2;
 
     info.push(data);
 
     const rs: any = await this.api.insRec(info);
     if (rs.ok) {
-      this.successNotification();
       console.log(rs.message[0]);
       const rsins: any = await this.insertRec(rs.message[0]);
+      console.log('rsins ', rsins );
+      this.successNotification();
     } else {
       this.errorNotification();
     }
   }
 
+  // บันทึก Timeline
   async insertRec(id): Promise<any> {
     const data: any = {};
     const info: any = [];
@@ -420,7 +396,9 @@ export class FormsComponent implements OnInit {
     info.push(data);
 
     const rs: any = await this.api.insData(info);
+    console.log(rs);
 
   }
+
 
 }

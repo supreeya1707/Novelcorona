@@ -3,12 +3,11 @@
 
 <div class="container font-prompt-medium mt-12 ">
 
-
-  <!--  <h2>1.ข้อมูลทั่วไป</h2>-->
+  <!-- 1.ข้อมูลทั่วไป -->
   <div class="row  ">
     <div class="card col-md-12 shadow-xs">
       <div class="card-header">
-        <h2 class="text-success">1.ข้อมูลทั่วไป</h2>
+        <h2 class="text-success">1. ข้อมูลทั่วไป</h2>
       </div>
       <div class="card-body">
         <div class="row">
@@ -18,21 +17,18 @@
           </div>
           <div class="col-md-5">
             <label>ชื่อ <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" placeholder="ชื่อ" [(ngModel)]="fname"
-                   value="{{fname}}"/>
+            <input type="text" class="form-control" placeholder="ชื่อ" [(ngModel)]="fname" value="{{fname}}"/>
           </div>
           <div class="col-md-5">
             <label>นามสกุล <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" placeholder="นามสกุล" id="lname" name="lname"
-                   [(ngModel)]="lname"
-                   value="{{lname}}"/>
+            <input type="text" class="form-control" placeholder="นามสกุล" id="lname" name="lname" [(ngModel)]="lname" value="{{lname}}"/>
           </div>
         </div>
+
         <div class="row mt-5">
           <div class="col-md-4">
             <label>เลขบัตรประชาชน <span class="text-danger">*</span></label>
-            <input [(ngModel)]="cid" type="text" class="form-control" placeholder="เลขบัตรประชาชน" value="{{cid}}"
-                   maxlength="13"/>
+            <input [(ngModel)]="cid" type="text" class="form-control" placeholder="เลขบัตรประชาชน" value="{{cid}}" maxlength="13"/>
           </div>
           <div class="col-md-4">
             <label>อายุ <span class="text-danger">*</span></label>
@@ -40,71 +36,70 @@
           </div>
           <div class="col-md-4">
             <label>สัญชาติ <span class="text-danger">*</span></label>
-            <input class="form-control" [(ngModel)]="national" type="text" id="national"
-                   value="{{national}}">
+            <input class="form-control" [(ngModel)]="national" type="text" id="national" value="{{national}}">
           </div>
         </div>
+
         <div class="row mt-5">
           <div class="col-md-2">
             <label>เพศ</label>
             <div class="radio-inline col-md-3">
               <label class="radio">
-                <input type="radio" name="radios3" [(ngModel)]="radioGender" (ngModelChange)="radioGender"  value="1"/>
-                <span></span>
-                หญิง
+                <input type="radio" name="radios3" [(ngModel)]="radioGender" (ngModelChange)="radioGender" value="1"/>
+                <span></span>หญิง
               </label>
               <label class="radio ">
                 <input type="radio" name="radios3" [(ngModel)]="radioGender" (ngModelChange)="radioGender" value="2"/>
-                <span></span>
-                ชาย
+                <span></span>ชาย
               </label>
             </div>
           </div>
+
           <div class="col-md-2" *ngIf="radioGender == 1">
             <label>กรณีเพศหญิง<span class="text-danger">*</span></label>
             <div class="radio-inline">
               <label class="radio">
                 <input type="radio" name="radios6" [(ngModel)]="radioPreg" value="0"/>
-                <span></span>
-                ไม่ได้ตั้งครรภ์
+                <span></span>ไม่ได้ตั้งครรภ์
               </label>
               <label class="radio">
                 <input type="radio" name="radios6" [(ngModel)]="radioPreg" value="1"/>
-                <span></span>
-                ตั้งครรภ์
+                <span></span>ตั้งครรภ์
               </label>
             </div>
           </div>
           <div class="col-md-8 mt-8" *ngIf="radioPreg ==1">
             <div class="row">
               <div class="col-md-6">
-                <input type="text" [(ngModel)]="numPreg" class="form-control" placeholder="ครรภ์ที่ "
-                       value="numPreg"/>
+                <input type="text" [(ngModel)]="numPreg" class="form-control" placeholder="ครรภ์ที่ " value="numPreg"/>
               </div>
               <div class="col-md-6">
-                <input type="email" [(ngModel)]="pregAge" class="form-control" placeholder="อายุครรภ์/สัปดาห์"
-                       value="pregAge"/>
+                <input type="email" [(ngModel)]="pregAge" class="form-control" placeholder="อายุครรภ์/สัปดาห์" value="pregAge"/>
               </div>
             </div>
           </div>
         </div>
+
         <div class="row mt-5">
           <div class="col">
             <label>อาชีพ <span class="text-danger">*</span></label>
             <input type="Job" class="form-control" [(ngModel)]="job" value="{{job}}" id="job"/>
           </div>
-          <div class="col">
-            <label>สถานที่ทำงาน/สถานศึกษา<span class="text-danger">*</span></label>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-lg-6 col-sm-12">
+            <label>สถานที่ทำงาน/สถานศึกษา <span class="text-danger">*</span></label>
             <input type="text" class="form-control" [(ngModel)]="station"
                    value="{{station}}"/>
           </div>
-          <div class="col">
-            <label>เบอร์โทรศัพท์ที่ติดต่อได้<span class="text-danger">*</span></label>
+          <div class="col-lg-6 col-sm-12">
+            <label>เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-danger">*</span></label>
             <input type="text" [(ngModel)]="Telephone" class="form-control"
                    maxlength="10" id="Telephone" name="Telephone" value="{{Telephone}}"/>
-
           </div>
         </div>
+
         <div class="row mt-5">
           <div class="col-lg-4 mt-4">
             <label>เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชั่น "หมอชนะ" </label>
@@ -116,70 +111,42 @@
             <input type="text" class="form-control" [(ngModel)]="treat" value="{{treat}}"/>
           </div>
           <div class="col-md-4 mt-4">
-            <form [formGroup]="form">
-
-              <label>วัน /เดือน/ ปีเกิด</label>
-              <div class="input-group">
-                <input class="form-control" #datepickerMDY="bsDatepicker"
-                       bsDatepicker formControlName="dateMDY"
-                       (ngModelChange)="getBirthDate($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-                <div class="input-group-append">
+            <label>วัน /เดือน/ ปีเกิด</label>
+            <div class="input-group">
+              <input class="form-control" #datepickerMDY="bsDatepicker"
+                     bsDatepicker
+                     [(ngModel)]="birthday">
+              <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-                </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
-
-
-        <!--                      <form [formGroup]="form">-->
-<!--          <div class="col-lg-4 mt-4">-->
-<!--            <label>วัน/ เดือน / ปีเกิด</label>-->
-<!--            &lt;!&ndash;              <div class="input-group">&ndash;&gt;-->
-<!--            &lt;!&ndash;                <input class="form-control" placeholder="yyyy-mm-dd"&ndash;&gt;-->
-<!--            &lt;!&ndash;                       name="dp" [(ngModel)]="birthday" bsDatepicker >&ndash;&gt;-->
-<!--            &lt;!&ndash;                <div class="input-group-append">&ndash;&gt;-->
-<!--            &lt;!&ndash;                  <span class="input-group-text bg-white"><i class="fa fa-calendar"></i></span>&ndash;&gt;-->
-<!--            &lt;!&ndash;                </div>&ndash;&gt;-->
-<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
-<!--            <input class="form-control" #datepickerMDY="bsDatepicker"-->
-<!--                   bsDatepicker formControlName="dateMDY"-->
-<!--                   (ngModelChange)="getBirthDate($event)"-->
-<!--                   [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">-->
-<!--            <div class="input-group-append">-->
-<!--                <span class="input-group-text">-->
-<!--                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"-->
-<!--                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--                   </form>-->
-<!--        </div>-->
-<!--                </div>-->
         <div class="row mt-5">
           <div class="col">
             <label>ที่อยู่ที่สามารถติดต่อได้ <span class="text-danger">*</span></label>
           </div>
         </div>
         <div class="row mt-5">
-          <div class="col-2 mt-2">
+          <div class="col-4 mt-2">
             <label>เลขที่ <span class="text-danger">*</span></label>
             <input type="text" [(ngModel)]="No" class="form-control" value="{{No}}" name="No"/>
           </div>
-          <div class=" col-2 mt-2">
+          <div class=" col-4 mt-2">
             <label>หมู่ที่<span class="text-danger">*</span></label>
             <input type="text" [(ngModel)]="moo" class="form-control" value="{{moo}}"/>
           </div>
-          <div class="col-2 mt-2">
+          <div class="col-4 mt-2">
             <label>หมู่บ้าน<span class="text-danger">*</span></label>
             <input type="text" [(ngModel)]="mooban" class="form-control" value="{{mooban}}"/>
           </div>
-          <div class="col-3 mt-2">
+          <div class="col-6 mt-2">
             <label>ซอย<span class="text-danger"></span></label>
             <input type="text" [(ngModel)]="soi" class="form-control" value="{{soi}}"/>
           </div>
-          <div class="col-3 mt-2">
+          <div class="col-6 mt-2">
             <label>ถนน</label>
             <input type="text" [(ngModel)]="road" class="form-control" value="{{road}}"/>
           </div>
@@ -195,11 +162,7 @@
             <label>จังหวัด<span class="text-danger">*</span></label>
             <input type="text" [(ngModel)]="province" class="form-control" value="{{province}}"/>
           </div>
-          <div class="col-lg-4 mt-2">
-            <label>โรคประจำตัว(ถ้ามี)<span class="text-danger">*</span></label>
-            <input type="text" [(ngModel)]="disaese" class="form-control" value="{{disaese}}"/>
-          </div>
-          <div class="col-md-8 mt-4">
+          <div class="col-md-12 mt-5">
             <label>การสูบบุหรี่</label>
             <div class="col radio-inline ">
               <label class="radio ">
@@ -227,38 +190,31 @@
               <div class="checkbox-inline checkbox-info">
                 <label class="checkbox checkbox-square">
                   <input type="checkbox" name="Checkboxes11_1" [(ngModel)]="checkcopd" value="{{checkcopd}}"/>
-                  <span></span>
-                  COPD
+                  <span></span>COPD
                 </label>
                 <label class="checkbox checkbox-square">
                   <input type="checkbox" name="Checkboxes11_1" [(ngModel)]="checkckd" value="{{checkckd}}"/>
-                  <span></span>
-                  CKD
+                  <span></span>CKD
                 </label>
                 <label class="checkbox checkbox-square">
                   <input type="checkbox" name="Checkboxes11_1" [(ngModel)]="checkcad" value="{{checkcad}}"/>
-                  <span></span>
-                  CAD
+                  <span></span>CAD
                 </label>
                 <label class="checkbox checkbox-square">
                   <input type="checkbox" name="Checkboxes11_1" [(ngModel)]="checkcva" value="{{checkcva}}"/>
-                  <span></span>
-                  CVA
+                  <span></span>CVA
                 </label>
                 <label class="checkbox checkbox-square">
                   <input type="checkbox" name="Checkboxes11_1" [(ngModel)]="checkundm" value="{{checkundm}}"/>
-                  <span></span>
-                  Uncontrolled DM
+                  <span></span>Uncontrolled DM
                 </label>
                 <label class="checkbox checkbox-square">
                   <input type="checkbox" name="Checkboxes11_1" [(ngModel)]="checkpids" value="{{checkpids}}"/>
-                  <span></span>
-                  ภูมิคุ้มกันบกพร่อง
+                  <span></span>ภูมิคุ้มกันบกพร่อง
                 </label>
                 <label class="checkbox checkbox-square">
-                  <input type="checkbox" name="Checkboxes11_1"/>
-                  <span></span>
-                  อื่นๆ
+                  <input type="checkbox" name="Checkboxes11_1" [(ngModel)]="congential" value="{{congential}}"/>
+                  <span></span>อื่นๆ
                 </label>
                 <div class=" col-md-3">
                   <input type="text" class="form-control" placeholder="โปรดระบุ" [(ngModel)]="congential_etc"
@@ -277,56 +233,47 @@
             <label>ส่วนสูง <span class="text-danger">*</span></label>
             <input type="text" class="form-control" placeholder="เซนติเมตร" [(ngModel)]="high"/>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2" *ngIf="weight != null && high != null">
             <label>BMI <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" [(ngModel)]="bmi" value="{{bmi}}"/>
+            <input type="text" class="form-control" [(ngModel)]="bmi" [value]="(weight / ((high / 100) * (high / 100))).toFixed(2)"/>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-
-  <!--  section 2 edit -->
+  <!--  section 2 -->
   <div class="row mt-5 ">
     <div class="card col-md-12 shadow-xs">
       <div class="card-header">
-        <h2 class="text-info">2.ข้อมูลทางคลินิก</h2>
+        <h2 class="text-info">2. ข้อมูลทางคลินิก</h2>
       </div>
       <div class="card-body">
         <div class="row">
           <div class="col-md-6 mt-4">
-            <form [formGroup]="form">
-
-              <label>วันที่เริ่มป่วย</label>
-              <div class="input-group">
-                <input class="form-control"(bsValueChange)="selectDateStart($event)" #datepickerMDY="bsDatepicker"
-                       bsDatepicker formControlName="dateMDY"
-                       (ngModelChange)="getDate($event)"
-                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-                <div class="input-group-append">
+            <label>วันที่เริ่มป่วย</label>
+            <div class="input-group">
+              <input class="form-control" (bsValueChange)="getDate($event)" #datepickerMDY="bsDatepicker"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [bsValue]="currentDate">
+              <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-                </div>
               </div>
-            </form>
+            </div>
           </div>
           <div class="col-md-6 mt-4">
-            <form [formGroup]="form">
-
-              <label>วันที่เริ่มรักษา</label>
-              <div class="input-group">
-                <input class="form-control" #datepickerMDY="bsDatepicker"
-                       bsDatepicker formControlName="dateMDY"
-                       (ngModelChange)="getDatetreat($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-                <div class="input-group-append">
+            <label>วันที่เริ่มรักษา</label>
+            <div class="input-group">
+              <input class="form-control" #datepickerMDY="bsDatepicker" (bsValueChange)="getDatetreat($event)"
+                     bsDatepicker [bsValue]="currentDate"
+                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+              <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-                </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
         <div class="row ">
@@ -351,109 +298,93 @@
           <div class="col font-prompt-medium">
             <div class="form-group">
               <label>อาการและอาการแสดงในวันพบผู้ป่วย</label>
-
-
               <div class="checkbox-inline">
                 <label class="checkbox checkbox-square">
-                  <input type="checkbox" name="Checkboxes13_1"/>
-                  <span></span>
-                  ไข้
+                  <input type="checkbox" name="Checkboxes13_1" [(ngModel)]="radiofever"/>
+                  <span></span>ไข้
                 </label>
                 <div class=" col-md-3">
-                  <input type="text" class="form-control" [(ngModel)]="assign_fever" placeholder="องศาเซลเซียส"
-                         value="{{assign_fever}}"/>
+                  <input type="text" class="form-control" [(ngModel)]="assign_fever" placeholder="องศาเซลเซียส" value="{{assign_fever}}"/>
                 </div>
                 <div class="col-md-3 ">
-                  <input type="text" class="form-control" [(ngModel)]="assign_oxygen" placeholder="ค่าออกซิเจน(%)"
-                         value="{{assign_oxygen}}"/>
+                  <input type="text" class="form-control" [(ngModel)]="assign_oxygen" placeholder="ค่าออกซิเจน(%)" value="{{assign_oxygen}}"/>
                 </div>
               </div>
+
               <div class="checkbox-inline">
                 <label class="checkbox checkbox-square mt-8  ">
                   <input type="checkbox" name="Checkboxes6" value="02" [(ngModel)]="radiorespirator"/>
-                  <span></span>
-                  ใส่เครื่องช่วยหายใจ
+                  <span></span>ใส่เครื่องช่วยหายใจ
                 </label>
+
                 <label class="checkbox checkbox-square mt-8 ">
                   <input type="checkbox" name="Checkboxes6" value="03" [(ngModel)]="radiocough"/>
-                  <span></span>
-                  ไอ
+                  <span></span>ไอ
                 </label>
+
                 <label class="checkbox checkbox-square mt-8 ">
                   <input type="checkbox" name="Checkboxes6" value="04" [(ngModel)]="radiosorethroat"/>
-                  <span></span>
-                  เจ็บคอ
+                  <span></span>เจ็บคอ
                 </label>
+
                 <label class="checkbox checkbox-square mt-8  ">
                   <input type="checkbox" name="Checkboxes6" value="05" [(ngModel)]="radiomusclepain"/>
-                  <span></span>
-                  ปวดกล้ามเนื้อ
+                  <span></span>ปวดกล้ามเนื้อ
                 </label>
 
                 <label class="checkbox checkbox-square mt-8   ">
                   <input type="checkbox" name="Checkboxes6" value="0 " [(ngModel)]="radiomucous"/>
-                  <span></span>
-                  มีน้ำมูก
+                  <span></span>มีน้ำมูก
                 </label>
 
                 <label class="checkbox checkbox-square mt-8 ">
                   <input type="checkbox" name="Checkboxes6" value="06" [(ngModel)]="radiophlegm"/>
-                  <span></span>
-                  มีเสมหะ
+                  <span></span>มีเสมหะ
                 </label>
                 <label class="checkbox checkbox-square mt-8 ">
                   <input type="checkbox" name="Checkboxes6" value="07" [(ngModel)]="radiodifficulbreathing"/>
-                  <span></span>
-                  หายใจลำบาก
+                  <span></span>หายใจลำบาก
                 </label>
 
                 <label class="checkbox checkbox-square mt-8 ">
                   <input type="checkbox" name="Checkboxes6" value="08" [(ngModel)]="radioheadache"/>
-                  <span></span>
-                  ปวดศรีษะ
+                  <span></span>ปวดศรีษะ
                 </label>
 
                 <label class="checkbox checkbox-square mt-8 ">
                   <input type="checkbox" name="Checkboxes6" value="09" [(ngModel)]="radiopurify"/>
-                  <span></span>
-                  ถ่ายเหลว
+                  <span></span>ถ่ายเหลว
                 </label>
 
                 <label class="checkbox checkbox-square mt-8 ">
-                  <input type="checkbox" name="Checkboxes6" value="010" [(ngModel)]="radiosmell"
-                  />
-                  <span></span>
-                  จมูกไม่ได้กลิ่น
+                  <input type="checkbox" name="Checkboxes6" value="010" [(ngModel)]="radiosmell"/>
+                  <span></span>จมูกไม่ได้กลิ่น
                 </label>
 
                 <label class="checkbox checkbox-square mt-8">
                   <input type="checkbox" name="Checkboxes6" value="011" [(ngModel)]="radiotaste"/>
-                  <span></span>
-                  ลิ้นไม่รับรส
+                  <span></span>ลิ้นไม่รับรส
                 </label>
 
                 <label class="checkbox checkbox-square mt-8">
                   <input type="checkbox" name="Checkboxes6" value="012" [(ngModel)]="radioredeye"/>
-                  <span></span>
-                  ตาแดง
+                  <span></span>ตาแดง
                 </label>
 
                 <label class="checkbox checkbox-square mt-8">
                   <input type="checkbox" name="Checkboxes6" value="013" [(ngModel)]="radiorash"/>
-                  <span></span>
-                  ผื่น
+                  <span></span>ผื่น
                   <div class="form-inline  col-lg-5">
                     <input type="text" class="form-control" [(ngModel)]="assign_position"
                            placeholder="โปรดระบุตำแหน่ง" value="{{assign_position}}"/>
                   </div>
                 </label>
+
                 <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" value="014"/>
-                  <span></span>
-                  อื่นๆ
-                  <div class="form-inline  col-lg-5">
-                    <input type="text" class="form-control" placeholder="โปรดระบุ" [(ngModel)]="symtom_etc"
-                           value="{{symtom_etc}}"/>
+                  <input type="checkbox" name="Checkboxes6" value="014" [(ngModel)]="radiosymptom"/>
+                  <span></span>อื่นๆ
+                  <div class="form-inline col-lg-5">
+                    <input type="text" class="form-control" placeholder="โปรดระบุ" [(ngModel)]="symtom_etc" value="{{symtom_etc}}"/>
                   </div>
                 </label>
               </div>
@@ -464,34 +395,27 @@
     </div>
   </div>
 
-
-  <!--section 3 edit -->
+  <!--section 3 -->
   <div class="row mt-5 ">
     <div class="card col-md-12 shadow-xs">
       <div class="card-header">
-        <h2 class="text-primary">3.ประวัติความเสี่ยง</h2>
+        <h2 class="text-primary">3. ประวัติความเสี่ยง</h2>
       </div>
-
-
       <div class="card-body">
         <div class="row font-prompt-medium fsize16">
           <label>● ช่วง 14 วันก่อนป่วยอาศัยอยู่หรือเดินทางมาจากพื้นที่ที่มีการระบาด</label>
-
           <div class="radio-inline  ml-md-auto ">
-
-            <label class="radio   ">
+            <label class="radio">
               <input type="radio" name="radios21" [(ngModel)]="radiofrom" value="1"/>
-              <span></span>
-              ใช่
+              <span></span>ใช่
             </label>
-            <label class="radio   ">
+            <label class="radio">
               <input type="radio" name="radios21" [(ngModel)]="radiofrom" value="0"/>
-              <span></span>
-              ไม่ใช่
+              <span></span>ไม่ใช่
             </label>
           </div>
         </div>
-        <div class="row mt-5 " *ngIf="radiofrom== 1">
+        <div class="row mt-5 " *ngIf="radiofrom == 1">
           <div class="col-md-2 ">
             <input type="text " class="form-control fsize9" placeholder="โปรดระบุเมือง" [(ngModel)]="come_city"
                    value="come_city" id="come_city"/>
@@ -523,29 +447,24 @@
           <div class="radio-inline ml-md-auto">
             <label class="radio ">
               <input type="radio" name="radios22" [(ngModel)]="radiorepair" value="1"/>
-              <span></span>
-              ใช่
+              <span></span>ใช่
             </label>
             <label class="radio ">
               <input type="radio" name="radios22" [(ngModel)]="radiorepair" value="0"/>
-              <span></span>
-              ไม่ใช่
+              <span></span>ไม่ใช่
             </label>
           </div>
         </div>
         <div class="row mt-5 font-prompt-medium fsize16">
           <label>● ช่วง 14 วันก่อนป่วยได้ดูแลหรือสัมผัสใกล้ชิดกับผู้ป่วยอาการคล้ายไข้หวัดใหญ่หรือปอดอักเสบ</label>
-
           <div class="radio-inline ml-md-auto">
             <label class="radio  ">
               <input type="radio" name="radios23" [(ngModel)]="radionear" value="1"/>
-              <span></span>
-              ใช่
+              <span></span>ใช่
             </label>
             <label class="radio   ">
               <input type="radio" name="radios23" [(ngModel)]="radionear" value="0"/>
-              <span></span>
-              ไม่ใช่
+              <span></span>ไม่ใช่
             </label>
           </div>
         </div>
@@ -555,13 +474,11 @@
           <div class="radio-inline ml-md-auto">
             <label class="radio  ">
               <input type="radio" name="radios25" [(ngModel)]="radiotouch" value="1"/>
-              <span></span>
-              ใช่
+              <span></span>ใช่
             </label>
             <label class="radio   ">
               <input type="radio" name="radios25" [(ngModel)]="radiotouch" value="0"/>
-              <span></span>
-              ไม่ใช่
+              <span></span>ไม่ใช่
             </label>
           </div>
         </div>
@@ -577,64 +494,55 @@
           <div class="radio-inline ml-md-auto">
             <label class="radio  ml-md-auto">
               <input type="radio" name="radios26" [(ngModel)]="radiovisitor" value="1"/>
-              <span></span>
-              ใช่
+              <span></span>ใช่
             </label>
             <label class="radio  ">
               <input type="radio" name="radios26" [(ngModel)]="radiovisitor" value="0"/>
-              <span></span>
-              ไม่ใช่
+              <span></span>ไม่ใช่
             </label>
           </div>
         </div>
         <div class="row mt-5 font-prompt-medium fsize16">
           <label>● ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช้น ผับ สนามมวย</label>
           <div class="radio-inline ml-md-auto">
-            <label class="radio ">
+            <label class="radio">
               <input type="radio" name="radios27" [(ngModel)]="radiocrowded" value="1"/>
-              <span></span>
-              ใช่
+              <span></span>ใช่
             </label>
-            <label class="radio  ">
+            <label class="radio">
               <input type="radio" name="radios27" [(ngModel)]="radiocrowded" value="0"/>
-              <span></span>
-              ไม่ใช่
+              <span></span>ไม่ใช่
             </label>
           </div>
         </div>
         <div class="row md-5" *ngIf="radiocrowded==1">
           <div class="col-lg-2 col-md-4">
-            <input type="text" class="form-control" [(ngModel)]="assign_station" value="{{assign_station}}"
-                   placeholder="โปรดระบุ"/>
+            <input type="text" class="form-control" [(ngModel)]="assign_station" value="{{assign_station}}" placeholder="โปรดระบุ"/>
           </div>
         </div>
         <div class="row mt-5 font-prompt-medium fsize16">
           <label>● เป็นผู้ป่วยอาการทางเดินหายใจหรือปอดอักเสบเป็นกลุ่มก้อน</label>
           <div class="radio-inline ml-md-auto">
-            <label class="radio ">
+            <label class="radio">
               <input type="radio" name="radios28" [(ngModel)]="radiobreath" value="1"/>
-              <span></span>
-              ใช่
+              <span></span>ใช่
             </label>
-            <label class="radio  ">
+            <label class="radio">
               <input type="radio" name="radios28" [(ngModel)]="radiobreath" value="0"/>
-              <span></span>
-              ไม่ใช่
+              <span></span>ไม่ใช่
             </label>
           </div>
         </div>
         <div class="row mt-5 font-prompt-medium fsize16">
           <label>● เป็นผู้ป่วยปอดอักเสบรุนแรงหรือเสียชีวิตที่หาสาเหตุไม่ได้</label>
           <div class="radio-inline ml-md-auto">
-            <label class="radio ">
+            <label class="radio">
               <input type="radio" name="radios29" [(ngModel)]="radioinject" value="1"/>
-              <span></span>
-              ใช่
+              <span></span>ใช่
             </label>
-            <label class="radio  ">
+            <label class="radio">
               <input type="radio" name="radios29" [(ngModel)]="radioinject" value="0"/>
-              <span></span>
-              ไม่ใช่
+              <span></span>ไม่ใช่
             </label>
           </div>
         </div>
@@ -643,32 +551,27 @@
           <div class="radio-inline ml-md-auto">
             <label class="radio ">
               <input type="radio" name="radios30" [(ngModel)]="radiolabtest" value="1"/>
-              <span></span>
-              ใช่
+              <span></span>ใช่
             </label>
-            <label class="radio  ">
+            <label class="radio">
               <input type="radio" name="radios30" [(ngModel)]="radiolabtest" value="0"/>
-              <span></span>
-              ไม่ใช่
+              <span></span>ไม่ใช่
             </label>
           </div>
         </div>
         <div class="row mt-5 font-prompt-medium fsize16">
-          <label>● อื่นๆ</label>
-          <input type="text" class="form-control" [(ngModel)]="assign_etc" value="{{assign_etc}}"
-                 placeholder="โปรดระบุ"/>
+          <label class="col-lg-1 m-0 p-0">● อื่นๆ</label>
+          <input type="text" class="form-control col-lg-11" [(ngModel)]="assign_etc" value="{{assign_etc}}" placeholder="โปรดระบุ"/>
         </div>
       </div>
     </div>
   </div>
 
   <!--section 4 -->
-
-
   <div class="row mt-5 font-prompt-medium">
     <div class="card col-md-12 shadow-xs">
       <div class="card-header">
-        <h2 class="text-warning">4.รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย</h2>
+        <h2 class="text-warning">4. รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย</h2>
       </div>
       <div class="card-body">
         <div class="row mt-4">
@@ -778,8 +681,7 @@
             วันที่ {{dateTimeLine[11]}} <input type="hidden" name="dateTimeLine11" value="{{dateTimeLineShort[11]}}">
           </div>
           <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine0" id="textTimeLine11" rows="3" [(ngModel)]="des_day12"
-                      value="{{des_day12}}"></textarea>
+            <textarea class="form-control" name="textTimeLine0" id="textTimeLine11" rows="3" [(ngModel)]="des_day12" value="{{des_day12}}"></textarea>
           </div>
         </div>
         <div class="row mt-4">
@@ -787,8 +689,7 @@
             วันที่ {{dateTimeLine[12]}} <input type="hidden" name="dateTimeLine12" value="{{dateTimeLineShort[12]}}">
           </div>
           <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine1" id="textTimeLine12" rows="3" [(ngModel)]="des_day13"
-                      value="{{des_day13}}"></textarea>
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine12" rows="3" [(ngModel)]="des_day13" value="{{des_day13}}"></textarea>
           </div>
         </div>
         <div class="row mt-4">
@@ -796,113 +697,95 @@
             วันที่ {{dateTimeLine[13]}} <input type="hidden" name="dateTimeLine13" value="{{dateTimeLineShort[13]}}">
           </div>
           <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine1" id="textTimeLine13" rows="3" [(ngModel)]="des_day14"
-                      value="{{des_day14}}"></textarea>
+            <textarea class="form-control" name="textTimeLine1" id="textTimeLine13" rows="3" [(ngModel)]="des_day14" value="{{des_day14}}"></textarea>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <!--  section5-->
   <div class="row mt-5 font-prompt-medium">
     <div class="card col-md-12 shadow-xs">
       <div class="card-header">
-        <h2 class="text-warning">5.ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019 </h2>
+        <h2 class="text-warning">5. ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019 </h2>
       </div>
       <div class="card-body">
         <div class="row ">
           <div class="col font-prompt-medium">
             <div class="radio-inline">
               <label class="radio font-size-h4 ">
-                <input type="radio" name="radio_1"/>
-                <span></span>
-                ไม่เคยได้รับ
+                <input type="radio" name="radio_1" [(ngModel)]="havevac" value="0"/>
+                <span></span>ไม่เคยได้รับ
               </label>
               <label class="radio font-size-h4">
-                <input type="radio" name="radio_1"/>
-                <span></span>
-                เคยได้รับ สมุดบันทึกหรือหลักฐานการรับวัคซีนหรือไม่
+                <input type="radio" name="radio_1" [(ngModel)]="havevac" value="1"/>
+                <span></span>เคยได้รับ
               </label>
-
-              <label class="radio font-size-h6">
-                <input type="radio" name="radio_2"/>
-                <span></span>
-                มี
+              <label class="radio font-size-h4">สมุดบันทึกหรือหลักฐานการรับวัคซีนหรือไม่</label>
+              <label class="radio font-size-h4">
+                <input type="radio" name="radio_2" [(ngModel)]="havecertificate" value="1"/>
+                <span></span>มี
               </label>
-              <label class="radio  font-size-h6">
-                <input type="radio" name="radio_2"/>
-                <span></span>
-                ไม่มี
+              <label class="radio  font-size-h4">
+                <input type="radio" name="radio_2" [(ngModel)]="havecertificate" value="0"/>
+                <span></span>ไม่มี
               </label>
             </div>
           </div>
         </div>
-
-        <form [formGroup]="form">
-          <div class="row mt-4">
-            <div class="col-md-4 ">
-              <label>ครั้งที่ 1 วันที่ได้รับ </label>
-              <div class="input-group">
-                <input class="form-control" #datepickerMDY="bsDatepicker"
-                       bsDatepicker formControlName="dateMDY"
-                       (ngModelChange)="getDatevac1($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-                <div class="input-group-append">
+        <div class="row mt-4">
+          <div class="col-md-4 ">
+            <label>ครั้งที่ 1 วันที่ได้รับ </label>
+            <div class="input-group">
+              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker>
+              <div class="input-group-append">
                 <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-                </div>
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()" [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
               </div>
             </div>
-            <div class="col-md-4">
-              <label>ชื่อวัคซีน </label>
-
-              <input type="text " class="form-control" id="vaccine" [(ngModel)]="namevac1">
-            </div>
-            <div class="col-md-4">
-              <label>สถานที่ได้รับ </label>
-              <input type="text " class="form-control" id="placevaccine" [(ngModel)]="placevac1">
-            </div>
           </div>
-        </form>
+          <div class="col-md-4">
+            <label>ชื่อวัคซีน </label>
+            <input type="text " class="form-control" id="vaccine" [(ngModel)]="namevac1" >
+          </div>
+          <div class="col-md-4">
+            <label>สถานที่ได้รับ </label>
+            <input type="text " class="form-control" id="placevaccine" [(ngModel)]="placevac1">
+          </div>
+        </div>
 
-
-        <form [formGroup]="form">
-          <div class="row mt-5">
-            <div class=" col-md-4 ">
-              <label>ครั้งที่ 2 วันที่ได้รับ </label>
-              <div class="input-group">
-                <input class="form-control" #datepickerMDY="bsDatepicker"
-                       bsDatepicker formControlName="dateMDY"
-                       (ngModelChange)="getDatevac2($event)" [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-                <div class="input-group-append">
+        <!-- 5.ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019-->
+        <div class="row mt-5">
+          <div class=" col-md-4 ">
+            <label>ครั้งที่ 2 วันที่ได้รับ </label>
+            <div class="input-group">
+              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker>
+              <div class="input-group-append">
                 <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-                </div>
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()" [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
               </div>
             </div>
-            <div class="col-md-4">
-              <label>ชื่อวัคซีน </label>
-
-              <input type="text " class="form-control" id="vaccine2" [(ngModel)]="namevac2">
-            </div>
-            <div class="col-md-4">
-              <label>สถานที่ได้รับ </label>
-              <input type="text " class="form-control" id="placevaccine2" [(ngModel)]="placevac2">
-            </div>
           </div>
-        </form>
+          <div class="col-md-4">
+            <label>ชื่อวัคซีน </label>
+            <input type="text " class="form-control" id="vaccine2" [(ngModel)]="namevac2">
+          </div>
+          <div class="col-md-4">
+            <label>สถานที่ได้รับ </label>
+            <input type="text " class="form-control" id="placevaccine2" [(ngModel)]="placevac2">
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  </div>
+</div>
 
 
+<!--  section bottom-->
+<div class="row justify-content-center mt-5 mb-6 font-prompt-medium ">
+  <button type="submit" class="mx-2 btn btn-primary btn-lg" (click)="insertData()">บันทึก</button>
 
-<!--      section bottom-->
-<div class="row justify-content-center mt-5 mb-6  ">
-  <button type="submit" class="btn btn-primary btn-lg" (click)="insertData()">บันทึก</button>
-  &nbsp;&nbsp;  &nbsp;&nbsp;
   <button type="button" class="btn btn-secondary btn-lg ">ยกเลิก</button>
 
 </div>
