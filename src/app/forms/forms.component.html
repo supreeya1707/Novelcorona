@@ -1,6 +1,3 @@
-<!--<div class="wrapper  bg-primary-o-35 ">-->
-
-
 <div class="container font-prompt-medium mt-12 ">
     <form [formGroup]="generalFrm">
       <!-- 1.ข้อมูลทั่วไป -->
@@ -23,8 +20,6 @@
                 </div>
               </div>
             </div>
-            <!-- <label>คำนำหน้าชื่อ <span class="text-danger">*</span></label>
-             <input type="text" class="form-control" placeholder="คำนำหน้าชื่อ" name="pname" id="pname" formControlName="pname"/>-->
             <div class="col-md-4">
               <div class="form-group">
                 <label>ชื่อ <span class="text-danger">*</span></label>
@@ -36,8 +31,6 @@
                   <div class="text-left fSize12" *ngIf="f.fname.errors.required">กรุณาใส่ชื่อ</div>
                 </div>
               </div>
-              <!--<label>ชื่อ <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" placeholder="ชื่อ" [(ngModel)]="fname" value="{{fname}}"/>-->
             </div>
             <div class="col-md-5">
               <div class="form-group">
@@ -50,8 +43,6 @@
                   <div class="text-left fSize12" *ngIf="f.lname.errors.required">กรุณาใส่นามสกุล</div>
                 </div>
               </div>
-              <!--<label>นามสกุล <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" placeholder="นามสกุล" id="lname" name="lname" [(ngModel)]="lname" value="{{lname}}"/>-->
             </div>
           </div>
 
@@ -70,9 +61,6 @@
                   </div>
                 </div>
               </div>
-              <!-- <label>เลขบัตรประชาชน <span class="text-danger">*</span></label>
-               <input [(ngModel)]="cid" type="text" class="form-control" placeholder="เลขบัตรประชาชน" value="{{cid}}"
-                      maxlength="13"/>-->
             </div>
             <div class="col-md-3">
               <div class="form-group">
@@ -86,8 +74,6 @@
                 </div>
               </div>
             </div>
-            <!--<label>อายุ <span class="text-danger">*</span></label>
-            <input class="form-control" [(ngModel)]="age" type="text" placeholder="ปี" id="age" value="{{age}}">-->
             <div class="col-md-3">
               <div class="form-group">
                 <label>สัญชาติ <span class="text-danger">*</span></label>
@@ -100,8 +86,6 @@
                   <div class="text-left fSize12" *ngIf="f.national.errors.required">กรุณาใส่สัญชาติ</div>
                 </div>
               </div>
-              <!--<label>สัญชาติ <span class="text-danger">*</span></label>
-              <input class="form-control" [(ngModel)]="national" type="text" id="national" value="{{national}}">-->
             </div>
           </div>
 
@@ -130,20 +114,9 @@
                   </div>
                 </div>
               </div>
-              <!--<label>เพศ</label>
-              <div class="radio-inline col-md-3">
-                <label class="radio">
-                  <input type="radio" name="radios3" [(ngModel)]="radioGender" (ngModelChange)="radioGender" value="1"/>
-                  <span></span>หญิง
-                </label>
-                <label class="radio ">
-                  <input type="radio" name="radios3" [(ngModel)]="radioGender" (ngModelChange)="radioGender" value="2"/>
-                  <span></span>ชาย
-                </label>
-              </div>-->
             </div>
 
-            <div class="col-md-4" *ngIf="radioGender === 1">
+            <div class="col-md-3" *ngIf="radioGender === 1">
               <div class="form-group">
                 <label class="form-label">กรณีเพศหญิง</label><br>
                 <div style="padding-left: 20px;">
@@ -165,20 +138,9 @@
                   </div>
                 </div>
               </div>
-              <!--<label>กรณีเพศหญิง<span class="text-danger">*</span></label>
-              <div class="radio-inline">
-                <label class="radio">
-                  <input type="radio" name="radios6" [(ngModel)]="radioPreg" value="0"/>
-                  <span></span>ไม่ได้ตั้งครรภ์
-                </label>
-                <label class="radio">
-                  <input type="radio" name="radios6" [(ngModel)]="radioPreg" value="1"/>
-                  <span></span>ตั้งครรภ์
-                </label>
-              </div>-->
             </div>
-            <div class="col-md-6 mt-2" *ngIf="radioPreg === 1">
-              <div class="col-md-6">
+            <div class="col-md-6 row mt-2" *ngIf="radioPreg === 1">
+              <div class="col-md-3 d-inline">
                 <input type="text" id="numPreg" name="numPreg" formControlName="numPreg" class="form-control"
                        inputmode="numeric" pattern="[0-9]*" digitOnly
                        placeholder="ครรภ์ที่"/>
@@ -218,18 +180,9 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="col">
-               <label>อาชีพ <span class="text-danger">*</span></label>
-               <input type="Job" class="form-control" [(ngModel)]="job" value="{{job}}" id="job"/>
-             </div>-->
           </div>
 
           <div class="row mt-5">
-            <!-- <div class="col-lg-6 col-sm-12">
-               <label>สถานที่ทำงาน/สถานศึกษา <span class="text-danger">*</span></label>
-               <input type="text" class="form-control" [(ngModel)]="station"
-                      value="{{station}}"/>
-             </div>-->
             <div class="col-md-6">
               <div class="form-group">
                 <label>เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-danger">*</span></label>
@@ -254,34 +207,16 @@
                        class="form-control" type="text" placeholder='ใส่เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชั่น "หมอชนะ"'>
               </div>
             </div>
-            <!-- <div class="col-lg-6 col-sm-12">
-               <label>เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-danger">*</span></label>
-               <input type="text" [(ngModel)]="Telephone" class="form-control"
-                      maxlength="10" id="Telephone" name="Telephone" value="{{Telephone}}"/>
-             </div>-->
           </div>
 
           <div class="row mt-5">
-
-            <!--<div class="col-lg-4 mt-4">
-              <label>เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชั่น "หมอชนะ" </label>
-              <input type="text" [(ngModel)]="Telephonedoc" class="form-control" maxlength="10" id="Telephonedoc"
-                     value="{{Telephonedoc}}"/>
-            </div>-->
             <div class="col-lg-6">
               <div class="form-group">
                 <label>สิทธิการรักษา <!--<span class="text-danger">*</span>--></label>
                 <input type="text" class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat"
                        formControlName="treat">
-                <!--[ngClass]="{ 'is-invalid': submitted && f.treat.errors  || ((f.treat.touched || f.treat.dirty) && f.treat.invalid) }"-->
-                <!-- <div *ngIf="submitted && f.treat.errors  || ((f.treat.touched || f.treat.dirty) && f.treat.invalid)"
-                      class="invalid-feedback">
-                   <div class="text-left fSize12" *ngIf="f.treat.errors.required">กรุณาใส่สิทธิการรักษา</div>
-                 </div>-->
               </div>
             </div>
-            <!-- <label>สิทธิการรักษา <span class="text-danger">*</span></label>
-             <input type="text" class="form-control" [(ngModel)]="treat" value="{{treat}}"/>-->
             <div class="col-md-6">
               <div class="form-group">
                 <label>วัน /เดือน/ ปีเกิด</label>
@@ -298,6 +233,7 @@
               </div>
             </div>
           </div>
+          <!--Address-->
           <div class="row mt-5">
             <div class="col-md-12">
               <label>ที่อยู่ที่สามารถติดต่อได้ <span class="text-danger">*</span></label>
@@ -335,35 +271,23 @@
               <div class="form-group">
                 <label>หมู่บ้าน </label>
                 <input type="text" class="form-control" name="mooban" id="mooban" formControlName="mooban">
-                <!--[ngClass]="{ 'is-invalid': submitted && f.mooban.errors  || ((f.mooban.touched || f.mooban.dirty) && f.mooban.invalid)}"-->
-                <!--<div *ngIf="submitted && f.mooban.errors  || ((f.mooban.touched || f.mooban.dirty) && f.mooban.invalid)" class="invalid-feedback">
-                  <div class="text-left fSize12" *ngIf="f.mooban.errors.required">กรุณาใส่หมู่</div>
-                </div>-->
               </div>
-              <!-- <label>หมู่บ้าน<span class="text-danger">*</span></label>
-               <input type="text" [(ngModel)]="mooban" class="form-control" value="{{mooban}}"/>-->
             </div>
           </div>
-
           <div class="row mt-3">
             <div class="col-md-6">
               <div class="form-group">
                 <label>ซอย</label>
                 <input type="text" class="form-control" name="soi" id="soi" formControlName="soi">
               </div>
-              <!--<label>ซอย<span class="text-danger"></span></label>
-              <input type="text" [(ngModel)]="soi" class="form-control" value="{{soi}}"/>-->
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>ถนน</label>
                 <input type="text" class="form-control" name="road" id="road" formControlName="road">
               </div>
-              <!--<label>ถนน</label>
-              <input type="text" [(ngModel)]="road" class="form-control" value="{{road}}"/>-->
             </div>
           </div>
-
           <div class="row mt-3">
             <div class="col-md-4">
               <div class="form-group">
@@ -374,8 +298,6 @@
                   <div class="text-left fSize12" *ngIf="f.tumbon.errors.required">กรุณาใส่ตำบล</div>
                 </div>
               </div>
-             <!-- <label>ตำบล<span class="text-danger">*</span></label>
-              <input type="text" [(ngModel)]="tumbon" class="form-control" value="{{tumbon}}"/>-->
             </div>
             <div class="col-md-4">
               <div class="form-group">
@@ -386,8 +308,6 @@
                   <div class="text-left fSize12" *ngIf="f.amphur.errors.required">กรุณาใส่อำเภอ</div>
                 </div>
               </div>
-             <!-- <label>อำเภอ<span class="text-danger">*</span></label>
-              <input type="text" [(ngModel)]="amphur" class="form-control" value="{{amphur}}"/>-->
             </div>
             <div class="col-md-4">
               <div class="form-group">
@@ -398,29 +318,29 @@
                   <div class="text-left fSize12" *ngIf="f.province.errors.required">กรุณาใส่จังหวัด</div>
                 </div>
               </div>
-             <!-- <label>จังหวัด<span class="text-danger">*</span></label>
-              <input type="text" [(ngModel)]="province" class="form-control" value="{{province}}"/>-->
             </div>
           </div>
+          <!--END Address-->
 
+          <!--การสูบบุหรี่-->
           <div class="row mt-5">
             <div class="col-md-12">
               <div class="form-group">
                 <label class="form-label">การสูบบุหรี่ <span class="text-danger">*</span></label><br>
                 <div class="form-inline text-left">
-                  <div class="form-check col-md-3">
+                  <div class="form-check col-md-2">
                     <input class="form-check-input" type="radio" name="radioSmoke" id="radioSmoke1"
                            [ngClass]="{ 'is-invalid': submitted && f.radioSmoke.errors || ((f.radioSmoke.touched || f.radioSmoke.dirty) && f.radioSmoke.invalid) }"
                            [value]="0" formControlName="radioSmoke">
                     <label class="form-check-label" for="radioSmoke1">ไม่เคยสูบบุหรี่</label>
                   </div>
-                  <div class="form-check col-md-3">
+                  <div class="form-check col-md-2">
                     <input class="form-check-input" type="radio" name="radioSmoke" id="radioSmoke2"
                            [ngClass]="{ 'is-invalid': submitted && f.radioSmoke.errors || ((f.radioSmoke.touched || f.radioSmoke.dirty) && f.radioSmoke.invalid) }"
                            [value]="1" formControlName="radioSmoke">
                     <label class="form-check-label" for="radioSmoke2">ยังคงสูบบุหรี่</label>
                   </div>
-                  <div class="form-check col-md-3">
+                  <div class="form-check col-md-2">
                     <input class="form-check-input" type="radio" name="radioSmoke" id="radioSmoke3"
                            [ngClass]="{ 'is-invalid': submitted && f.radioSmoke.errors || ((f.radioSmoke.touched || f.radioSmoke.dirty) && f.radioSmoke.invalid) }"
                            [value]="2" formControlName="radioSmoke">
@@ -432,27 +352,9 @@
                   </div>
                 </div>
               </div>
-              <!--<label>การสูบบุหรี่</label>
-              <div class="col radio-inline ">
-                <label class="radio ">
-                  <input type="radio" name="radios5" [(ngModel)]="radioSmoke" value="0"/>
-                  <span></span>
-                  ไม่เคยสูบบุหรี่
-                </label>
-                <label class="radio ">
-                  <input type="radio" name="radios5" [(ngModel)]="radioSmoke" value="1"/>
-                  <span></span>
-                  ยังคงสูบบุหรี่
-                </label>
-                <label class="radio ">
-                  <input type="radio" name="radios5" [(ngModel)]="radioSmoke" value="2"/>
-                  <span></span>
-                  เคยสูบแต่เลิกแล้ว
-                </label>
-              </div>-->
             </div>
           </div>
-
+          <!--โรคประจำตัว-->
           <div class="row mt-4">
             <div class="col-md-12">
               <div class="form-group">
@@ -498,8 +400,6 @@
                   </div>
                   <div class="form-check text-left">
                     <label class="checkbox checkbox-square">
-                      <!--(change)="checkEtc($event)" [checked]="congential"-->
-                      <!--formControlName="congential"-->
                       <input type="checkbox" name="Checkboxes11_1" [(ngModel)]="congential" [ngModelOptions]="{standalone: true}"
                              name="congential" id="congential"/>
                       <span></span>&nbsp;อื่น ๆ
@@ -512,7 +412,7 @@
               </div>
             </div>
           </div>
-
+          <!--น้ำหนักส่วนสูง-->
           <div class="row mt-5">
             <div class="col-md-3">
               <div class="form-group">
@@ -578,19 +478,19 @@
           <div class="row ">
             <div class=" col-md-6 mt-4">
               <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาครั้งแรก<span class="text-danger">*</span></label>
-              <input type="text" [(ngModel)]="hosp_fist" class="form-control" value="{{ hosp_fist}}"/>
+              <input type="text" [(ngModel)]="fistHosp" class="form-control" value="{{fistHosp}}"/>
             </div>
             <div class=" col-md-6 mt-4 ">
               <label>จังหวัด<span class="text-danger">*</span></label>
-              <input type="text" [(ngModel)]="provin_first" class="form-control" value="{{ provin_first}}"/>
+              <input type="text" [(ngModel)]="fistChw" class="form-control" value="{{ fistChw}}"/>
             </div>
             <div class=" col-md-6 mt-4 ">
               <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาปัจจุบัน<span class="text-danger">*</span></label>
-              <input type="text" [(ngModel)]="hosp_now" class="form-control" value="{{hosp_now}}"/>
+              <input type="text" [(ngModel)]="nowHosp" class="form-control" value="{{nowHosp}}"/>
             </div>
             <div class=" col-md-6 mt-4">
               <label>จังหวัด<span class="text-danger">*</span></label>
-              <input type="text" [(ngModel)]="provin_now" class="form-control" value="{{ provin_now}}"/>
+              <input type="text" [(ngModel)]="nowChw" class="form-control" value="{{nowChw}}"/>
             </div>
           </div>
           <div class=" row mt-5">
@@ -718,27 +618,37 @@
             </div>
           </div>
           <div class="row mt-5 " *ngIf="radiofrom == 1">
-            <div class="col-md-2 ">
+            <div class="col-md-4">
               <input type="text " class="form-control fsize9" placeholder="โปรดระบุเมือง" [(ngModel)]="come_city"
                      value="come_city" id="come_city"/>
             </div>
-            <div class=" col-md-2">
+            <div class="col-md-4">
               <input type="text" class="form-control fsize9" placeholder="โปรดระบุประเทศ" [(ngModel)]="come_region"
                      value="{{come_region}}"/>
             </div>
-            <div class="col-md-2">
-              <input type="text" class="form-control fsize9" placeholder="โปรดระบุวันเดินทาง" [(ngModel)]="datacome"
-                     value="{{datacome}}"/>
+            <div class="col-md-4">
+              <div class="input-group">
+                <input class="form-control" (bsValueChange)="getDate($event)" placeholder="โปรดระบุวันเดินทาง"
+                       #datepickerMDY="bsDatepicker" [(ngModel)]="datacome"
+                       bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" >
+                <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                </div>
+              </div>
+              <!--<input type="text" class="form-control fsize9" placeholder="โปรดระบุวันเดินทาง" [(ngModel)]="datacome"
+                     value="{{datacome}}"/>-->
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
               <input type="text" class="form-control fsize4" placeholder="โปรดระบุโดยสารการบิน" [(ngModel)]="come_plane"
                      value="{{come_plane}}"/>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
               <input type="text" class="form-control fsize9" placeholder="โปรดระบุเที่ยวบินที่" [(ngModel)]="come_round"
                      value="{{come_round}}"/>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
               <input type="text" class="form-control fsize9" placeholder="โปรดระบุเลขที่นั่ง" [(ngModel)]="come_seat"
                      value="{{come_seat}}"/>
             </div>
@@ -774,11 +684,11 @@
           <div class="row mt-5 font-prompt-medium fsize16">
             <label>● ช่วง 14 วันก่อนป่วยมีประวัติสัมผัสกับผู้ป่วยยืนยันโรคติดเชื้อไวรัสโคโรน่า 2019 ระบุ</label>
             <div class="radio-inline ml-md-auto">
-              <label class="radio  ">
+              <label class="radio">
                 <input type="radio" name="radios25" [(ngModel)]="radiotouch" value="1"/>
                 <span></span>ใช่
               </label>
-              <label class="radio   ">
+              <label class="radio">
                 <input type="radio" name="radios25" [(ngModel)]="radiotouch" value="0"/>
                 <span></span>ไม่ใช่
               </label>
@@ -1045,7 +955,7 @@
             <div class="col-md-4 ">
               <label>ครั้งที่ 1 วันที่ได้รับ </label>
               <div class="input-group">
-                <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker>
+                <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac1">
                 <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -1063,12 +973,11 @@
             </div>
           </div>
 
-          <!-- 5.ประวัติการได้รับวัคซีนป้องกันโรคติดเชื้อไวรัสโคโรนา 2019-->
           <div class="row mt-5">
             <div class=" col-md-4 ">
               <label>ครั้งที่ 2 วันที่ได้รับ </label>
               <div class="input-group">
-                <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker>
+                <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac2">
                 <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"

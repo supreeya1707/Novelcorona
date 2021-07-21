@@ -68,49 +68,18 @@ export class FormsComponent implements OnInit {
   datacome: any;
   d: any;
   // dateFirst = moment().format('yyyy-MM-DD');
-  hosp_fist = 'โรงพยาบาลราชบุรี';
-  provin_first = 'ราชบุรี';
-  hosp_now = 'โรงพยาบาลราชบุรี';
-  provin_now = 'ราชบุรี';
+  fistHosp = 'โรงพยาบาลราชบุรี';
+  fistChw = 'ราชบุรี';
+  nowHosp = 'โรงพยาบาลราชบุรี';
+  nowChw = 'ราชบุรี';
 
   havevac: any;
   havecertificate: any;
 
-  pname: any;
-  fname: any;
-  lname: any;
-  cid: any;
-  age: any;
-  national: any;
-  numPreg: any;
-  pregAge: any;
-
-  station: any;
-  job: any;
-  Telephone: any;
-  Telephonedoc: any;
-  treat: any;
-  birthday: any;
-  No: any;
-  moo: any;
-  mooban: any;
-  soi: any;
-  road: any;
-  tumbon: any;
-  amphur: any;
-  disaese: any;
-  province: any;
   congential: any;
-  congential_etc: any;
   weight: any;
   high: any;
-  bmi: any;
-  checkcopd: any;
-  checkckd: any;
-  checkcad: any;
-  checkcva: any;
-  checkundm: any;
-  checkpids: any;
+
   namevac1: any;
   namevac2: any;
   placevac1: any;
@@ -211,7 +180,6 @@ export class FormsComponent implements OnInit {
       checkcva: [null],
       checkundm: [null],
       checkpids: [null],
-      congential: [null],
       congential_etc: [null],
       weight: [null],
       high: [null],
@@ -275,22 +243,21 @@ export class FormsComponent implements OnInit {
 
   getDatetreat(e: any): any {
     // console.log(e);
-    this.datatreat = moment(e).format('yyyy-MM-DD');
-    console.log(this.datatreat);
+    this.datatreat = moment(e).format('YYYY-MM-DD');
+    // console.log(this.datatreat);
   }
 
   getDatecome(e: any): any {
     // console.log(e);
-    this.datacome = moment(e).format('yyyy-MM-DD');
-    console.log(this.datacome);
+    this.datacome = moment(e).format('YYYY-MM-DD');
+    // console.log(this.datacome);
   }
 
   convertDate(d: any, i: any): any {
     const ss: any = d.toString().split('/');
     const dataDate: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
-    console.log('dataDate', dataDate);
     const datai: any = -i;
-    return moment(dataDate).locale('th').add(datai, 'day').format('DD MMMM YYYY');
+    return moment(dataDate).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
   }
 
   genDateTimeLine(e: any): any {
@@ -316,14 +283,14 @@ export class FormsComponent implements OnInit {
   async insertData(): Promise<any> {
     this.submitted = true;
     // stop here if form is invalid
-    /*if (this.generalFrm.invalid) {
+    if (this.generalFrm.invalid) {
       return;
-    }*/
+    }
     this.btndisble = true;
 
 
     // console.log('this.generalFrm.value.birthday', this.generalFrm.value.birthday);
-    console.log(this.generalFrm.value.bmi);
+    // console.log(this.generalFrm.value);
 
     const data: any = {};
     const info: any = [];
@@ -355,25 +322,28 @@ export class FormsComponent implements OnInit {
     data.novel_province = this.generalFrm.value.province;
 
     data.novel_smoke = this.generalFrm.value.radioSmoke;
-    data.novel_copd = (this.generalFrm.value.checkcopd) ? 0 : 1;
-    data.novel_ckd = (this.generalFrm.value.checkckd) ? 0 : 1;
-    data.novel_cad = (this.generalFrm.value.checkcad) ? 0 : 1;
-    data.novel_cva = (this.generalFrm.value.checkcva) ? 0 : 1;
-    data.novel_undm = (this.generalFrm.value.checkundm) ? 0 : 1;
-    data.novel_pids = (this.generalFrm.value.checkpids) ? 0 : 1;
-    data.novel_congential = this.generalFrm.value.congential;
+
+    data.novel_copd = (this.generalFrm.value.checkcopd) ? 1 : 0;
+    data.novel_ckd = (this.generalFrm.value.checkckd) ? 1 : 0;
+    data.novel_cad = (this.generalFrm.value.checkcad) ? 1 : 0;
+    data.novel_cva = (this.generalFrm.value.checkcva) ? 1 : 0;
+    data.novel_undm = (this.generalFrm.value.checkundm) ? 1 : 0;
+    data.novel_pids = (this.generalFrm.value.checkpids) ? 1 : 0;
+    data.novel_congential = this.congential;
     data.novel_congential_etc = this.generalFrm.value.congential_etc;
+
     data.novel_weight = this.generalFrm.value.weight;
     data.novel_high = this.generalFrm.value.high;
-    data.novel_bmi = this.generalFrm.value.bmi;
+    data.novel_bmi = (this.generalFrm.value.weight / ((this.generalFrm.value.high / 100) * (this.generalFrm.value.high / 100)));
 
     data.novel_birthday = (this.generalFrm.value.birthday != null) ? moment(this.generalFrm.value.birthday).format('YYYY-MM-DD') : null;
     data.novel_start_sick = moment(this.datadate).format('YYYY-MM-DD');
     data.novel_start_treat = moment(this.datatreat).format('YYYY-MM-DD');
-    data.novel_hospital_first = this.hosp_fist;
-    data.novel_province_first = this.provin_first;
-    data.novel_hospital_now = this.hosp_now;
-    data.novel_province_now = this.provin_now;
+    data.novel_hospital_first = this.fistHosp;
+    data.novel_province_first = this.fistChw;
+    data.novel_hospital_now = this.nowHosp;
+    data.novel_province_now = this.nowChw;
+
     data.novel_fever = this.radiofever;
     data.novel_assign_fever = this.assign_fever;
     data.novel_assign_oxygen = this.assign_oxygen;
@@ -399,7 +369,7 @@ export class FormsComponent implements OnInit {
     data.novel_comefrom_31 = this.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
-    data.novel_date_come = this.datacome;
+    data.novel_date_come = (this.datacome != null) ? moment(this.datacome).format('YYYY-MM-DD') : null;
     data.novel_transportation = this.come_plane;
     data.novel_round_tran = this.come_round;
     data.novel_number_seat = this.come_seat;
@@ -419,10 +389,10 @@ export class FormsComponent implements OnInit {
     data.novel_input_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
     data.novel_havevac = this.havevac;
     data.novel_certificate = this.havecertificate;
-    data.novel_getvac1 = moment(this.datevac1).format('YYYY-MM-DD');
+    data.novel_getvac1 = (this.datevac1 != null) ? moment(this.datevac1).format('YYYY-MM-DD') : null;
     data.novel_namevac1 = this.namevac1;
     data.novel_placevac1 = this.placevac1;
-    data.novel_getvac2 = moment(this.datevac2).format('YYYY-MM-DD');
+    data.novel_getvac2 = (this.datevac2 != null) ? moment(this.datevac2).format('YYYY-MM-DD') : null;
     data.novel_namevac2 = this.namevac2;
     data.novel_placevac2 = this.placevac2;
 
