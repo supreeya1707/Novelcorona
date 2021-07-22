@@ -4,10 +4,7 @@ import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {listLocales} from 'ngx-bootstrap/chronos';
 import Swal from 'sweetalert2';
-import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 import {ApiService} from '../services/api.service';
-// @ts-ignore
-// import {DateAdapter} from '@angular/material';
 
 @Component({
   selector: 'app-forms',
@@ -15,6 +12,7 @@ import {ApiService} from '../services/api.service';
 })
 export class FormsComponent implements OnInit {
   generalFrm: any;
+  timelineFrm: any;
   submitted = false;
   btndisble = false;
 
@@ -131,23 +129,11 @@ export class FormsComponent implements OnInit {
               @Inject('baseURL') private baseURL: any) {
   }
 
-  // form = new FormGroup({
-  //   dateYMD: new FormControl(new Date()),
-  //   dateFull: new FormControl(new Date()),
-  //   dateMDY: new FormControl(new Date()),
-  //   dateRange: new FormControl([
-  //     new Date(),
-  //     new Date(this.currentDate.setDate(this.currentDate.getDate() + 7))
-  //   ])
-  // });
-
 
   ngOnInit(): void {
-    console.log('this.currentDate');
-    console.log(this.currentDate);
     this.localeService.use(this.locale);
     this.genDateTimeLine(moment().format('YYYY-MM-DD'));
-    /*console.log(this.dateTimeLine);*/
+    // console.log(this.dateTimeLineShort);
 
     this.generalFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
@@ -187,6 +173,12 @@ export class FormsComponent implements OnInit {
       bmi: [null],
     });
 
+    this.timelineFrm  = this.formBuilder.group({
+      desDay1: [null, Validators.compose([Validators.required])],
+      desDay2: [null, Validators.compose([Validators.required])],
+      desDay3: [null, Validators.compose([Validators.required])]
+    });
+
   }
 
   radiochPreg(e): any {
@@ -209,6 +201,9 @@ export class FormsComponent implements OnInit {
 
   get f() {
     return this.generalFrm.controls;
+  }
+  get f2() {
+    return this.timelineFrm.controls;
   }
 
   resetForm(formGroup: FormGroup) {
@@ -237,9 +232,10 @@ export class FormsComponent implements OnInit {
   }
 
   getDate(e: any): any {
-    // console.log(e);
     this.datadate = moment(e).format('YYYY-MM-DD');
     this.genDateTimeLine(this.datadate);
+    // console.log(this.datadate);
+    // console.log(this.dateTimeLineShort);
   }
 
   getDatetreat(e: any): any {
@@ -263,9 +259,11 @@ export class FormsComponent implements OnInit {
 
   genDateTimeLine(e: any): any {
     this.dateTimeLine = [];
+    this.dateTimeLineShort = [];
     for (let i = 1; i <= 14; i++) {
       this.dateTimeLine.push(this.convertDate(e, i));
       this.dateTimeLineShort.push(moment(e).add(-i, 'day').format('YYYY-MM-DD'));
+      // console.log(this.dateTimeLineShort);
     }
   }
 
@@ -284,14 +282,14 @@ export class FormsComponent implements OnInit {
   async insertData(): Promise<any> {
     this.submitted = true;
     // stop here if form is invalid
-    if (this.generalFrm.invalid) {
+    if (this.generalFrm.invalid || this.timelineFrm.invalid) {
       return;
     }
     this.btndisble = true;
 
 
     // console.log('this.generalFrm.value.birthday', this.generalFrm.value.birthday);
-    // console.log(this.generalFrm.value);
+    console.log(this.generalFrm.value);
 
     const data: any = {};
     const info: any = [];
@@ -412,6 +410,7 @@ export class FormsComponent implements OnInit {
   }
 
   // บันทึก Timeline
+
   async insertRec(id): Promise<any> {
     const data: any = {};
     const info: any = [];
@@ -432,9 +431,9 @@ export class FormsComponent implements OnInit {
     data.day14 = this.dateTimeLineShort[13];
 
 
-    data.timeline_date1 = this.des_day1;
-    data.timeline_date2 = this.des_day2;
-    data.timeline_date3 = this.des_day3;
+    data.timeline_date1 = this.timelineFrm.value.desDay1;
+    data.timeline_date2 = this.timelineFrm.value.desDay2;
+    data.timeline_date3 = this.timelineFrm.value.desDay3;
     data.timeline_date4 = this.des_day4;
     data.timeline_date5 = this.des_day5;
     data.timeline_date6 = this.des_day6;
