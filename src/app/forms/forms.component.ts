@@ -258,7 +258,7 @@ export class FormsComponent implements OnInit {
     const ss: any = d.toString().split('/');
     const dataDate: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
     const datai: any = -i;
-    return moment(dataDate).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
+    // return moment(dataDate).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
   }
 
   genDateTimeLine(e: any): any {

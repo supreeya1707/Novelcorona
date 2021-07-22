@@ -15,6 +15,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { ReportComponent } from './report/report.component';
 import { RegisterComponent } from './register/register.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 
 defineLocale('th-be', thBeLocale);
@@ -25,6 +26,7 @@ defineLocale('th-be', thBeLocale);
     FormsComponent,
     ReportComponent,
     RegisterComponent,
+    ConfirmComponent,
 
   ],
   imports: [
