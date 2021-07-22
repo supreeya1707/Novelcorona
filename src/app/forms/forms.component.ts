@@ -72,6 +72,7 @@ export class FormsComponent implements OnInit {
   fistChw = 'ราชบุรี';
   nowHosp = 'โรงพยาบาลราชบุรี';
   nowChw = 'ราชบุรี';
+  hospcode = 10677;
 
   havevac: any;
   havecertificate: any;
@@ -294,6 +295,7 @@ export class FormsComponent implements OnInit {
 
     const data: any = {};
     const info: any = [];
+    data.novel_hospcode = this.hospcode;
     data.novel_pname = this.generalFrm.value.pname;
     data.novel_fname = this.generalFrm.value.fname;
     data.novel_lname = this.generalFrm.value.lname;

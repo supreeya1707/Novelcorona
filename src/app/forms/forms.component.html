@@ -35,7 +35,7 @@
             <div class="col-md-5">
               <div class="form-group">
                 <label>นามสกุล <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" placeholder="คำนำหน้าชื่อ" name="lname" id="lname"
+                <input type="text" class="form-control" placeholder="นามสกุล" name="lname" id="lname"
                        formControlName="lname"
                        [ngClass]="{ 'is-invalid': submitted && f.lname.errors  || ((f.lname.touched || f.lname.dirty) && f.lname.invalid) }">
                 <div *ngIf="submitted && f.lname.errors  || ((f.lname.touched || f.lname.dirty) && f.lname.invalid)"
