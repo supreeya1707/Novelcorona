@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
+import {right} from "@popperjs/core";
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -164,8 +165,7 @@ export class RegisterComponent implements OnInit {
       pageMargins: [55, 40, 55, 40],
       content: [
         {text:  'โรงพยาบาลราชบุรี', absolutePosition: {x:  405, y: 157}},
-        {text:  '√', absolutePosition: {x:  230, y: 260}, style: 'fSize24'},
-
+        {text:  '√', absolutePosition: {x:  228, y: 260}, style: 'fSize24'},
 
         {image: this.logo, fit: [65, 65], alignment: 'center'},
         {text: 'คำสั่งของเจ้าพนักงานควบคุมโรคติดต่อ', alignment: 'center'},
@@ -240,7 +240,7 @@ export class RegisterComponent implements OnInit {
           ],
           columnGap: 3
         },
-        {text: 'ได้แก่โรค ............................................................................................... ณ ............................................................................................'},
+        {text: 'ได้แก่โรค ............................................................................................... ณ ..............................................................................................'},
         {
           columns: [
             {width: 'auto', text: 'จึงมีคำสั่งให้ (ชื่อ - นามสกุล) ................................................................... อายุ ........... ปี สัญชาติ..................'},
@@ -268,12 +268,322 @@ export class RegisterComponent implements OnInit {
           ],
           columnGap: 3
         },
+        {text: 'เลขที่บัตรประจำตัวประชาชน/เลขที่หนังสือเดินทาง..................................................................................................................................'},
+        {text: 'หมายเลขโทรศัพท์......................................................... ที่อยู่ที่สามารถติดต่อได้ตั้งอยู่เลขที่ ........................ หมู่บ้าน/อาคาร...................'},
+        {text: 'ถนน.......................................................ตำบล/แขวง................................................... อำเภอ/เขต............................................................'},
+        {text: 'จังหวัด..............................................................'},
+        {text: 'ดำเนินการดังต่อไปนี้' , style:'title'},
+        {
+          columns: [
+            {width: 'auto', text: '(๑)'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'มารับการตรวจ'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'มารับการรักษา'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'มารับการชันสูตรทางการแพทย์'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'มารับการสร้างเสริมภูมิคุ้มกันโรคภายใน'},
+          ],
+          columnGap: 3
+        },
+        {text: 'วันที่........................................เดือน......................................... พ.ศ.............................. เวลา.............................น. ณ.................................' },
+        {
+          columns: [
+            {width: 'auto', text: '(๒)', style: 'small' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'เดินทางมาที่..........................หมู่............ตำบล.......................อำเภอ..........................จังหวัด..........................เพื่อ', style: 'small'},
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+             {width: 'auto', text: 'แยกกักตัว' , style: 'small'},
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'กักกัน', style: 'small'},
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'คุมไว้สังเกต', style: 'small'},
+          ],
+          columnGap: 2
+        },
+        {text: 'ตั้งแต่วันที่...............................................เดือน..................................................พ.ศ..................................เวลา........................................น.'},
+        {text: 'ถึงวันที่....................................................เดือน..................................................พ.ศ..................................เวลา........................................น.'},
+        {
+          columns: [
+            {width: 'auto', text: '(๓)' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'นำ(ชื่อ-นามสกุล).................................................................อายุ.....................ปี สัญชาติ............................เพศ'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ชาย' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'หญิง'},
+          ],
+          columnGap: 3
+        },
+        {text: 'เลขที่บัตรประจำตัวประชาชน/เลขที่หนังสือเดินทาง....................................................................................................................................'},
+        {text: 'ที่อยู่ที่สามารถติดต่อได้ตั้งอยู่เลขที่........................................................................หมู่บ้าน/อาคาร...............................................................'},
+        {text: 'ถนน.................................ตำบล/แขวง.....................................อำเภอ/เขต.................................................จังหวัด......................................'},
+        {text: 'หมายเลขโทรศัพท์......................................................................................'},
+        {
+          columns: [
+            {width: 'auto', text: 'เพื่อมา',style: 'small' },
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'แยกกัก' ,style: 'small'},
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'กักกัน',style: 'small' },
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'คุมไว้สังเกต',style: 'small'},
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'รับการตรวจ',style: 'small'},
+
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'รับการรักษา',style: 'small'},
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'รับการชันสูตรทางการแพทย์',style: 'small'},
+            {width: 'auto',
+              table: {
+                widths: [1],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'รับการสร้างเสริมภูมิคุ้มกันโรค',style: 'small'},
+
+
+          ],
+          columnGap:3
+        },
+        {text: 'ตั้งแต่วันที่...............................................เดือน..................................................พ.ศ..................................เวลา........................................น.'},
+        {text: 'ถึงวันที่....................................................เดือน..................................................พ.ศ..................................เวลา........................................น.'},
+        {text: 'ณ..................................................................................................................................................................................................................'},
+        {
+          columns: [
+            {width: 'auto', text: '(๔)' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'นำสัตว์ประเภท......................................................................................................................................จำนวน ...........................ตัว'},
+
+          ],
+          columnGap: 3
+        },
+        {
+          columns: [
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'มารับการตรวจ' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'มารับการรักษา' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'มารับการชันสูตรทางการแพทย์'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'มารับการป้องกันโรค'},
+
+
+          ],
+          columnGap:3
+        },
+        {text: 'ภายในวันที่.........................................................เดือน..................................................พ.ศ............................เวลา..................................น.'},
+        {text: 'ณ..................................................................................................................................................................................................................'},
+        {
+          columns: [
+            {width: 'auto', text: '(๕)ให้นำศพ(นาย/นาง/นางสาว)................................................................................................................................' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ซากสัตว์ประเภท' },
+
+          ],
+          columnGap:3
+        },
+        {text: '...............................................................................................................................................ซึ่งตายหรือมีเหตุอันควรสงสัยว่าตายด้วยโรค'},
+         {text: '........................................................................................ณ..........................................................................................................................'},
+        {text: '/ไปรับการตรวจ...',alignment: right ,style: 'small'},
+
+
 
       ],
       defaultStyle: {
         font: 'THSarabunNew',
         fontSize: 14,
-        lineHeight: 1
+        lineHeight: 0.9
       },
       styles: {
         title: {
