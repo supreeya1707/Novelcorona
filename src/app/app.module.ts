@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {FormsComponent} from './forms/forms.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
@@ -16,6 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { ReportComponent } from './report/report.component';
 import { RegisterComponent } from './register/register.component';
 
+
 defineLocale('th-be', thBeLocale);
 
 @NgModule({
@@ -23,7 +24,7 @@ defineLocale('th-be', thBeLocale);
     AppComponent,
     FormsComponent,
     ReportComponent,
-    RegisterComponent
+    RegisterComponent,
 
   ],
   imports: [

@@ -1,23 +1,23 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup,FormsModule } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {listLocales} from 'ngx-bootstrap/chronos';
 import Swal from 'sweetalert2';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
-import {ApiService} from "../services/api.service";
+import {ApiService} from '../services/api.service';
 // @ts-ignore
 // import {DateAdapter} from '@angular/material';
 
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
-
-
-
-
 })
 export class FormsComponent implements OnInit {
+  generalFrm: any;
+  submitted = false;
+  btndisble = false;
+
   radioGender: any;
   radioPreg: any;
   radioCheck: any;
@@ -60,7 +60,7 @@ export class FormsComponent implements OnInit {
   sDate: any;
   dateselect = moment().format('yyyy-MM-DD');
   dateStart = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
-  datadate: any =  moment();
+  datadate: any = moment();
   // datadate: any ;
   datatreat: any;
   datevac1: any;
@@ -68,49 +68,18 @@ export class FormsComponent implements OnInit {
   datacome: any;
   d: any;
   // dateFirst = moment().format('yyyy-MM-DD');
-  hosp_fist = 'โรงพยาบาลราชบุรี';
-  provin_first = 'ราชบุรี';
-  hosp_now = 'โรงพยาบาลราชบุรี';
-  provin_now = 'ราชบุรี';
+  fistHosp = 'โรงพยาบาลราชบุรี';
+  fistChw = 'ราชบุรี';
+  nowHosp = 'โรงพยาบาลราชบุรี';
+  nowChw = 'ราชบุรี';
 
   havevac: any;
   havecertificate: any;
 
-  pname: any[];
-  fname: any;
-  lname: any;
-  cid: any;
-  age: any;
-  national: any;
-  numPreg: any;
-  pregAge: any;
-
-  station: any;
-  job: any;
-  Telephone: any;
-  Telephonedoc: any;
-  treat: any;
-  birthday:any ;
-  No: any;
-  moo: any;
-  mooban: any;
-  soi: any;
-  road: any;
-  tumbon: any;
-  amphur: any;
-  disaese: any;
-  province: any;
   congential: any;
-  congential_etc: any;
   weight: any;
   high: any;
-  bmi: any;
-  checkcopd: any;
-  checkckd: any;
-  checkcad: any;
-  checkcva: any;
-  checkundm: any;
-  checkpids: any;
+
   namevac1: any;
   namevac2: any;
   placevac1: any;
@@ -157,7 +126,7 @@ export class FormsComponent implements OnInit {
   des_day14: any;
   date: any;
 
-  constructor(private localeService: BsLocaleService, private api: ApiService,
+  constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
               @Inject('baseURL') private baseURL: any) {
   }
 
@@ -178,6 +147,77 @@ export class FormsComponent implements OnInit {
     this.localeService.use(this.locale);
     this.genDateTimeLine(moment().format('YYYY-MM-DD'));
     /*console.log(this.dateTimeLine);*/
+
+    this.generalFrm = this.formBuilder.group({
+      cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
+      pname: [null, Validators.compose([Validators.required])],
+      fname: [null, Validators.compose([Validators.required])],
+      lname: [null, Validators.compose([Validators.required])],
+      age: [null, Validators.compose([Validators.required])],
+      national: [null, Validators.compose([Validators.required])],
+      radioGender: [null, Validators.compose([Validators.required])],
+      radioPreg: [null],
+      numPreg: [null],
+      pregAge: [null],
+      job: [null, Validators.compose([Validators.required])],
+      station: [null, Validators.compose([Validators.required])],
+      telephone: [null, Validators.compose([Validators.required])],
+      telephonedoc: [null],
+      treat: [null],
+      birthday: [null],
+      addr: [null, Validators.compose([Validators.required])],
+      moo: [null, Validators.compose([Validators.required])],
+      mooban: [null],
+      soi: [null],
+      road: [null],
+      tumbon: [null, Validators.compose([Validators.required])],
+      amphur: [null, Validators.compose([Validators.required])],
+      province: [null, Validators.compose([Validators.required])],
+      radioSmoke: [null, Validators.compose([Validators.required])],
+      checkcopd: [null],
+      checkckd: [null],
+      checkcad: [null],
+      checkcva: [null],
+      checkundm: [null],
+      checkpids: [null],
+      congential_etc: [null],
+      weight: [null],
+      high: [null],
+      bmi: [null],
+    });
+
+  }
+
+  radiochPreg(e): any {
+    this.radioPreg = e;
+  }
+
+  setValidators() {
+    const pregControl = this.generalFrm.get('radioPreg');
+
+    this.generalFrm.get('radioGender').valueChanges
+      .subscribe((genderSelect: any | null) => {
+        console.log(genderSelect);
+        if (genderSelect === 1) {
+          pregControl.setValidators([null, Validators.compose([Validators.required])]);
+        }
+        pregControl.updateValueAndValidity();
+      });
+
+  }
+
+  get f() {
+    return this.generalFrm.controls;
+  }
+
+  resetForm(formGroup: FormGroup) {
+    let control: AbstractControl = null;
+    formGroup.reset();
+    formGroup.markAsUntouched();
+    Object.keys(formGroup.controls).forEach((name) => {
+      control = formGroup.controls[name];
+      control.setErrors(null);
+    });
   }
 
   successNotification() {
@@ -203,22 +243,21 @@ export class FormsComponent implements OnInit {
 
   getDatetreat(e: any): any {
     // console.log(e);
-    this.datatreat = moment(e).format('yyyy-MM-DD');
-    console.log(this.datatreat);
+    this.datatreat = moment(e).format('YYYY-MM-DD');
+    // console.log(this.datatreat);
   }
 
   getDatecome(e: any): any {
     // console.log(e);
-    this.datacome = moment(e).format('yyyy-MM-DD');
-    console.log(this.datacome);
+    this.datacome = moment(e).format('YYYY-MM-DD');
+    // console.log(this.datacome);
   }
 
   convertDate(d: any, i: any): any {
     const ss: any = d.toString().split('/');
     const dataDate: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
-    console.log('dataDate' , dataDate);
     const datai: any = -i;
-    return moment(dataDate).locale('th').add(datai, 'day').format('DD MMMM YYYY');
+    return moment(dataDate).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
   }
 
   genDateTimeLine(e: any): any {
@@ -242,56 +281,69 @@ export class FormsComponent implements OnInit {
   }
 
   async insertData(): Promise<any> {
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.generalFrm.invalid) {
+      return;
+    }
+    this.btndisble = true;
+
+
+    // console.log('this.generalFrm.value.birthday', this.generalFrm.value.birthday);
+    // console.log(this.generalFrm.value);
+
     const data: any = {};
     const info: any = [];
-    data.novel_pname = this.pname;
-    data.novel_fname = this.fname;
-    data.novel_lname = this.lname;
-    data.novel_cid = this.cid;
-    data.novel_age = this.age;
-    data.novel_national = this.national;
-    data.novel_gender = this.radioGender;
-    data.novel_preg = this.radioPreg;
-    data.novel_numpreg = this.numPreg;
-    data.novel_agepreg = this.pregAge;
-    data.novel_worker = this.job;
-    data.novel_station = this.station;
-    data.novel_phone = this.Telephone;
-    data.novel_phonedoc = this.Telephonedoc;
-    data.novel_treat = this.treat;
+    data.novel_pname = this.generalFrm.value.pname;
+    data.novel_fname = this.generalFrm.value.fname;
+    data.novel_lname = this.generalFrm.value.lname;
+    data.novel_cid = this.generalFrm.value.cid;
+    data.novel_age = this.generalFrm.value.age;
+    data.novel_national = this.generalFrm.value.national;
+    data.novel_gender = this.generalFrm.value.radioGender;
+    data.novel_preg = this.generalFrm.value.radioPreg;
+    data.novel_numpreg = this.generalFrm.value.numPreg;
+    data.novel_agepreg = this.generalFrm.value.pregAge;
+    data.novel_worker = this.generalFrm.value.job;
+    data.novel_station = this.generalFrm.value.station;
+    data.novel_phone = this.generalFrm.value.telephone;
+    data.novel_phonedoc = this.generalFrm.value.telephonedoc;
+    data.novel_treat = this.generalFrm.value.treat;
 
+    data.novel_address = this.generalFrm.value.radioAddress;
+    data.novel_address_etc = this.generalFrm.value.Addressetc;
+    data.novel_number_address = this.generalFrm.value.addr;
+    data.novel_moo = this.generalFrm.value.moo;
+    data.novel_mooban = this.generalFrm.value.mooban;
+    data.novel_soi = this.generalFrm.value.soi;
+    data.novel_road = this.generalFrm.value.road;
+    data.novel_district = this.generalFrm.value.tumbon;
+    data.novel_amphur = this.generalFrm.value.amphur;
+    data.novel_province = this.generalFrm.value.province;
 
-    data.novel_address = this.radioAddress;
-    data.novel_address_etc = this.Addressetc;
-    data.novel_number_address = this.No;
-    data.novel_moo = this.moo;
-    data.novel_mooban = this.mooban;
-    data.novel_soi = this.soi;
-    data.novel_road = this.road;
-    data.novel_district = this.tumbon;
-    data.novel_amphur = this.amphur;
+    data.novel_smoke = this.generalFrm.value.radioSmoke;
 
-    data.novel_province = this.province;
+    data.novel_copd = (this.generalFrm.value.checkcopd) ? 1 : 0;
+    data.novel_ckd = (this.generalFrm.value.checkckd) ? 1 : 0;
+    data.novel_cad = (this.generalFrm.value.checkcad) ? 1 : 0;
+    data.novel_cva = (this.generalFrm.value.checkcva) ? 1 : 0;
+    data.novel_undm = (this.generalFrm.value.checkundm) ? 1 : 0;
+    data.novel_pids = (this.generalFrm.value.checkpids) ? 1 : 0;
     data.novel_congential = this.congential;
-    data.novel_smoke = this.radioSmoke;
-    data.novel_copd = this.checkcopd;
-    data.novel_ckd = this.checkckd;
-    data.novel_cad = this.checkcad;
-    data.novel_cva = this.checkcva;
-    data.novel_undm = this.checkundm;
-    data.novel_pids = this.checkpids;
-    data.novel_congential_etc = this.congential_etc;
-    data.novel_weight = this.weight;
-    data.novel_high = this.high;
-    data.novel_bmi = this.bmi;
+    data.novel_congential_etc = this.generalFrm.value.congential_etc;
 
-    data.novel_birthday = moment(this.birthday).format('YYYY-MM-DD');
+    data.novel_weight = this.generalFrm.value.weight;
+    data.novel_high = this.generalFrm.value.high;
+    data.novel_bmi = (this.generalFrm.value.weight / ((this.generalFrm.value.high / 100) * (this.generalFrm.value.high / 100)));
+
+    data.novel_birthday = (this.generalFrm.value.birthday != null) ? moment(this.generalFrm.value.birthday).format('YYYY-MM-DD') : null;
     data.novel_start_sick = moment(this.datadate).format('YYYY-MM-DD');
-    data.novel_start_treat = moment(this.datatreat).format('YYYY-MM-DD');;
-    data.novel_hospital_first = this.hosp_fist;
-    data.novel_province_first = this.provin_first;
-    data.novel_hospital_now = this.hosp_now;
-    data.novel_province_now = this.provin_now;
+    data.novel_start_treat = moment(this.datatreat).format('YYYY-MM-DD');
+    data.novel_hospital_first = this.fistHosp;
+    data.novel_province_first = this.fistChw;
+    data.novel_hospital_now = this.nowHosp;
+    data.novel_province_now = this.nowChw;
+
     data.novel_fever = this.radiofever;
     data.novel_assign_fever = this.assign_fever;
     data.novel_assign_oxygen = this.assign_oxygen;
@@ -317,7 +369,7 @@ export class FormsComponent implements OnInit {
     data.novel_comefrom_31 = this.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
-    data.novel_date_come = this.datacome;
+    data.novel_date_come = (this.datacome != null) ? moment(this.datacome).format('YYYY-MM-DD') : null;
     data.novel_transportation = this.come_plane;
     data.novel_round_tran = this.come_round;
     data.novel_number_seat = this.come_seat;
@@ -337,10 +389,10 @@ export class FormsComponent implements OnInit {
     data.novel_input_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
     data.novel_havevac = this.havevac;
     data.novel_certificate = this.havecertificate;
-    data.novel_getvac1 = moment(this.datevac1).format('YYYY-MM-DD');
+    data.novel_getvac1 = (this.datevac1 != null) ? moment(this.datevac1).format('YYYY-MM-DD') : null;
     data.novel_namevac1 = this.namevac1;
     data.novel_placevac1 = this.placevac1;
-    data.novel_getvac2 = moment(this.datevac2).format('YYYY-MM-DD');
+    data.novel_getvac2 = (this.datevac2 != null) ? moment(this.datevac2).format('YYYY-MM-DD') : null;
     data.novel_namevac2 = this.namevac2;
     data.novel_placevac2 = this.placevac2;
 
@@ -350,7 +402,7 @@ export class FormsComponent implements OnInit {
     if (rs.ok) {
       console.log(rs.message[0]);
       const rsins: any = await this.insertRec(rs.message[0]);
-      console.log('rsins ', rsins );
+      console.log('rsins ', rsins);
       this.successNotification();
     } else {
       this.errorNotification();
