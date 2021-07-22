@@ -1,6 +1,5 @@
 <div class="container font-prompt-medium bg-">
-
-  <div class="card-header card-info text-center">
+  <!--<div class="card-header card-info text-center">
     <form [formGroup]="registerFrm">
       <div class="form-group">
         <label class="form-label">เลขประจำตัวประชาชน</label>
@@ -21,6 +20,22 @@
 
       </div>
     </form>
+  </div>-->
+  <div class="card-header card-info text-center">
+      <div class="form-group">
+        <label>เลือกวันที่ต้องการดูข้อมูล</label>
+        <div class="input-group">
+          <input class="form-control" #datepickerMDY="bsDatepicker"
+                 bsDatepicker [bsValue]="currentDate"
+                 (bsValueChange)="dateChange($event)"
+                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+          <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 <!--<div class="text-center"><button class="btn btn-outline-dark" (click)="testReport()">TEST</button></div>-->

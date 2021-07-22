@@ -5,6 +5,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
 import * as moment from 'moment';
+import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -41,84 +42,59 @@ export class ReportComponent implements OnInit {
   dataNovelByID: any;
   dataTimeLineByID: any;
 
+  data: any = [];
+  searchFrm: any = [];
+  submitted = false;
+  currentDate: any = new Date();
+
+  locale = 'th-be';
+
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
 
-  data: any = [];
-  registerFrm: any = [];
-  submitted = false;
-
-
-
-  constructor(private api: ApiService, private formBuilder: FormBuilder) {
+  constructor(private api: ApiService, private formBuilder: FormBuilder, private localeService: BsLocaleService,) {
   }
 
   ngOnInit(): void {
-    this.registerFrm = this.formBuilder.group({
-      //pull value cid
+    this.localeService.use(this.locale);
+   /* this.searchFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])]
-    });
+    });*/
   }
 
-  //function call registerFrm
+  // function call searchFrm
   get f() {
-    return this.registerFrm.controls;
+    return this.searchFrm.controls;
   }
 
-  async getonclick(): Promise<any> {
-    this.submitted = true;
-    // stop here if form is invalid
-    if (this.registerFrm.invalid) {
-      return;
-    }
-
-
-    this.cid = this.registerFrm.value.cid;
-    // console.log(this.cid);
-
-    //get data from API
-    const rs: any = await this.api.getData(this.cid);
-    // console.log(rs);
-    //print on success
-    if (rs.ok === true) {
+  async  dateChange(e: any): Promise<any> {
+    const  dateinput = moment(e).format('YYYY-MM-DD');
+    // console.log(dateinput);
+    const rs: any = await this.api.getDataByDate(dateinput);
+    console.log(rs);
+    if (rs.ok){
       this.dataNovel = rs.message;
-      console.log(this.dataNovel);
+    }else{
+      console.log('error');
+    }
+  }
+
+
+  async printReport(novelID: any) {
+    // console.log(novelID);
+    const res: any = await this.api.getDataById(novelID);
+    const resTimeLine: any = await this.api.getTimeLineById(novelID);
+    console.log(resTimeLine);
+    if (res.ok === true) {
+      if (resTimeLine.ok === true){
+        this.dataNovelByID = res.message;
+        this.dataTimeLineByID = resTimeLine.message;
+        this.generatePdf('open');
+      }
     } else {
       console.log('error');
     }
-
-  }
-
-
-
-  async printReport(novel_id: any) {
-      // console.log(novel_id);
-      const res: any = await this.api.getDataById(novel_id);
-      const resTimeLine: any = await this.api.getTimeLineById(novel_id);
-      console.log(resTimeLine);
-      if (res.ok === true) {
-        if (resTimeLine.ok === true){
-          this.dataNovelByID = res.message;
-          this.dataTimeLineByID = resTimeLine.message;
-          this.generatePdf('open');
-        }
-      } else {
-        console.log('error');
-      }
-  }
-
-  testReport(){
-    this.generatePdf('open');
-  }
-
-  async insertData(): Promise<any> {
-    const data: any = {};
-    const info: any = [];
-    // data.novel_id = ;
-
-    info.push(data);
-    const rs: any = await this.api.insData(info);
   }
 
   generatePdf(action) {

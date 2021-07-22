@@ -85,16 +85,10 @@ export class FormsComponent implements OnInit {
   placevac2: any;
 
 
-  hos_first: any;
-  province_first: any;
-  hos_now: any;
-  province_now: any;
   assign_fever: any;
   assign_oxygen: any;
-  find_symtom: any;
   come_city: any;
   come_region: any;
-  come_day: any;
   come_plane: any;
   come_round: any;
   come_seat: any;
@@ -107,11 +101,8 @@ export class FormsComponent implements OnInit {
   locale = 'th-be';
   locales = listLocales();
   currentDate = new Date();
-  assign_des: any;
 
-  des_day1: any;
-  des_day2: any;
-  des_day3: any;
+
   des_day4: any;
   des_day5: any;
   des_day6: any;
@@ -152,8 +143,8 @@ export class FormsComponent implements OnInit {
       telephonedoc: [null],
       treat: [null],
       birthday: [null],
-      addr: [null, Validators.compose([Validators.required])],
-      moo: [null, Validators.compose([Validators.required])],
+      addr: [null],
+      moo: [null],
       mooban: [null],
       soi: [null],
       road: [null],
@@ -254,7 +245,7 @@ export class FormsComponent implements OnInit {
     const ss: any = d.toString().split('/');
     const dataDate: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
     const datai: any = -i;
-    // return moment(dataDate).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
+    return moment(dataDate).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
   }
 
   genDateTimeLine(e: any): any {
@@ -283,13 +274,17 @@ export class FormsComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.generalFrm.invalid || this.timelineFrm.invalid) {
+      console.log('invalid');
+      console.log(this.generalFrm.invalid);
+      console.log(this.timelineFrm.invalid);
       return;
-    }
-    this.btndisble = true;
-
+    }/*else{
+      this.btndisble = true;
+    }*/
 
     // console.log('this.generalFrm.value.birthday', this.generalFrm.value.birthday);
     console.log(this.generalFrm.value);
+    console.log(this.timelineFrm.value);
 
     const data: any = {};
     const info: any = [];
@@ -386,7 +381,6 @@ export class FormsComponent implements OnInit {
     data.novel_inject_38 = this.radioinject;
     data.novel_doc_39 = this.radiolabtest;
     data.novel_etc_310 = this.assign_etc;
-    data.novel_input_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
     data.novel_havevac = this.havevac;
     data.novel_certificate = this.havecertificate;
     data.novel_getvac1 = (this.datevac1 != null) ? moment(this.datevac1).format('YYYY-MM-DD') : null;
@@ -395,6 +389,8 @@ export class FormsComponent implements OnInit {
     data.novel_getvac2 = (this.datevac2 != null) ? moment(this.datevac2).format('YYYY-MM-DD') : null;
     data.novel_namevac2 = this.namevac2;
     data.novel_placevac2 = this.placevac2;
+
+    data.novel_input_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     info.push(data);
 

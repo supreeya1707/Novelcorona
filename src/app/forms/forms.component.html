@@ -99,14 +99,14 @@
                            [(ngModel)]="radioGender"
                            [ngClass]="{ 'is-invalid': submitted && f.radioGender.errors || ((f.radioGender.touched || f.radioGender.dirty) && f.radioGender.invalid) }"
                            [value]="1" formControlName="radioGender">
-                    <label class="form-check-label" for="inlineRadio1">&nbsp;หญิง</label>
+                    <label class="form-check-label" for="inlineRadio1">หญิง</label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="radioGender" id="inlineRadio2"
                            [(ngModel)]="radioGender"  (change)="radiochPreg(0)"
                            [ngClass]="{ 'is-invalid': submitted && f.radioGender.errors || ((f.radioGender.touched || f.radioGender.dirty) && f.radioGender.invalid) }"
                            [value]="2" formControlName="radioGender">
-                    <label class="form-check-label" for="inlineRadio2">&nbsp;ชาย</label>
+                    <label class="form-check-label" for="inlineRadio2">ชาย</label>
                   </div>
                 </div>
                 <div *ngIf="submitted && f.radioGender.errors  || f.radioGender.invalid" class="invalid-feedback">
@@ -124,13 +124,13 @@
                     <input class="form-check-input" type="radio" name="radioPreg" id="radioPreg1" formControlName="radioPreg"
                            (change)="radiochPreg(0)"  [value]="0"
                            [ngClass]="{ 'is-invalid': submitted && f.radioPreg.errors || ((f.radioPreg.touched || f.radioPreg.dirty) && f.radioPreg.invalid) }">
-                    <label class="form-check-label" for="radioPreg1">&nbsp;ไม่ได้ตั้งครรภ์</label>
+                    <label class="form-check-label" for="radioPreg1">ไม่ได้ตั้งครรภ์</label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="radioPreg" id="radioPreg2" formControlName="radioPreg"
                            (change)="radiochPreg(1)" [value]="1"
                            [ngClass]="{ 'is-invalid': submitted && f.radioPreg.errors || ((f.radioPreg.touched || f.radioPreg.dirty) && f.radioPreg.invalid) }">
-                    <label class="form-check-label" for="radioPreg2">&nbsp;ตั้งครรภ์</label>
+                    <label class="form-check-label" for="radioPreg2">ตั้งครรภ์</label>
                   </div>
                 </div>
                 <div *ngIf="submitted && f.radioPreg.errors  || f.radioPreg.invalid" class="invalid-feedback">
@@ -186,8 +186,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-danger">*</span></label>
-                <input name="telephone" id="telephone" formControlName="telephone" inputmode="numeric" pattern="[0-9]*"
-                       digitOnly
+                <input name="telephone" id="telephone" formControlName="telephone" inputmode="numeric" pattern="[0-9]*" digitOnly
                        [ngClass]="{ 'is-invalid': submitted && f.telephone.errors  || ((f.telephone.touched || f.telephone.dirty) && f.telephone.invalid) }"
                        class="form-control" type="text" placeholder="ใส่เบอร์โทรศัพท์ที่ติดต่อได้">
                 <div
@@ -244,28 +243,18 @@
               <div class="form-group">
                 <label>เลขที่ <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" placeholder="ใส่บ้านเลขที่" name="addr" id="addr"
-                       formControlName="addr"
-                       [ngClass]="{ 'is-invalid': submitted && f.addr.errors  || ((f.addr.touched || f.addr.dirty) && f.addr.invalid)}">
-                <div *ngIf="submitted && f.addr.errors  || ((f.addr.touched || f.addr.dirty) && f.addr.invalid)"
+                       formControlName="addr">
+               <!-- <div *ngIf="submitted && f.addr.errors  || ((f.addr.touched || f.addr.dirty) && f.addr.invalid)"
                      class="invalid-feedback">
                   <div class="text-left fSize12" *ngIf="f.addr.errors.required">กรุณาใส่บ้านเลขที่</div>
-                </div>
+                </div>-->
               </div>
-              <!--<label>เลขที่ <span class="text-danger">*</span></label>
-              <input type="text" [(ngModel)]="No" class="form-control" value="{{No}}" name="No"/>-->
             </div>
             <div class=" col-md-4">
               <div class="form-group">
-                <label>หมู่ที่ <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="moo" id="moo" formControlName="moo"
-                       [ngClass]="{ 'is-invalid': submitted && f.moo.errors  || ((f.moo.touched || f.moo.dirty) && f.moo.invalid)}">
-                <div *ngIf="submitted && f.moo.errors  || ((f.moo.touched || f.moo.dirty) && f.moo.invalid)"
-                     class="invalid-feedback">
-                  <div class="text-left fSize12" *ngIf="f.moo.errors.required">กรุณาใส่หมู่</div>
-                </div>
+                <label>หมู่ที่</label>
+                <input type="text" class="form-control" name="moo" id="moo" formControlName="moo" inputmode="numeric" pattern="[0-9]*" digitOnly>
               </div>
-              <!--<label>หมู่ที่<span class="text-danger">*</span></label>
-              <input type="text" [(ngModel)]="moo" class="form-control" value="{{moo}}"/>-->
             </div>
             <div class="col-md-4">
               <div class="form-group">
@@ -344,7 +333,7 @@
                     <input class="form-check-input" type="radio" name="radioSmoke" id="radioSmoke3"
                            [ngClass]="{ 'is-invalid': submitted && f.radioSmoke.errors || ((f.radioSmoke.touched || f.radioSmoke.dirty) && f.radioSmoke.invalid) }"
                            [value]="2" formControlName="radioSmoke">
-                    <label class="form-check-label" for="radioSmoke3">&nbsp;เคยสูบแต่เลิกแล้ว</label>
+                    <label class="form-check-label" for="radioSmoke3">เคยสูบแต่เลิกแล้ว</label>
                   </div>
                 </div>
                 <div *ngIf="submitted && f.radioSmoke.errors  || f.radioSmoke.invalid" class="invalid-feedback">
@@ -628,8 +617,7 @@
             </div>
             <div class="col-md-4">
               <div class="input-group">
-                <input class="form-control" (bsValueChange)="getDate($event)" placeholder="โปรดระบุวันเดินทาง"
-                       #datepickerMDY="bsDatepicker" [(ngModel)]="datacome"
+                <input class="form-control" placeholder="โปรดระบุวันเดินทาง" #datepickerMDY="bsDatepicker" [(ngModel)]="datacome"
                        bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" >
                 <div class="input-group-append">
                 <span class="input-group-text">
@@ -637,8 +625,6 @@
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
                 </div>
               </div>
-              <!--<input type="text" class="form-control fsize9" placeholder="โปรดระบุวันเดินทาง" [(ngModel)]="datacome"
-                     value="{{datacome}}"/>-->
             </div>
             <div class="col-md-4">
               <input type="text" class="form-control fsize4" placeholder="โปรดระบุโดยสารการบิน" [(ngModel)]="come_plane"
@@ -963,9 +949,7 @@
             </div>
             <div class="col-md-10">
           <textarea class="form-control" name="textTimeLine1" id="textTimeLine13" rows="3"
-                    placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                    [(ngModel)]="des_day14"
-                    value="{{des_day14}}"></textarea>
+                    placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย" [(ngModel)]="des_day14" value="{{des_day14}}"></textarea>
             </div>
           </div>
         </div>
@@ -1054,7 +1038,7 @@
 
 <!--  section bottom-->
 <div class="row justify-content-center mt-5 mb-6 font-prompt-medium ">
-  <button type="submit" class="mx-2 btn btn-primary btn-lg" (click)="insertData()">บันทึก</button>
+  <button type="submit" class="mx-2 btn btn-outline-primary btn-lg" (click)="insertData()">บันทึก</button>
 
   <button type="button" class="btn btn-secondary btn-lg ">ยกเลิก</button>
 
