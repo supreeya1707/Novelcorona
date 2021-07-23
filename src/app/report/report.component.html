@@ -1,6 +1,5 @@
 <div class="container font-prompt-medium bg-">
-
-  <div class="card-header card-info text-center">
+  <!--<div class="card-header card-info text-center">
     <form [formGroup]="registerFrm">
       <div class="form-group">
         <label class="form-label">เลขประจำตัวประชาชน</label>
@@ -21,6 +20,22 @@
 
       </div>
     </form>
+  </div>-->
+  <div class="card-header card-info text-center">
+      <div class="form-group">
+        <label>เลือกวันที่ต้องการดูข้อมูล</label>
+        <div class="input-group">
+          <input class="form-control" #datepickerMDY="bsDatepicker"
+                 bsDatepicker [bsValue]="currentDate"
+                 (bsValueChange)="dateChange($event)"
+                 [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+          <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 <!--<div class="text-center"><button class="btn btn-outline-dark" (click)="testReport()">TEST</button></div>-->
@@ -37,6 +52,7 @@
                   <th>เลขบัตรประจำตัวประชาชน</th>
                   <th>ชื่อ</th>
                   <th>เบอร์โทรศัพท์</th>
+                  <th>วันที่ลงข้อมูล</th>
                   <th>วันที่เข้ารับการรักษา</th>
                   <th></th>
                 </tr>
@@ -44,8 +60,9 @@
                 <tbody *ngFor="let novel of dataNovel">
                 <tr>
                   <td>{{novel.novel_cid}}</td>
-                  <td>{{novel.novel_name}}</td>
+                  <td>{{novel.novel_pname + novel.novel_fname + '  ' + novel.novel_lname}}</td>
                   <td>{{novel.novel_phone}}</td>
+                  <td>{{novel.novel_input_datetime }}</td>
                   <td>{{novel.novel_start_treat}}</td>
                   <td><button (click)="printReport(novel.novel_id)" class="btn btn-xs btn-outline-secondary"><i class="fa fa-print"></i>Corona</button></td>
                 </tr>

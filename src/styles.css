@@ -384,6 +384,10 @@ legend {
   white-space: normal
 }
 
+swal2-popup{
+  font-family: 'prompt-medium';
+}
+
 @media (max-width: 1200px) {
   legend {
     font-size: calc(1.275rem + .3vw)

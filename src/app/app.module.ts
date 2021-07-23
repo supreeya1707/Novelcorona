@@ -1,11 +1,10 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
+import {CommonModule} from '@angular/common';
 import {AppComponent} from './app.component';
 import {FormsComponent} from './forms/forms.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {defineLocale} from 'ngx-bootstrap/chronos';
 import {thBeLocale} from 'ngx-bootstrap/locale';
@@ -15,7 +14,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { ReportComponent } from './report/report.component';
 import { RegisterComponent } from './register/register.component';
-import { ConfirmComponent } from './confirm/confirm.component';
+import {DigitOnlyModule} from '@uiowa/digit-only';
+import {AdminModule} from './admin/admin.module';
+// import { ConfirmComponent } from './confirm/confirm.component';
 
 
 defineLocale('th-be', thBeLocale);
@@ -26,10 +27,11 @@ defineLocale('th-be', thBeLocale);
     FormsComponent,
     ReportComponent,
     RegisterComponent,
-    ConfirmComponent,
+    // ConfirmComponent,
 
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
@@ -37,6 +39,8 @@ defineLocale('th-be', thBeLocale);
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    DigitOnlyModule,
+    AdminModule,
 
 
   ],

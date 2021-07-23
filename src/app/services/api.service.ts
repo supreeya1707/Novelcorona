@@ -83,6 +83,19 @@ export class ApiService {
     return this.http.get(url, this.httpOptions).toPromise();
   }
 
+  getDataByDate(dateinput: any): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelcorona/${dateinput}/dateinput`;
+
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
   getTimeLineById(novelid: any): any {
     // const token = sessionStorage.getTimeLineById('token');
     this.httpOptions = {

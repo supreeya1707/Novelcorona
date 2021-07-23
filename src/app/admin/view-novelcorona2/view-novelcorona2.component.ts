@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../services/api.service';
+import {ApiService} from '../../services/api.service';
 import {FormBuilder, Validators} from '@angular/forms';
+import * as moment from 'moment';
+import {BsLocaleService} from 'ngx-bootstrap/datepicker';
+import {Router} from '@angular/router';
+import * as _ from 'lodash';
+
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
-import * as moment from 'moment';
-import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -30,15 +33,16 @@ pdfMake.fonts = {
   }
 };
 
+
 @Component({
   selector: 'app-report',
-  templateUrl: './report.component.html',
+  templateUrl: './view-novelcorona2.component.html',
 
 })
-export class ReportComponent implements OnInit {
+export class ViewNovelcorona2Component implements OnInit {
   navbarOpen = false;
   cid: any;
-  dataNovel: any;
+  dataNovel: any[];
   dataNovelByID: any;
   dataTimeLineByID: any;
 
@@ -46,21 +50,24 @@ export class ReportComponent implements OnInit {
   searchFrm: any = [];
   submitted = false;
   currentDate: any = new Date();
-
   locale = 'th-be';
 
-  toggleNavbar() {
-    this.navbarOpen = !this.navbarOpen;
-  }
 
-  constructor(private api: ApiService, private formBuilder: FormBuilder, private localeService: BsLocaleService,) {
+
+  constructor(private api: ApiService, private formBuilder: FormBuilder, private localeService: BsLocaleService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.localeService.use(this.locale);
-   /* this.searchFrm = this.formBuilder.group({
-      cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])]
-    });*/
+    /* this.searchFrm = this.formBuilder.group({
+       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])]
+     });*/
+  }
+
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 
   // function call searchFrm
@@ -68,18 +75,27 @@ export class ReportComponent implements OnInit {
     return this.searchFrm.controls;
   }
 
-  async  dateChange(e: any): Promise<any> {
-    const  dateinput = moment(e).format('YYYY-MM-DD');
-    // console.log(dateinput);
+  async dateChange(e: any): Promise<any> {
+    const dateinput = moment(e).format('YYYY-MM-DD');
     const rs: any = await this.api.getDataByDate(dateinput);
-    console.log(rs);
-    if (rs.ok){
+    if (rs.ok) {
       this.dataNovel = rs.message;
-    }else{
+    } else {
       console.log('error');
     }
   }
 
+  viewForm(novelID: any) {
+    console.log(novelID);
+    this.router.navigateByUrl('admin/formRecheck', {state: {novelid: novelID}});
+  }
+
+  nameOrder(): any {
+    const data = _.sortBy(this.dataNovel, (o: any) => {
+      return o.novel_cid;
+    });
+    this.dataNovel = data;
+  }
 
   async printReport(novelID: any) {
     // console.log(novelID);
@@ -190,7 +206,7 @@ export class ReportComponent implements OnInit {
         {text:  this.dataNovelByID[0].novel_come_city, absolutePosition: {x: 115, y: 605}, bold : true},
         {text:  this.dataNovelByID[0].novel_come_country, absolutePosition: {x: 280, y: 605}, bold : true},
         {text:  moment(this.dataNovelByID[0].novel_date_come).locale('th').add(543, 'year').format('D MMMM YYYY'),
-                absolutePosition: {x: 480, y: 605}, bold : true},
+          absolutePosition: {x: 480, y: 605}, bold : true},
         {text:  this.dataNovelByID[0].novel_transportation, absolutePosition: {x: 120, y: 620}, bold : true},
         {text:  this.dataNovelByID[0].novel_round_tran, absolutePosition: {x: 315, y: 620}, bold : true},
         {text:  this.dataNovelByID[0].novel_number_seat, absolutePosition: {x: 480, y: 620}, bold : true},
@@ -1446,7 +1462,7 @@ export class ReportComponent implements OnInit {
           ],
           columnGap: 5
         }
-        ],
+      ],
       defaultStyle: {
         font: 'THSarabunNew',
         fontSize: 14,

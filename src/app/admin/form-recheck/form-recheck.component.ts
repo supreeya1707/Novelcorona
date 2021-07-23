@@ -1,20 +1,30 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup,  Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {listLocales} from 'ngx-bootstrap/chronos';
 import Swal from 'sweetalert2';
-import {ApiService} from '../services/api.service';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-forms',
-  templateUrl: './forms.component.html',
+  templateUrl: './form-recheck.component.html',
 })
-export class FormsComponent implements OnInit {
+export class FormRecheckComponent implements OnInit {
   generalFrm: any;
   timelineFrm: any;
   submitted = false;
   btndisble = false;
+  novelID: any;
+  dataNovel: any[];
+  dataTL: any[];
+
+  pname: any;
+  fname: any;
+  lname: any;
+  cid: any;
+  age: any;
+  nation: any;
 
   radioGender: any;
   radioPreg: any;
@@ -121,9 +131,11 @@ export class FormsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.novelID = history.state.novelid;
+    console.log(this.novelID);
+    this.getData(this.novelID);
+
     this.localeService.use(this.locale);
-    this.genDateTimeLine(moment().format('YYYY-MM-DD'));
-    // console.log(this.dateTimeLineShort);
 
     this.generalFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
@@ -175,9 +187,35 @@ export class FormsComponent implements OnInit {
     this.radioPreg = e;
   }
 
+  async getData(novelid: any): Promise<any>{
+    const resDataNovel = await this.api.getDataById(novelid);
+    if (resDataNovel.ok){
+      // console.log(resDataNovel.message);
+      this.dataNovel = resDataNovel.message[0];
+      this.pname = this.dataNovel['novel_pname'];
+      this.fname = this.dataNovel['novel_fname'];
+      this.lname = this.dataNovel['novel_lname'];
+      this.cid = this.dataNovel['novel_cid'];
+      this.age = this.dataNovel['novel_age'];
+      this.nation = this.dataNovel['novel_nation'];
+      this.radioGender = this.dataNovel['novel_gender'];
+      this.radioGender = this.dataNovel['novel_gender'];
+      this.radioPreg = this.dataNovel['novel_preg'];
+    }else{
+      console.error('error');
+    }
+
+    const resDataTL = await this.api.getTimeLineById(novelid);
+    if (resDataTL.ok){
+      this.dataTL = resDataTL.message[0];
+      console.log(this.dataTL);
+    }else{
+      console.error('error');
+    }
+  }
+
   setValidators() {
     const pregControl = this.generalFrm.get('radioPreg');
-
     this.generalFrm.get('radioGender').valueChanges
       .subscribe((genderSelect: any | null) => {
         console.log(genderSelect);
