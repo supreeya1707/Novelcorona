@@ -193,6 +193,7 @@ export class FormRecheckComponent implements OnInit {
       // console.log(resDataNovel.message);
       this.dataNovel = resDataNovel.message[0];
       this.pname = this.dataNovel['novel_pname'];
+      this.generalFrm.get('pname').setValue(this.dataNovel['novel_pname']);
       this.fname = this.dataNovel['novel_fname'];
       this.lname = this.dataNovel['novel_lname'];
       this.cid = this.dataNovel['novel_cid'];

@@ -15,7 +15,7 @@
               <div class="form-group">
                 <label>คำนำหน้าชื่อ <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" placeholder="คำนำหน้าชื่อ" name="pname" id="pname"
-                       formControlName="pname" value="{{pname}}"
+                       formControlName="pname"
                        [ngClass]="{ 'is-invalid': submitted && f.pname.errors  || ((f.pname.touched || f.pname.dirty) && f.pname.invalid) }">
                 <div *ngIf="submitted && f.pname.errors  || ((f.pname.touched || f.pname.dirty) && f.pname.invalid)" class="invalid-feedback">
                   <div class="text-left fSize12" *ngIf="f.cid.errors.required">กรุณาใส่คำนำหน้าชื่อ</div>
