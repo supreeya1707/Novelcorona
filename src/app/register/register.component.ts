@@ -6,7 +6,7 @@ import * as moment from 'moment';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
-import {right} from "@popperjs/core";
+import {right} from '@popperjs/core';
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;

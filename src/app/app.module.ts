@@ -15,6 +15,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { ReportComponent } from './report/report.component';
 import { RegisterComponent } from './register/register.component';
 import {DigitOnlyModule} from '@uiowa/digit-only';
+import {AdminModule} from './admin/admin.module';
 // import { ConfirmComponent } from './confirm/confirm.component';
 
 
@@ -39,6 +40,7 @@ defineLocale('th-be', thBeLocale);
     AppRoutingModule,
     HttpClientModule,
     DigitOnlyModule,
+    AdminModule,
 
 
   ],
