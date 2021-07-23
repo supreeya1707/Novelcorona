@@ -7,14 +7,12 @@ import {thBeLocale} from 'ngx-bootstrap/locale';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ViewNovelcorona2Component} from './view-novelcorona2/view-novelcorona2.component';
 import {LayoutComponent} from './layout/layout.component';
-import {DataTablesModule} from 'angular-datatables';
 import {FormRecheckComponent} from './form-recheck/form-recheck.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
-
 
 
 defineLocale('th-be', thBeLocale);
@@ -30,7 +28,6 @@ defineLocale('th-be', thBeLocale);
     AdminRoutingModule,
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
-    DataTablesModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

@@ -295,6 +295,9 @@ export class FormRecheckComponent implements OnInit {
     }
   }
 
+  async insertRecheck():Promise<any> {
+
+  }
 
   async insertData(): Promise<any> {
     this.submitted = true;
