@@ -16,6 +16,7 @@ import { ReportComponent } from './report/report.component';
 import { RegisterComponent } from './register/register.component';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {AdminModule} from './admin/admin.module';
+import {SharedModule} from './shared.module';
 // import { ConfirmComponent } from './confirm/confirm.component';
 
 
@@ -41,8 +42,7 @@ defineLocale('th-be', thBeLocale);
     HttpClientModule,
     DigitOnlyModule,
     AdminModule,
-
-
+    SharedModule,
   ],
   providers: [
     {provide: 'baseURL', useValue: environment.baseURL},

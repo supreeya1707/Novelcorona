@@ -108,4 +108,28 @@ export class ApiService {
 
     return this.http.get(url, this.httpOptions).toPromise();
   }
+
+  updateNovelData(novelid, dataUpdate): any{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    // console.log(dataUpdate);
+    const url = `${this.baseURL}/novelcorona/${novelid}/novel_id`;
+    return this.http.put(url, {data: dataUpdate}, this.httpOptions).toPromise();
+  }
+
+  updateTLData(novelid, dataUpdate): any{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    // console.log(dataUpdate);
+    const url = `${this.baseURL}/noveltimeline/${novelid}/novel_id`;
+    return this.http.put(url, {data: dataUpdate}, this.httpOptions).toPromise();
+  }
 }
