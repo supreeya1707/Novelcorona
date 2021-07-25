@@ -27,7 +27,7 @@ defineLocale('th-be', thBeLocale);
     FormsComponent,
     ReportComponent,
     RegisterComponent,
-    // ConfirmComponent,
+
 
   ],
   imports: [

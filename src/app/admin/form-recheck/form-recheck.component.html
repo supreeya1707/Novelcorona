@@ -985,7 +985,51 @@
       </div>
     </div>
   </div>
+  <!-- also evolution-->
+  <div class="row mt-5 font-prompt-medium">
+    <div class="card col-md-12 shadow-xs">
+      <div class="card-body">
+        <div class="row">
+          <label>สรุปความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยงกลุ่มใด</label>
+          <textarea class="form-control" name="textTimeLine0" id="textconnect"
+                    value="" rows="3"></textarea>
+        </div>
+        <div class="row mt-5">
+          <div class="radio-inline">
+            <label class="radio font-size-h4 ">
+              <input type="radio" name="radiow" value="2"/>
+              <span></span> ใส่ mask ตลอดเวลา
+            </label>
+            <label class="radio font-size-h4 ">
+              <input type="radio" name="radiow" value="1"/>
+              <span></span> ใส่บางครั้ง
+            </label>
+            <label class="radio font-size-h4 ">
+              <input type="radio" name="radiow" value="0"/>
+              <span></span> ไม่ใส่
+            </label>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="radio-inline">
+            <label class="radio font-size-h4">
+              <input type="radio" name="radiow_2" value="1"/>
+              <span></span>ห้องปรับอากาศ
+            </label>
+            <label class="radio font-size-h4">
+              <input type="radio" name="radiow_2" value="1"/>
+              <span></span>ห้องพัดลม
+            </label>
+            <label class="radio font-size-h4">
+              <input type="radio" name="radiow_2" value="1"/>
+              <span></span>นอกอาคาร
+            </label>
 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!--  section5-->
   <div class="row mt-5 font-prompt-medium">
     <div class="card col-md-12 shadow-xs">
@@ -1059,9 +1103,232 @@
             <input type="text " class="form-control" id="placevaccine2" [(ngModel)]="placevac2">
           </div>
         </div>
+        <div class="row mt-4">
+          <div class="col">
+            <div class="form-group">
+              <label>ผลการตรวจ SARS-CoV2 Antibody</label>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-md-1">
+            <label>ครั้งที่</label>
+            <input type="text " class="form-control" id="times1st" value="{{times1st}}">
+          </div>
+          <div class="col-md-3">
+            <label>วันที่เก็บ</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="โปรดระบุวันที่เก็บตัวอย่าง" #datepickerMDY="bsDatepicker"
+                     [(ngModel)]="dateSARS1"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label>ชนิดตัวอย่าง</label>
+            <input type="text " class="form-control" id="typeSAR1"[(ngModel)]="typeSAR1" >
+          </div>
+          <div class="col-md-2">
+            <label>สถานที่ส่งตรวจ</label>
+            <input type="text " class="form-control" id="placesendSAR1" [(ngModel)]="placesendSAR1">
+          </div>
+          <div class="col-md-4">
+            <label>ผลตรวจ</label>
+            <div class="radio-inline">
+              <label class="radio mt-3  ">
+                <input type="radio" name="radioSAR1" [(ngModel)]="radiodetect1"  value="1"/>
+                <span></span>DETECTED
+              </label>
+              <label class="radio mt-3 ">
+                <input type="radio" name="radioSAR1" [(ngModel)]="radiodetect1"  value="0"/>
+                <span></span>NOT DETECTED
+              </label>
+
+            </div>
+          </div>
+        </div>
+        <div class="row mt-8">
+          <div class="col-md-1">
+            <label>ครั้งที่</label>
+            <input type="text " class="form-control" id="times1st" value="{{times2nd}}">
+          </div>
+          <div class="col-md-3">
+            <label>วันที่เก็บ</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="โปรดระบุวันที่เก็บตัวอย่าง" #datepickerMDY="bsDatepicker"
+                     [(ngModel)]="dateSARS1"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label>ชนิดตัวอย่าง</label>
+            <input type="text " class="form-control" id="typeSAR2" [(ngModel)]="typeSAR2" >
+          </div>
+          <div class="col-md-2">
+            <label>สถานที่ส่งตรวจ</label>
+            <input type="text " class="form-control" id="placeSAR2" [(ngModel)]="placesendSAR2">
+          </div>
+          <div class="col-md-4">
+            <label>ผลตรวจ</label>
+            <div class="radio-inline">
+              <label class="radio mt-3 ">
+                <input type="radio" name="radioSAR2" [(ngModel)]="radiodetect2" value="1"/>
+                <span></span>DETECTED
+              </label>
+              <label class="radio mt-3 ">
+                <input type="radio" name="radioSAR2" [(ngModel)]="radiodetect1"  value="0"/>
+                <span></span>NOT DETECTED
+              </label>
+
+            </div>
+          </div>
+        </div>
+        <div class="row mt-8">
+          <div class="col-md-6">
+            <label>รายงานแพทย์</label>
+            <div class="radio-inline">
+              <label class="radio mt-3 ">
+                <input type="radio" name="radioSAR2" [(ngModel)]="radiodoctor" value="1"/>
+                <span></span> ปิยะณัฐ บุญประดิษฐ์
+              </label>
+              <label class="radio mt-3 ">
+                <input type="radio" name="radioSAR2"[(ngModel)]="radiodoctor" value="2"/>
+                <span></span>สุดารัตน์ วิจิตรเศรษฐกุล
+              </label>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label>เวลา</label>
+            <input type="text " class="form-control" id="timefromdoc" [(ngModel)]="timefromdoc">
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col">
+            <label>แพทย์ลงความเห็น</label>
+            <input type="text " class="form-control" id="commentdoctor" [(ngModel)]="commentdoctor">
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-auto">
+            <div class="radio-inline">
+              <label class="radio mt-10 ">
+                <input type="radio" name="radioSARtype" [(ngModel)]="radioSARtype" value="0"/>
+                <span></span>PUI Admit ตึก
+              </label>
+              &nbsp; &nbsp;
+              <label class="radio mt-10 ">
+                <input type="radio" name="radioSARtype" [(ngModel)]="radioSARtype" value="1"/>
+                <span></span>HR contract
+              </label>
+              &nbsp;
+              &nbsp;
+              <label class="radio mt-10 ">
+                <input type="radio" name="radioSARtype" [(ngModel)]="radioSARtype" value="3"/>
+                <span></span>นัด Swab
+              </label>
+
+            </div>
+          </div>
+          <div class="col-md-auto">
+            <label>ครั้งที่ 1</label>
+            <input type="text " class="form-control" id="firstswab" [(ngModel)]="firstswab" >
+          </div>
+          <div class="col-md-auto">
+            <label>ครั้งที่ 2</label>
+            <input type="text " class="form-control" id="secondswab" [(ngModel)]="secondswab">
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-md-3">
+            <label>วันที่</label>
+            <div class="input-group">
+              <input class="form-control" (bsValueChange)="getDatequarantine($event)" #datepickerMDY="bsDatepicker"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [bsValue]="Datequaran">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label>ถึง</label>
+            <div class="input-group">
+              <input type="text " class="form-control" id="enddate" value="{{dateTimeLineShortquaran[13]}}">
+              <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                   [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+
+            </div>
+            </div>
+
+          </div>
+          <div class="col-md-5">
+            <div class="radio-inline">
+              <label class="radio mt-10 ">
+                <input type="radio" name="radioSARtip" [(ngModel)]="radioSARtip" value="1"/>
+                <span></span>LR Contract
+              </label>
+              &nbsp; &nbsp;
+              <label class="radio mt-10 ">
+                <input type="radio" name="radioSARtip" [(ngModel)]="radioSARtip" value="2"/>
+                <span></span>แนะนำ DMHT
+              </label>
+              &nbsp;
+              &nbsp;
+              <label class="radio mt-10 ">
+
+                <input type="radio" name="radioSARtip" [(ngModel)]="radioSARtip" value="3"/>
+                <span></span>ไม่เข้าเกณฑ์ PUI
+              </label>
+
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col">
+            <label>ที่อยู่สำหรับการกักตัว </label>
+            <input type="text " class="form-control" id="addressquaran" [(ngModel)]="addressquaran" >
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-md-3">
+            <label>ผู้รายงาน</label>
+            <input type="text " class="form-control" id="reporter" [(ngModel)]="reporter" >
+          </div>
+
+          <div class="col-md-4">
+
+            <label>วันที่สอบสวน</label>
+            <div class="input-group">
+              <!--[(ngModel)]="birthday" [ngModelOptions]="{standalone: true}"-->
+              <input class="form-control" #datepickerMDY="bsDatepicker" formControlName="dateinvestigate" bsDatepicker>
+              <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                       [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3  ">
+            <label>เวลา</label>
+            <input type="text " class="form-control" id="timesave" [(ngModel)]="timesave" >
+          </div>
+        </div>
+        </div>
       </div>
     </div>
-  </div>
 
 </div>
 

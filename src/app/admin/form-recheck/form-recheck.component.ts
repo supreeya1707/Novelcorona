@@ -74,6 +74,13 @@ export class FormRecheckComponent implements OnInit {
   datevac1: any;
   datevac2: any;
   datacome: any;
+  dateSARS1:any;
+  dateSARS2:any;
+  startquaran:any;
+  endquaran:any;
+  dateinvestigate:any;
+  dateTimeLinequarantine: any = [];
+  dateTimeLineShortquaran: any = [];
   d: any;
   fistHosp = 'โรงพยาบาลราชบุรี';
   fistChw = 'ราชบุรี';
@@ -110,7 +117,7 @@ export class FormRecheckComponent implements OnInit {
   locale = 'th-be';
   locales = listLocales();
   currentDate = new Date();
-
+  Datequaran=new Date();
 
   desDay4: any;
   desDay5: any;
@@ -125,6 +132,24 @@ export class FormRecheckComponent implements OnInit {
   desDay14: any;
   date: any;
 
+  times1st =1;
+  times2nd=2;
+  typeSAR1:any;
+  placesendSAR1:any;
+  radiodetect1:any;
+  typeSAR2:any;
+  placesendSAR2:any;
+  radiodetect2:any;
+  radiodoctor:any;
+  timefromdoc:any;
+  commentdoctor:any;
+  radioSARtype:any;
+  firstswab:any;
+  secondswab:any;
+  radioSARtip:any;
+  addressquaran:any;
+  reporter:any;
+  timesave:any;
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
               @Inject('baseURL') private baseURL: any) {
   }
@@ -277,7 +302,28 @@ export class FormRecheckComponent implements OnInit {
     this.datacome = moment(e).format('YYYY-MM-DD');
     // console.log(this.datacome);
   }
+  getDatequarantine(e: any): any {
 
+    // console.log(e);
+    this.startquaran = moment(e).format('YYYY-MM-DD');
+    this.genDatequarantine(this.startquaran);
+    // console.log(this.datacome);
+  }
+  convertDatequaran(d: any, i: any): any {
+    const ss: any = d.toString().split('/');
+    const sdatequa : any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
+    const datequai: any = -i;
+    return moment(sdatequa).locale('th').add(datequai, 'day').add('year', 543).format('DD MMMM YYYY');
+  }
+  genDatequarantine(e: any): any {
+    this.dateTimeLinequarantine = [];
+    this.dateTimeLineShortquaran = [];
+    for (let i = 1; i <= 14; i++) {
+      this.dateTimeLinequarantine.push(this.convertDatequaran(e, i));
+      this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').format('DD/MM/YYYY'));
+      // console.log(this.dateTimeLineShort);
+    }
+  }
   convertDate(d: any, i: any): any {
     const ss: any = d.toString().split('/');
     const dataDate: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];

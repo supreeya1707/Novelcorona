@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {FormsComponent} from './forms/forms.component';
 import {ReportComponent} from './report/report.component';
 import {RegisterComponent} from './register/register.component';
+import {FormRecheckComponent} from "./admin/form-recheck/form-recheck.component";
 
 
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'form', component: FormsComponent},
   {path: 'report', component: ReportComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'formRecheck', component: FormRecheckComponent},
   // {path:'**',redirectTo:'date'}
 ];
 
