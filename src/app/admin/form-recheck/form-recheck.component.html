@@ -221,7 +221,8 @@
                 <label>วัน /เดือน/ ปีเกิด</label>
                 <div class="input-group">
                   <!--[(ngModel)]="birthday" [ngModelOptions]="{standalone: true}"-->
-                  <input class="form-control" #datepickerMDY="bsDatepicker" formControlName="birthday" bsDatepicker>
+                  <input class="form-control" #datepickerMDY="bsDatepicker" [value]="birthday"
+                         formControlName="birthday" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
                   <div class="input-group-append">
                   <span class="input-group-text">
                     <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -444,7 +445,8 @@
             <label>วันที่เริ่มป่วย</label>
             <div class="input-group">
               <input class="form-control" (bsValueChange)="getDate($event)" #datepickerMDY="bsDatepicker"
-                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [bsValue]="currentDate">
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                     [value]="startsick" [bsValue]="currentDate">
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -456,7 +458,7 @@
             <label>วันที่เริ่มรักษา</label>
             <div class="input-group">
               <input class="form-control" #datepickerMDY="bsDatepicker" (bsValueChange)="getDatetreat($event)"
-                     bsDatepicker [bsValue]="currentDate"
+                     bsDatepicker [value]="starttreat" [bsValue]="currentDate"
                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
               <div class="input-group-append">
                 <span class="input-group-text">
@@ -623,9 +625,10 @@
             </div>
             <div class="col-md-4">
               <div class="input-group">
-                <input class="form-control" placeholder="โปรดระบุวันเดินทาง" #datepickerMDY="bsDatepicker"
-                       [(ngModel)]="datacome" [ngModelOptions]="{standalone: true}"
-                       bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                <input class="form-control" placeholder="โปรดระบุวันเดินทาง"
+                       (bsValueChange)="getDatecome($event)" #datepickerMDY="bsDatepicker"
+                       bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                       [value]="datecome" [bsValue]="currentDate">
                 <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -1017,43 +1020,52 @@
       </div>
     </div>
   </div>
+
   <!-- also evolution-->
   <div class="row mt-5 font-prompt-medium">
     <div class="card col-md-12 shadow-xs">
       <div class="card-body">
         <div class="row">
-          <label>สรุปความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยงกลุ่มใด</label>
-          <textarea class="form-control" name="textTimeLine0" id="textconnect"
-                    value="" rows="3"></textarea>
+          <label class="col-12">สรุปความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยงกลุ่มใด</label>
+          <div class="col-md-3">
+            <div class="form-group">
+              <select  class="form-control" placeholder="เลือกความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยงกลุ่มใด"
+                       [(ngModel)]="cluster" name="cluster" id="cluster" *ngFor="let c of dataCluster">
+                <option value="{{c.cluster_id}}">{{c.cluster_name}}</option>
+              </select>
+            </div>
+          </div>
         </div>
+
         <div class="row mt-5">
           <div class="radio-inline">
             <label class="radio font-size-h4 ">
-              <input type="radio" name="radiow" value="2"/>
+              <input type="radio" name="radiow" [value]="2" [ngModel]="wearmask"/>
               <span></span> ใส่ mask ตลอดเวลา
             </label>
             <label class="radio font-size-h4 ">
-              <input type="radio" name="radiow" value="1"/>
+              <input type="radio" name="radiow" [value]="1" [ngModel]="wearmask"/>
               <span></span> ใส่บางครั้ง
             </label>
             <label class="radio font-size-h4 ">
-              <input type="radio" name="radiow" value="0"/>
+              <input type="radio" name="radiow" [value]="0" [ngModel]="wearmask"/>
               <span></span> ไม่ใส่
             </label>
           </div>
         </div>
+
         <div class="row mt-5">
           <div class="radio-inline">
             <label class="radio font-size-h4">
-              <input type="radio" name="radiow_2" value="1"/>
+              <input type="radio" name="radiow_2" [value]="2" [ngModel]="place" />
               <span></span>ห้องปรับอากาศ
             </label>
             <label class="radio font-size-h4">
-              <input type="radio" name="radiow_2" value="1"/>
+              <input type="radio" name="radiow_2" [value]="1" [ngModel]="place" />
               <span></span>ห้องพัดลม
             </label>
             <label class="radio font-size-h4">
-              <input type="radio" name="radiow_2" value="1"/>
+              <input type="radio" name="radiow_2" [value]="0" [ngModel]="place" />
               <span></span>นอกอาคาร
             </label>
 
@@ -1062,6 +1074,7 @@
       </div>
     </div>
   </div>
+
   <!--  section5-->
   <div class="row mt-5 font-prompt-medium">
     <div class="card col-md-12 shadow-xs">
@@ -1092,6 +1105,7 @@
             </div>
           </div>
         </div>
+
         <div class="row mt-4">
           <div class="col-md-4 ">
             <label>ครั้งที่ 1 วันที่ได้รับ </label>
@@ -1135,17 +1149,16 @@
             <input type="text " class="form-control" id="placevaccine2" [(ngModel)]="placevac2">
           </div>
         </div>
-        <div class="row mt-4">
-          <div class="col">
-            <div class="form-group">
-              <label>ผลการตรวจ SARS-CoV2 Antibody</label>
-            </div>
+
+        <div class="row mt-10">
+          <div class="form-group">
+            <label>ผลการตรวจ SARS-CoV2 Antibody</label>
           </div>
         </div>
-        <div class="row mt-1">
+        <div class="row">
           <div class="col-md-1">
             <label>ครั้งที่</label>
-            <input type="text " class="form-control" id="times1st" value="{{times1st}}">
+            <input type="text " class="form-control" id="sars1" value="1" readonly="true">
           </div>
           <div class="col-md-3">
             <label>วันที่เก็บ</label>
@@ -1171,28 +1184,27 @@
           <div class="col-md-4">
             <label>ผลตรวจ</label>
             <div class="radio-inline">
-              <label class="radio mt-3  ">
-                <input type="radio" name="radioSAR1" [(ngModel)]="radiodetect1"  value="1"/>
+              <label class="radio mt-3">
+                <input type="radio" id="radioSAR1_1" name="radioSAR1" [(ngModel)]="radiodetect1"  [value]="1"/>
                 <span></span>DETECTED
               </label>
-              <label class="radio mt-3 ">
-                <input type="radio" name="radioSAR1" [(ngModel)]="radiodetect1"  value="0"/>
+              <label class="radio mt-3">
+                <input type="radio" id="radioSAR1_2" name="radioSAR1" [(ngModel)]="radiodetect1"  [value]="0"/>
                 <span></span>NOT DETECTED
               </label>
-
             </div>
           </div>
         </div>
-        <div class="row mt-8">
+        <div class="row mt-5">
           <div class="col-md-1">
             <label>ครั้งที่</label>
-            <input type="text " class="form-control" id="times1st" value="{{times2nd}}">
+            <input type="text " class="form-control" id="sars2" value="2" readonly="true">
           </div>
           <div class="col-md-3">
             <label>วันที่เก็บ</label>
             <div class="input-group">
               <input class="form-control" placeholder="โปรดระบุวันที่เก็บตัวอย่าง" #datepickerMDY="bsDatepicker"
-                     [(ngModel)]="dateSARS1"
+                     [(ngModel)]="dateSARS2"
                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
               <div class="input-group-append">
                 <span class="input-group-text">
@@ -1213,27 +1225,28 @@
             <label>ผลตรวจ</label>
             <div class="radio-inline">
               <label class="radio mt-3 ">
-                <input type="radio" name="radioSAR2" [(ngModel)]="radiodetect2" value="1"/>
+                <input type="radio" id="radioSAR2_1" name="radioSAR2" [(ngModel)]="radiodetect2" [value]="1"/>
                 <span></span>DETECTED
               </label>
               <label class="radio mt-3 ">
-                <input type="radio" name="radioSAR2" [(ngModel)]="radiodetect1"  value="0"/>
+                <input type="radio" id="radioSAR2_2" name="radioSAR2" [(ngModel)]="radiodetect2"  [value]="0"/>
                 <span></span>NOT DETECTED
               </label>
 
             </div>
           </div>
         </div>
-        <div class="row mt-8">
+
+        <div class="row mt-10">
           <div class="col-md-6">
             <label>รายงานแพทย์</label>
             <div class="radio-inline">
-              <label class="radio mt-3 ">
-                <input type="radio" name="radioSAR2" [(ngModel)]="radiodoctor" value="1"/>
-                <span></span> ปิยะณัฐ บุญประดิษฐ์
+              <label class="radio mt-3">
+                <input type="radio" name="radioSAR2" [(ngModel)]="radiodoctor" [value]="'ปิยะณัฐ บุญประดิษฐ์'"/>
+                <span></span>ปิยะณัฐ บุญประดิษฐ์
               </label>
-              <label class="radio mt-3 ">
-                <input type="radio" name="radioSAR2"[(ngModel)]="radiodoctor" value="2"/>
+              <label class="radio mt-3">
+                <input type="radio" name="radioSAR2"[(ngModel)]="radiodoctor" [value]="'สุดารัตน์ วิจิตรเศรษฐกุล'"/>
                 <span></span>สุดารัตน์ วิจิตรเศรษฐกุล
               </label>
             </div>
@@ -1243,48 +1256,83 @@
             <input type="text " class="form-control" id="timefromdoc" [(ngModel)]="timefromdoc">
           </div>
         </div>
-        <div class="row mt-5">
+
+        <div class="row mt-4">
           <div class="col">
             <label>แพทย์ลงความเห็น</label>
-            <input type="text " class="form-control" id="commentdoctor" [(ngModel)]="commentdoctor">
+            <textarea type="text " class="form-control" id="commentdoctor" rows="3"  [(ngModel)]="commentdoctor"></textarea>
           </div>
         </div>
+
         <div class="row mt-4">
           <div class="col-md-auto">
             <div class="radio-inline">
-              <label class="radio mt-10 ">
-                <input type="radio" name="radioSARtype" [(ngModel)]="radioSARtype" value="0"/>
-                <span></span>PUI Admit ตึก
-              </label>
-              &nbsp; &nbsp;
-              <label class="radio mt-10 ">
-                <input type="radio" name="radioSARtype" [(ngModel)]="radioSARtype" value="1"/>
-                <span></span>HR contract
-              </label>
-              &nbsp;
-              &nbsp;
-              <label class="radio mt-10 ">
-                <input type="radio" name="radioSARtype" [(ngModel)]="radioSARtype" value="3"/>
-                <span></span>นัด Swab
+              <label class="radio ">
+                <input type="radio" name="radioSARtype" id="radioSARtype0"  [(ngModel)]="radioSARtype" [value]="0"/>
+                <span></span>ไม่เข้าเกณฑ์ PUI
               </label>
 
+              <label class="radio ">
+                <input type="radio" name="radioSARtype" id="radioSARtype1"  [(ngModel)]="radioSARtype" [value]="1"/>
+                <span></span>แนะนำ DMHT
+              </label>
+
+              <label class="radio ">
+                <input type="radio" name="radioSARtype" id="radioSARtype2"  [(ngModel)]="radioSARtype" [value]="2"/>
+                <span></span>PUI
+              </label>
+
+              <label class="radio ">
+                <input type="radio" name="radioSARtype" id="radioSARtype3"  [(ngModel)]="radioSARtype" [value]="3"/>
+                <span></span>LR contract
+              </label>
+
+              <label class="radio ">
+                <input type="radio" name="radioSARtype" id="radioSARtype4"  [(ngModel)]="radioSARtype" [value]="4"/>
+                <span></span>HR contract
+              </label>
             </div>
           </div>
-          <div class="col-md-auto">
-            <label>ครั้งที่ 1</label>
-            <input type="text " class="form-control" id="firstswab" [(ngModel)]="firstswab" >
-          </div>
-          <div class="col-md-auto">
-            <label>ครั้งที่ 2</label>
-            <input type="text " class="form-control" id="secondswab" [(ngModel)]="secondswab">
-          </div>
         </div>
+
+        <div class="div mt-5">
+          <label>นัด Swab</label>
+         <div class="row">
+           <div class="col-md-6">
+             <label>ครั้งที่ 1</label>
+             <div class="input-group">
+               <input class="form-control"  #datepickerMDY="bsDatepicker"
+                      placeholder="เลือกวันที่นัด Swab ครั้งที่ 1"
+                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" id="firstswab" [(ngModel)]="firstswab">
+               <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+               </div>
+             </div>
+           </div>
+           <div class="col-md-6">
+             <label>ครั้งที่ 2</label>
+             <div class="input-group">
+               <input class="form-control"  #datepickerMDY="bsDatepicker"
+                      placeholder="เลือกวันที่นัด Swab ครั้งที่ 2"
+                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" id="secondswab" [(ngModel)]="secondswab">
+               <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+               </div>
+             </div>
+           </div>
+         </div>
+        </div>
+
         <div class="row mt-5">
-          <div class="col-md-3">
-            <label>วันที่</label>
+          <div class="col-md-6">
+            <label>จพต. 14 วันที่</label>
             <div class="input-group">
               <input class="form-control" (bsValueChange)="getDatequarantine($event)" #datepickerMDY="bsDatepicker"
-                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [bsValue]="Datequaran">
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" >
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -1293,70 +1341,32 @@
             </div>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-6">
             <label>ถึง</label>
             <div class="input-group">
               <input type="text " class="form-control" id="enddate" value="{{dateTimeLineShortquaran[13]}}">
               <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                   [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-
-            </div>
-            </div>
-
-          </div>
-          <div class="col-md-5">
-            <div class="radio-inline">
-              <label class="radio mt-10 ">
-                <input type="radio" name="radioSARtip" [(ngModel)]="radioSARtip" value="1"/>
-                <span></span>LR Contract
-              </label>
-              &nbsp; &nbsp;
-              <label class="radio mt-10 ">
-                <input type="radio" name="radioSARtip" [(ngModel)]="radioSARtip" value="2"/>
-                <span></span>แนะนำ DMHT
-              </label>
-              &nbsp;
-              &nbsp;
-              <label class="radio mt-10 ">
-
-                <input type="radio" name="radioSARtip" [(ngModel)]="radioSARtip" value="3"/>
-                <span></span>ไม่เข้าเกณฑ์ PUI
-              </label>
-
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+              </div>
             </div>
           </div>
         </div>
-        <div class="row mt-4">
+
+        <div class="row mt-5">
           <div class="col">
             <label>ที่อยู่สำหรับการกักตัว </label>
             <input type="text " class="form-control" id="addressquaran" [(ngModel)]="addressquaran" >
           </div>
         </div>
+
         <div class="row mt-5">
-          <div class="col-md-3">
+          <div class="col-md-12">
             <label>ผู้รายงาน</label>
             <input type="text " class="form-control" id="reporter" [(ngModel)]="reporter" >
           </div>
 
-          <div class="col-md-4">
-
-            <label>วันที่สอบสวน</label>
-            <div class="input-group">
-              <!--[(ngModel)]="birthday" [ngModelOptions]="{standalone: true}"-->
-              <input class="form-control" #datepickerMDY="bsDatepicker" formControlName="dateinvestigate" bsDatepicker>
-              <div class="input-group-append">
-                  <span class="input-group-text">
-                    <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                       [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3  ">
-            <label>เวลา</label>
-            <input type="text " class="form-control" id="timesave" [(ngModel)]="timesave" >
-          </div>
         </div>
         </div>
       </div>
