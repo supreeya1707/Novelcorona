@@ -521,7 +521,7 @@ export class FormRecheckComponent implements OnInit {
     data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ii');
 
     infoData.push(data);
-    const resStaff = await this.api.insStaff(infoData);
+    const resStaff = await this.api.insByStaff(infoData);
     return resStaff.ok;
   }
 
