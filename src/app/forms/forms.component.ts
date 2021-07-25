@@ -13,6 +13,7 @@ import {ApiService} from '../services/api.service';
 export class FormsComponent implements OnInit {
   generalFrm: any;
   timelineFrm: any;
+  riskFrm: any;
   submitted = false;
   btndisble = false;
 
@@ -95,10 +96,8 @@ export class FormsComponent implements OnInit {
   assign_etc: any;
   assign_station: any;
   assign_position: any;
-  radioAddress: any;
   symtom_etc: any;
   locale = 'th-be';
-  locales = listLocales();
   currentDate = new Date();
 
 
@@ -163,6 +162,19 @@ export class FormsComponent implements OnInit {
       bmi: [null],
     });
 
+    this.riskFrm  = this.formBuilder.group({
+      radiofrom: [null, Validators.compose([Validators.required])],
+      radiorepair: [null, Validators.compose([Validators.required])],
+      radionear: [null, Validators.compose([Validators.required])],
+      radiotouch: [null, Validators.compose([Validators.required])],
+      radiovisitor: [null, Validators.compose([Validators.required])],
+      radiocrowded: [null, Validators.compose([Validators.required])],
+      radiobreath: [null, Validators.compose([Validators.required])],
+      radioinject: [null, Validators.compose([Validators.required])],
+      radiolabtest: [null, Validators.compose([Validators.required])]
+    });
+
+
     this.timelineFrm  = this.formBuilder.group({
       desDay1: [null, Validators.compose([Validators.required])],
       desDay2: [null, Validators.compose([Validators.required])],
@@ -171,29 +183,16 @@ export class FormsComponent implements OnInit {
 
   }
 
-  radiochPreg(e): any {
-    this.radioPreg = e;
-  }
 
-  setValidators() {
-    const pregControl = this.generalFrm.get('radioPreg');
-
-    this.generalFrm.get('radioGender').valueChanges
-      .subscribe((genderSelect: any | null) => {
-        console.log(genderSelect);
-        if (genderSelect === 1) {
-          pregControl.setValidators([null, Validators.compose([Validators.required])]);
-        }
-        pregControl.updateValueAndValidity();
-      });
-
-  }
 
   get f() {
     return this.generalFrm.controls;
   }
   get f2() {
     return this.timelineFrm.controls;
+  }
+  get f3() {
+    return this.riskFrm.controls;
   }
 
   resetForm(formGroup: FormGroup) {
@@ -261,9 +260,10 @@ export class FormsComponent implements OnInit {
   async insertData(): Promise<any> {
     this.submitted = true;
     // stop here if form is invalid
-    if (this.generalFrm.invalid || this.timelineFrm.invalid) {
+    if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid) {
       // console.log('invalid');
       console.log('this.generalFrm.invalid ', this.generalFrm.invalid);
+      console.log('this.riskFrm.invalid ', this.riskFrm.invalid);
       console.log('this.timelineFrm.invalid ', this.timelineFrm.invalid);
       return;
     }else{
@@ -293,8 +293,6 @@ export class FormsComponent implements OnInit {
     data.novel_phonedoc = this.generalFrm.value.telephonedoc;
     data.novel_treat = this.generalFrm.value.treat;
 
-    data.novel_address = this.generalFrm.value.radioAddress;
-    data.novel_address_etc = this.generalFrm.value.Addressetc;
     data.novel_number_address = this.generalFrm.value.addr;
     data.novel_moo = this.generalFrm.value.moo;
     data.novel_mooban = this.generalFrm.value.mooban;
@@ -349,7 +347,7 @@ export class FormsComponent implements OnInit {
     data.novel_symtom_etc = this.symtom_etc;
 
 
-    data.novel_comefrom_31 = this.radiofrom;
+    data.novel_comefrom_31 = this.riskFrm.value.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
     data.novel_date_come = (this.datacome != null) ? moment(this.datacome).format('YYYY-MM-DD') : null;
@@ -357,18 +355,19 @@ export class FormsComponent implements OnInit {
     data.novel_round_tran = this.come_round;
     data.novel_number_seat = this.come_seat;
 
-    data.novel_takecare_32 = this.radiorepair;
-    data.novel_touch_his33 = this.radionear;
-    data.novel_his_touch_34 = this.radiotouch;
+    data.novel_takecare_32 = this.riskFrm.value.radiorepair;
+    data.novel_touch_his33 = this.riskFrm.value.radionear;
+    data.novel_his_touch_34 = this.riskFrm.value.radiotouch;
     data.novel_assigntouch_34 = this.assign_touch;
     data.novel_assign_station_36 = this.assign_station;
 
-    data.novel_tourist_35 = this.radiovisitor;
-    data.novel_manyperson_36 = this.radiocrowded;
-    data.novel_ari_37 = this.radiobreath;
-    data.novel_inject_38 = this.radioinject;
-    data.novel_doc_39 = this.radiolabtest;
+    data.novel_tourist_35 = this.riskFrm.value.radiovisitor;
+    data.novel_manyperson_36 = this.riskFrm.value.radiocrowded;
+    data.novel_ari_37 = this.riskFrm.value.radiobreath;
+    data.novel_inject_38 = this.riskFrm.value.radioinject;
+    data.novel_doc_39 = this.riskFrm.value.radiolabtest;
     data.novel_etc_310 = this.assign_etc;
+
     data.novel_havevac = this.havevac;
     data.novel_certificate = this.havecertificate;
     data.novel_getvac1 = (this.datevac1 != null) ? moment(this.datevac1).format('YYYY-MM-DD') : null;

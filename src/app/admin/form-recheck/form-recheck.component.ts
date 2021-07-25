@@ -12,6 +12,7 @@ import {ApiService} from '../../services/api.service';
 })
 export class FormRecheckComponent implements OnInit {
   generalFrm: any;
+  riskFrm: any;
   timelineFrm: any;
   submitted = false;
   btndisble = false;
@@ -19,12 +20,7 @@ export class FormRecheckComponent implements OnInit {
   dataNovel: any[];
   dataTL: any[];
 
-  pname: any;
-  fname: any;
-  lname: any;
-  cid: any;
-  age: any;
-  nation: any;
+  birthday: any;
 
   radioGender: any;
   radioPreg: any;
@@ -95,6 +91,9 @@ export class FormRecheckComponent implements OnInit {
   weight: any;
   high: any;
 
+  startsick: any;
+  starttreat: any;
+
   namevac1: any;
   namevac2: any;
   placevac1: any;
@@ -115,7 +114,6 @@ export class FormRecheckComponent implements OnInit {
   radioAddress: any;
   symtom_etc: any;
   locale = 'th-be';
-  locales = listLocales();
   currentDate = new Date();
   Datequaran=new Date();
 
@@ -156,11 +154,10 @@ export class FormRecheckComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.novelID = history.state.novelid;
-    console.log(this.novelID);
-    this.getData(this.novelID);
-
     this.localeService.use(this.locale);
+    this.novelID = history.state.novelid;
+    // console.log(this.novelID);
+    this.getData(this.novelID);
 
     this.generalFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
@@ -178,11 +175,11 @@ export class FormRecheckComponent implements OnInit {
       telephone: [null, Validators.compose([Validators.required])],
       telephonedoc: [null],
       treat: [null],
-      birthday: [null],
       addr: [null],
       moo: [null],
       mooban: [null],
       soi: [null],
+      birthday: [null],
       road: [null],
       tumbon: [null, Validators.compose([Validators.required])],
       amphur: [null, Validators.compose([Validators.required])],
@@ -200,6 +197,18 @@ export class FormRecheckComponent implements OnInit {
       bmi: [null],
     });
 
+    this.riskFrm  = this.formBuilder.group({
+      radiofrom: [null, Validators.compose([Validators.required])],
+      radiorepair: [null, Validators.compose([Validators.required])],
+      radionear: [null, Validators.compose([Validators.required])],
+      radiotouch: [null, Validators.compose([Validators.required])],
+      radiovisitor: [null, Validators.compose([Validators.required])],
+      radiocrowded: [null, Validators.compose([Validators.required])],
+      radiobreath: [null, Validators.compose([Validators.required])],
+      radioinject: [null, Validators.compose([Validators.required])],
+      radiolabtest: [null, Validators.compose([Validators.required])]
+    });
+
     this.timelineFrm  = this.formBuilder.group({
       desDay1: [null, Validators.compose([Validators.required])],
       desDay2: [null, Validators.compose([Validators.required])],
@@ -208,24 +217,106 @@ export class FormRecheckComponent implements OnInit {
 
   }
 
-  radiochPreg(e): any {
-    this.radioPreg = e;
-  }
-
   async getData(novelid: any): Promise<any>{
     const resDataNovel = await this.api.getDataById(novelid);
     if (resDataNovel.ok){
       // console.log(resDataNovel.message);
       this.dataNovel = resDataNovel.message[0];
-      this.pname = this.dataNovel['novel_pname'];
-      this.fname = this.dataNovel['novel_fname'];
-      this.lname = this.dataNovel['novel_lname'];
-      this.cid = this.dataNovel['novel_cid'];
-      this.age = this.dataNovel['novel_age'];
-      this.nation = this.dataNovel['novel_nation'];
-      this.radioGender = this.dataNovel['novel_gender'];
+
+      this.generalFrm.get('pname').setValue(this.dataNovel['novel_pname']);
+      this.generalFrm.get('fname').setValue(this.dataNovel['novel_fname']);
+      this.generalFrm.get('lname').setValue(this.dataNovel['novel_lname']);
+      this.generalFrm.get('cid').setValue(this.dataNovel['novel_cid']);
+      this.generalFrm.get('age').setValue(this.dataNovel['novel_age']);
+      this.generalFrm.get('national').setValue(this.dataNovel['novel_national']);
       this.radioGender = this.dataNovel['novel_gender'];
       this.radioPreg = this.dataNovel['novel_preg'];
+      // this.generalFrm.get('radioPreg').setValue(this.dataNovel['novel_preg']);
+      this.generalFrm.get('numPreg').setValue(this.dataNovel['novel_numpreg']);
+      this.generalFrm.get('pregAge').setValue(this.dataNovel['novel_agepreg']);
+      this.generalFrm.get('job').setValue(this.dataNovel['novel_worker']);
+      this.generalFrm.get('station').setValue(this.dataNovel['novel_station']);
+      this.generalFrm.get('telephone').setValue(this.dataNovel['novel_phone']);
+      this.generalFrm.get('telephonedoc').setValue(this.dataNovel['novel_phonedoc']);
+      this.generalFrm.get('treat').setValue(this.dataNovel['novel_treat']);
+      this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).format('YYYY-MM-DD'));
+      // this.birthday = moment(this.dataNovel['novel_birthday']).add('year', 543).format('DD/MM/YYYY');
+      this.generalFrm.get('addr').setValue(this.dataNovel['novel_number_address']);
+      this.generalFrm.get('moo').setValue(this.dataNovel['novel_moo']);
+      this.generalFrm.get('mooban').setValue(this.dataNovel['novel_mooban']);
+      this.generalFrm.get('soi').setValue(this.dataNovel['novel_soi']);
+      this.generalFrm.get('road').setValue(this.dataNovel['novel_road']);
+      this.generalFrm.get('tumbon').setValue(this.dataNovel['novel_district']);
+      this.generalFrm.get('amphur').setValue(this.dataNovel['novel_amphur']);
+      this.generalFrm.get('province').setValue(this.dataNovel['novel_province']);
+      this.generalFrm.get('radioSmoke').setValue(this.dataNovel['novel_smoke']);
+      this.generalFrm.get('checkcopd').setValue(this.dataNovel['novel_copd']);
+      this.generalFrm.get('checkckd').setValue(this.dataNovel['novel_ckd']);
+      this.generalFrm.get('checkcad').setValue(this.dataNovel['novel_cad']);
+      this.generalFrm.get('checkcva').setValue(this.dataNovel['novel_cva']);
+      this.generalFrm.get('checkundm').setValue(this.dataNovel['novel_undm']);
+      this.generalFrm.get('checkpids').setValue(this.dataNovel['novel_pids']);
+      this.congential = this.dataNovel['novel_congential'];
+      this.generalFrm.get('congential_etc').setValue(this.dataNovel['novel_congential_etc']);
+      this.generalFrm.get('weight').setValue(this.dataNovel['novel_weight']);
+      this.generalFrm.get('high').setValue(this.dataNovel['novel_high']);
+      this.generalFrm.get('bmi').setValue(this.dataNovel['novel_bmi']);
+
+      this.startsick = this.dataNovel['novel_start_sick'];
+      this.starttreat = this.dataNovel['novel_start_treat'];
+      this.fistHosp = this.dataNovel['novel_hospital_first'];
+      this.fistChw = this.dataNovel['novel_province_first'];
+      this.nowHosp = this.dataNovel['novel_hospital_now'];
+      this.nowChw = this.dataNovel['novel_province_now'];
+
+      this.radiofever = this.dataNovel['novel_fever'];
+      this.assign_fever = this.dataNovel['novel_assign_fever'];
+      this.assign_oxygen = this.dataNovel['novel_assign_oxygen'];
+      this.radiorespirator = this.dataNovel['novel_respirator'];
+      this.radiocough = this.dataNovel['novel_cough'];
+      this.radiosorethroat = this.dataNovel['novel_sorethroat'];
+      this.radiomusclepain = this.dataNovel['novel_musclepain'];
+      this.radiomucous = this.dataNovel['novel_mucous'];
+      this.radiophlegm = this.dataNovel['novel_phlegm'];
+      this.radiodifficulbreathing = this.dataNovel['novel_difficulbreathing'];
+      this.radioheadache = this.dataNovel['novel_headache'];
+      this.radiopurify = this.dataNovel['novel_purify'];
+      this.radiosmell = this.dataNovel['novel_smell'];
+      this.radiotaste = this.dataNovel['novel_taste'];
+      this.radioredeye = this.dataNovel['novel_redeye'];
+      this.radiorash = this.dataNovel['novel_rash'];
+      this.assign_position = this.dataNovel['novel_position'];
+      this.radiosymptom = this.dataNovel['novel_symtom'];
+      this.symtom_etc = this.dataNovel['novel_symtom_etc'];
+
+      this.radiofrom = this.dataNovel['novel_comefrom_31'];
+      this.come_city = this.dataNovel['novel_come_city'];
+      this.come_region = this.dataNovel['novel_come_country'];
+      this.datacome = this.dataNovel['novel_date_come'];
+      this.come_plane = this.dataNovel['novel_transportation'];
+      this.come_round = this.dataNovel['novel_round_tran'];
+      this.come_seat = this.dataNovel['novel_number_seat'];
+
+      this.radiorepair = this.dataNovel['novel_takecare_32'];
+      this.radionear = this.dataNovel['novel_touch_his33'];
+      this.radiotouch = this.dataNovel['novel_his_touch_34'];
+      this.assign_touch = this.dataNovel['novel_assigntouch_34'];
+      this.radiovisitor = this.dataNovel['novel_tourist_35'];
+      this.radiocrowded = this.dataNovel['novel_manyperson_36'];
+      this.assign_station = this.dataNovel['novel_assign_station_36'];
+      this.radiobreath = this.dataNovel['novel_ari_37'];
+      this.radioinject = this.dataNovel['novel_inject_38'];
+      this.radiolabtest = this.dataNovel['novel_doc_39'];
+      this.assign_etc = this.dataNovel['novel_etc_310'];
+
+      this.havevac = this.dataNovel['novel_havevac'];
+      this.havecertificate = this.dataNovel['novel_certificate'];
+      this.datevac1 = this.dataNovel['novel_getvac1'];
+      this.namevac1 = this.dataNovel['novel_namevac1'];
+      this.placevac1 = this.dataNovel['novel_placevac1'];
+      this.datevac2 = this.dataNovel['novel_getvac2'];
+      this.namevac2 = this.dataNovel['novel_namevac2'];
+      this.placevac2 = this.dataNovel['novel_placevac2'];
     }else{
       console.error('error');
     }
@@ -233,30 +324,51 @@ export class FormRecheckComponent implements OnInit {
     const resDataTL = await this.api.getTimeLineById(novelid);
     if (resDataTL.ok){
       this.dataTL = resDataTL.message[0];
-      console.log(this.dataTL);
+
+      this.dateTimeLineShort[0] = moment(this.dataTL['day1']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[1] = moment(this.dataTL['day2']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[2] = moment(this.dataTL['day3']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[3] = moment(this.dataTL['day4']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[4] = moment(this.dataTL['day5']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[5] = moment(this.dataTL['day6']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[6] = moment(this.dataTL['day7']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[7] = moment(this.dataTL['day8']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[8] = moment(this.dataTL['day9']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[9] = moment(this.dataTL['day10']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[10] = moment(this.dataTL['day11']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[11] = moment(this.dataTL['day12']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[12] = moment(this.dataTL['day12']).format('YYYY-MM-DD');
+      this.dateTimeLineShort[13] = moment(this.dataTL['day14']).format('YYYY-MM-DD');
+
+      this.timelineFrm.get('desDay1').setValue(this.dataTL['timeline_date1']);
+      this.timelineFrm.get('desDay2').setValue(this.dataTL['timeline_date2']);
+      this.timelineFrm.get('desDay3').setValue(this.dataTL['timeline_date3']);
+
+      this.desDay4 = this.dataTL['timeline_date4'];
+      this.desDay5 = this.dataTL['timeline_date5'];
+      this.desDay6 = this.dataTL['timeline_date6'];
+      this.desDay7 = this.dataTL['timeline_date7'];
+      this.desDay8 = this.dataTL['timeline_date8'];
+      this.desDay9 = this.dataTL['timeline_date9'];
+      this.desDay10 = this.dataTL['timeline_date10'];
+      this.desDay11 = this.dataTL['timeline_date11'];
+      this.desDay12 = this.dataTL['timeline_date12'];
+      this.desDay13 = this.dataTL['timeline_date13'];
+      this.desDay14 = this.dataTL['timeline_date14'];
     }else{
       console.error('error');
     }
   }
 
-  setValidators() {
-    const pregControl = this.generalFrm.get('radioPreg');
-    this.generalFrm.get('radioGender').valueChanges
-      .subscribe((genderSelect: any | null) => {
-        console.log(genderSelect);
-        if (genderSelect === 1) {
-          pregControl.setValidators([null, Validators.compose([Validators.required])]);
-        }
-        pregControl.updateValueAndValidity();
-      });
-
-  }
 
   get f() {
     return this.generalFrm.controls;
   }
   get f2() {
     return this.timelineFrm.controls;
+  }
+  get f3() {
+    return this.riskFrm.controls;
   }
 
   resetForm(formGroup: FormGroup) {
@@ -289,6 +401,12 @@ export class FormRecheckComponent implements OnInit {
     this.genDateTimeLine(this.datadate);
     // console.log(this.datadate);
     // console.log(this.dateTimeLineShort);
+  }
+
+  getBirthday(e: any): any {
+    console.log('this.birthday', e);
+    this.birthday = moment(e).format('YYYY-MM-DD');
+    // console.log(this.datatreat);
   }
 
   getDatetreat(e: any): any {
@@ -341,29 +459,35 @@ export class FormRecheckComponent implements OnInit {
     }
   }
 
-  async insertRecheck():Promise<any> {
-
-  }
-
-  async insertData(): Promise<any> {
+  async updateData(): Promise<any>{
     this.submitted = true;
-    // stop here if form is invalid
-    if (this.generalFrm.invalid || this.timelineFrm.invalid) {
+    if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid) {
       // console.log('invalid');
       console.log('this.generalFrm.invalid ', this.generalFrm.invalid);
+      console.log('this.riskFrm.invalid ', this.riskFrm.invalid);
       console.log('this.timelineFrm.invalid ', this.timelineFrm.invalid);
       return;
     }else{
       this.btndisble = true;
     }
+    const novelResponse = await this.updateNovelData();
+    const timelineResponse = await this.updateTLData();
 
-    // console.log('this.generalFrm.value.birthday', this.generalFrm.value.birthday);
-    // console.log(this.generalFrm.value);
-    // console.log(this.timelineFrm.value);
+    if (novelResponse === true && timelineResponse === true) {
+      this.successNotification();
+    } else {
+      this.errorNotification();
+    }
+  }
 
+  async insertRecheck(): Promise<any> {
+
+  }
+
+  async updateNovelData(): Promise<any> {
     const data: any = {};
-    const info: any = [];
-    data.novel_hospcode = this.hospcode;
+    const infoData: any = [];
+
     data.novel_pname = this.generalFrm.value.pname;
     data.novel_fname = this.generalFrm.value.fname;
     data.novel_lname = this.generalFrm.value.lname;
@@ -380,8 +504,6 @@ export class FormRecheckComponent implements OnInit {
     data.novel_phonedoc = this.generalFrm.value.telephonedoc;
     data.novel_treat = this.generalFrm.value.treat;
 
-    data.novel_address = this.generalFrm.value.radioAddress;
-    data.novel_address_etc = this.generalFrm.value.Addressetc;
     data.novel_number_address = this.generalFrm.value.addr;
     data.novel_moo = this.generalFrm.value.moo;
     data.novel_mooban = this.generalFrm.value.mooban;
@@ -436,7 +558,7 @@ export class FormRecheckComponent implements OnInit {
     data.novel_symtom_etc = this.symtom_etc;
 
 
-    data.novel_comefrom_31 = this.radiofrom;
+    data.novel_comefrom_31 = this.riskFrm.value.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
     data.novel_date_come = (this.datacome != null) ? moment(this.datacome).format('YYYY-MM-DD') : null;
@@ -444,18 +566,19 @@ export class FormRecheckComponent implements OnInit {
     data.novel_round_tran = this.come_round;
     data.novel_number_seat = this.come_seat;
 
-    data.novel_takecare_32 = this.radiorepair;
-    data.novel_touch_his33 = this.radionear;
-    data.novel_his_touch_34 = this.radiotouch;
+    data.novel_takecare_32 = this.riskFrm.value.radiorepair;
+    data.novel_touch_his33 = this.riskFrm.value.radionear;
+    data.novel_his_touch_34 = this.riskFrm.value.radiotouch;
     data.novel_assigntouch_34 = this.assign_touch;
     data.novel_assign_station_36 = this.assign_station;
 
-    data.novel_tourist_35 = this.radiovisitor;
-    data.novel_manyperson_36 = this.radiocrowded;
-    data.novel_ari_37 = this.radiobreath;
-    data.novel_inject_38 = this.radioinject;
-    data.novel_doc_39 = this.radiolabtest;
+    data.novel_tourist_35 = this.riskFrm.value.radiovisitor;
+    data.novel_manyperson_36 = this.riskFrm.value.radiocrowded;
+    data.novel_ari_37 = this.riskFrm.value.radiobreath;
+    data.novel_inject_38 = this.riskFrm.value.radioinject;
+    data.novel_doc_39 = this.riskFrm.value.radiolabtest;
     data.novel_etc_310 = this.assign_etc;
+
     data.novel_havevac = this.havevac;
     data.novel_certificate = this.havecertificate;
     data.novel_getvac1 = (this.datevac1 != null) ? moment(this.datevac1).format('YYYY-MM-DD') : null;
@@ -465,26 +588,16 @@ export class FormRecheckComponent implements OnInit {
     data.novel_namevac2 = this.namevac2;
     data.novel_placevac2 = this.placevac2;
 
-    data.novel_input_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
+    infoData.push(data);
 
-    info.push(data);
-
-    const rs: any = await this.api.insRec(info);
-    if (rs.ok) {
-      console.log(rs.message[0]);
-      const rsins: any = await this.insertRec(rs.message[0]);
-      console.log('rsins ', rsins);
-      this.successNotification();
-    } else {
-      this.errorNotification();
-    }
+    const resUpdateNovel: any = await this.api.updateNovelData(this.novelID, infoData);
+    return resUpdateNovel.ok;
   }
 
-  // บันทึก Timeline
-  async insertRec(id): Promise<any> {
+  async updateTLData(): Promise<any> {
     const data: any = {};
     const info: any = [];
-    data.novel_id = id;
+
     data.day1 = this.dateTimeLineShort[0];
     data.day2 = this.dateTimeLineShort[1];
     data.day3 = this.dateTimeLineShort[2];
@@ -518,10 +631,8 @@ export class FormRecheckComponent implements OnInit {
 
     info.push(data);
 
-    const rs: any = await this.api.insData(info);
-    console.log(rs);
-
+    const resUpdateTL: any = await this.api.updateTLData(this.novelID, info);
+    return  resUpdateTL.ok;
   }
-
 
 }

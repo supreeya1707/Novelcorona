@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
+import {SharedModule} from "../shared.module";
 
 
 defineLocale('th-be', thBeLocale);
@@ -23,16 +24,17 @@ defineLocale('th-be', thBeLocale);
     LayoutComponent,
     FormRecheckComponent
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    DigitOnlyModule,
-  ]
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        BsDatepickerModule.forRoot(),
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        DigitOnlyModule,
+        SharedModule,
+    ]
 })
 export class AdminModule { }
