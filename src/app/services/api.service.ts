@@ -58,7 +58,7 @@ export class ApiService {
     ).toPromise();
   }
 
-  insByStaff(insRecord: any): any {
+  insStaff(insRecord: any): any {
     const token = sessionStorage.getItem('token');
     this.httpOptions = {
       headers: new HttpHeaders({
