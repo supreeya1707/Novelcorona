@@ -1222,13 +1222,6 @@ export class PrintReportComponent implements OnInit {
         {text: this.dataNovelStaff.reporter, absolutePosition: {x: 80, y: 767}, bold : true},
         (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).locale('th').add('year', '543').format('D MMM YY'), absolutePosition: {x: 415, y: 767}, bold : true} : null,
         (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).format('HH:mm'), absolutePosition: {x: 510, y: 767}, bold : true} : null,
-
-
-
-
-
-
-
         {
           margin: [0, 3],
           table: {
