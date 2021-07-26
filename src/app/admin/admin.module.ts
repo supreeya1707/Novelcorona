@@ -14,6 +14,7 @@ import {AppRoutingModule} from '../app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {SharedModule} from "../shared.module";
+import { PrintReportComponent } from './print-report/print-report.component';
 
 
 defineLocale('th-be', thBeLocale);
@@ -22,7 +23,8 @@ defineLocale('th-be', thBeLocale);
   declarations: [
     ViewNovelcorona2Component,
     LayoutComponent,
-    FormRecheckComponent
+    FormRecheckComponent,
+    PrintReportComponent
   ],
     imports: [
         CommonModule,

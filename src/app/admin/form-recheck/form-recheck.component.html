@@ -220,13 +220,12 @@
               <div class="form-group">
                 <label>วัน /เดือน/ ปีเกิด</label>
                 <div class="input-group">
-                  <!--[(ngModel)]="birthday" [ngModelOptions]="{standalone: true}"-->
-                  <input class="form-control" #datepickerMDY="bsDatepicker" [value]="birthday"
+                  <input class="form-control" #datepickerMDY="bsDatepicker"
                          formControlName="birthday" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
                   <div class="input-group-append">
-                  <span class="input-group-text">
-                    <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                       [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
                   </div>
                 </div>
               </div>
@@ -625,10 +624,9 @@
             </div>
             <div class="col-md-4">
               <div class="input-group">
-                <input class="form-control" placeholder="โปรดระบุวันเดินทาง"
-                       (bsValueChange)="getDatecome($event)" #datepickerMDY="bsDatepicker"
-                       bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-                       [value]="datecome" [bsValue]="currentDate">
+                <input class="form-control" placeholder="โปรดระบุวันเดินทาง" #datepickerMDY="bsDatepicker"
+                       formControlName="datecome" (bsValueChange)="getDatecome($event)"
+                       bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
                 <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -1040,15 +1038,15 @@
         <div class="row mt-5">
           <div class="radio-inline">
             <label class="radio font-size-h4 ">
-              <input type="radio" name="radiow" [value]="2" [ngModel]="wearmask"/>
+              <input type="radio" name="wearmask" id="wearmask1" [value]="2" [(ngModel)]="wearmask"/>
               <span></span> ใส่ mask ตลอดเวลา
             </label>
             <label class="radio font-size-h4 ">
-              <input type="radio" name="radiow" [value]="1" [ngModel]="wearmask"/>
+              <input type="radio" name="wearmask" id="wearmask2" [value]="1" [(ngModel)]="wearmask"/>
               <span></span> ใส่บางครั้ง
             </label>
             <label class="radio font-size-h4 ">
-              <input type="radio" name="radiow" [value]="0" [ngModel]="wearmask"/>
+              <input type="radio" name="wearmask" id="wearmask3" [value]="0" [(ngModel)]="wearmask"/>
               <span></span> ไม่ใส่
             </label>
           </div>
@@ -1057,15 +1055,15 @@
         <div class="row mt-5">
           <div class="radio-inline">
             <label class="radio font-size-h4">
-              <input type="radio" name="radiow_2" [value]="2" [ngModel]="place" />
+              <input type="radio" name="radioPlace" id="radioPlace1" [value]="2" [(ngModel)]="radioPlace" />
               <span></span>ห้องปรับอากาศ
             </label>
             <label class="radio font-size-h4">
-              <input type="radio" name="radiow_2" [value]="1" [ngModel]="place" />
+              <input type="radio" name="radioPlace" id="radioPlace2" [value]="1" [(ngModel)]="radioPlace" />
               <span></span>ห้องพัดลม
             </label>
             <label class="radio font-size-h4">
-              <input type="radio" name="radiow_2" [value]="0" [ngModel]="place" />
+              <input type="radio" name="radioPlace" id="radioPlace3" [value]="0" [(ngModel)]="radioPlace" />
               <span></span>นอกอาคาร
             </label>
 
@@ -1242,11 +1240,11 @@
             <label>รายงานแพทย์</label>
             <div class="radio-inline">
               <label class="radio mt-3">
-                <input type="radio" name="radioSAR2" [(ngModel)]="radiodoctor" [value]="'ปิยะณัฐ บุญประดิษฐ์'"/>
+                <input type="radio" name="radiodoctor1" [(ngModel)]="radiodoctor" [value]="'ปิยะณัฐ บุญประดิษฐ์'"/>
                 <span></span>ปิยะณัฐ บุญประดิษฐ์
               </label>
               <label class="radio mt-3">
-                <input type="radio" name="radioSAR2"[(ngModel)]="radiodoctor" [value]="'สุดารัตน์ วิจิตรเศรษฐกุล'"/>
+                <input type="radio" name="radiodoctor2"[(ngModel)]="radiodoctor" [value]="'สุดารัตน์ วิจิตรเศรษฐกุล'"/>
                 <span></span>สุดารัตน์ วิจิตรเศรษฐกุล
               </label>
             </div>
