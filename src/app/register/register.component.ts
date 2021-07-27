@@ -342,7 +342,7 @@ export class RegisterComponent implements OnInit {
                 ]
               }
             },
-             {width: 'auto', text: 'แยกกักตัว' , style: 'small'},
+            {width: 'auto', text: 'แยกกักตัว' , style: 'small'},
             {width: 'auto',
               table: {
                 widths: [1],
