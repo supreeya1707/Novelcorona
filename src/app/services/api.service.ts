@@ -113,7 +113,7 @@ export class ApiService {
     return this.http.get(url, this.httpOptions).toPromise();
   }
 
-  getClusterByType(typeid: any): any {
+  getCluster(): any {
     // const token = sessionStorage.getByCid('token');
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -121,7 +121,7 @@ export class ApiService {
         Authorization: 'Bearer '
       })
     };
-    const url = `${this.baseURL}/covidcluster/${typeid}/cluster_type`;
+    const url = `${this.baseURL}/covidcluster`;
     return this.http.get(url, this.httpOptions).toPromise();
   }
 
@@ -134,6 +134,20 @@ export class ApiService {
       })
     };
     const url = `${this.baseURL}/novelcorona/${dateinput}/dateinput`;
+
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
+
+  getDataByDateStaff(dateinput: any): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelcorona/${dateinput}/staff_dateinput`;
 
     return this.http.get(url, this.httpOptions).toPromise();
   }

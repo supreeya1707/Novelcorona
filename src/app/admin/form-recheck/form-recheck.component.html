@@ -221,6 +221,7 @@
                 <label>วัน /เดือน/ ปีเกิด</label>
                 <div class="input-group">
                   <input class="form-control" #datepickerMDY="bsDatepicker"
+                         (bsValueChange)="getBirthday($event)"
                          formControlName="birthday" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
                   <div class="input-group-append">
                 <span class="input-group-text">
@@ -734,7 +735,7 @@
           </div>
 
           <div class="row font-prompt-medium fsize16">
-            <label>● ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช้น ผับ สนามมวย</label>
+            <label>● ช่วง 14 วันก่อนป่วยมีประวัติเดินทางไปในสถานที่ที่มีคนหนาแน่น เช่น ผับ สนามมวย</label>
             <div class="radio-inline ml-md-auto" style="padding-left: 20px;">
               <div class="form-check col-sm-6">
                 <input class="form-check-input" type="radio" name="radiocrowded" id="radiocrowded1" formControlName="radiocrowded"
@@ -1025,13 +1026,13 @@
       <div class="card-body">
         <div class="row">
           <label class="col-12">สรุปความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยงกลุ่มใด</label>
-          <div class="col-md-3">
-            <div class="form-group">
-              <select  class="form-control" placeholder="เลือกความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยงกลุ่มใด"
-                       [(ngModel)]="cluster" name="cluster" id="cluster" *ngFor="let c of dataCluster">
-                <option value="{{c.cluster_id}}">{{c.cluster_name}}</option>
-              </select>
-            </div>
+          <div class="col-md-12">
+            <select class="form-control"
+                    placeholder="เลือกความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยง"
+                    [(ngModel)]="cluster" name="cluster" id="cluster">
+              <!--<option [ngValue]="null" value="undefined" selected disabled>== เลือกความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยง ==</option>-->
+              <option *ngFor="let clus of dataCluster" [value]="clus.cluster_id">{{clus.cluster_name}}</option>
+            </select>
           </div>
         </div>
 
@@ -1239,13 +1240,9 @@
           <div class="col-md-6">
             <label>รายงานแพทย์</label>
             <div class="radio-inline">
-              <label class="radio mt-3">
-                <input type="radio" name="radiodoctor1" [(ngModel)]="radiodoctor" [value]="'ปิยะณัฐ บุญประดิษฐ์'"/>
-                <span></span>ปิยะณัฐ บุญประดิษฐ์
-              </label>
-              <label class="radio mt-3">
-                <input type="radio" name="radiodoctor2"[(ngModel)]="radiodoctor" [value]="'สุดารัตน์ วิจิตรเศรษฐกุล'"/>
-                <span></span>สุดารัตน์ วิจิตรเศรษฐกุล
+              <label class="radio mt-3" *ngFor="let doctor of dataDoctor">
+                <input type="radio" name="radiodoctor" [(ngModel)]="radiodoctor" [value]="doctor.value"/>
+                <span></span>{{doctor.viewValue}}
               </label>
             </div>
           </div>
