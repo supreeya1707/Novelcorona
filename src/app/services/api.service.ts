@@ -58,7 +58,7 @@ export class ApiService {
     ).toPromise();
   }
 
-  insByStaff(insRecord: any): any {
+  insStaff(insRecord: any): any {
     const token = sessionStorage.getItem('token');
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -96,6 +96,19 @@ export class ApiService {
       })
     };
     const url = `${this.baseURL}/novelcorona/${id}/id`;
+
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
+  getDataStaff(novelid: any): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelstaff/${novelid}/novel_id`;
 
     return this.http.get(url, this.httpOptions).toPromise();
   }

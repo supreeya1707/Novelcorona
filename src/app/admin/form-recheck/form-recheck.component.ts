@@ -19,8 +19,11 @@ export class FormRecheckComponent implements OnInit {
   novelID: any;
   dataNovel: any[];
   dataTL: any[];
+  dataCluster: any = [];
+  locale = 'th-be';
+  currentDate = new Date();
 
-  birthday: any;
+
 
   radioGender: any;
   radioPreg: any;
@@ -60,16 +63,15 @@ export class FormRecheckComponent implements OnInit {
   radiotest: any = 0;
   dateTimeLine: any = [];
   dateTimeLineShort: any = [];
-  Addressetc: any;
   sDate: any;
-  dateselect = moment().format('yyyy-MM-DD');
+  dateselect = moment().format('YYYY-MM-DD');
   dateStart = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
 
   datadate: any = moment();
   datatreat: any;
   datevac1: any;
   datevac2: any;
-  datacome: any;
+
   dateSARS1:any;
   dateSARS2:any;
   startquaran:any;
@@ -93,6 +95,8 @@ export class FormRecheckComponent implements OnInit {
 
   startsick: any;
   starttreat: any;
+  birthday: any;
+  datecome: any;
 
   namevac1: any;
   namevac2: any;
@@ -111,11 +115,9 @@ export class FormRecheckComponent implements OnInit {
   assign_etc: any;
   assign_station: any;
   assign_position: any;
-  radioAddress: any;
   symtom_etc: any;
-  locale = 'th-be';
-  currentDate = new Date();
-  Datequaran=new Date();
+
+
 
   desDay4: any;
   desDay5: any;
@@ -130,34 +132,37 @@ export class FormRecheckComponent implements OnInit {
   desDay14: any;
   date: any;
 
-  times1st =1;
-  times2nd=2;
-  typeSAR1:any;
-  placesendSAR1:any;
-  radiodetect1:any;
-  typeSAR2:any;
-  placesendSAR2:any;
-  radiodetect2:any;
-  radiodoctor:any;
-  timefromdoc:any;
-  commentdoctor:any;
-  radioSARtype:any;
-  firstswab:any;
-  secondswab:any;
-  radioSARtip:any;
-  addressquaran:any;
-  reporter:any;
-  timesave:any;
+  typeSAR1: any;
+  placesendSAR1: any;
+  radiodetect1: any;
+  typeSAR2: any;
+  placesendSAR2: any;
+  radiodetect2: any;
+  radiodoctor: any;
+  timefromdoc: any;
+  commentdoctor: any;
+  radioSARtype: any;
+  firstswab: any;
+  secondswab: any;
+  ptSarstype: any;
+  addressquaran: any;
+  reporter: any;
+  timereport: any;
+  datereport: any;
+  wearmask: any;
+  radioPlace: any;
+  cluster: any;
+
+
+
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
-              @Inject('baseURL') private baseURL: any) {
-  }
+              @Inject('baseURL') private baseURL: any) {}
 
 
   ngOnInit(): void {
     this.localeService.use(this.locale);
     this.novelID = history.state.novelid;
     // console.log(this.novelID);
-    this.getData(this.novelID);
 
     this.generalFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
@@ -179,7 +184,6 @@ export class FormRecheckComponent implements OnInit {
       moo: [null],
       mooban: [null],
       soi: [null],
-      birthday: [null],
       road: [null],
       tumbon: [null, Validators.compose([Validators.required])],
       amphur: [null, Validators.compose([Validators.required])],
@@ -195,6 +199,7 @@ export class FormRecheckComponent implements OnInit {
       weight: [null],
       high: [null],
       bmi: [null],
+      birthday: [null],
     });
 
     this.riskFrm  = this.formBuilder.group({
@@ -206,7 +211,8 @@ export class FormRecheckComponent implements OnInit {
       radiocrowded: [null, Validators.compose([Validators.required])],
       radiobreath: [null, Validators.compose([Validators.required])],
       radioinject: [null, Validators.compose([Validators.required])],
-      radiolabtest: [null, Validators.compose([Validators.required])]
+      radiolabtest: [null, Validators.compose([Validators.required])],
+      datecome: [null]
     });
 
     this.timelineFrm  = this.formBuilder.group({
@@ -214,6 +220,9 @@ export class FormRecheckComponent implements OnInit {
       desDay2: [null, Validators.compose([Validators.required])],
       desDay3: [null, Validators.compose([Validators.required])]
     });
+
+    this.getData(this.novelID);
+    this.getCluster(1);
 
   }
 
@@ -231,7 +240,6 @@ export class FormRecheckComponent implements OnInit {
       this.generalFrm.get('national').setValue(this.dataNovel['novel_national']);
       this.radioGender = this.dataNovel['novel_gender'];
       this.radioPreg = this.dataNovel['novel_preg'];
-      // this.generalFrm.get('radioPreg').setValue(this.dataNovel['novel_preg']);
       this.generalFrm.get('numPreg').setValue(this.dataNovel['novel_numpreg']);
       this.generalFrm.get('pregAge').setValue(this.dataNovel['novel_agepreg']);
       this.generalFrm.get('job').setValue(this.dataNovel['novel_worker']);
@@ -239,8 +247,8 @@ export class FormRecheckComponent implements OnInit {
       this.generalFrm.get('telephone').setValue(this.dataNovel['novel_phone']);
       this.generalFrm.get('telephonedoc').setValue(this.dataNovel['novel_phonedoc']);
       this.generalFrm.get('treat').setValue(this.dataNovel['novel_treat']);
-      this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).format('YYYY-MM-DD'));
-      // this.birthday = moment(this.dataNovel['novel_birthday']).add('year', 543).format('DD/MM/YYYY');
+      this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).format('DD/MM/YYYY'));
+      // this.birthday = moment(this.dataNovel['novel_birthday']).format('DD/MM/YYYY');
       this.generalFrm.get('addr').setValue(this.dataNovel['novel_number_address']);
       this.generalFrm.get('moo').setValue(this.dataNovel['novel_moo']);
       this.generalFrm.get('mooban').setValue(this.dataNovel['novel_mooban']);
@@ -262,8 +270,8 @@ export class FormRecheckComponent implements OnInit {
       this.generalFrm.get('high').setValue(this.dataNovel['novel_high']);
       this.generalFrm.get('bmi').setValue(this.dataNovel['novel_bmi']);
 
-      this.startsick = this.dataNovel['novel_start_sick'];
-      this.starttreat = this.dataNovel['novel_start_treat'];
+      this.startsick = moment(this.dataNovel['novel_start_sick']).format('DD/MM/YYYY');
+      this.starttreat = moment(this.dataNovel['novel_start_treat']).format('DD/MM/YYYY');
       this.fistHosp = this.dataNovel['novel_hospital_first'];
       this.fistChw = this.dataNovel['novel_province_first'];
       this.nowHosp = this.dataNovel['novel_hospital_now'];
@@ -292,7 +300,8 @@ export class FormRecheckComponent implements OnInit {
       this.radiofrom = this.dataNovel['novel_comefrom_31'];
       this.come_city = this.dataNovel['novel_come_city'];
       this.come_region = this.dataNovel['novel_come_country'];
-      this.datacome = this.dataNovel['novel_date_come'];
+      this.riskFrm.get('datecome').setValue((this.dataNovel['novel_date_come'] != null) ? moment(this.dataNovel['novel_date_come']).format('DD/MM/YYYY') : null);
+      // this.datecome = moment(this.dataNovel['novel_date_come']).format('DD/MM/YYYY');
       this.come_plane = this.dataNovel['novel_transportation'];
       this.come_round = this.dataNovel['novel_round_tran'];
       this.come_seat = this.dataNovel['novel_number_seat'];
@@ -311,10 +320,10 @@ export class FormRecheckComponent implements OnInit {
 
       this.havevac = this.dataNovel['novel_havevac'];
       this.havecertificate = this.dataNovel['novel_certificate'];
-      this.datevac1 = this.dataNovel['novel_getvac1'];
+      this.datevac1 = (this.dataNovel['novel_getvac1'] != null) ? moment(this.dataNovel['novel_getvac1']).format('DD/MM/YYYY') : null;
       this.namevac1 = this.dataNovel['novel_namevac1'];
       this.placevac1 = this.dataNovel['novel_placevac1'];
-      this.datevac2 = this.dataNovel['novel_getvac2'];
+      this.datevac2 = (this.dataNovel['novel_getvac2'] != null) ? moment(this.dataNovel['novel_getvac2']).format('DD/MM/YYYY') : null;
       this.namevac2 = this.dataNovel['novel_namevac2'];
       this.placevac2 = this.dataNovel['novel_placevac2'];
     }else{
@@ -360,6 +369,11 @@ export class FormRecheckComponent implements OnInit {
     }
   }
 
+  async getCluster(type: any): Promise<any>{
+    const resCluster = await this.api.getClusterByType(type);
+    console.log(resCluster);
+  }
+
 
   get f() {
     return this.generalFrm.controls;
@@ -399,12 +413,12 @@ export class FormRecheckComponent implements OnInit {
   getDate(e: any): any {
     this.datadate = moment(e).format('YYYY-MM-DD');
     this.genDateTimeLine(this.datadate);
-    // console.log(this.datadate);
-    // console.log(this.dateTimeLineShort);
+    console.log(this.datadate);
+    console.log(this.dateTimeLineShort);
   }
 
   getBirthday(e: any): any {
-    console.log('this.birthday', e);
+    // console.log('this.birthday', e);
     this.birthday = moment(e).format('YYYY-MM-DD');
     // console.log(this.datatreat);
   }
@@ -417,36 +431,31 @@ export class FormRecheckComponent implements OnInit {
 
   getDatecome(e: any): any {
     // console.log(e);
-    this.datacome = moment(e).format('YYYY-MM-DD');
-    // console.log(this.datacome);
+    this.datecome = moment(e).format('YYYY-MM-DD');
+    // console.log('this.datecome ', this.datecome);
   }
-  getDatequarantine(e: any): any {
 
+  getDatequarantine(e: any): any {
     // console.log(e);
     this.startquaran = moment(e).format('YYYY-MM-DD');
     this.genDatequarantine(this.startquaran);
-    // console.log(this.datacome);
   }
-  convertDatequaran(d: any, i: any): any {
-    const ss: any = d.toString().split('/');
-    const sdatequa : any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
-    const datequai: any = -i;
-    return moment(sdatequa).locale('th').add(datequai, 'day').add('year', 543).format('DD MMMM YYYY');
-  }
-  genDatequarantine(e: any): any {
-    this.dateTimeLinequarantine = [];
-    this.dateTimeLineShortquaran = [];
-    for (let i = 1; i <= 14; i++) {
-      this.dateTimeLinequarantine.push(this.convertDatequaran(e, i));
-      this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').format('DD/MM/YYYY'));
-      // console.log(this.dateTimeLineShort);
-    }
-  }
+
   convertDate(d: any, i: any): any {
     const ss: any = d.toString().split('/');
     const dataDate: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
     const datai: any = -i;
     return moment(dataDate).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
+  }
+
+  genDatequarantine(e: any): any {
+    this.dateTimeLinequarantine = [];
+    this.dateTimeLineShortquaran = [];
+    for (let i = 1; i <= 14; i++) {
+      this.dateTimeLinequarantine.push(this.convertDate(e, i));
+      this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').format('DD/MM/YYYY'));
+      // console.log(this.dateTimeLineShort);
+    }
   }
 
   genDateTimeLine(e: any): any {
@@ -472,8 +481,9 @@ export class FormRecheckComponent implements OnInit {
     }
     const novelResponse = await this.updateNovelData();
     const timelineResponse = await this.updateTLData();
+    const staffResponse = await this.insertRecheck();
 
-    if (novelResponse === true && timelineResponse === true) {
+    if (novelResponse === true && timelineResponse === true && staffResponse === true) {
       this.successNotification();
     } else {
       this.errorNotification();
@@ -481,7 +491,40 @@ export class FormRecheckComponent implements OnInit {
   }
 
   async insertRecheck(): Promise<any> {
+    const data: any = {};
+    const infoData: any = [];
 
+    data.novel_id = this.novelID;
+    data.riskconnect = this.cluster;
+    data.wearmask = this.wearmask;
+    data.radioPlace = this.radioPlace;
+
+    data.sars1_date = (this.dateSARS1 != null) ? moment(this.dateSARS1).format('YYYY-MM-DD') : null;
+    data.sars1_type = this.typeSAR1;
+    data.sars1_placesend = this.placesendSAR1;
+    data.sars1_result = this.radiodetect1;
+
+    data.sars2_date = (this.dateSARS2 != null) ? moment(this.dateSARS2).format('YYYY-MM-DD') : null;
+    data.sars2_type = this.typeSAR2;
+    data.sars2_placesend = this.placesendSAR2;
+    data.sars2_result = this.radiodetect2;
+
+    data.doctor = this.radiodoctor;
+    data.doctor_time = this.timefromdoc;
+    data.doctor_comment = this.commentdoctor;
+
+    data.sars_pt_type = this.radioSARtype;
+    data.date_swab1 = (this.firstswab != null) ? moment(this.firstswab).format('YYYY-MM-DD') : null;
+    data.date_swab2 = (this.secondswab != null) ? moment(this.secondswab).format('YYYY-MM-DD') : null;
+    data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
+    data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
+    data.address_quaran = this.addressquaran;
+    data.reporter = this.reporter;
+    data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
+
+    infoData.push(data);
+    const resStaff = await this.api.insStaff(infoData);
+    return resStaff.ok;
   }
 
   async updateNovelData(): Promise<any> {
@@ -529,6 +572,7 @@ export class FormRecheckComponent implements OnInit {
     data.novel_bmi = (this.generalFrm.value.weight / ((this.generalFrm.value.high / 100) * (this.generalFrm.value.high / 100)));
 
     data.novel_birthday = (this.generalFrm.value.birthday != null) ? moment(this.generalFrm.value.birthday).format('YYYY-MM-DD') : null;
+    // data.novel_birthday = (this.birthday != null) ? moment(this.birthday).format('YYYY-MM-DD') : null;
     data.novel_start_sick = moment(this.datadate).format('YYYY-MM-DD');
     data.novel_start_treat = moment(this.datatreat).format('YYYY-MM-DD');
     data.novel_hospital_first = this.fistHosp;
@@ -561,7 +605,8 @@ export class FormRecheckComponent implements OnInit {
     data.novel_comefrom_31 = this.riskFrm.value.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
-    data.novel_date_come = (this.datacome != null) ? moment(this.datacome).format('YYYY-MM-DD') : null;
+    data.novel_date_come = (this.riskFrm.value.datecome != null) ? moment(this.riskFrm.value.datecome).format('YYYY-MM-DD') : null;
+    // data.novel_date_come = (this.datecome != null) ? moment(this.datecome).format('YYYY-MM-DD') : null;
     data.novel_transportation = this.come_plane;
     data.novel_round_tran = this.come_round;
     data.novel_number_seat = this.come_seat;

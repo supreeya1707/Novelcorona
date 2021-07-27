@@ -27,6 +27,7 @@
               <tr class="text-center" style="height: 60px" >
                 <th width="15%">เลขประจำตัวประชาชน</th>
                 <th width="25%">ชื่อ-นามสกุล</th>
+                <th width="5%">สัญชาติ</th>
                 <th width="15%">เบอร์โทรศัพท์</th>
                 <th width="15%">วันที่มีอาการ</th>
                 <th width="15%">วันที่เข้ารับการรักษา</th>
@@ -37,12 +38,12 @@
               <tr *ngFor="let novel of dataNovel">
                 <td>{{novel.novel_cid}}</td>
                 <td class="text-left">{{novel.novel_pname + novel.novel_fname + '  ' + novel.novel_lname}}</td>
+                <td>{{novel.novel_national}}</td>
                 <td>{{novel.novel_phone}}</td>
                 <td>{{novel.novel_start_sick | thaiDate: 'short'}}</td>
                 <td>{{novel.novel_start_treat | thaiDate: 'thdatetime'}}</td>
                 <td>
                   <button class="btn btn-xs btn-outline-primary btn-xs" (click)="viewForm(novel.novel_id)"><i class="fa fa-pencil"></i></button>
-                  <button class="btn btn-xs btn-outline-primary btn-xs" (click)="printReport(novel.novel_id)"><i class="fa fa-print"></i></button>
                 </td>
               </tr>
             </tbody>

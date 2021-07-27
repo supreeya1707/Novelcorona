@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {ViewNovelcorona2Component} from './view-novelcorona2/view-novelcorona2.component';
 import {LayoutComponent} from './layout/layout.component';
 import {FormRecheckComponent} from './form-recheck/form-recheck.component';
+import {PrintReportComponent} from './print-report/print-report.component';
 
 const routes: Routes = [{
   path: 'admin',
@@ -11,6 +12,7 @@ const routes: Routes = [{
     {path: '', redirectTo: 'viewNovelcorona2', pathMatch: 'full'},
     {path: 'viewNovelcorona2', component: ViewNovelcorona2Component},
     {path: 'formRecheck', component: FormRecheckComponent},
+    {path: 'printReport', component: PrintReportComponent},
 ]
 }];
 
