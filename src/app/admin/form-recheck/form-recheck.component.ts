@@ -2,9 +2,14 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup,  Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
-import {listLocales} from 'ngx-bootstrap/chronos';
 import Swal from 'sweetalert2';
 import {ApiService} from '../../services/api.service';
+
+interface Doctor {
+  value: string;
+  viewValue: string;
+}
+
 
 @Component({
   selector: 'app-forms',
@@ -72,11 +77,11 @@ export class FormRecheckComponent implements OnInit {
   datevac1: any;
   datevac2: any;
 
-  dateSARS1:any;
-  dateSARS2:any;
-  startquaran:any;
-  endquaran:any;
-  dateinvestigate:any;
+  dateSARS1: any;
+  dateSARS2: any;
+  startquaran: any;
+  endquaran: any;
+  dateinvestigate: any;
   dateTimeLinequarantine: any = [];
   dateTimeLineShortquaran: any = [];
   d: any;
@@ -153,7 +158,10 @@ export class FormRecheckComponent implements OnInit {
   radioPlace: any;
   cluster: any;
 
-
+  dataDoctor: Doctor[] = [
+    {value: 'นพ.ปิยะณัฐ บุญประดิษฐ์', viewValue: 'นพ.ปิยะณัฐ บุญประดิษฐ์'},
+    {value: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล', viewValue: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล'}
+  ];
 
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
               @Inject('baseURL') private baseURL: any) {}
@@ -222,8 +230,7 @@ export class FormRecheckComponent implements OnInit {
     });
 
     this.getData(this.novelID);
-    this.getCluster(1);
-
+    this.getCluster();
   }
 
   async getData(novelid: any): Promise<any>{
@@ -247,7 +254,7 @@ export class FormRecheckComponent implements OnInit {
       this.generalFrm.get('telephone').setValue(this.dataNovel['novel_phone']);
       this.generalFrm.get('telephonedoc').setValue(this.dataNovel['novel_phonedoc']);
       this.generalFrm.get('treat').setValue(this.dataNovel['novel_treat']);
-      this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).format('DD/MM/YYYY'));
+      this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).add(543, 'year').format('DD/MM/YYYY'));
       // this.birthday = moment(this.dataNovel['novel_birthday']).format('DD/MM/YYYY');
       this.generalFrm.get('addr').setValue(this.dataNovel['novel_number_address']);
       this.generalFrm.get('moo').setValue(this.dataNovel['novel_moo']);
@@ -270,8 +277,8 @@ export class FormRecheckComponent implements OnInit {
       this.generalFrm.get('high').setValue(this.dataNovel['novel_high']);
       this.generalFrm.get('bmi').setValue(this.dataNovel['novel_bmi']);
 
-      this.startsick = moment(this.dataNovel['novel_start_sick']).format('DD/MM/YYYY');
-      this.starttreat = moment(this.dataNovel['novel_start_treat']).format('DD/MM/YYYY');
+      this.startsick = moment(this.dataNovel['novel_start_sick']).add(543, 'year').format('DD/MM/YYYY');
+      this.starttreat = moment(this.dataNovel['novel_start_treat']).add(543, 'year').format('DD/MM/YYYY');
       this.fistHosp = this.dataNovel['novel_hospital_first'];
       this.fistChw = this.dataNovel['novel_province_first'];
       this.nowHosp = this.dataNovel['novel_hospital_now'];
@@ -300,7 +307,7 @@ export class FormRecheckComponent implements OnInit {
       this.radiofrom = this.dataNovel['novel_comefrom_31'];
       this.come_city = this.dataNovel['novel_come_city'];
       this.come_region = this.dataNovel['novel_come_country'];
-      this.riskFrm.get('datecome').setValue((this.dataNovel['novel_date_come'] != null) ? moment(this.dataNovel['novel_date_come']).format('DD/MM/YYYY') : null);
+      this.riskFrm.get('datecome').setValue((this.dataNovel['novel_date_come'] != null) ? moment(this.dataNovel['novel_date_come']).add(543,'year').format('DD/MM/YYYY') : null);
       // this.datecome = moment(this.dataNovel['novel_date_come']).format('DD/MM/YYYY');
       this.come_plane = this.dataNovel['novel_transportation'];
       this.come_round = this.dataNovel['novel_round_tran'];
@@ -320,10 +327,10 @@ export class FormRecheckComponent implements OnInit {
 
       this.havevac = this.dataNovel['novel_havevac'];
       this.havecertificate = this.dataNovel['novel_certificate'];
-      this.datevac1 = (this.dataNovel['novel_getvac1'] != null) ? moment(this.dataNovel['novel_getvac1']).format('DD/MM/YYYY') : null;
+      this.datevac1 = (this.dataNovel['novel_getvac1'] != null) ? moment(this.dataNovel['novel_getvac1']).add(543, 'year').format('DD/MM/YYYY') : null;
       this.namevac1 = this.dataNovel['novel_namevac1'];
       this.placevac1 = this.dataNovel['novel_placevac1'];
-      this.datevac2 = (this.dataNovel['novel_getvac2'] != null) ? moment(this.dataNovel['novel_getvac2']).format('DD/MM/YYYY') : null;
+      this.datevac2 = (this.dataNovel['novel_getvac2'] != null) ? moment(this.dataNovel['novel_getvac2']).add(543, 'year').format('DD/MM/YYYY') : null;
       this.namevac2 = this.dataNovel['novel_namevac2'];
       this.placevac2 = this.dataNovel['novel_placevac2'];
     }else{
@@ -369,9 +376,14 @@ export class FormRecheckComponent implements OnInit {
     }
   }
 
-  async getCluster(type: any): Promise<any>{
-    const resCluster = await this.api.getClusterByType(type);
-    console.log(resCluster);
+  async getCluster(): Promise<any>{
+    const resCluster = await this.api.getCluster();
+    // console.log(resCluster);
+    if (resCluster.ok === true){
+      this.dataCluster = resCluster.message;
+    }else{
+      console.log('error');
+    }
   }
 
 
@@ -420,7 +432,13 @@ export class FormRecheckComponent implements OnInit {
   getBirthday(e: any): any {
     // console.log('this.birthday', e);
     this.birthday = moment(e).format('YYYY-MM-DD');
-    // console.log(this.datatreat);
+    // console.log(this.birthday);
+  }
+
+  getVac1(e: any): any {
+    console.log('this.birthday', e);
+    this.datevac1 = moment(e).format('YYYY-MM-DD');
+    console.log(this.datevac1);
   }
 
   getDatetreat(e: any): any {
@@ -430,9 +448,9 @@ export class FormRecheckComponent implements OnInit {
   }
 
   getDatecome(e: any): any {
-    // console.log(e);
+    console.log(e);
     this.datecome = moment(e).format('YYYY-MM-DD');
-    // console.log('this.datecome ', this.datecome);
+    console.log('this.datecome ', this.datecome);
   }
 
   getDatequarantine(e: any): any {
@@ -497,7 +515,7 @@ export class FormRecheckComponent implements OnInit {
     data.novel_id = this.novelID;
     data.riskconnect = this.cluster;
     data.wearmask = this.wearmask;
-    data.radioPlace = this.radioPlace;
+    data.place = this.radioPlace;
 
     data.sars1_date = (this.dateSARS1 != null) ? moment(this.dateSARS1).format('YYYY-MM-DD') : null;
     data.sars1_type = this.typeSAR1;

@@ -6,6 +6,7 @@ import pdfMakeUnicode from 'pdfmake-unicode';
 import * as moment from 'moment';
 import {ApiService} from '../../services/api.service';
 import {right} from '@popperjs/core';
+import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -46,9 +47,11 @@ export class PrintReportComponent implements OnInit {
   locale = 'th-be';
   logo: any;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private localeService: BsLocaleService,) { }
 
   ngOnInit(): void {
+    this.localeService.use(this.locale);
+
     const toDataURL = url => fetch(url)
       .then(response => response.blob())
       .then(blob => new Promise((resolve, reject) => {
@@ -1201,7 +1204,7 @@ export class PrintReportComponent implements OnInit {
         {text: this.dataNovelStaff.sars2_placesend, absolutePosition: {x: 290, y: 663}, bold : true},
         {text:  '√', absolutePosition: {x: this.dataNovelStaff.sars2_result === 0 ? 383 : 472, y: 654}, style: 'fSize24'},
 
-        (this.dataNovelStaff.doctor !== null && this.dataNovelStaff.doctor !== '') ? {text:  '√', absolutePosition: {x: this.dataNovelStaff.doctor === 'สุดารัตน์ วิจิตรเศรษฐกุล' ? 189 : 88, y: 677}, style: 'fSize24'} : {text: ''},
+        (this.dataNovelStaff.doctor !== null && this.dataNovelStaff.doctor !== '') ? {text:  '√', absolutePosition: {x: this.dataNovelStaff.doctor === 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล' ? 189 : 88, y: 677}, style: 'fSize24'} : {text: ''},
         {text: this.dataNovelStaff.doctor_time, absolutePosition: {x: 330, y: 683}, bold : true},
         {text: this.dataNovelStaff.doctor_comment, absolutePosition: {x: 105, y: 702}, bold : true},
 
@@ -1495,12 +1498,32 @@ export class PrintReportComponent implements OnInit {
   }
 
   docReport01() {
+    const ptfullname = this.dataNovelByID.novel_pname + this.dataNovelByID.novel_fname + '  ' + this.dataNovelByID.novel_lname;
     const docDefinition = {
       pageSize: 'A4',
       pageOrientation: 'portrait',
       // [left, top, right, bottom]
       pageMargins: [55, 40, 55, 40],
       content: [
+        {text: this.dataNovelStaff.doctor, absolutePosition: {x: 180, y: 218}, bold: 'true'},
+        {text: 'โรงพยาบาลราชบุรี', absolutePosition: {x: 180, y: 234}, bold: 'true'},
+        {text: 'ติดเชื้อไวรัสโคโรนา ๒๐๑๙ หรือ โควิด๑๙', absolutePosition: {x: 100, y: 267}, bold: 'true'},
+        {text: ptfullname, absolutePosition: {x: 180, y: 284}, bold: 'true'},
+        {text: this.dataNovelByID.novel_age, absolutePosition: {x: 342, y: 284}, bold: 'true'},
+        {text: this.dataNovelByID.novel_national, absolutePosition: {x: 410, y: 284}, bold: 'true'},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID.novel_gender === 2 ? 480  : 496, y: 277}, style: 'fSize24'},
+        {text: this.dataNovelByID.novel_cid, absolutePosition: {x: 300, y: 300}, bold: 'true'},
+        {text: this.dataNovelByID.novel_phone, absolutePosition: {x: 150, y: 316}, bold: 'true'},
+
+        {text: this.dataNovelByID.novel_number_address, absolutePosition: {x: 410, y: 316}, bold: 'true'},
+        {text: this.dataNovelByID.novel_moo, absolutePosition: {x: 495, y: 316}, bold: 'true'},
+        {text: this.dataNovelByID.novel_mooban, absolutePosition: {x: 160, y: 333}, bold: 'true'},
+        {text: this.dataNovelByID.novel_road, absolutePosition: {x: 280, y: 333}, bold: 'true'},
+        {text: this.dataNovelByID.novel_district, absolutePosition: {x: 445, y: 333}, bold: 'true'},
+        {text: this.dataNovelByID.novel_amphur, absolutePosition: {x: 130, y: 349}, bold: 'true'},
+        {text: this.dataNovelByID.novel_province, absolutePosition: {x: 290, y: 349}, bold: 'true'},
+
+
         {text:  'โรงพยาบาลราชบุรี', absolutePosition: {x:  405, y: 152}},
         {text:  '√', absolutePosition: {x:  223, y: 244}, style: 'fSize24'},
 
@@ -1606,9 +1629,9 @@ export class PrintReportComponent implements OnInit {
           columnGap: 3
         },
         {text: 'เลขที่บัตรประจำตัวประชาชน/เลขที่หนังสือเดินทาง..................................................................................................................................'},
-        {text: 'หมายเลขโทรศัพท์......................................................... ที่อยู่ที่สามารถติดต่อได้ตั้งอยู่เลขที่ ........................ หมู่บ้าน/อาคาร...................'},
-        {text: 'ถนน.......................................................ตำบล/แขวง................................................... อำเภอ/เขต............................................................'},
-        {text: 'จังหวัด..............................................................'},
+        {text: 'หมายเลขโทรศัพท์......................................................... ที่อยู่ที่สามารถติดต่อได้ตั้งอยู่เลขที่ ................................ หมู่ .............................'},
+        {text: 'หมู่บ้าน/อาคาร.............................................ถนน.....................................................ตำบล/แขวง.............................................................. '},
+        {text: 'อำเภอ/เขต............................................................จังหวัด..............................................................'},
         {text: 'ดำเนินการดังต่อไปนี้' , style: 'title'},
         {
           columns: [
