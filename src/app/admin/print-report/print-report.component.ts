@@ -1996,7 +1996,7 @@ export class PrintReportComponent implements OnInit {
       pageSize: 'A4',
       pageOrientation: 'landscape',
       // [left, top, right, bottom]
-      pageMargins: [30, 40, 40, 30],
+      pageMargins: [30, 40, 30, 30],
       content: [
         {text:  '√', absolutePosition: {x:  this.dataNovelStaff.sars_pt_type === 2 ? 507 : this.dataNovelStaff.sars_pt_type === 3 ? 634 : 542 , y: 32}, style: 'fSize24'},
         {text: ptfullname, absolutePosition: {x: 120, y: 74}, bold: 'true'},
@@ -2050,8 +2050,12 @@ export class PrintReportComponent implements OnInit {
         {text: '13', absolutePosition: {x: 738, y: 227}, style: 'fSize12'},
         {text: '14', absolutePosition: {x: 780, y: 227}, style: 'fSize12'},
 
-
-
+        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 135, y: 500}, bold: 'true'},
+        {text: 'โรงพยาบาลราชบุรี', absolutePosition: {x: 340, y: 500}, bold: 'true'},
+        (this.dataNovelStaff.date_swab2 != null) ? {text: moment(this.dataNovelStaff.date_swab2).locale('th').add(543, 'year').format('D MMM YY'),
+          absolutePosition: {x: 530, y: 500}, bold: 'true'} : null,
+        {text: '032-719600', absolutePosition: {x: 635, y: 500}, bold: 'true'},
+        {text: '1284', absolutePosition: {x: 748, y: 500}, bold: 'true'},
 
 
         {
@@ -2112,12 +2116,13 @@ export class PrintReportComponent implements OnInit {
             widths: [ 95, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36],
             body: [
               [{text: 'อาการและอาการแสดง', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-              [{text: ' ', alignment: 'center', border: [true, false, true, true]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+              [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
             ]
           }
         },
         {text: ' '},
-        {text: 'ชื่อผู้สัมภาษณ์............................................................................ หน่วยงาน..............................................................นัดรอบ 2..................................................โทร............................................... ต่อ .........................'},
+        {text: 'ชื่อผู้สัมภาษณ์....................................................................... หน่วยงาน.................................................................' +
+            'นัดรอบ 2..................................................โทร.......................................... ต่อ ...........................', margin: [17, 0]},
         {text: ' '},
         {columns: [
             { width: '50%', qr: 'https://www.rajburi.org/images/documents/news/covid19/Advice.jpg', fit: '90', alignment: 'right'},
