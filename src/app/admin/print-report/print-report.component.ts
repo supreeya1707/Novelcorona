@@ -68,7 +68,8 @@ export class PrintReportComponent implements OnInit {
 
   async dateChange(e: any): Promise<any> {
     const dateinput = moment(e).format('YYYY-MM-DD');
-    const rs: any = await this.api.getDataByDate(dateinput);
+    const rs: any = await this.api.getStaffByDate(dateinput);
+    console.log(rs);
     if (rs.ok) {
       this.dataNovel = rs.message;
     } else {
@@ -100,6 +101,19 @@ export class PrintReportComponent implements OnInit {
       this.dataNovelByID = res.message[0];
       this.dataNovelStaff = resStaff.message[0];
         pdfMake.createPdf(this.docReport01()).open();
+    } else {
+      console.log('error');
+    }
+  }
+
+  async printReport02(novelID: any) {
+    // console.log(novelID);
+    const res: any = await this.api.getDataById(novelID);
+    const resStaff: any = await this.api.getDataStaff(novelID);
+    if (res.ok === true && resStaff.ok === true) {
+      this.dataNovelByID = res.message[0];
+      this.dataNovelStaff = resStaff.message[0];
+      pdfMake.createPdf(this.docReport02()).open();
     } else {
       console.log('error');
     }
@@ -1959,6 +1973,113 @@ export class PrintReportComponent implements OnInit {
     };
     return docDefinition;
   }
+
+  docReport02() {
+    const docDefinition = {
+      pageSize: 'A4',
+      pageOrientation: 'landscape',
+      // [left, top, right, bottom]
+      pageMargins: [45, 40, 50, 45],
+      content: [
+        {
+          columns: [
+            {width: '15%', text: ''},
+            {width: 'auto', text: 'แบบติดตามอาการผู้ที่มีความเสี่ยง/ผู้ที่เดินทางไปประเทศที่มีการระบาดของ COVID-19 /'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'PUI'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'High Risk Contract'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'Low Risk'},
+          ],
+          columnGap: 3
+        },
+        {text: 'โรงพยาบาลราชบุรี', alignment: 'center'},
+        {text: 'ชื่อ - สกุล...................................................................เพศ.........................' +
+            'อายุ...........................ปี สัญชาติ.....................เชื้อชาติ.........................อาชีพ..............................เบอร์โทรศัพท์.........................................'},
+        {text: 'ที่อยู่ที่สามารถติดต่อได้ บ้านเลขที่..............................หมู่................ซอย..................................ถนน...............................' +
+            'ตำบล.................................อำเภอ...............................จังหวัด..............................................'},
+        {text: 'ประวัติ/ความเสี่ยงที่สัมผัสโรค.....................................................................................................................................................'},
+        {text: 'วันที่ Admit...................................................วันที่ Discharge..................................................... วันที่สังเกตอาการ.....................................................วันที่สังเกตอาการครบ 14 วัน...............................................'},
+        {text: ' '},
+        {
+          table: {
+            widths: [ 100, 38, 602],
+            body: [[{text: ' ', border: [true, true, true, false]},
+              {text: 'วันที่สัมผัส', margin: [0, 3], style: 'small', alignment: 'center', border: [true, true, true, false]},
+              {text: 'วันที่สังเกตุอาการ', alignment: 'center', border: [true, true, true, false], margin: [0, 3]}]]
+          }
+        },
+        {
+          table: {
+            widths: [ 100, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38],
+            body: [
+              [{text: 'อาการและอาการแสดง', alignment: 'center'}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+              [{text: ' ', alignment: 'center'}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+            ]
+          }
+        },
+        /* ['ไข้ (ระบุ Temp.....ํC)', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['ไอ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['เจ็บคอ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['มีน้ำมูก', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['มีเสมหะ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['หายใจลำบาก', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['หอบเหนื่อย', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['ปวดกล้ามเนื้อ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['ปวดศีรษะ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['ถ่ายเหลว', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['อุณภูมิร่างกายสูงสุด', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['อุณภูมิร่างกายต่ำสุด', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['ชีพจรสูงสุด', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+            ['Oxygen sat', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],*/
+        {text: 'ชื่อผู้สัมภาษณ์.................................................. หน่วยงาน....................................................นัดรอบ 2..................................................โทร.....032-719600 ต่อ 1284'},
+        /*{image:this.qrcode,fit:[65,65], alignment: 'center'},*/
+        {text: 'คำแนะนำสำหรับการกักตัว', alignment: 'center'},
+
+      ],
+      defaultStyle: {
+        font: 'THSarabunNew',
+        fontSize: 14,
+        lineHeight: 1
+      },
+      styles: {
+        title: {
+          fontSize: 14,
+          bold: true
+        },
+        small: {fontSize: 12},
+        fontMid: {fontSize: 13},
+        fSize24: {fontSize: 24, bold: true}
+      }
+    };
+    return docDefinition;
+  }
+
 
 
 }
