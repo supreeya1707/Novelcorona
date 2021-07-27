@@ -41,6 +41,7 @@ export class PrintReportComponent implements OnInit {
   dataNovelByID: any = [];
   dataNovelStaff: any = [];
   dataTimeLineByID: any;
+  dateTimeLineShortquaran: any = [];
 
   submitted = false;
   currentDate: any = new Date();
@@ -77,6 +78,20 @@ export class PrintReportComponent implements OnInit {
     }
   }
 
+  convertDate(d: any, i: any): any {
+    const ss: any = d.toString().split('/');
+    const dataDate: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
+    const datai: any = -i;
+    return moment(dataDate).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
+  }
+
+  genDatequarantine(e: any): any {
+    for (let i = 1; i <= 14; i++) {
+      this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').locale('th').add(543,'year').format('DD/MM/YY'));
+    }
+    // console.log(this.dateTimeLineShortquaran);
+  }
+
   async printNovelcorona2(novelID: any) {
     // console.log(novelID);
     const res: any = await this.api.getDataById(novelID);
@@ -100,7 +115,7 @@ export class PrintReportComponent implements OnInit {
     if (res.ok === true && resStaff.ok === true) {
       this.dataNovelByID = res.message[0];
       this.dataNovelStaff = resStaff.message[0];
-        pdfMake.createPdf(this.docReport01()).open();
+      pdfMake.createPdf(this.docReport01()).open();
     } else {
       console.log('error');
     }
@@ -113,6 +128,7 @@ export class PrintReportComponent implements OnInit {
     if (res.ok === true && resStaff.ok === true) {
       this.dataNovelByID = res.message[0];
       this.dataNovelStaff = resStaff.message[0];
+      this.genDatequarantine(moment(this.dataNovelStaff.sdate_quaran).format('YYYY-MM-DD'));
       pdfMake.createPdf(this.docReport02()).open();
     } else {
       console.log('error');
@@ -1975,15 +1991,72 @@ export class PrintReportComponent implements OnInit {
   }
 
   docReport02() {
+    const ptfullname = this.dataNovelByID.novel_pname + this.dataNovelByID.novel_fname + '  ' + this.dataNovelByID.novel_lname;
     const docDefinition = {
       pageSize: 'A4',
       pageOrientation: 'landscape',
       // [left, top, right, bottom]
-      pageMargins: [45, 40, 50, 45],
+      pageMargins: [30, 40, 40, 30],
       content: [
+        {text:  '√', absolutePosition: {x:  this.dataNovelStaff.sars_pt_type === 2 ? 507 : this.dataNovelStaff.sars_pt_type === 3 ? 634 : 542 , y: 32}, style: 'fSize24'},
+        {text: ptfullname, absolutePosition: {x: 120, y: 74}, bold: 'true'},
+        {text: this.dataNovelByID.novel_gender === 1 ? 'หญิง' : 'ชาย', absolutePosition: {x: 265, y: 74}, bold : true},
+        {text: this.dataNovelByID.novel_age, absolutePosition: {x: 333, y: 74}, bold : true},
+        {text: this.dataNovelByID.novel_national, absolutePosition: {x: 409, y: 74}, bold : true},
+        {text: this.dataNovelByID.novel_worker, absolutePosition: {x: 537, y: 74}, bold : true},
+        {text: this.dataNovelByID.novel_phone, absolutePosition: {x: 702, y: 74}, bold : true},
+
+        {text: this.dataNovelByID.novel_number_address, absolutePosition: {x: 190, y: 93}, bold: 'true'},
+        {text: this.dataNovelByID.novel_moo, absolutePosition: {x: 257, y: 93}, bold: 'true'},
+        {text: this.dataNovelByID.novel_soi, absolutePosition: {x: 340, y: 93}, bold: 'true'},
+        {text: this.dataNovelByID.novel_road, absolutePosition: {x: 430, y: 93}, bold: 'true'},
+        {text: this.dataNovelByID.novel_district, absolutePosition: {x: 500, y: 93}, bold: 'true'},
+        {text: this.dataNovelByID.novel_amphur, absolutePosition: {x: 595, y: 93}, bold: 'true'},
+        {text: this.dataNovelByID.novel_province, absolutePosition: {x: 702, y: 93}, bold: 'true'},
+
+        {text: 'สัมผัส/เสี่ยง COVID-19', absolutePosition: {x: 200, y: 111}, bold: 'true'},
+
+        (this.dataNovelStaff.sdate_quaran != null) ? {text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 470, y: 129}, bold: 'true'} : null,
+        (this.dataNovelStaff.edate_quaran != null) ? {text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 695, y: 129}, bold: 'true'} : null,
+        {text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('DD/MM/YY'), absolutePosition: {x: 140, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[0], absolutePosition: {x: 186, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[1], absolutePosition: {x: 230, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[2], absolutePosition: {x: 276, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[3], absolutePosition: {x: 321, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[4], absolutePosition: {x: 365, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[5], absolutePosition: {x: 410, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[6], absolutePosition: {x: 455, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[7], absolutePosition: {x: 501, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[8], absolutePosition: {x: 544, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[9], absolutePosition: {x: 590, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[10], absolutePosition: {x: 634, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[11], absolutePosition: {x: 680, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[12], absolutePosition: {x: 726, y: 204}, style: 'fSize12'},
+        {text: this.dateTimeLineShortquaran[13], absolutePosition: {x: 769, y: 204}, style: 'fSize12'},
+
+        {text: '0', absolutePosition: {x: 155, y: 227}, style: 'fSize12'},
+        {text: '1', absolutePosition: {x: 200, y: 227}, style: 'fSize12'},
+        {text: '2', absolutePosition: {x: 248, y: 227}, style: 'fSize12'},
+        {text: '3', absolutePosition: {x: 290, y: 227}, style: 'fSize12'},
+        {text: '4', absolutePosition: {x: 330, y: 227}, style: 'fSize12'},
+        {text: '5', absolutePosition: {x: 380, y: 227}, style: 'fSize12'},
+        {text: '6', absolutePosition: {x: 428, y: 227}, style: 'fSize12'},
+        {text: '7', absolutePosition: {x: 470, y: 227}, style: 'fSize12'},
+        {text: '8', absolutePosition: {x: 516, y: 227}, style: 'fSize12'},
+        {text: '9', absolutePosition: {x: 560, y: 227}, style: 'fSize12'},
+        {text: '10', absolutePosition: {x: 603, y: 227}, style: 'fSize12'},
+        {text: '11', absolutePosition: {x: 649, y: 227}, style: 'fSize12'},
+        {text: '12', absolutePosition: {x: 694, y: 227}, style: 'fSize12'},
+        {text: '13', absolutePosition: {x: 738, y: 227}, style: 'fSize12'},
+        {text: '14', absolutePosition: {x: 780, y: 227}, style: 'fSize12'},
+
+
+
+
+
         {
           columns: [
-            {width: '15%', text: ''},
+            {width: '20%', text: ''},
             {width: 'auto', text: 'แบบติดตามอาการผู้ที่มีความเสี่ยง/ผู้ที่เดินทางไปประเทศที่มีการระบาดของ COVID-19 /'},
             {width: 'auto',
               table: {
@@ -2018,48 +2091,42 @@ export class PrintReportComponent implements OnInit {
           ],
           columnGap: 3
         },
-        {text: 'โรงพยาบาลราชบุรี', alignment: 'center'},
-        {text: 'ชื่อ - สกุล...................................................................เพศ.........................' +
-            'อายุ...........................ปี สัญชาติ.....................เชื้อชาติ.........................อาชีพ..............................เบอร์โทรศัพท์.........................................'},
-        {text: 'ที่อยู่ที่สามารถติดต่อได้ บ้านเลขที่..............................หมู่................ซอย..................................ถนน...............................' +
-            'ตำบล.................................อำเภอ...............................จังหวัด..............................................'},
-        {text: 'ประวัติ/ความเสี่ยงที่สัมผัสโรค.....................................................................................................................................................'},
-        {text: 'วันที่ Admit...................................................วันที่ Discharge..................................................... วันที่สังเกตอาการ.....................................................วันที่สังเกตอาการครบ 14 วัน...............................................'},
+        {text: 'โรงพยาบาลราชบุรี จังหวัดราชบุรี', alignment: 'center'},
+        {text: 'ชื่อ - สกุล...................................................................เพศ.......................' +
+            'อายุ..................ปี สัญชาติ..................เชื้อชาติ.................อาชีพ...................................................เบอร์โทรศัพท์.........................................', margin: [17, 0]},
+        {text: 'ที่อยู่ที่สามารถติดต่อได้ บ้านเลขที่............................หมู่................ซอย..................................ถนน...............................' +
+            'ตำบล.................................อำเภอ...............................จังหวัด..............................................', margin: [17, 0]},
+        {text: 'ประวัติ/ความเสี่ยงที่สัมผัสโรค.....................................................................................................................................................', margin: [17, 0]},
+        {text: 'วันที่ Admit................................................วันที่ Discharge.................................................. วันที่สังเกตอาการ.......................................................วันที่สังเกตอาการครบ 14 วัน.................................................', margin: [17, 0]},
         {text: ' '},
         {
           table: {
-            widths: [ 100, 38, 602],
+            widths: [ 95, 36, 621],
             body: [[{text: ' ', border: [true, true, true, false]},
-              {text: 'วันที่สัมผัส', margin: [0, 3], style: 'small', alignment: 'center', border: [true, true, true, false]},
+              {text: 'วันที่สัมผัส', margin: [0, 5], style: 'fSize12', alignment: 'center', border: [true, true, true, false]},
               {text: 'วันที่สังเกตุอาการ', alignment: 'center', border: [true, true, true, false], margin: [0, 3]}]]
           }
         },
         {
           table: {
-            widths: [ 100, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38],
+            widths: [ 95, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36],
             body: [
-              [{text: 'อาการและอาการแสดง', alignment: 'center'}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-              [{text: ' ', alignment: 'center'}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+              [{text: 'อาการและอาการแสดง', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+              [{text: ' ', alignment: 'center', border: [true, false, true, true]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
             ]
           }
         },
-        /* ['ไข้ (ระบุ Temp.....ํC)', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['ไอ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['เจ็บคอ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['มีน้ำมูก', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['มีเสมหะ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['หายใจลำบาก', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['หอบเหนื่อย', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['ปวดกล้ามเนื้อ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['ปวดศีรษะ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['ถ่ายเหลว', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['อุณภูมิร่างกายสูงสุด', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['อุณภูมิร่างกายต่ำสุด', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['ชีพจรสูงสุด', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
-            ['Oxygen sat', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],*/
-        {text: 'ชื่อผู้สัมภาษณ์.................................................. หน่วยงาน....................................................นัดรอบ 2..................................................โทร.....032-719600 ต่อ 1284'},
-        /*{image:this.qrcode,fit:[65,65], alignment: 'center'},*/
-        {text: 'คำแนะนำสำหรับการกักตัว', alignment: 'center'},
+        {text: ' '},
+        {text: 'ชื่อผู้สัมภาษณ์............................................................................ หน่วยงาน..............................................................นัดรอบ 2..................................................โทร............................................... ต่อ .........................'},
+        {text: ' '},
+        {columns: [
+            { width: '50%', qr: 'https://www.rajburi.org/images/documents/news/covid19/Advice.jpg', fit: '90', alignment: 'right'},
+
+            {width: 'auto', text: 'คำแนะนำ\nสำหรับการกักตัว', alignment: 'center', style: 'fSize18', margin: [0, 5] },
+          ],
+          columnGap: 10
+        }
+
 
       ],
       defaultStyle: {
@@ -2072,9 +2139,11 @@ export class PrintReportComponent implements OnInit {
           fontSize: 14,
           bold: true
         },
-        small: {fontSize: 12},
-        fontMid: {fontSize: 13},
-        fSize24: {fontSize: 24, bold: true}
+        fSize12: {fontSize: 12},
+        fSize11: {fontSize: 11},
+        fSize13: {fontSize: 13},
+        fSize18: {fontSize: 18},
+        fSize24: {fontSize: 24, bold: 'true'}
       }
     };
     return docDefinition;

@@ -419,12 +419,13 @@ export class FormRecheckComponent implements OnInit {
   async getCluster(): Promise<any>{
     const resCluster = await this.api.getCluster();
     console.log(resCluster);
-    if(resCluster.ok===true){
-      this.dataCluster=resCluster.message;
+    if(resCluster.ok === true){
+      this.dataCluster = resCluster.message;
     }else{
       console.log('error');
     }
   }
+
   get f() {
     return this.generalFrm.controls;
   }
@@ -485,18 +486,19 @@ export class FormRecheckComponent implements OnInit {
     // console.log('this.datecome ', this.datecome);
   }
 
-  getDatequarantine(e: any): any {
-    // console.log(e);
-    this.startquaran = moment(e).format('YYYY-MM-DD');
-    this.genDatequarantine(this.startquaran);
-  }
-
   convertDate(d: any, i: any): any {
     const ss: any = d.toString().split('/');
     const dataDate: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
     const datai: any = -i;
     return moment(dataDate).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
   }
+
+  getDatequarantine(e: any): any {
+    // console.log(e);
+    this.startquaran = moment(e).format('YYYY-MM-DD');
+    this.genDatequarantine(this.startquaran);
+  }
+
 
   genDatequarantine(e: any): any {
     this.dateTimeLinequarantine = [];
