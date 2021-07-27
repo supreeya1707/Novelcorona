@@ -40,6 +40,7 @@ export class ApiService {
       this.httpOptions
     ).toPromise();
   }
+
   insRegis(insRecord: any): any {
     const token = sessionStorage.getItem('token');
     this.httpOptions = {
@@ -51,6 +52,22 @@ export class ApiService {
 
     const url = `${this.baseURL}/novelregis`;
 
+    console.log(url);
+    return this.http.post(url, {data: insRecord},
+      this.httpOptions
+    ).toPromise();
+  }
+
+  insByStaff(insRecord: any): any {
+    const token = sessionStorage.getItem('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer ' + token
+      })
+    };
+
+    const url = `${this.baseURL}/novelstaff`;
     console.log(url);
     return this.http.post(url, {data: insRecord},
       this.httpOptions
@@ -83,6 +100,18 @@ export class ApiService {
     return this.http.get(url, this.httpOptions).toPromise();
   }
 
+  getClusterByType(typeid: any): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/covidcluster/${typeid}/cluster_type`;
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
   getDataByDate(dateinput: any): any {
     // const token = sessionStorage.getByCid('token');
     this.httpOptions = {
@@ -95,6 +124,7 @@ export class ApiService {
 
     return this.http.get(url, this.httpOptions).toPromise();
   }
+
 
   getTimeLineById(novelid: any): any {
     // const token = sessionStorage.getTimeLineById('token');

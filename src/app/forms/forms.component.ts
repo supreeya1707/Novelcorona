@@ -64,7 +64,7 @@ export class FormsComponent implements OnInit {
   datatreat: any;
   datevac1: any;
   datevac2: any;
-  datacome: any;
+  datecome: any;
   d: any;
   fistHosp = 'โรงพยาบาลราชบุรี';
   fistChw = 'ราชบุรี';
@@ -235,8 +235,8 @@ export class FormsComponent implements OnInit {
 
   getDatecome(e: any): any {
     // console.log(e);
-    this.datacome = moment(e).format('YYYY-MM-DD');
-    // console.log(this.datacome);
+    this.datecome = moment(e).format('YYYY-MM-DD');
+    // console.log(this.datecome);
   }
 
   convertDate(d: any, i: any): any {
@@ -350,7 +350,7 @@ export class FormsComponent implements OnInit {
     data.novel_comefrom_31 = this.riskFrm.value.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
-    data.novel_date_come = (this.datacome != null) ? moment(this.datacome).format('YYYY-MM-DD') : null;
+    data.novel_date_come = (this.datecome != null) ? moment(this.datecome).format('YYYY-MM-DD') : null;
     data.novel_transportation = this.come_plane;
     data.novel_round_tran = this.come_round;
     data.novel_number_seat = this.come_seat;
