@@ -5,6 +5,38 @@ import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {listLocales} from 'ngx-bootstrap/chronos';
 import Swal from 'sweetalert2';
 import {ApiService} from '../../services/api.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import pdfMakeUnicode from 'pdfmake-unicode';
+import {right} from '@popperjs/core';
+interface Doctor {
+  value: string;
+  viewValue: string;
+}
+
+// this part is crucial
+pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.fonts = {
+  THSarabunNew: {
+    normal: 'THSarabunNew.ttf',
+    bold: 'THSarabunNew Bold.ttf',
+    italics: 'THSarabunNew Italic.ttf',
+    bolditalics: 'THSarabunNew BoldItalic.ttf'
+  },
+  Fontello: {
+    normal: 'fontello.ttf',
+    bold: 'fontello.ttf',
+    italics: 'fontello.ttf',
+    bolditalics: 'fontello.ttf'
+  },
+  Roboto: {
+    normal: 'Roboto Regular.ttf',
+    bold: 'Roboto Medium.ttf',
+    italics: 'Roboto Italic.ttf',
+    bolditalics: 'Roboto MediumItalic.ttf'
+  }
+};
 
 @Component({
   selector: 'app-forms',
@@ -152,7 +184,11 @@ export class FormRecheckComponent implements OnInit {
   wearmask: any;
   radioPlace: any;
   cluster: any;
-
+  qrcode:any;
+  dataDoctor: Doctor[] = [
+    {value: 'นพ.ปิยะณัฐ บุญประดิษฐ์', viewValue: 'นพ.ปิยะณัฐ บุญประดิษฐ์'},
+    {value: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล', viewValue: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล'}
+  ];
 
 
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
@@ -163,6 +199,17 @@ export class FormRecheckComponent implements OnInit {
     this.localeService.use(this.locale);
     this.novelID = history.state.novelid;
     // console.log(this.novelID);
+    const toDataURL = url => fetch(url)
+      .then(response => response.blob())
+      .then(blob => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      }));
+    toDataURL('../assets/picture/qrcode.png') .then(dataUrl => {
+      this.qrcode = 'data:image;base64,' + dataUrl;
+    });
 
     this.generalFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
@@ -222,7 +269,7 @@ export class FormRecheckComponent implements OnInit {
     });
 
     this.getData(this.novelID);
-    this.getCluster(1);
+    this.getCluster();
 
   }
 
@@ -369,12 +416,15 @@ export class FormRecheckComponent implements OnInit {
     }
   }
 
-  async getCluster(type: any): Promise<any>{
-    const resCluster = await this.api.getClusterByType(type);
+  async getCluster(): Promise<any>{
+    const resCluster = await this.api.getCluster();
     console.log(resCluster);
+    if(resCluster.ok===true){
+      this.dataCluster=resCluster.message;
+    }else{
+      console.log('error');
+    }
   }
-
-
   get f() {
     return this.generalFrm.controls;
   }
@@ -678,6 +728,127 @@ export class FormRecheckComponent implements OnInit {
 
     const resUpdateTL: any = await this.api.updateTLData(this.novelID, info);
     return  resUpdateTL.ok;
+  } testReport(){
+    this.generatePdf('open');
   }
+
+
+  generatePdf(action) {
+    const documentDefinition = this.getDocumentDefinition();
+
+    switch (action) {
+      case 'open':
+        pdfMake.createPdf(documentDefinition).open();
+        break;
+      case 'print':
+        pdfMake.createPdf(documentDefinition).print();
+        break;
+
+      default:
+        pdfMake.createPdf(documentDefinition).open();
+        break;
+    }
+  }
+
+
+  getDocumentDefinition() {
+    const docDefinition = {
+      pageSize: 'A4',
+      pageOrientation: 'landscape',
+      // [left, top, right, bottom]
+      pageMargins: [50, 40, 50, 40],
+      content: [
+        {
+          columns: [
+            {width: '15%', text: ''},
+            {width: 'auto', text: 'แบบติดตามอาการผู้ที่มีความเสี่ยง/ผู้ที่เดินทางไปประเทศที่มีการระบาดของ COVID-19 /'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'PUI'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'High Risk Contract'},
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'Low Risk'},
+          ],
+          columnGap: 3
+        },
+        {text: 'โรงพยาบาลราชบุรี',alignment: 'center'},
+        {text: 'ชื่อ - สกุล...................................................................เพศ.........................' +
+            'อายุ...........................ปี สัญชาติ.....................เชื้อชาติ.........................อาชีพ..............................เบอร์โทรศัพท์.........................................'},
+        {text: 'ที่อยู่ที่สามารถติดต่อได้ บ้านเลขที่..............................หมู่................ซอย..................................ถนน...............................' +
+            'ตำบล.................................อำเภอ...............................จังหวัด..............................................'},
+        {text: 'ประวัติ/ความเสี่ยงที่สัมผัสโรค.....................................................................................................................................................'},
+        {text: 'วันที่ Admit...................................................วันที่ Discharge..................................................... วันที่สังเกตอาการ.....................................................วันที่สังเกตอาการครบ 14 วัน...............................................'},
+        {
+          style: 'tableExample',
+          table: {
+            body: [
+              ['อาการและอาการแสดง', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['ไข้ (ระบุ Temp.....ํC)', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['ไอ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['เจ็บคอ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['มีน้ำมูก', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['มีเสมหะ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['หายใจลำบาก', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['หอบเหนื่อย', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['ปวดกล้ามเนื้อ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['ปวดศีรษะ', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['ถ่ายเหลว', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['อุณภูมิร่างกายสูงสุด', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['อุณภูมิร่างกายต่ำสุด', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['ชีพจรสูงสุด', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              ['Oxygen sat', 'Column 2', 'Column 3','Column 4', 'Column 5', 'Column 6','Column 7', 'Column 8', 'Column 9','Column 10', 'Column 11', 'Column 12'],
+              // ['One value goes here', 'Another one here', 'OK?']
+            ]
+          }
+        },
+        {text:'',columnGap: 5},
+        {text: 'ชื่อผู้สัมภาษณ์.................................................. หน่วยงาน....................................................นัดรอบ 2..................................................โทร.....032-719600 ต่อ 1284'},
+        {image:this.qrcode,fit:[65,65],alignment: 'center'},
+       {text: 'คำแนะนำสำหรับการกักตัว',alignment: 'center'},
+
+      ],
+      defaultStyle: {
+        font: 'THSarabunNew',
+        fontSize: 14,
+        lineHeight: 1.5
+      },
+      styles: {
+        title: {
+          fontSize: 14,
+          bold: true
+        },
+        small: {fontSize: 12},
+        fontMid: {fontSize: 13},
+        fSize24: {fontSize: 24, bold: true}
+      }
+    };
+    return docDefinition;
+  }
+
+
 
 }
