@@ -221,8 +221,8 @@
                 <label>วัน /เดือน/ ปีเกิด</label>
                 <div class="input-group">
                   <input class="form-control" #datepickerMDY="bsDatepicker"
-                         (bsValueChange)="getBirthday($event)"
-                         formControlName="birthday" bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                         formControlName="birthday" (bsValueChange)="getBirthday($event)"
+                         bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
                   <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -446,7 +446,7 @@
             <div class="input-group">
               <input class="form-control" (bsValueChange)="getDate($event)" #datepickerMDY="bsDatepicker"
                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-                     [value]="startsick" [bsValue]="currentDate">
+                     [value]="startsick">
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -458,7 +458,7 @@
             <label>วันที่เริ่มรักษา</label>
             <div class="input-group">
               <input class="form-control" #datepickerMDY="bsDatepicker" (bsValueChange)="getDatetreat($event)"
-                     bsDatepicker [value]="starttreat" [bsValue]="currentDate"
+                     bsDatepicker [value]="starttreat"
                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
               <div class="input-group-append">
                 <span class="input-group-text">
@@ -959,7 +959,7 @@
         </div>
         <div class="row mt-4">
           <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[8]}} <input type="hidden" name="dateTimeLine8" value="{{dateTimeLineShort[8]}}">
+            วันที่ {{dateTimeLineShort[8] | thaiDate: 'short'}}<input type="hidden" name="dateTimeLine8" value="{{dateTimeLineShort[8]}}">
           </div>
           <div class="col-md-10">
             <textarea class="form-control" name="textTimeLine0" id="textTimeLine8"
@@ -1109,7 +1109,10 @@
           <div class="col-md-4 ">
             <label>ครั้งที่ 1 วันที่ได้รับ </label>
             <div class="input-group">
-              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac1">
+<!--              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac1">-->
+              <input class="form-control" (bsValueChange)="getDateVac1($event)" #datepickerMDY="bsDatepicker"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                     [value]="datevac1">
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -1131,7 +1134,10 @@
           <div class=" col-md-4 ">
             <label>ครั้งที่ 2 วันที่ได้รับ </label>
             <div class="input-group">
-              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac2">
+<!--              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac2">-->
+              <input class="form-control" (bsValueChange)="getDateVac2($event)" #datepickerMDY="bsDatepicker"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                     [value]="datevac2">
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
