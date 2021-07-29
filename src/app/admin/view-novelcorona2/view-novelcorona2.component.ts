@@ -50,7 +50,7 @@ export class ViewNovelcorona2Component implements OnInit {
   async dateChange(e: any): Promise<any> {
     const dateinput = moment(e).format('YYYY-MM-DD');
     const rs: any = await this.api.getDataByDateStaff(dateinput);
-    console.log(rs);
+    // console.log(rs);
     if (rs.ok) {
       this.dataNovel = rs.message;
     } else {

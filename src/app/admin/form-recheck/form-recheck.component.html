@@ -444,26 +444,26 @@
           <div class="col-md-6 mt-4">
             <label>วันที่เริ่มป่วย</label>
             <div class="input-group">
-              <input class="form-control" (bsValueChange)="getDate($event)" #datepickerMDY="bsDatepicker"
-                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-                     [value]="startsick">
+              <input class="form-control"
+                     [value]="startsick" (bsValueChange)="getSsick($event)" #datepickerMDY01="bsDatepicker"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
               <div class="input-group-append">
                 <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                  <i class="fa fa-calendar" (click)="datepickerMDY01.toggle()"
+                     [attr.aria-expanded]="datepickerMDY01.isOpen"></i></span>
               </div>
             </div>
           </div>
           <div class="col-md-6 mt-4">
             <label>วันที่เริ่มรักษา</label>
             <div class="input-group">
-              <input class="form-control" #datepickerMDY="bsDatepicker" (bsValueChange)="getDatetreat($event)"
+              <input class="form-control" #datepickerMDY02="bsDatepicker" (bsValueChange)="getDatetreat($event)"
                      bsDatepicker [value]="starttreat"
                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
               <div class="input-group-append">
                 <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                  <i class="fa fa-calendar" (click)="datepickerMDY02.toggle()"
+                     [attr.aria-expanded]="datepickerMDY02.isOpen"></i></span>
               </div>
             </div>
           </div>
@@ -1110,13 +1110,12 @@
             <label>ครั้งที่ 1 วันที่ได้รับ </label>
             <div class="input-group">
 <!--              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac1">-->
-              <input class="form-control" (bsValueChange)="getDateVac1($event)" #datepickerMDY="bsDatepicker"
-                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-                     [value]="datevac1">
+              <input class="form-control" (bsValueChange)="getDateVac1($event)" #datepickerVac1="bsDatepicker"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [value]="vac1">
               <div class="input-group-append">
                 <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                  <i class="fa fa-calendar" (click)="datepickerVac1.toggle()"
+                     [attr.aria-expanded]="datepickerVac1.isOpen"></i></span>
               </div>
             </div>
           </div>
@@ -1135,13 +1134,13 @@
             <label>ครั้งที่ 2 วันที่ได้รับ </label>
             <div class="input-group">
 <!--              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac2">-->
-              <input class="form-control" (bsValueChange)="getDateVac2($event)" #datepickerMDY="bsDatepicker"
+              <input class="form-control" (bsValueChange)="getDateVac2($event)" #datepickerVac2="bsDatepicker"
                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
-                     [value]="datevac2">
+                     [value]="vac2">
               <div class="input-group-append">
                 <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                  <i class="fa fa-calendar" (click)="datepickerVac2.toggle()"
+                     [attr.aria-expanded]="datepickerVac2.isOpen"></i></span>
               </div>
             </div>
           </div>
