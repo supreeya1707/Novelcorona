@@ -16,6 +16,9 @@ export class ThaiDatePipe implements PipeTransform {
     } else if (args === 'short') {
       const thDate = `${moment(value).locale('th').add(543, 'year').format('DD MMM YY')} `;
       return thDate;
+    } else if (args === 'short2') {
+      const thDate = `${moment(value).locale('th').add(543, 'year').format('DD/MM/YYYY')} `;
+      return thDate;
     }else if (args === 'thdatetime') {
       const thDate = `${moment(value).locale('th').add(-7, 'hours').add(543, 'year').format('DD MMM YY HH:mm')} `;
       return thDate;

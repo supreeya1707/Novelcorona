@@ -9,6 +9,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
 import {right} from '@popperjs/core';
+import {Router} from "@angular/router";
 interface Doctor {
   value: string;
   viewValue: string;
@@ -106,6 +107,7 @@ export class FormRecheckComponent implements OnInit {
   starttreat: any;
   vac1: any;
   vac2: any;
+  edate: any;
 
   dateSsick: any;
   datatreat: any;
@@ -200,7 +202,7 @@ export class FormRecheckComponent implements OnInit {
 
 
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
-              @Inject('baseURL') private baseURL: any) {}
+              @Inject('baseURL') private baseURL: any,  private router: Router) {}
 
 
   ngOnInit(): void {
@@ -475,44 +477,30 @@ export class FormRecheckComponent implements OnInit {
     return this.riskFrm.controls;
   }
 
-  resetForm(formGroup: FormGroup) {
-    let control: AbstractControl = null;
-    formGroup.reset();
-    formGroup.markAsUntouched();
-    Object.keys(formGroup.controls).forEach((name) => {
-      control = formGroup.controls[name];
-      control.setErrors(null);
-    });
-  }
+
 
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
       .then(() => {
-        window.location.reload();
+        this.router.navigateByUrl('/admin/printReport');
       });
   }
 
   errorNotification() {
-    Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!', 'error')
-      .then(() => {
-        window.location.reload();
-        // this.router.navigateByUrl('/date');
-      });
+    Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!', 'error');
   }
 
  getSsick(e: any): any {
-    console.log('this.startsick (e): ', e);
+    // console.log('this.startsick (e): ', e);
     this.dateSsick = moment(e).format('YYYY-MM-DD');
     this.genDateTimeLine(this.dateSsick);
-    console.log('this.dateSsick : ', this.dateSsick);
+    // console.log('this.dateSsick : ', this.dateSsick);
     // console.log(this.dateTimeLineShort);
   }
 
   getBirthday(e: any): any {
-    console.log('this.birthday (e) :', e);
+    // console.log('this.birthday (e) :', e);
     this.birthday = moment(e).format('YYYY-MM-DD');
-
-    // console.log(this.datatreat);
   }
 
   getDateVac1(e: any): any {
@@ -526,7 +514,7 @@ export class FormRecheckComponent implements OnInit {
   getDatetreat(e: any): any {
     // console.log(e);
     this.datatreat = moment(e).format('YYYY-MM-DD');
-    console.log('this.datatreat : ', this.datatreat);
+    // console.log('this.datatreat : ', this.datatreat);
   }
 
   getDatecome(e: any): any {
@@ -535,17 +523,29 @@ export class FormRecheckComponent implements OnInit {
     // console.log('this.datecome ', this.datecome);
   }
 
-  convertDate(d: any, i: any): any {
+  // convertDate(d: any, i: any): any {
+  //   const ss: any = d.toString().split('/');
+  //   const dateString: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
+  //   const datai: any = -i;
+  //   return moment(dateString).add(datai, 'day').add(543, 'year').format('DD/MMM/YYYY');
+  // }
+
+  convertDateQuarantin(d: any, i: any): any {
     const ss: any = d.toString().split('/');
-    const startsick: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
-    const datai: any = -i;
-    return moment(startsick).locale('th').add(datai, 'day').add('year', 543).format('DD MMMM YYYY');
+    const dateString: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
+    const datai: any = +i;
+    return moment(dateString).add(datai, 'day').add(543, 'year').format('DD/MM/YYYY');
   }
 
   getDatequarantine(e: any): any {
-    // console.log(e);
+    console.log('this.startquaran (e) :', e);
     this.startquaran = moment(e).format('YYYY-MM-DD');
-    this.genDatequarantine(this.startquaran);
+    this.genDatequarantine(e);
+  }
+
+  getEDatequarantine(e: any): any {
+    // console.log(e);
+    this.endquaran = moment(e).format('YYYY-MM-DD');
   }
 
 
@@ -553,17 +553,22 @@ export class FormRecheckComponent implements OnInit {
     this.dateTimeLinequarantine = [];
     this.dateTimeLineShortquaran = [];
     for (let i = 1; i <= 14; i++) {
-      this.dateTimeLinequarantine.push(this.convertDate(e, i));
-      this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').format('DD/MM/YYYY'));
-      // console.log(this.dateTimeLineShort);
+      this.dateTimeLinequarantine.push(this.convertDateQuarantin(e, i));
+      this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').format('YYYY-MM-DD'));
     }
+    // console.log(this.dateTimeLinequarantine);
+
+    this.edate = this.dateTimeLinequarantine[13];
+    this.endquaran = this.dateTimeLineShortquaran[13];
+    // console.log('this.edate : ', this.edate);
+    // console.log('this.endquaran : ', this.endquaran);
   }
 
   genDateTimeLine(e: any): any {
-    this.dateTimeLine = [];
+    // this.dateTimeLine = [];
     this.dateTimeLineShort = [];
     for (let i = 1; i <= 14; i++) {
-      this.dateTimeLine.push(this.convertDate(e, i));
+      // this.dateTimeLine.push(this.convertDate(e, i));
       this.dateTimeLineShort.push(moment(e).add(-i, 'day').format('YYYY-MM-DD'));
       // console.log(this.dateTimeLineShort);
     }
@@ -598,7 +603,7 @@ export class FormRecheckComponent implements OnInit {
     data.novel_id = this.novelID;
     data.riskconnect = this.cluster;
     data.wearmask = this.wearmask;
-    data.radioPlace = this.radioPlace;
+    data.place = this.radioPlace;
 
     data.sars1_date = (this.dateSARS1 != null) ? moment(this.dateSARS1).format('YYYY-MM-DD') : null;
     data.sars1_type = this.typeSAR1;

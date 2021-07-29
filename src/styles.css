@@ -384,9 +384,9 @@ legend {
   white-space: normal
 }
 
-swal2-popup{
-  font-family: 'prompt-medium';
-}
+
+
+
 
 @media (max-width: 1200px) {
   legend {
@@ -85378,7 +85378,8 @@ body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown):not(.sweetalert
 
 .swal2-popup {
   padding: 2rem;
-  border-radius: .85rem
+  border-radius: .85rem;
+  font-family: 'prompt-medium' !important;
 }
 
 .swal2-popup .swal2-icon {
@@ -85387,14 +85388,14 @@ body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown):not(.sweetalert
 
 .swal2-popup .swal2-title {
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   margin: 2rem 0 0 0;
   color: #181c32
 }
 
 .swal2-popup .swal2-content {
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   margin-top: 1.5rem;
   color: #3f4254
 }
