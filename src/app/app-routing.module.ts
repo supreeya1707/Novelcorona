@@ -4,6 +4,7 @@ import {FormsComponent} from './forms/forms.component';
 import {ReportComponent} from './report/report.component';
 import {RegisterComponent} from './register/register.component';
 import {FormRecheckComponent} from "./admin/form-recheck/form-recheck.component";
+import {PrintReportComponent} from "./admin/print-report/print-report.component";
 
 
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'report', component: ReportComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'formRecheck', component: FormRecheckComponent},
+  // {path: 'printReport', component: PrintReportComponent},
   // {path:'**',redirectTo:'date'}
 ];
 
