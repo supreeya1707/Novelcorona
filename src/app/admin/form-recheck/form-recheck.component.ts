@@ -9,8 +9,14 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
 import {right} from '@popperjs/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+
 interface Doctor {
+  value: string;
+  viewValue: string;
+}
+
+interface Pname {
   value: string;
   viewValue: string;
 }
@@ -53,10 +59,12 @@ export class FormRecheckComponent implements OnInit {
   dataNovel: any[];
   dataTL: any[];
   dataCluster: any = [];
+  dataContact: any = [];
   locale = 'th-be';
-  currentDate = new Date();
 
+  pname: any;
 
+  // currentDate = new Date();
 
   radioGender: any;
   radioPreg: any;
@@ -136,9 +144,7 @@ export class FormRecheckComponent implements OnInit {
   congential: any;
   weight: any;
   high: any;
-
-
-
+  contactid: any;
 
   namevac1: any;
   namevac2: any;
@@ -154,6 +160,7 @@ export class FormRecheckComponent implements OnInit {
   come_round: any;
   come_seat: any;
   assign_touch: any;
+  assign_contract: any;
   assign_etc: any;
   assign_station: any;
   assign_position: any;
@@ -198,6 +205,14 @@ export class FormRecheckComponent implements OnInit {
   dataDoctor: Doctor[] = [
     {value: 'นพ.ปิยะณัฐ บุญประดิษฐ์', viewValue: 'นพ.ปิยะณัฐ บุญประดิษฐ์'},
     {value: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล', viewValue: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล'}
+  ];
+
+  dataPname: Pname[] = [
+    {value: 'นาย', viewValue: 'นาย'},
+    {value: 'นาง', viewValue: 'นาง'},
+    {value: 'นางสาว', viewValue: 'นางสาว'},
+    {value: 'ด.ช.', viewValue: 'ด.ช.'},
+    {value: 'ด.ญ.', viewValue: 'ด.ญ.'},
   ];
 
 
@@ -283,6 +298,7 @@ export class FormRecheckComponent implements OnInit {
 
     this.getData(this.novelID);
     this.getCluster();
+    this.getContact();
 
   }
 
@@ -292,7 +308,8 @@ export class FormRecheckComponent implements OnInit {
       // console.log(resDataNovel.message);
       this.dataNovel = resDataNovel.message[0];
 
-      this.generalFrm.get('pname').setValue(this.dataNovel['novel_pname']);
+      // this.generalFrm.get('pname').setValue(this.dataNovel['novel_pname']);
+      this.pname = this.dataNovel['novel_pname'];
       this.generalFrm.get('fname').setValue(this.dataNovel['novel_fname']);
       this.generalFrm.get('lname').setValue(this.dataNovel['novel_lname']);
       this.generalFrm.get('cid').setValue(this.dataNovel['novel_cid']);
@@ -388,6 +405,8 @@ export class FormRecheckComponent implements OnInit {
       this.radionear = this.dataNovel['novel_touch_his33'];
       this.radiotouch = this.dataNovel['novel_his_touch_34'];
       this.assign_touch = this.dataNovel['novel_assigntouch_34'];
+      this.contactid = this.dataNovel['novel_contact'];
+
       this.radiovisitor = this.dataNovel['novel_tourist_35'];
       this.radiocrowded = this.dataNovel['novel_manyperson_36'];
       this.assign_station = this.dataNovel['novel_assign_station_36'];
@@ -467,6 +486,16 @@ export class FormRecheckComponent implements OnInit {
     }
   }
 
+  async getContact(): Promise<any>{
+    const resContact = await this.api.getContact();
+    // console.log(resContact);
+    if (resContact.ok === true){
+      this.dataContact = resContact.message;
+    }else{
+      console.log('error');
+    }
+  }
+
   get f() {
     return this.generalFrm.controls;
   }
@@ -476,8 +505,6 @@ export class FormRecheckComponent implements OnInit {
   get f3() {
     return this.riskFrm.controls;
   }
-
-
 
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
@@ -490,7 +517,7 @@ export class FormRecheckComponent implements OnInit {
     Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!', 'error');
   }
 
- getSsick(e: any): any {
+  getSsick(e: any): any {
     // console.log('this.startsick (e): ', e);
     this.dateSsick = moment(e).format('YYYY-MM-DD');
     this.genDateTimeLine(this.dateSsick);
@@ -530,7 +557,7 @@ export class FormRecheckComponent implements OnInit {
   //   return moment(dateString).add(datai, 'day').add(543, 'year').format('DD/MMM/YYYY');
   // }
 
-  convertDateQuarantin(d: any, i: any): any {
+  convertDateQuarantine(d: any, i: any): any {
     const ss: any = d.toString().split('/');
     const dateString: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
     const datai: any = +i;
@@ -548,12 +575,11 @@ export class FormRecheckComponent implements OnInit {
     this.endquaran = moment(e).format('YYYY-MM-DD');
   }
 
-
   genDatequarantine(e: any): any {
     this.dateTimeLinequarantine = [];
     this.dateTimeLineShortquaran = [];
     for (let i = 1; i <= 14; i++) {
-      this.dateTimeLinequarantine.push(this.convertDateQuarantin(e, i));
+      this.dateTimeLinequarantine.push(this.convertDateQuarantine(e, i));
       this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').format('YYYY-MM-DD'));
     }
     // console.log(this.dateTimeLinequarantine);
@@ -713,7 +739,7 @@ export class FormRecheckComponent implements OnInit {
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
     // data.novel_date_come = (this.riskFrm.value.datecome != null) ? moment(this.riskFrm.value.datecome).format('YYYY-MM-DD') : null;
-    data.novel_date_come = (this.datecome != null) ? moment(this.datecome).format('YYYY-MM-DD') : null;
+    // data.novel_date_come = (this.datecome != null) ? moment(this.datecome).format('YYYY-MM-DD') : null;
     data.novel_transportation = this.come_plane;
     data.novel_round_tran = this.come_round;
     data.novel_number_seat = this.come_seat;
@@ -722,6 +748,7 @@ export class FormRecheckComponent implements OnInit {
     data.novel_touch_his33 = this.riskFrm.value.radionear;
     data.novel_his_touch_34 = this.riskFrm.value.radiotouch;
     data.novel_assigntouch_34 = this.assign_touch;
+    data.novel_contact = this.contactid;
     data.novel_assign_station_36 = this.assign_station;
 
     data.novel_tourist_35 = this.riskFrm.value.radiovisitor;

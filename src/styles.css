@@ -385,9 +385,6 @@ legend {
 }
 
 
-
-
-
 @media (max-width: 1200px) {
   legend {
     font-size: calc(1.275rem + .3vw)

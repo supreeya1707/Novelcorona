@@ -17,6 +17,12 @@ pdfMake.fonts = {
     italics: 'THSarabunNew Italic.ttf',
     bolditalics: 'THSarabunNew BoldItalic.ttf'
   },
+  THSarabunIT: {
+    normal: 'THSarabunIT-.ttf',
+    bold: 'THSarabunIT-.ttf',
+    italics: 'THSarabunIT-.ttf',
+    bolditalics: 'THSarabunIT-.ttf'
+  },
   Fontello: {
     normal: 'fontello.ttf',
     bold: 'fontello.ttf',
@@ -1973,7 +1979,7 @@ export class PrintReportComponent implements OnInit {
 
       ],
       defaultStyle: {
-        font: 'THSarabunNew',
+        font: 'THSarabunIT',
         fontSize: 14,
         lineHeight: 0.9
       },

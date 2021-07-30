@@ -6,6 +6,12 @@ import {listLocales} from 'ngx-bootstrap/chronos';
 import Swal from 'sweetalert2';
 import {ApiService} from '../services/api.service';
 
+interface Pname {
+  value: string;
+  viewValue: string;
+}
+
+
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
@@ -16,6 +22,8 @@ export class FormsComponent implements OnInit {
   riskFrm: any;
   submitted = false;
   btndisble = false;
+
+  dataContact: any = [];
 
   radioGender: any;
   radioPreg: any;
@@ -55,7 +63,6 @@ export class FormsComponent implements OnInit {
   radiotest: any = 0;
   dateTimeLine: any = [];
   dateTimeLineShort: any = [];
-  Addressetc: any;
   sDate: any;
   dateselect = moment().format('yyyy-MM-DD');
   dateStart = moment().locale('th').add(543, 'year').format('DD/MM/yyyy');
@@ -93,6 +100,7 @@ export class FormsComponent implements OnInit {
   come_round: any;
   come_seat: any;
   assign_touch: any;
+  assign_contract: any;
   assign_etc: any;
   assign_station: any;
   assign_position: any;
@@ -113,6 +121,14 @@ export class FormsComponent implements OnInit {
   desDay13: any;
   desDay14: any;
   date: any;
+
+  dataPname: Pname[] = [
+    {value: 'นาย', viewValue: 'นาย'},
+    {value: 'นาง', viewValue: 'นาง'},
+    {value: 'นางสาว', viewValue: 'นางสาว'},
+    {value: 'ด.ช.', viewValue: 'ด.ช.'},
+    {value: 'ด.ญ.', viewValue: 'ด.ญ.'},
+  ];
 
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
               @Inject('baseURL') private baseURL: any) {
@@ -174,12 +190,13 @@ export class FormsComponent implements OnInit {
       radiolabtest: [null, Validators.compose([Validators.required])]
     });
 
-
     this.timelineFrm  = this.formBuilder.group({
       desDay1: [null, Validators.compose([Validators.required])],
       desDay2: [null, Validators.compose([Validators.required])],
       desDay3: [null, Validators.compose([Validators.required])]
     });
+
+    this.getContact();
 
   }
 
@@ -194,6 +211,17 @@ export class FormsComponent implements OnInit {
   get f3() {
     return this.riskFrm.controls;
   }
+
+  async getContact(): Promise<any>{
+    const resContact = await this.api.getContact();
+    console.log(resContact);
+    if (resContact.ok === true){
+      this.dataContact = resContact.message;
+    }else{
+      console.log('error');
+    }
+  }
+
 
   resetForm(formGroup: FormGroup) {
     let control: AbstractControl = null;
@@ -359,6 +387,7 @@ export class FormsComponent implements OnInit {
     data.novel_touch_his33 = this.riskFrm.value.radionear;
     data.novel_his_touch_34 = this.riskFrm.value.radiotouch;
     data.novel_assigntouch_34 = this.assign_touch;
+    data.assign_contract = this.assign_contract;
     data.novel_assign_station_36 = this.assign_station;
 
     data.novel_tourist_35 = this.riskFrm.value.radiovisitor;
