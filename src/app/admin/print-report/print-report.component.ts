@@ -7,6 +7,9 @@ import * as moment from 'moment';
 import {ApiService} from '../../services/api.service';
 import {right} from '@popperjs/core';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
+import {style} from "@angular/animations";
+
+
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -1996,7 +1999,7 @@ export class PrintReportComponent implements OnInit {
       pageSize: 'A4',
       pageOrientation: 'landscape',
       // [left, top, right, bottom]
-      pageMargins: [30, 40, 30, 30],
+      pageMargins: [30, 30, 28, 30],
       content: [
         {text:  '√', absolutePosition: {x:  this.dataNovelStaff.sars_pt_type === 2 ? 507 : this.dataNovelStaff.sars_pt_type === 3 ? 634 : 542 , y: 32}, style: 'fSize24'},
         {text: ptfullname, absolutePosition: {x: 120, y: 74}, bold: 'true'},
@@ -2106,17 +2109,247 @@ export class PrintReportComponent implements OnInit {
         {
           table: {
             widths: [ 95, 36, 621],
-            body: [[{text: ' ', border: [true, true, true, false]},
+            body: [[
+              {text: ' ', border: [true, true, true, false]},
               {text: 'วันที่สัมผัส', margin: [0, 5], style: 'fSize12', alignment: 'center', border: [true, true, true, false]},
               {text: 'วันที่สังเกตุอาการ', alignment: 'center', border: [true, true, true, false], margin: [0, 3]}]]
           }
         },
         {
           table: {
-            widths: [ 95, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36],
+            widths: [ 95, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36],
             body: [
-              [{text: 'อาการและอาการแสดง', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-              [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+              [{text: 'อาการและอาการแสดง', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+              [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+              // [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+              [{text: '', alignment: 'center', margin: [0, 5], style: 'fSize10',  border: [true, false, true, false]},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},
+                {text: 'มี', style: 'fSize10',alignment: 'center'},
+                {text: 'ไม่มี', style: 'fSize10',alignment: 'center'},],
+              // [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+              // [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'ไข้(ระบุ Temp....ํC)'}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              // {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},
+              //   {text: '', style: 'fSize12',alignment: 'center'},],
+              // // [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+              // // [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'ไอ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'เจ็บคอ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'มีน้ำมูก', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'มีเสมหะ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'หายใจลำบาก', alignment: 'left', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'หอบเหนื่อย', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'ปวดกล้ามเนื้อ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'ปวดศีรษะ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'ถ่ายเหลว', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'อุณภูมิร่างกายสูงสุด', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'อุณภูมิร่างกายต่ำสุด', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'ชีพจรสูงสุด', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
+            ]
+          }
+        },
+        {
+          table: {
+            widths: [ 95, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5, 13.5,13.5],
+            body: [
+
+              [
+                {text: 'Oxygen sat', border: [true, true, true, true]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
             ]
           }
         },
@@ -2144,6 +2377,7 @@ export class PrintReportComponent implements OnInit {
           fontSize: 14,
           bold: true
         },
+        fSize10: {fontSize: 10},
         fSize12: {fontSize: 12},
         fSize11: {fontSize: 11},
         fSize13: {fontSize: 13},
