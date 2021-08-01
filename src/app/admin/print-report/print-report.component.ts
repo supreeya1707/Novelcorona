@@ -20,12 +20,6 @@ pdfMake.fonts = {
     italics: 'THSarabunNew Italic.ttf',
     bolditalics: 'THSarabunNew BoldItalic.ttf'
   },
-  THSarabunIT: {
-    normal: 'THSarabunIT-.ttf',
-    bold: 'THSarabunIT-.ttf',
-    italics: 'THSarabunIT-.ttf',
-    bolditalics: 'THSarabunIT-.ttf'
-  },
   Fontello: {
     normal: 'fontello.ttf',
     bold: 'fontello.ttf',
@@ -1982,7 +1976,7 @@ export class PrintReportComponent implements OnInit {
 
       ],
       defaultStyle: {
-        font: 'THSarabunIT',
+        font: 'THSarabunNew',
         fontSize: 14,
         lineHeight: 0.9
       },
@@ -2005,7 +1999,7 @@ export class PrintReportComponent implements OnInit {
       pageSize: 'A4',
       pageOrientation: 'landscape',
       // [left, top, right, bottom]
-      pageMargins: [30, 30, 28, 30],
+      pageMargins: [30, 30, 30, 20],
       content: [
         {text:  '√', absolutePosition: {x:  this.dataNovelStaff.sars_pt_type === 2 ? 507 : this.dataNovelStaff.sars_pt_type === 3 ? 634 : 542 , y: 32}, style: 'fSize24'},
         {text: ptfullname, absolutePosition: {x: 120, y: 74}, bold: 'true'},
@@ -2111,23 +2105,23 @@ export class PrintReportComponent implements OnInit {
             'ตำบล.................................อำเภอ...............................จังหวัด..............................................', margin: [17, 0]},
         {text: 'ประวัติ/ความเสี่ยงที่สัมผัสโรค.....................................................................................................................................................', margin: [17, 0]},
         {text: 'วันที่ Admit................................................วันที่ Discharge.................................................. วันที่สังเกตอาการ.......................................................วันที่สังเกตอาการครบ 14 วัน.................................................', margin: [17, 0]},
-        {text: ' '},
+         // {text: ' '},
         {
           table: {
             widths: [ 95, 36, 621],
             body: [[
               {text: ' ', border: [true, true, true, false]},
-              {text: 'วันที่สัมผัส', margin: [0, 5], style: 'fSize12', alignment: 'center', border: [true, true, true, false]},
-              {text: 'วันที่สังเกตุอาการ', alignment: 'center', border: [true, true, true, false], margin: [0, 3]}]]
+              {text: 'วันที่สัมผัส', margin: [0, 3], style: 'fSize12', alignment: 'center', border: [true, true, true, false]},
+              {text: 'วันที่สังเกตุอาการ', alignment: 'center', border: [true, true, true, false], margin: [0, 2]}]]
           }
         },
         {
           table: {
-            widths: [ 95, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36],
+            widths: [ 95, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36],
             body: [
-              [{text: 'อาการและอาการแสดง', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+              [{text: 'อาการและอาการแสดง', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
               [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-              // [{text: ' ', alignment: 'center', border: [true, false, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+
 
             ]
           }
@@ -2179,7 +2173,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'ไข้(ระบุ Temp....ํC)'}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'ไข้(ระบุ Temp....ํC)', style: 'fSize10',alignment: 'left'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
               //   {text: '', style: 'fSize12',alignment: 'center'},
               //   {text: '', style: 'fSize12',alignment: 'center'},
               //   {text: '', style: 'fSize12',alignment: 'center'},
@@ -2222,7 +2246,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'ไอ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'ไอ',style:'fSize10'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2233,7 +2287,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'เจ็บคอ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'เจ็บคอ', style: 'fSize10',alignment: 'left' }   ,
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2244,7 +2328,38 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'มีน้ำมูก', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'มีน้ำมูก', style: 'fSize10'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
+
 
             ]
           }
@@ -2255,7 +2370,38 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'มีเสมหะ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'มีเสมหะ', style: 'fSize10'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
+
 
             ]
           }
@@ -2266,7 +2412,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'หายใจลำบาก', alignment: 'left', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'หายใจลำบาก', style: 'fSize10', alignment: 'left', border: [true, true, true, false]},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2277,7 +2453,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'หอบเหนื่อย', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'หอบเหนื่อย', style: 'fSize10', border: [true, true, true, false]},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2288,7 +2494,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'ปวดกล้ามเนื้อ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'ปวดกล้ามเนื้อ', style: 'fSize10', border: [true, true, true, false]},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2299,7 +2535,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'ปวดศีรษะ', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'ปวดศีรษะ', style: 'fSize10', border: [true, true, true, false]},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2310,7 +2576,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'ถ่ายเหลว', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'ถ่ายเหลว', style: 'fSize10', border: [true, true, true, false]},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2321,7 +2617,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'อุณภูมิร่างกายสูงสุด', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'อุณภูมิร่างกายสูงสุด', style: 'fSize10', border: [true, true, true, false]},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2332,7 +2658,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'อุณภูมิร่างกายต่ำสุด', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'อุณภูมิร่างกายต่ำสุด', style: 'fSize10', border: [true, true, true, false]},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2343,7 +2699,37 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'ชีพจรสูงสุด', border: [true, true, true, false]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'ชีพจรสูงสุด', style: 'fSize10', border: [true, true, true, false]},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
@@ -2354,21 +2740,52 @@ export class PrintReportComponent implements OnInit {
             body: [
 
               [
-                {text: 'Oxygen sat', border: [true, true, true, true]}, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+                {text: 'Oxygen sat', style: 'fSize10', border: [true, true, true, true]},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},
+                {text: '', style: 'fSize10',alignment: 'center'},],
 
             ]
           }
         },
-        {text: ' '},
+        // {text: ' '},
         {text: 'ชื่อผู้สัมภาษณ์....................................................................... หน่วยงาน.................................................................' +
             'นัดรอบ 2..................................................โทร.......................................... ต่อ ...........................', margin: [17, 0]},
-        {text: ' '},
-        {columns: [
-            { width: '50%', qr: 'https://www.rajburi.org/images/documents/news/covid19/Advice.jpg', fit: '90', alignment: 'right'},
+         {text: ' '},
 
-            {width: 'auto', text: 'คำแนะนำ\nสำหรับการกักตัว', alignment: 'center', style: 'fSize18', margin: [0, 5] },
+        {columns: [
+            { width: '50%', qr: 'https://www.rajburi.org/images/documents/news/covid19/Advice.jpg', fit: '65', alignment: 'right'},
+
+            {width: 'auto', text: 'คำแนะนำ\nสำหรับการกักตัว', alignment: 'center', style: 'fSize16', margin: [0, 2] },
           ],
-          columnGap: 10
+          columnGap: 5
         }
 
 
@@ -2376,7 +2793,7 @@ export class PrintReportComponent implements OnInit {
       defaultStyle: {
         font: 'THSarabunNew',
         fontSize: 14,
-        lineHeight: 1
+        lineHeight: 0.98
       },
       styles: {
         title: {
