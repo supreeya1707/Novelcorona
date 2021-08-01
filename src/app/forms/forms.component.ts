@@ -2,11 +2,14 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
-import {listLocales} from 'ngx-bootstrap/chronos';
 import Swal from 'sweetalert2';
 import {ApiService} from '../services/api.service';
 
 interface Pname {
+  value: string;
+  viewValue: string;
+}
+interface PTtype {
   value: string;
   viewValue: string;
 }
@@ -24,6 +27,7 @@ export class FormsComponent implements OnInit {
   btndisble = false;
 
   dataContact: any = [];
+  dataVaccine: any = [];
 
   radioGender: any;
   radioPreg: any;
@@ -50,6 +54,8 @@ export class FormsComponent implements OnInit {
   radioredeye: any;
   radiorash: any;
 
+  treat: any;
+  other_treat: any;
 
   radiorepair: any;
   radionear: any;
@@ -130,6 +136,21 @@ export class FormsComponent implements OnInit {
     {value: 'ด.ญ.', viewValue: 'ด.ญ.'},
   ];
 
+  dataPTtpye: PTtype[] = [
+    {value: 'UC ในเขต', viewValue: 'UC ในเขต'},
+    {value: 'UC นอกเขต', viewValue: 'UC นอกเขต'},
+    {value: 'UC ต่างจังหวัด', viewValue: 'UC ต่างจังหวัด'},
+    {value: 'ผู้พิการ', viewValue: 'ผู้พิการ'},
+    {value: 'ข้าราชการจ่ายตรง', viewValue: 'ข้าราชการจ่ายตรง'},
+    {value: 'ข้าราชการท้องถิ่น', viewValue: 'ข้าราชการท้องถิ่น'},
+    {value: 'เบิกต้นสังกัด', viewValue: 'เบิกต้นสังกัด'},
+    {value: 'ประกันสังคม', viewValue: 'ประกันสังคม'},
+    {value: 'รัฐวิสาหกิจ', viewValue: 'รัฐวิสาหกิจ'},
+    {value: 'โครงการพิเศษ', viewValue: 'โครงการพิเศษ'},
+    {value: 'ชำระเงินเอง', viewValue: 'ชำระเงินเอง'},
+    {value: 'อื่น ๆ', viewValue: 'อื่น ๆ'},
+  ];
+
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
               @Inject('baseURL') private baseURL: any) {
   }
@@ -197,6 +218,7 @@ export class FormsComponent implements OnInit {
     });
 
     this.getContact();
+    this.getVaccine();
 
   }
 
@@ -214,9 +236,19 @@ export class FormsComponent implements OnInit {
 
   async getContact(): Promise<any>{
     const resContact = await this.api.getContact();
-    console.log(resContact);
+    // console.log(resContact);
     if (resContact.ok === true){
       this.dataContact = resContact.message;
+    }else{
+      console.log('error');
+    }
+  }
+
+  async getVaccine(): Promise<any>{
+    const resVac = await this.api.getVaccine();
+    console.log(resVac);
+    if (resVac.ok === true){
+      this.dataVaccine = resVac.message;
     }else{
       console.log('error');
     }
@@ -319,7 +351,13 @@ export class FormsComponent implements OnInit {
     data.novel_station = this.generalFrm.value.station;
     data.novel_phone = this.generalFrm.value.telephone;
     data.novel_phonedoc = this.generalFrm.value.telephonedoc;
-    data.novel_treat = this.generalFrm.value.treat;
+
+    if (this.generalFrm.value.treat === 'อื่น ๆ'){
+      data.novel_treat = this.other_treat;
+    }else{
+      data.novel_treat = this.generalFrm.value.treat;
+    }
+
 
     data.novel_number_address = this.generalFrm.value.addr;
     data.novel_moo = this.generalFrm.value.moo;
@@ -387,7 +425,7 @@ export class FormsComponent implements OnInit {
     data.novel_touch_his33 = this.riskFrm.value.radionear;
     data.novel_his_touch_34 = this.riskFrm.value.radiotouch;
     data.novel_assigntouch_34 = this.assign_touch;
-    data.assign_contract = this.assign_contract;
+    data.novel_contact = this.assign_contract;
     data.novel_assign_station_36 = this.assign_station;
 
     data.novel_tourist_35 = this.riskFrm.value.radiovisitor;

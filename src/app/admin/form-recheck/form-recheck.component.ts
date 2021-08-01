@@ -21,6 +21,11 @@ interface Pname {
   viewValue: string;
 }
 
+interface PTtype {
+  value: string;
+  viewValue: string;
+}
+
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -60,9 +65,11 @@ export class FormRecheckComponent implements OnInit {
   dataTL: any[];
   dataCluster: any = [];
   dataContact: any = [];
+  dataVaccine: any = [];
   locale = 'th-be';
 
   pname: any;
+
 
   // currentDate = new Date();
 
@@ -160,13 +167,13 @@ export class FormRecheckComponent implements OnInit {
   come_round: any;
   come_seat: any;
   assign_touch: any;
-  assign_contract: any;
   assign_etc: any;
   assign_station: any;
   assign_position: any;
   symtom_etc: any;
 
-
+  treat: any;
+  other_treat: any;
 
   desDay4: any;
   desDay5: any;
@@ -202,6 +209,7 @@ export class FormRecheckComponent implements OnInit {
   radioPlace: any;
   cluster: any;
   qrcode: any;
+
   dataDoctor: Doctor[] = [
     {value: 'นพ.ปิยะณัฐ บุญประดิษฐ์', viewValue: 'นพ.ปิยะณัฐ บุญประดิษฐ์'},
     {value: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล', viewValue: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล'}
@@ -213,6 +221,21 @@ export class FormRecheckComponent implements OnInit {
     {value: 'นางสาว', viewValue: 'นางสาว'},
     {value: 'ด.ช.', viewValue: 'ด.ช.'},
     {value: 'ด.ญ.', viewValue: 'ด.ญ.'},
+  ];
+
+  dataPTtpye: PTtype[] = [
+    {value: 'UC ในเขต', viewValue: 'UC ในเขต'},
+    {value: 'UC นอกเขต', viewValue: 'UC นอกเขต'},
+    {value: 'UC ต่างจังหวัด', viewValue: 'UC ต่างจังหวัด'},
+    {value: 'ผู้พิการ', viewValue: 'ผู้พิการ'},
+    {value: 'ข้าราชการจ่ายตรง', viewValue: 'ข้าราชการจ่ายตรง'},
+    {value: 'ข้าราชการท้องถิ่น', viewValue: 'ข้าราชการท้องถิ่น'},
+    {value: 'เบิกต้นสังกัด', viewValue: 'เบิกต้นสังกัด'},
+    {value: 'ประกันสังคม', viewValue: 'ประกันสังคม'},
+    {value: 'รัฐวิสาหกิจ', viewValue: 'รัฐวิสาหกิจ'},
+    {value: 'โครงการพิเศษ', viewValue: 'โครงการพิเศษ'},
+    {value: 'ชำระเงินเอง', viewValue: 'ชำระเงินเอง'},
+    {value: 'อื่น ๆ', viewValue: 'อื่น ๆ'},
   ];
 
 
@@ -299,6 +322,7 @@ export class FormRecheckComponent implements OnInit {
     this.getData(this.novelID);
     this.getCluster();
     this.getContact();
+    this.getVaccine();
 
   }
 
@@ -323,8 +347,19 @@ export class FormRecheckComponent implements OnInit {
       this.generalFrm.get('station').setValue(this.dataNovel['novel_station']);
       this.generalFrm.get('telephone').setValue(this.dataNovel['novel_phone']);
       this.generalFrm.get('telephonedoc').setValue(this.dataNovel['novel_phonedoc']);
-      this.generalFrm.get('treat').setValue(this.dataNovel['novel_treat']);
-      this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).format('DD/MM/YYYY'));
+      if (this.dataNovel['novel_treat'] != null){
+        for (let i = 0; i < this.dataPTtpye.length; i++){
+          if (this.dataNovel['novel_treat'] === this.dataPTtpye[i]['value'] ){
+            this.generalFrm.get('treat').setValue(this.dataNovel['novel_treat']);
+          }else{
+            this.generalFrm.get('treat').setValue('อื่น ๆ');
+            this.other_treat = this.dataNovel['novel_treat'];
+          }
+        }
+      }
+
+      // this.generalFrm.get('treat').setValue(this.dataNovel['novel_treat']);
+      // this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).format('DD/MM/YYYY'));
       if (this.dataNovel['novel_birthday'] != null){
         this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).add(543, 'year').format('DD/MM/YYYY'));
         this.getBirthday(moment(this.dataNovel['novel_birthday']).format('YYYY-MM-DD'));
@@ -421,6 +456,8 @@ export class FormRecheckComponent implements OnInit {
       if (this.dataNovel['novel_getvac1']){
         this.vac1 =  moment(this.dataNovel['novel_getvac1']).add(543, 'year').format('DD/MM/YYYY');
         this.getDateVac1(moment(this.dataNovel['novel_getvac1']).format('YYYY-MM-DD'));
+      }else{
+        this.vac1 = null;
       }
       this.namevac1 = this.dataNovel['novel_namevac1'];
       this.placevac1 = this.dataNovel['novel_placevac1'];
@@ -430,6 +467,8 @@ export class FormRecheckComponent implements OnInit {
       if (this.dataNovel['novel_getvac2'] != null){
         this.vac2 =  moment(this.dataNovel['novel_getvac2']).add(543, 'year').format('DD/MM/YYYY');
         this.getDateVac2(moment(this.dataNovel['novel_getvac2']).format('YYYY-MM-DD'));
+      }else{
+        this.vac2 = null;
       }
       this.namevac2 = this.dataNovel['novel_namevac2'];
       this.placevac2 = this.dataNovel['novel_placevac2'];
@@ -491,6 +530,16 @@ export class FormRecheckComponent implements OnInit {
     // console.log(resContact);
     if (resContact.ok === true){
       this.dataContact = resContact.message;
+    }else{
+      console.log('error');
+    }
+  }
+
+  async getVaccine(): Promise<any>{
+    const resVac = await this.api.getVaccine();
+    console.log(resVac);
+    if (resVac.ok === true){
+      this.dataVaccine = resVac.message;
     }else{
       console.log('error');
     }
