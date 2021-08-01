@@ -125,6 +125,18 @@ export class ApiService {
     return this.http.get(url, this.httpOptions).toPromise();
   }
 
+  getVaccine(): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/vaccine`;
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
   getContact(): any {
     // const token = sessionStorage.getByCid('token');
     this.httpOptions = {

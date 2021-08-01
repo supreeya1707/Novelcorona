@@ -213,8 +213,18 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label>สิทธิการรักษา <!--<span class="text-danger">*</span>--></label>
-                <input type="text" class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat"
-                       formControlName="treat">
+<!--                <input type="text" class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat"-->
+<!--                       formControlName="treat">-->
+                <select class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat"
+                        formControlName="treat" [(ngModel)]="treat">
+                  <option *ngFor="let t of dataPTtpye" [value]="t.value">{{t.viewValue}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="treat === 'อื่น ๆ'">
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <input type="text" class="form-control" placeholder="โปรดระบุสิทธิการรักษา"  [(ngModel)]="other_treat"  [ngModelOptions]="{standalone: true}">
               </div>
             </div>
             <div class="col-md-6">
@@ -1074,7 +1084,11 @@
           </div>
           <div class="col-md-4">
             <label>ชื่อวัคซีน </label>
-            <input type="text " class="form-control" id="vaccine" [(ngModel)]="namevac1">
+<!--            <input type="text " class="form-control" id="vaccine" [(ngModel)]="namevac1">\-->
+            <select class="form-control" placeholder="ชื่อวัคซีน" name="namevac1" id="namevac1"
+                    [(ngModel)]="namevac1">
+              <option *ngFor="let vac of dataVaccine" [value]="vac.vaccine_name">{{vac.vaccine_name}}</option>
+            </select>
           </div>
           <div class="col-md-4">
             <label>สถานที่ได้รับ </label>
@@ -1096,7 +1110,11 @@
           </div>
           <div class="col-md-4">
             <label>ชื่อวัคซีน </label>
-            <input type="text " class="form-control" id="vaccine2" [(ngModel)]="namevac2">
+<!--            <input type="text " class="form-control" id="vaccine2" [(ngModel)]="namevac2">-->
+            <select class="form-control" placeholder="ชื่อวัคซีน" name="namevac2" id="namevac2"
+                    [(ngModel)]="namevac2">
+              <option *ngFor="let vac of dataVaccine" [value]="vac.vaccine_name">{{vac.vaccine_name}}</option>
+            </select>
           </div>
           <div class="col-md-4">
             <label>สถานที่ได้รับ </label>
