@@ -728,7 +728,7 @@
 <!--              <input type="text" class="form-control" [(ngModel)]="assign_touch_type" [ngModelOptions]="{standalone: true}" placeholder="ลักษณะการสัมผัส"/>-->
               <select class="form-control" placeholder="เลือกลักษณะการสัมผัส"
                       [(ngModel)]="assign_contract" [ngModelOptions]="{standalone: true}" name="contract" id="contract">
-                <!--<option [ngValue]="null" value="undefined" selected disabled>== เลือกความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยง ==</option>-->
+                <option [ngValue]="null"></option>
                 <option *ngFor="let contact of dataContact" [value]="contact.contact_id">{{contact.contact_detail}}</option>
               </select>
             </div>
@@ -836,6 +836,44 @@
                        [value]="0">
                 <label class="form-check-label" for="radiolabtest2">&nbsp;ไม่ใช่</label>
               </div>
+            </div>
+          </div>
+          <div class="row mt-2 font-prompt-medium fsize16" *ngIf="radiolabtest==1">
+            <div class="radio-inline"  style="padding-left: 20px;">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioStaffContact" id="radioStaffContact01" [(ngModel)]="radioStaffContact" [ngModelOptions]="{standalone: true}" [value]="1">
+                <label class="form-check-label" for="radioStaffContact01">&nbsp;สัมผัสผู้ติดเชื้อยืนยัน</label>
+              </div>&nbsp;
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioStaffContact" id="radioStaffContact02" [(ngModel)]="radioStaffContact" [ngModelOptions]="{standalone: true}"[value]="2">
+                <label class="form-check-label" for="radioStaffContact02">&nbsp;ไปสถานที่เสี่ยงสูง</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-lg-12 col-md-12" *ngIf="radioStaffContact === 1">
+              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact2" [ngModelOptions]="{standalone: true}"  name="scontact2" id="scontact21">
+                <option  *ngFor="let sc of dataSContact" [value]="sc.value">{{sc.viewValue}}</option>
+              </select>
+            </div>
+            <div class="col-lg-12 col-md-12" *ngIf="radioStaffContact === 2">
+              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontactplace" [ngModelOptions]="{standalone: true}" name="scontactplace" id="scontactplace">
+                <option  *ngFor="let scp of dataSContactPlace"   [value]="scp.value">{{scp.viewValue}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mt-2" [ngSwitch] = "scontact2">
+            <div class="col-lg-12 col-md-12" *ngSwitchCase="1">
+              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact31">
+                <option  *ngFor="let sc of dataSContact1"  [value]="sc.value">{{sc.viewValue}}</option>
+              </select>
+            </div>
+            <div class="col-lg-12 col-md-12" *ngSwitchCase="2">
+              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact32">
+                <option  *ngFor="let sc of dataSContact2" [value]="sc.value">{{sc.viewValue}}</option>
+              </select>
             </div>
           </div>
 

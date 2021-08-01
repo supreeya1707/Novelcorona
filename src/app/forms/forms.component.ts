@@ -14,6 +14,26 @@ interface PTtype {
   viewValue: string;
 }
 
+interface SContact {
+  value: string;
+  viewValue: string;
+}
+
+interface SContact1 {
+  value: string;
+  viewValue: string;
+}
+
+interface SContact2 {
+  value: string;
+  viewValue: string;
+}
+
+interface SContactPlace {
+  value: string;
+  viewValue: string;
+}
+
 
 @Component({
   selector: 'app-forms',
@@ -128,6 +148,41 @@ export class FormsComponent implements OnInit {
   desDay14: any;
   date: any;
 
+
+  scontact: any;
+  scontact2: any;
+  scontact3: any;
+  scontactplace: any;
+  radioStaffContact: any;
+
+  dataSContact: SContact[] = [
+    {value: '1', viewValue: 'บุคคลากรใส่ surgical mask ร่วมกับ face shield หรือ อยู่ห่างจากผู้ป่วยเกิน 1 เมตร'},
+    {value: '2', viewValue: 'บุคคลากรใส่ surgical mask'},
+    {value: '3', viewValue: 'บุคลากรใส่แค่ face shield หรือ บุคลากรไม่ใส่เครื่องป้องกันใดๆ หรือ กรณีทำ aerosol-generating procedure และไม่ได้ใส่ N95 respirator และ face shield'},
+    {value: '4', viewValue: 'สัมผัสโดยตรง (direct contact) กับสารคัดหลั่งของผู้ติดเชื้อ เช่น น้ำมูก เสมหะ น้ำลายโดยไม่ได้ใส่ถุงมือ และไม่ได้ล้างมือ ก่อนเอามือสัมผัสบริเวณเยื่อบุตา ปาก จมูกตัวเอง หรือรับประทานอาการโดยใช้ จาน ชาม ช้อน หรือ แก้วน้ำร่วมกัน'},
+    {value: '5', viewValue: 'สัมผัสทางอ้อม (indirect contact) เช่น สัมผัสกับสิ่งของของผู้ติดเชื้อ โดยไม่ได้ใส่ถุงมือ และไม่ได้ล้างมือ ก่อนเอามือสัมผัสบริเวณเยื่อบุตา ปาก จมูกตัวเอง'}
+  ];
+
+  dataSContactPlace: SContactPlace[] = [
+    {value: '1', viewValue: 'บุคลากรใส่ surgical mask หรือ cloth mask ตลอดเวลา'},
+    {value: '2', viewValue: 'บุคลากรไม่ใส่ surgical mask หรือ cloth mask หรือไม่ได้ใส่ตลอดเวลา'}
+  ];
+
+
+  dataSContact1: SContact1[] = [
+    {value: '1', viewValue: 'ผู้ติดเชื้อใส่ surgical mask หรือ cloth mask'},
+    {value: '2', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส <= 15 นาที'},
+    {value: '3', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส > 15 นาที'}
+  ];
+
+  dataSContact2: SContact2[] = [
+    {value: '1', viewValue: 'ผู้ติดเชื้อใส่ surgical mask หรือ cloth mask และสัมผัส <= 15 นาที'},
+    {value: '2', viewValue: 'ผู้ติดเชื้อใส่ surgical mask หรือ cloth mask และสัมผัส > 15 นาที'},
+    {value: '3', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส <= 15 นาที'},
+    {value: '4', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส > 15 นาที'}
+  ];
+
+
   dataPname: Pname[] = [
     {value: 'นาย', viewValue: 'นาย'},
     {value: 'นาง', viewValue: 'นาง'},
@@ -223,7 +278,6 @@ export class FormsComponent implements OnInit {
   }
 
 
-
   get f() {
     return this.generalFrm.controls;
   }
@@ -254,7 +308,6 @@ export class FormsComponent implements OnInit {
     }
   }
 
-
   resetForm(formGroup: FormGroup) {
     let control: AbstractControl = null;
     formGroup.reset();
@@ -264,6 +317,7 @@ export class FormsComponent implements OnInit {
       control.setErrors(null);
     });
   }
+
 
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
@@ -433,6 +487,16 @@ export class FormsComponent implements OnInit {
     data.novel_ari_37 = this.riskFrm.value.radiobreath;
     data.novel_inject_38 = this.riskFrm.value.radioinject;
     data.novel_doc_39 = this.riskFrm.value.radiolabtest;
+
+    data.novel_staff_contact = this.radioStaffContact;
+    if (this.radioStaffContact === 1){
+      data.novel_staff_contact2 = this.scontact2;
+      data.novel_staff_contact3 = this.scontact3;
+    }else{
+      data.novel_staff_contact2 = this.scontactplace;
+    }
+
+
     data.novel_etc_310 = this.assign_etc;
 
     data.novel_havevac = this.havevac;
