@@ -12,8 +12,6 @@ import {environment} from 'src/environments/environment';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import { ReportComponent } from './report/report.component';
-import { RegisterComponent } from './register/register.component';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {AdminModule} from './admin/admin.module';
 import {SharedModule} from './shared.module';
@@ -26,10 +24,6 @@ defineLocale('th-be', thBeLocale);
   declarations: [
     AppComponent,
     FormsComponent,
-    ReportComponent,
-    RegisterComponent,
-
-
   ],
   imports: [
     CommonModule,

@@ -1,14 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup,  Validators} from '@angular/forms';
+import {FormBuilder,  Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
-import {listLocales} from 'ngx-bootstrap/chronos';
 import Swal from 'sweetalert2';
 import {ApiService} from '../../services/api.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
-import {right} from '@popperjs/core';
 import {Router} from '@angular/router';
 
 interface Doctor {
@@ -42,6 +40,11 @@ interface SContact2 {
 }
 
 interface SContactPlace {
+  value: string;
+  viewValue: string;
+}
+
+interface PuiPriority {
   value: string;
   viewValue: string;
 }
@@ -178,6 +181,8 @@ export class FormRecheckComponent implements OnInit {
   placevac1: any;
   placevac2: any;
 
+  puiPriority: any;
+
 
   assign_fever: any;
   assign_oxygen: any;
@@ -249,6 +254,12 @@ export class FormRecheckComponent implements OnInit {
     {value: '2', viewValue: 'บุคลากรไม่ใส่ surgical mask หรือ cloth mask หรือไม่ได้ใส่ตลอดเวลา'}
   ];
 
+  dataPuiPriority: PuiPriority[] = [
+    {value: '1', viewValue: 'LR Contact'},
+    {value: '2', viewValue: 'HR Contact'},
+    {value: '3', viewValue: 'พื้นที่เสี่ยง'},
+    {value: '4', viewValue: 'Rapid Test'}
+  ];
 
   dataSContact1: SContact1[] = [
     {value: '1', viewValue: 'ผู้ติดเชื้อใส่ surgical mask หรือ cloth mask'},
@@ -362,6 +373,7 @@ export class FormRecheckComponent implements OnInit {
       radiobreath: [null, Validators.compose([Validators.required])],
       radioinject: [null, Validators.compose([Validators.required])],
       radiolabtest: [null, Validators.compose([Validators.required])],
+      assignRisk: [null, Validators.compose([Validators.required])],
       datecome: [null]
     });
 
@@ -510,7 +522,8 @@ export class FormRecheckComponent implements OnInit {
         this.scontactplace = this.dataNovel['novel_staff_contact2'];
       }
 
-      this.assign_etc = this.dataNovel['novel_etc_310'];
+      // this.assign_etc = this.dataNovel['novel_etc_310'];
+      this.riskFrm.get('assignRisk').setValue(this.dataNovel['novel_etc_310']);
 
       this.havevac = this.dataNovel['novel_havevac'];
       this.havecertificate = this.dataNovel['novel_certificate'];
@@ -757,6 +770,7 @@ export class FormRecheckComponent implements OnInit {
     data.doctor_comment = this.commentdoctor;
 
     data.sars_pt_type = this.radioSARtype;
+    data.pui_priority = this.puiPriority;
     data.date_swab1 = (this.firstswab != null) ? moment(this.firstswab).format('YYYY-MM-DD') : null;
     data.date_swab2 = (this.secondswab != null) ? moment(this.secondswab).format('YYYY-MM-DD') : null;
     data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
@@ -876,7 +890,8 @@ export class FormRecheckComponent implements OnInit {
       data.novel_staff_contact2 = this.scontactplace;
     }
 
-    data.novel_etc_310 = this.assign_etc;
+    // data.novel_etc_310 = this.assign_etc;
+    data.novel_etc_310 = this.riskFrm.value.assignRisk;
 
     data.novel_havevac = this.havevac;
     data.novel_certificate = this.havecertificate;

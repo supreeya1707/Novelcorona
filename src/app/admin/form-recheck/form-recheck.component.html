@@ -858,6 +858,18 @@
               <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact2" [ngModelOptions]="{standalone: true}"  name="scontact2" id="scontact21">
                 <option  *ngFor="let sc of dataSContact" [value]="sc.value">{{sc.viewValue}}</option>
               </select>
+              <div class="row mt-2" [ngSwitch] = "scontact2">
+                <div class="col-lg-12 col-md-12" *ngSwitchCase="1">
+                  <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact31">
+                    <option  *ngFor="let sc of dataSContact1"  [value]="sc.value">{{sc.viewValue}}</option>
+                  </select>
+                </div>
+                <div class="col-lg-12 col-md-12" *ngSwitchCase="2">
+                  <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact32">
+                    <option  *ngFor="let sc of dataSContact2" [value]="sc.value">{{sc.viewValue}}</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="col-lg-12 col-md-12" *ngIf="radioStaffContact === 2">
               <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontactplace" [ngModelOptions]="{standalone: true}" name="scontactplace" id="scontactplace">
@@ -866,22 +878,17 @@
             </div>
           </div>
 
-          <div class="row mt-2" [ngSwitch] = "scontact2">
-            <div class="col-lg-12 col-md-12" *ngSwitchCase="1">
-              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact31">
-                <option  *ngFor="let sc of dataSContact1"  [value]="sc.value">{{sc.viewValue}}</option>
-              </select>
-            </div>
-            <div class="col-lg-12 col-md-12" *ngSwitchCase="2">
-              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact32">
-                <option  *ngFor="let sc of dataSContact2" [value]="sc.value">{{sc.viewValue}}</option>
-              </select>
-            </div>
-          </div>
+
 
           <div class="row mt-2 font-prompt-medium fsize16">
             <label class="col-lg-1 m-0 p-0">● อื่นๆ</label>
-            <input type="text" class="form-control col-lg-11" [(ngModel)]="assign_etc" [ngModelOptions]="{standalone: true}" placeholder="โปรดระบุ"/>
+            <div class="col-lg-11">
+              <input type="text" class="form-control" formControlName="assignRisk" placeholder="ระบุลักษณะความเสี่ยง"
+                     [ngClass]="{ 'is-invalid': submitted && f3.assignRisk.errors  || ((f3.assignRisk.touched || f3.assignRisk.dirty) &&f3.assignRisk.invalid) }"/>
+              <div *ngIf="submitted && f3.assignRisk.errors  || ((f3.assignRisk.touched || f3.assignRisk.dirty) && f3.assignRisk.invalid)" class="invalid-feedback">
+                <div class="text-left fSize12" *ngIf="f3.assignRisk.errors.required">กรุณาระบุลักษณะความเสี่ยง</div>
+              </div>
+            </div>.
           </div>
 
         </div>
@@ -1090,7 +1097,7 @@
             <select class="form-control"
                     placeholder="เลือกความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยง"
                     [(ngModel)]="cluster" name="cluster" id="cluster">
-              <!--<option [ngValue]="null" value="undefined" selected disabled>== เลือกความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยง ==</option>-->
+              <option [value]="null"  selected></option>
               <option *ngFor="let clus of dataCluster" [value]="clus.cluster_id">{{clus.cluster_name}}</option>
             </select>
           </div>
@@ -1346,11 +1353,6 @@
               </label>
 
               <label class="radio ">
-                <input type="radio" name="radioSARtype" id="radioSARtype2"  [(ngModel)]="radioSARtype" [value]="2"/>
-                <span></span>PUI
-              </label>
-
-              <label class="radio ">
                 <input type="radio" name="radioSARtype" id="radioSARtype3"  [(ngModel)]="radioSARtype" [value]="3"/>
                 <span></span>LR contract
               </label>
@@ -1359,6 +1361,18 @@
                 <input type="radio" name="radioSARtype" id="radioSARtype4"  [(ngModel)]="radioSARtype" [value]="4"/>
                 <span></span>HR contract
               </label>
+
+              <label class="radio ">
+                <input type="radio" name="radioSARtype" id="radioSARtype2"  [(ngModel)]="radioSARtype" [value]="2"/>
+                <span></span>PUI
+              </label>
+
+              <div *ngIf="radioSARtype === 2">
+                <select class="form-control"  name="puiPriority" id="puiPriority"
+                        [(ngModel)]="puiPriority">
+                  <option *ngFor="let priority of dataPuiPriority" [value]="priority.value">{{priority.viewValue}}</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>

@@ -39,6 +39,12 @@ pdfMake.fonts = {
   }
 };
 
+interface PuiPriority {
+  value: string;
+  viewValue: string;
+}
+
+
 @Component({
   selector: 'app-print-report',
   templateUrl: './print-report.component.html'
@@ -55,6 +61,13 @@ export class PrintReportComponent implements OnInit {
   currentDate: any = new Date();
   locale = 'th-be';
   logo: any;
+
+  dataPuiPriority: PuiPriority[] = [
+    {value: '1', viewValue: 'LR Contact'},
+    {value: '2', viewValue: 'HR Contact'},
+    {value: '3', viewValue: 'พื้นที่เสี่ยง'},
+    {value: '4', viewValue: 'Rapid Test'}
+  ];
 
   constructor(private api: ApiService, private localeService: BsLocaleService,) { }
 
@@ -235,6 +248,9 @@ export class PrintReportComponent implements OnInit {
         {text:  '√', absolutePosition: {x:  this.dataNovelByID.novel_inject_38 === 0 ?  488 : 536 , y: 729}, style: 'fSize24'},
         {text:  '√', absolutePosition: {x:  this.dataNovelByID.novel_doc_39 === 0 ?  488 : 536 , y: 745}, style: 'fSize24'},
         {text:  this.dataNovelByID.novel_etc_310, absolutePosition: {x: 80, y: 767}, bold : true},
+        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 80, y: 784}, bold : true},
+        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).locale('th').add('year', '543').format('D MMM YY'), absolutePosition: {x: 415, y: 784}, bold : true} : null,
+        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).format('HH:mm'), absolutePosition: {x: 510, y: 784}, bold : true} : null,
 
         {
           columns: [
@@ -1234,13 +1250,13 @@ export class PrintReportComponent implements OnInit {
         (this.dataNovelStaff.sars1_date != null) ? {text: moment(this.dataNovelStaff.sars1_date).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 85, y: 642}, bold : true} : {text: ''},
         {text: this.dataNovelStaff.sars1_type, absolutePosition: {x: 180, y: 642}, bold : true},
         {text: this.dataNovelStaff.sars1_placesend, absolutePosition: {x: 290, y: 642}, bold : true},
-        {text:  '√', absolutePosition: {x: this.dataNovelStaff.sars1_result === 0 ? 383 : 472, y: 634}, style: 'fSize24'},
+        (this.dataNovelStaff.sars1_result != null) ? {text:  '√', absolutePosition: {x: this.dataNovelStaff.sars1_result === 0 ? 383 : 472, y: 634}, style: 'fSize24'} : null,
 
         {text: 2, absolutePosition: {x: 46, y: 663}, bold : true},
         (this.dataNovelStaff.sars2_date != null) ? {text: moment(this.dataNovelStaff.sars2_date).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 85, y: 663}, bold : true} : {text: ''},
         {text: this.dataNovelStaff.sars2_type, absolutePosition: {x: 180, y: 663}, bold : true},
         {text: this.dataNovelStaff.sars2_placesend, absolutePosition: {x: 290, y: 663}, bold : true},
-        {text:  '√', absolutePosition: {x: this.dataNovelStaff.sars2_result === 0 ? 383 : 472, y: 654}, style: 'fSize24'},
+        (this.dataNovelStaff.sars2_result != null) ? {text:  '√', absolutePosition: {x: this.dataNovelStaff.sars2_result === 0 ? 383 : 472, y: 654}, style: 'fSize24'} : null,
 
         (this.dataNovelStaff.doctor !== null && this.dataNovelStaff.doctor !== '') ? {text:  '√', absolutePosition: {x: this.dataNovelStaff.doctor === 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล' ? 189 : 88, y: 677}, style: 'fSize24'} : {text: ''},
         {text: this.dataNovelStaff.doctor_time, absolutePosition: {x: 330, y: 683}, bold : true},
@@ -1248,22 +1264,28 @@ export class PrintReportComponent implements OnInit {
 
         (this.dataNovelStaff.sars_pt_type === 2) ? {text:  '√', absolutePosition: {x: 31, y: 728}, style: 'fSize24'} :
           (this.dataNovelStaff.sars_pt_type === 4) ? {text:  '√', absolutePosition: {x: 170, y: 728}, style: 'fSize24'} :
-          (this.dataNovelStaff.sars_pt_type === 3) ? {text:  '√', absolutePosition: {x: 232, y: 729}, style: 'fSize24'} :
-          (this.dataNovelStaff.sars_pt_type === 1) ? {text:  '√', absolutePosition: {x: 298, y: 729}, style: 'fSize24'} :
-          (this.dataNovelStaff.sars_pt_type === 0) ? {text:  '√', absolutePosition: {x: 375, y: 729}, style: 'fSize24'} : null ,
+          (this.dataNovelStaff.sars_pt_type === 3) ? {text:  '√', absolutePosition: {x: 232, y: 745}, style: 'fSize24'} :
+          (this.dataNovelStaff.sars_pt_type === 1) ? {text:  '√', absolutePosition: {x: 298, y: 745}, style: 'fSize24'} :
+          (this.dataNovelStaff.sars_pt_type === 0) ? {text:  '√', absolutePosition: {x: 375, y: 745}, style: 'fSize24'} : null ,
+
+        (this.dataNovelStaff.pui_priority === 1) ? {text:  '√', absolutePosition: {x: 232, y: 745}, style: 'fSize24'} :
+          (this.dataNovelStaff.pui_priority === 2) ? {text:  '√', absolutePosition: {x: 170, y: 728}, style: 'fSize24'} :
+          (this.dataNovelStaff.pui_priority === 3) ? {text:  this.dataPuiPriority[2].viewValue, absolutePosition: {x: 80, y: 735}, bold: true} :
+          (this.dataNovelStaff.pui_priority === 4) ? {text:  this.dataPuiPriority[3].viewValue, absolutePosition: {x: 80, y: 735}, bold: true} : null,
+
 
         (this.dataNovelStaff.date_swab1 != null || this.dataNovelStaff.date_swab2 != null) ? {text:  '√', absolutePosition: {x: 255, y: 728}, style: 'fSize24'} : null,
         (this.dataNovelStaff.date_swab1 != null) ? {text: moment(this.dataNovelStaff.date_swab1).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 350, y: 735}, bold : true} : null,
         (this.dataNovelStaff.date_swab2 != null) ? {text: moment(this.dataNovelStaff.date_swab2).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 480, y: 735}, bold : true} : null,
 
-        (this.dataNovelStaff.sdate_quaran != null) ? {text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 92, y: 750}, bold : true} : null,
-        (this.dataNovelStaff.edate_quaran != null) ? {text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 168, y: 750}, bold : true} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 92, y: 752}, bold : true} : null,
+        (this.dataNovelStaff.edate_quaran != null) ? {text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 168, y: 752}, bold : true} : null,
 
-        {text: this.dataNovelStaff.address_quaran, absolutePosition: {x: 113, y: 767}, bold : true},
+        {text: this.dataNovelStaff.address_quaran, absolutePosition: {x: 113, y: 768}, bold : true},
 
-        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 80, y: 775}, bold : true},
-        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).locale('th').add('year', '543').format('D MMM YY'), absolutePosition: {x: 415, y: 775}, bold : true} : null,
-        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).format('HH:mm'), absolutePosition: {x: 510, y: 775}, bold : true} : null,
+        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 80, y: 784}, bold : true},
+        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).locale('th').add('year', '543').format('D MMM YY'), absolutePosition: {x: 415, y: 784}, bold : true} : null,
+        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).format('HH:mm'), absolutePosition: {x: 510, y: 784}, bold : true} : null,
         {
           margin: [0, 3],
           table: {

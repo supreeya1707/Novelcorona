@@ -263,7 +263,8 @@ export class FormsComponent implements OnInit {
       radiocrowded: [null, Validators.compose([Validators.required])],
       radiobreath: [null, Validators.compose([Validators.required])],
       radioinject: [null, Validators.compose([Validators.required])],
-      radiolabtest: [null, Validators.compose([Validators.required])]
+      radiolabtest: [null, Validators.compose([Validators.required])],
+      assignRisk: [null, Validators.compose([Validators.required])]
     });
 
     this.timelineFrm  = this.formBuilder.group({
@@ -497,7 +498,7 @@ export class FormsComponent implements OnInit {
     }
 
 
-    data.novel_etc_310 = this.assign_etc;
+    data.novel_etc_310 = this.riskFrm.value.assignRisk;
 
     data.novel_havevac = this.havevac;
     data.novel_certificate = this.havecertificate;
