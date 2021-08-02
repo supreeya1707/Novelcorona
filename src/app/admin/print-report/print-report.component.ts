@@ -1246,23 +1246,24 @@ export class PrintReportComponent implements OnInit {
         {text: this.dataNovelStaff.doctor_time, absolutePosition: {x: 330, y: 683}, bold : true},
         {text: this.dataNovelStaff.doctor_comment, absolutePosition: {x: 105, y: 702}, bold : true},
 
-        (this.dataNovelStaff.sars_pt_type === 2) ? {text:  '√', absolutePosition: {x: 31, y: 712}, style: 'fSize24'} :
-          (this.dataNovelStaff.sars_pt_type === 4) ? {text:  '√', absolutePosition: {x: 170, y: 712}, style: 'fSize24'} :
+        (this.dataNovelStaff.sars_pt_type === 2) ? {text:  '√', absolutePosition: {x: 31, y: 728}, style: 'fSize24'} :
+          (this.dataNovelStaff.sars_pt_type === 4) ? {text:  '√', absolutePosition: {x: 170, y: 728}, style: 'fSize24'} :
           (this.dataNovelStaff.sars_pt_type === 3) ? {text:  '√', absolutePosition: {x: 232, y: 729}, style: 'fSize24'} :
           (this.dataNovelStaff.sars_pt_type === 1) ? {text:  '√', absolutePosition: {x: 298, y: 729}, style: 'fSize24'} :
           (this.dataNovelStaff.sars_pt_type === 0) ? {text:  '√', absolutePosition: {x: 375, y: 729}, style: 'fSize24'} : null ,
 
-        (this.dataNovelStaff.date_swab1 != null || this.dataNovelStaff.date_swab2 != null) ? {text:  '√', absolutePosition: {x: 255, y: 712}, style: 'fSize24'} : null,
-        (this.dataNovelStaff.date_swab1 != null) ? {text: moment(this.dataNovelStaff.date_swab1).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 350, y: 719}, bold : true} : null,
-        (this.dataNovelStaff.date_swab2 != null) ? {text: moment(this.dataNovelStaff.date_swab2).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 480, y: 719}, bold : true} : null,
+        (this.dataNovelStaff.date_swab1 != null || this.dataNovelStaff.date_swab2 != null) ? {text:  '√', absolutePosition: {x: 255, y: 728}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.date_swab1 != null) ? {text: moment(this.dataNovelStaff.date_swab1).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 350, y: 735}, bold : true} : null,
+        (this.dataNovelStaff.date_swab2 != null) ? {text: moment(this.dataNovelStaff.date_swab2).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 480, y: 735}, bold : true} : null,
 
-        (this.dataNovelStaff.sdate_quaran != null) ? {text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 92, y: 735}, bold : true} : null,
-        (this.dataNovelStaff.edate_quaran != null) ? {text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 168, y: 735}, bold : true} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 92, y: 750}, bold : true} : null,
+        (this.dataNovelStaff.edate_quaran != null) ? {text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMM YY'), absolutePosition: {x: 168, y: 750}, bold : true} : null,
 
-        {text: this.dataNovelStaff.address_quaran, absolutePosition: {x: 113, y: 752}, bold : true},
-        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 80, y: 767}, bold : true},
-        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).locale('th').add('year', '543').format('D MMM YY'), absolutePosition: {x: 415, y: 767}, bold : true} : null,
-        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).format('HH:mm'), absolutePosition: {x: 510, y: 767}, bold : true} : null,
+        {text: this.dataNovelStaff.address_quaran, absolutePosition: {x: 113, y: 767}, bold : true},
+
+        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 80, y: 775}, bold : true},
+        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).locale('th').add('year', '543').format('D MMM YY'), absolutePosition: {x: 415, y: 775}, bold : true} : null,
+        (this.dataNovelStaff.report_datetime) ? {text: moment(this.dataNovelStaff.report_datetime).format('HH:mm'), absolutePosition: {x: 510, y: 775}, bold : true} : null,
         {
           margin: [0, 3],
           table: {
@@ -1444,6 +1445,7 @@ export class PrintReportComponent implements OnInit {
           columnGap: 5
         },
         {text: 'แพทย์ลงความเห็น..............................................................................................................................................................................................................'},
+        {text: '............................................................................................................................................................................................................................................'},
         {
           columns: [
             {width: 'auto', table: {
@@ -1453,7 +1455,7 @@ export class PrintReportComponent implements OnInit {
                   [ {text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }},
-            {width: 'auto', text: 'PUI Admit ตึก...........................'},
+            {width: 'auto', text: 'PUI ............................................'},
             {width: 'auto', table: {
                 widths: [2],
                 body: [
