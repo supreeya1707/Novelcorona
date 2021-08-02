@@ -1565,45 +1565,54 @@ export class PrintReportComponent implements OnInit {
       pageSize: 'A4',
       pageOrientation: 'portrait',
       // [left, top, right, bottom]
-      pageMargins: [55, 40, 55, 40],
+      pageMargins: [55, 50, 55, 40],
       content: [
 
-        {text:  'โรงพยาบาลราชบุรี', absolutePosition: {x:  405, y: 145}},
-        {text:  moment(this.dataNovelStaff.report_datetime).format('D'), absolutePosition: {x:  370, y: 159}},
-        {text:  moment(this.dataNovelStaff.report_datetime).locale('th').format('MMMM'), absolutePosition: {x:  430, y: 159}},
-        {text:  moment(this.dataNovelStaff.report_datetime).locale('th').add(543, 'year').format('YYYY'), absolutePosition: {x:  505, y: 159}},
-        {text:  '√', absolutePosition: {x:  224, y: 222}, style: 'fSize24'},
+        {text:  'โรงพยาบาลราชบุรี', absolutePosition: {x:  405, y: 164}},
+        {text:  moment(this.dataNovelStaff.report_datetime).format('D'), absolutePosition: {x:  373, y: 181}},
+        {text:  moment(this.dataNovelStaff.report_datetime).locale('th').format('MMMM'), absolutePosition: {x:  430, y: 181}},
+        {text:  moment(this.dataNovelStaff.report_datetime).locale('th').add(543, 'year').format('YYYY'), absolutePosition: {x:  505, y: 181}},
+        {text:  '√', absolutePosition: {x:  224, y: 259}, style: 'fSize24'}, // สงสัยว่าเกิดโรคติดต่ออันตราย
 
-        {text: (this.dataNovelStaff.doctor === null) ? this.dataNovelStaff.reporter : this.dataNovelStaff.doctor, absolutePosition: {x: 180, y: 200}},
-        {text: 'โรงพยาบาลราชบุรี', absolutePosition: {x: 180, y: 214}},
-        {text: 'ติดเชื้อไวรัสโคโรนา ๒๐๑๙ หรือ โควิด๑๙', absolutePosition: {x: 100, y: 242}},
+        {text: 'นพ.ปิยะณัฐ บุญประดิษฐ์', absolutePosition: {x: 180, y: 232}},
+        {text: 'โรงพยาบาลราชบุรี', absolutePosition: {x: 180, y: 248}},
+        {text: 'ติดเชื้อไวรัสโคโรนา ๒๐๑๙ หรือ โควิด๑๙', absolutePosition: {x: 100, y: 283}},
 
-        {text: ptfullname, absolutePosition: {x: 180, y: 256}, bold: 'true'},
-        {text: this.dataNovelByID.novel_age, absolutePosition: {x: 342, y: 256}},
-        {text: this.dataNovelByID.novel_national, absolutePosition: {x: 410, y: 256}},
-        {text:  '√', absolutePosition: {x:  this.dataNovelByID.novel_gender === 2 ? 463  : 496, y: 249}, style: 'fSize24'},
+        {text: ptfullname, absolutePosition: {x: 180, y: 300}, bold: 'true'},
+        {text: this.dataNovelByID.novel_age, absolutePosition: {x: 342, y: 300}},
+        {text: this.dataNovelByID.novel_national, absolutePosition: {x: 410, y: 300}},
+        {text:  '√', absolutePosition: {x:  this.dataNovelByID.novel_gender === 2 ? 463  : 496, y: 293}, style: 'fSize24'},
 
-        {text: this.dataNovelByID.novel_cid, absolutePosition: {x: 300, y: 270}},
+        {text: this.dataNovelByID.novel_cid, absolutePosition: {x: 300, y: 317}},
 
-        {text: this.dataNovelByID.novel_phone, absolutePosition: {x: 150, y: 283}},
-        {text: this.dataNovelByID.novel_number_address, absolutePosition: {x: 410, y: 283}},
-        {text: this.dataNovelByID.novel_moo, absolutePosition: {x: 495, y: 283}},
+        {text: this.dataNovelByID.novel_phone, absolutePosition: {x: 150, y: 333}},
+        {text: this.dataNovelByID.novel_number_address, absolutePosition: {x: 410, y: 333}},
+        {text: this.dataNovelByID.novel_moo, absolutePosition: {x: 495, y: 333}},
 
-        {text: this.dataNovelByID.novel_mooban, absolutePosition: {x: 160, y: 298}},
-        {text: this.dataNovelByID.novel_road, absolutePosition: {x: 280, y: 298}},
-        {text: this.dataNovelByID.novel_district, absolutePosition: {x: 445, y: 298}},
+        {text: this.dataNovelByID.novel_mooban, absolutePosition: {x: 160, y: 351}},
+        {text: this.dataNovelByID.novel_road, absolutePosition: {x: 280, y: 351}},
+        {text: this.dataNovelByID.novel_district, absolutePosition: {x: 445, y: 351}},
 
-        {text: this.dataNovelByID.novel_amphur, absolutePosition: {x: 130, y: 311}},
-        {text: this.dataNovelByID.novel_province, absolutePosition: {x: 290, y: 311}},
+        {text: this.dataNovelByID.novel_amphur, absolutePosition: {x: 130, y: 367}},
+        {text: this.dataNovelByID.novel_province, absolutePosition: {x: 290, y: 367}},
 
-        {text:  '√', absolutePosition: {x: 472, y: 360}, style: 'fSize24'},
-        {text:  moment(this.dataNovelStaff.sdate_quaran).format('D'), absolutePosition: {x:  120, y: 380}},
-        {text:  moment(this.dataNovelStaff.sdate_quaran).locale('th').format('MMMM'), absolutePosition: {x:  250, y: 380}},
-        {text:  moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('YYYY'), absolutePosition: {x:  380, y: 380}},
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  '√', absolutePosition: {x: 68, y: 429}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  this.dataNovelByID.novel_number_address, absolutePosition: {x: 135, y: 435}, style: 'small'} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  this.dataNovelByID.novel_moo, absolutePosition: {x: 190, y: 435}, style: 'small'} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  this.dataNovelByID.novel_district, absolutePosition: {x: 225, y: 435}, style: 'small'} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  this.dataNovelByID.novel_amphur, absolutePosition: {x: 297, y: 435}, style: 'small'} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  this.dataNovelByID.novel_province, absolutePosition: {x: 370, y: 435}, style: 'small'} : null,
 
-        {text:  moment(this.dataNovelStaff.edate_quaran).format('D'), absolutePosition: {x:  120, y: 394}},
-        {text:  moment(this.dataNovelStaff.edate_quaran).locale('th').format('MMMM'), absolutePosition: {x:  250, y: 394}},
-        {text:  moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('YYYY'), absolutePosition: {x:  380, y: 394}},
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  '√', absolutePosition: {x: 425, y: 429}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  moment(this.dataNovelStaff.report_datetime).format('D'), absolutePosition: {x:  120, y: 449}} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  moment(this.dataNovelStaff.report_datetime).locale('th').format('MMMM'), absolutePosition: {x:  250, y: 449}} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  moment(this.dataNovelStaff.report_datetime).locale('th').add(543, 'year').format('YYYY'), absolutePosition: {x:  375, y: 449}} : null,
+        (this.dataNovelStaff.sdate_quaran != null) ? {text:  moment(this.dataNovelStaff.report_datetime).format('HH:mm'), absolutePosition: {x:  480, y: 449}} : null,
+
+        (this.dataNovelStaff.edate_quaran != null) ? {text:  moment(this.dataNovelStaff.edate_quaran).format('D'), absolutePosition: {x:  120, y: 466}} : null,
+        (this.dataNovelStaff.edate_quaran != null) ? {text:  moment(this.dataNovelStaff.edate_quaran).locale('th').format('MMMM'), absolutePosition: {x:  250, y: 466}} : null,
+        (this.dataNovelStaff.edate_quaran != null) ? {text:  moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('YYYY'), absolutePosition: {x:  375, y: 466}} : null,
+        (this.dataNovelStaff.edate_quaran != null) ? {text: '๒๔.๐๐', absolutePosition: {x:  480, y: 466}} : null,
 
         {image: this.logo, fit: [65, 65], alignment: 'center'},
         {text: 'คำสั่งของเจ้าพนักงานควบคุมโรคติดต่อ', alignment: 'center'},
@@ -2014,16 +2023,89 @@ export class PrintReportComponent implements OnInit {
         {text: '...............................................................................................................................................ซึ่งตายหรือมีเหตุอันควรสงสัยว่าตายด้วยโรค'},
         {text: '........................................................................................ณ..........................................................................................................................'},
         {text: ' '},
-        {text: '/ไปรับการตรวจ...', alignment: right },
+        {text: '/ไปรับการตรวจ...', alignment: 'right' },
 
-
+        {text: '- ๒ -', alignment: 'center', pageBreak: 'before' },
+        {text: ' '},
+        {
+          columns: [
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ไปรับการตรวจ' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'จัดการทางการแพทย์' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'จัดการด้วยประการอื่นใด'},
+          ],
+          columnGap: 3
+        },
+        {text: 'ระบุ...............................................................................................................................................................................................................'},
+        {text: 'ภายในวันที่.............................................เดือน............................................. พ.ศ. ...............................เวลา........................................... น.'},
+        {text: 'ณ ................................................................................................................................................................................................................'},
+        {
+          columns: [
+            {width: 'auto', text: '(๖)' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'กำจัดความติดโรค/ทำลาย  ............................................................................................................................ที่มีหรือมีเหตุอันควร' }
+          ],
+          columnGap: 3
+        },
+        {text: 'สงสัยว่ามีเชื้อโรค...........................................................................................................................................................................................'},
+        {
+          columns: [
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'แก้ไขปรับปรุงสุขาภิบาลให้ถูกสุขลักษณะโดยดาร.................................................................................................................................' }
+          ],
+          columnGap: 3
+        },
+        {text: '.....................................................................................................................................................................................................................'},
+        {text: 'ภายในวันที่................เดือน................................ พ.ศ. ............................. เวลา.......................... น. จนกว่าเจ้าพนักงานควบคุมโรคติดต่อ จะมีคำสั่งยกเลิก'},
 
 
       ],
       defaultStyle: {
         font: 'THSarabunIT',
         fontSize: 14,
-        lineHeight: 0.9
+        lineHeight: 1.1
       },
       styles: {
         title: {
@@ -2046,7 +2128,7 @@ export class PrintReportComponent implements OnInit {
       // [left, top, right, bottom]
       pageMargins: [30, 25, 30, 10],
       content: [
-        {text:  '√', absolutePosition: {x:  this.dataNovelStaff.sars_pt_type === 2 ? 507 : this.dataNovelStaff.sars_pt_type === 3 ? 634 : 542 , y: 17}, style: 'fSize24'},
+        // {text:  '√', absolutePosition: {x:  this.dataNovelStaff.sars_pt_type === 2 ? 507 : this.dataNovelStaff.sars_pt_type === 3 ? 634 : 542 , y: 17}, style: 'fSize24'},
         {text: ptfullname, absolutePosition: {x: 115, y: 58}, bold: 'true'},
         {text: this.dataNovelByID.novel_gender === 1 ? 'หญิง' : 'ชาย', absolutePosition: {x: 265, y: 58}, bold : true},
         {text: this.dataNovelByID.novel_age, absolutePosition: {x: 332, y: 58}, bold : true},
