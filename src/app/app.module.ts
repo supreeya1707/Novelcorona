@@ -15,6 +15,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {AdminModule} from './admin/admin.module';
 import {SharedModule} from './shared.module';
+import { ApplayoutComponent } from './applayout/applayout.component';
+import { HomeComponent } from './home/home.component';
 // import { ConfirmComponent } from './confirm/confirm.component';
 
 
@@ -24,6 +26,8 @@ defineLocale('th-be', thBeLocale);
   declarations: [
     AppComponent,
     FormsComponent,
+    ApplayoutComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,

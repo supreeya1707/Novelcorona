@@ -5,7 +5,6 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
 import * as moment from 'moment';
 import {ApiService} from '../../services/api.service';
-import {right} from '@popperjs/core';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 
 
@@ -69,6 +68,10 @@ export class PrintReportComponent implements OnInit {
     {value: '4', viewValue: 'Rapid Test'}
   ];
 
+  imgSign01: any;
+  imgSign02: any;
+  imgSign03: any;
+
   constructor(private api: ApiService, private localeService: BsLocaleService,) { }
 
   ngOnInit(): void {
@@ -83,8 +86,20 @@ export class PrintReportComponent implements OnInit {
         reader.readAsDataURL(blob);
       }));
 
-    toDataURL('../assets/picture/garuda.jpg') .then(dataUrl => {
+    toDataURL('assets/picture/garuda.jpg') .then(dataUrl => {
       this.logo = 'data:image;base64,' + dataUrl;
+    });
+
+    toDataURL('assets/picture/sign01.png') .then(dataUrl => {
+      this.imgSign01 = 'data:image;base64,' + dataUrl;
+    });
+
+    toDataURL('assets/picture/sign02.png') .then(dataUrl => {
+      this.imgSign02 = 'data:image;base64,' + dataUrl;
+    });
+
+    toDataURL('assets/picture/sign03.png') .then(dataUrl => {
+      this.imgSign03 = 'data:image;base64,' + dataUrl;
     });
   }
 
@@ -2077,7 +2092,7 @@ export class PrintReportComponent implements OnInit {
                 ]
               }
             },
-            {width: 'auto', text: 'กำจัดความติดโรค/ทำลาย  ............................................................................................................................ที่มีหรือมีเหตุอันควร' }
+            {width: 'auto', text: 'กำจัดความติดโรค/ทำลาย...............................................................................................................................ที่มีหรือมีเหตุอันควร' }
           ],
           columnGap: 3
         },
@@ -2099,7 +2114,177 @@ export class PrintReportComponent implements OnInit {
         },
         {text: '.....................................................................................................................................................................................................................'},
         {text: 'ภายในวันที่................เดือน................................ พ.ศ. ............................. เวลา.......................... น. จนกว่าเจ้าพนักงานควบคุมโรคติดต่อ จะมีคำสั่งยกเลิก'},
+        {
+          columns: [
+            {width: 'auto', text: '(๗)' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'กำจัดสัตว์/แมลง/ตัวอ่อนของแมลงประเภท......................................................................................ที่เป็นสาเหตุของการเกิดโรค' }
+          ],
+          columnGap: 3
+        },
+        {text: '.....................................................................................................................................................................................................................'},
+        {text: 'ภายในวันที่................เดือน................................ พ.ศ. .............................ณ ..............................................................................................'},
+        {
+          columns: [
+            {width: 'auto', text: '(๘)' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ห้ามกระทำ/ดำเนินการ..................................................................................................................................................................' }
+          ],
+          columnGap: 3
+        },
+        {text: 'ตั้งแต่วันที่...............................เดือน.................................................... พ.ศ. ..................................เวลา................................................. น.'},
+        {text: 'ถึงวันที่....................................เดือน.................................................... พ.ศ. ..................................เวลา................................................. น.'},
+        {text: 'เนื่องจากอาจก่อให้เกิดสภาวะที่ไม่ถูกสุขลักษณะซึ่งอาจเป็นเหตุให้โรค.....................................................................................แพร่ออกไป'},
+        {
+          columns: [
+            {width: 'auto', text: '(๙)' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ห้ามเข้าไป/ออกจาก......................................................................................................................................................................' }
+          ],
+          columnGap: 3
+        },
+        {text: 'ตั้งแต่วันที่...............................เดือน.................................................... พ.ศ. ..................................เวลา................................................. น.'},
+        {text: 'ถึงวันที่....................................เดือน.................................................... พ.ศ. ..................................เวลา................................................. น.'},
+        {
+          columns: [
+            {width: 'auto', text: '(๑๐)' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'เข้าไปใน (บ้าน/โรงเรือน/สถานที่)................................................................................................................................................' }
+          ],
+          columnGap: 3
+        },
+        {text: 'ตำบล/แขวง..................................................อำเภอ/เขต.........................................................จังหวัด.........................................................'},
+        {text: 'ตั้งแต่วันที่...............................เดือน.................................................... พ.ศ. ..................................เวลา................................................. น.'},
+        {text: 'ถึงวันที่....................................เดือน.................................................... พ.ศ. ..................................เวลา................................................. น.'},
+        {text: 'เพื่อเฝ้าระวัง/ป้องกัน/ควบคุมมิให้มีการแพร่ของโรค...................................................................................................................................'},
+        {
+          columns: [
+            {width: 'auto', text: '(๑๑)' },
+            {width: 'auto',
+              table: {
+                widths: [2],
+                body: [
+                  [ {text: '', border: [true, true, true, false], alignment: 'center', margin : [0, 1]}],
+                  [ {text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'เข้าไปในพาหนะประเภท.....................................ยี่ห้อ..........................................รุ่น.......................................สี..........................' }
+          ],
+          columnGap: 3
+        },
+        {text: 'หมายเลขทะเบียน/หมายเลข................................................ที่มีหรือว่าสงสัยว่ามีโรค..................................................................................'},
+        {text: 'ตั้งแต่วันที่...............................เดือน.................................................... พ.ศ. ..................................เวลา................................................. น.'},
+        {text: 'ถึงวันที่....................................เดือน.................................................... พ.ศ. ..................................เวลา................................................. น.'},
+        {text: 'เพื่อเฝ้าระวัง/ป้องกัน/ควบคุมมิให้มีการแพร่ของโรค...................................................................................................................................'},
+        {
+          columns: [
+            {width: '5%', text: ' ' },
+            {width: '95%', text: 'อนึ่งเจ้าพนักงานควบคุมโรคติดต่อมีอำนาจที่จะเข้าดำเนินการด้วยตนเองหรือมีคำสั่งให้บุคคลอื่นกระทำแทนได้' }
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: '5%', text: ' ' },
+            {width: '95%', text: 'หากท่านไม่พอใจคำสั่งหรือเห็นว่าไม่ได้รับความเป็นธรรมท่านมีสิทธิอุธรณ์คำสั่งนี้ต่อเจ้าพนักงานควบคุมโรคติดต่อผู้ทำ' }
+          ],
+          columnGap: 5
+        },
+        {text: 'คำสั่งได้ภานใน ๑๕ นับตั้งแต่วันที่ได้รับทราบคำสั่ง'},
+        {text: ' '},
+        {
+          columns: [
+            {width: '5%', text: ' ' },
+            {width: '45%', text: 'ลงชื่อ......................................................', alignment: 'center' },
+            {width: '5%', text: ' ' },
+            {width: '45%', text: 'ลงชื่อ......................................................', alignment: 'center' }
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: '5%', text: ' ' },
+            {width: '45%', text: '(นพ.ปิยะณัฐ บุญประดิษฐ์)', alignment: 'center'},
+            {width: '5%', text: ' ' },
+            {width: '45%', text: '(' + ptfullname + ')', alignment: 'center' }
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: '5%', text: ' ' },
+            {width: '45%', text: 'เจ้าพนักงานควบคุมโรคติดต่อ', alignment: 'center'},
+            {width: '5%', text: ' ' },
+            {width: '45%', text: 'ผู้รับคำสั่ง', alignment: 'center' }
+          ],
+          columnGap: 5
+        },
 
+        {text: ' '},
+        {text: ' '},
+        {
+          columns: [
+            {width: '5%', text: ' ' },
+            {width: '45%', text: 'ลงชื่อ......................................................', alignment: 'center' },
+            {width: '5%', text: ' ' },
+            {width: '45%', text: 'ลงชื่อ......................................................', alignment: 'center' }
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: '5%', text: ' ' },
+            {width: '45%', text: '(นางสาวยุพา ฉิมทับทิม)', alignment: 'center'},
+            {width: '5%', text: ' ' },
+            {width: '45%', text: '(นางสาวสงวนลักษณ์ มีมาก)', alignment: 'center' }
+          ],
+          columnGap: 5
+        },
+        {
+          columns: [
+            {width: '5%', text: ' ' },
+            {width: '45%', text: 'พยาน', alignment: 'center'},
+            {width: '5%', text: ' ' },
+            {width: '45%', text: 'พยาน', alignment: 'center' }
+          ],
+          columnGap: 5
+        },
+        {image: this.imgSign01, absolutePosition: {x: 150, y: 650}, fit: [70, 70]},
+        {image: this.imgSign02, absolutePosition: {x: 175, y: 738}, fit: [30, 30]},
+        {image: this.imgSign03, absolutePosition: {x: 405, y: 738}, fit: [70, 70]},
 
       ],
       defaultStyle: {
@@ -2218,21 +2403,21 @@ export class PrintReportComponent implements OnInit {
             widths: [ 95, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36, 36],
             body: [
               [{text: 'อาการและอาการแสดง', alignment: 'center', border: [true, false, true, false]},
-                {text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('DD/MM/YY'), alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[0], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[1], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[2], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[3], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[4], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[5], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[6], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[7], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[8], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[9], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[10], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[11], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[12], alignment: 'center', border: [true, true, true, true], style: 'fSize12'},
-                {text: this.dateTimeLineShortquaran[13], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}
+                (this.dataNovelStaff.sdate_quaran) ? {text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('DD/MM/YY'), alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[0], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[1], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[2], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[3], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[4], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[5], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[6], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[7], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[8], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[9], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[10], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[11], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[12], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[13], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null
               ],
               [
                 {text: ' ', alignment: 'center', border: [true, false, true, true]},
@@ -2882,10 +3067,9 @@ export class PrintReportComponent implements OnInit {
         {text: ' ', style: 'fSize10'},
         {text: 'ชื่อผู้สัมภาษณ์....................................................................... หน่วยงาน.................................................................' +
             'นัดรอบ 2..................................................โทร.......................................... ต่อ ...........................', margin: [17, 0]},
-        {text: ' ', style: 'fSize10'},
+        {text: ' ', style: 'fSize8'},
         {columns: [
             { width: '50%', qr: 'https://www.rajburi.org/images/documents/news/covid19/Advice.jpg', fit: '70', alignment: 'right'},
-
             {width: 'auto', text: 'คำแนะนำ\nสำหรับการกักตัว', alignment: 'center', style: 'fSize16', margin: [0, 2] },
           ],
           columnGap: 5
@@ -2903,6 +3087,7 @@ export class PrintReportComponent implements OnInit {
           fontSize: 14,
           bold: true
         },
+        fSize8: {fontSize: 8},
         fSize10: {fontSize: 10},
         fSize12: {fontSize: 12},
         fSize11: {fontSize: 11},
