@@ -3,7 +3,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, Valid
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import Swal from 'sweetalert2';
-import {ApiService} from '../services/api.service';
+import {ApiService} from '../../services/api.service';
 
 interface Pname {
   value: string;
@@ -37,9 +37,9 @@ interface SContactPlace {
 
 @Component({
   selector: 'app-forms',
-  templateUrl: './forms.component.html',
+  templateUrl: './novelcorona2.component.html',
 })
-export class FormsComponent implements OnInit {
+export class Novelcorona2Component implements OnInit {
   generalFrm: any;
   timelineFrm: any;
   riskFrm: any;

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="167" height="167" viewBox="0 0 167 167">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.25" y1="0.067" x2="0.75" y2="0.933" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#158bff"/>
+      <stop offset="0.299" stop-color="#15b8ea"/>
+      <stop offset="0.604" stop-color="#15ded7"/>
+      <stop offset="0.849" stop-color="#15f6cb"/>
+      <stop offset="1" stop-color="#15ffc7"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.442" y1="0.181" x2="0.746" y2="0.786" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#158bff"/>
+      <stop offset="0.03" stop-color="#1591fc"/>
+      <stop offset="0.23" stop-color="#15b8e9"/>
+      <stop offset="0.44" stop-color="#15d7da"/>
+      <stop offset="0.64" stop-color="#15edd0"/>
+      <stop offset="0.83" stop-color="#15fac9"/>
+      <stop offset="1" stop-color="#15ffc7"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.85" y1="0.858" x2="0.21" y2="0.037" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="blue"/>
+      <stop offset="0.12" stop-color="#0204fc"/>
+      <stop offset="0.24" stop-color="#0911f3"/>
+      <stop offset="0.37" stop-color="#1527e5"/>
+      <stop offset="0.5" stop-color="#2545d0"/>
+      <stop offset="0.63" stop-color="#3a6bb6"/>
+      <stop offset="0.77" stop-color="#539b95"/>
+      <stop offset="0.9" stop-color="#71d270"/>
+      <stop offset="1" stop-color="#89ff51"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_957" data-name="Group 957" transform="translate(-868.5 -327)">
+    <g id="Group_909" data-name="Group 909" transform="translate(868.497 326.999)">
+      <circle id="Ellipse_73" data-name="Ellipse 73" cx="83.5" cy="83.5" r="83.5" transform="translate(0.002 0.001)" fill="#fff"/>
+    </g>
+    <g id="Group_910" data-name="Group 910" transform="translate(880.304 338.807)">
+      <circle id="Ellipse_74" data-name="Ellipse 74" cx="71.695" cy="71.695" r="71.695" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="Group_956" data-name="Group 956" transform="translate(-216.501 -4.139)">
+      <path id="Path_6537" data-name="Path 6537" d="M145.424,95.658a145.8,145.8,0,0,0-33.3,28.639l-12.452-9.737c-.33-.237-7.153,5.821-6.973,6.008L115.335,143.6a.841.841,0,0,0,.623.268.853.853,0,0,0,.174,0,.909.909,0,0,0,.66-.56c3.648-9.339,15.689-28.838,31.061-43a.9.9,0,0,0,.218-1.015S145.655,95.514,145.424,95.658Z" transform="translate(1049.937 294.959)" opacity="0.5" fill="url(#linear-gradient-2)"/>
+      <path id="Path_6538" data-name="Path 6538" d="M150.263,51.017c-35.693,0-41.713-13.547-41.782-13.7a1.787,1.787,0,0,0-1.644-1.121h0a1.812,1.812,0,0,0-1.669,1.121c-.044.143-6.226,13.7-41.775,13.7a1.774,1.774,0,0,0-1.774,1.774v60.714c0,24.854,42.684,43.836,44.49,44.633a1.868,1.868,0,0,0,1.438,0c1.824-.8,44.5-19.779,44.5-44.633V52.779A1.787,1.787,0,0,0,150.263,51.017Zm-42.84,96.556a1.419,1.419,0,0,1-1.189,0c-1.482-.623-36.795-16.361-36.795-36.9V60.487a1.482,1.482,0,0,1,1.476-1.476c29.4,0,34.5-11.206,34.547-11.319a1.5,1.5,0,0,1,1.357-.909h0a1.451,1.451,0,0,1,1.351.934c.05.1,5.043,11.294,34.553,11.294a1.469,1.469,0,0,1,1.463,1.476v50.186C144.218,131.212,108.924,146.926,107.423,147.574Z" transform="translate(1061.665 317.397)" opacity="0.1" fill="url(#linear-gradient-3)"/>
+      <path id="Path_6539" data-name="Path 6539" d="M137.363,118.974a2.14,2.14,0,0,0-2.347,1.868V130.7H116.674v-9.9a2.162,2.162,0,0,0-2.347-1.868,2.14,2.14,0,0,0-2.347,1.868v24.984a2.418,2.418,0,0,0,4.694,0V134.071h18.354v11.711a2.418,2.418,0,0,0,4.694,0V120.8A2.152,2.152,0,0,0,137.363,118.974Z" transform="translate(1042.658 286.174)" fill="#fff"/>
+      <path id="Path_6540" data-name="Path 6540" d="M148.653,89.65,112.306,60.544a3.318,3.318,0,0,0-4.209,0L71.77,89.65a3.438,3.438,0,0,0-.5,4.713,3.231,3.231,0,0,0,4.545.5l5.217-4.2v44.907a3.381,3.381,0,0,0,3.362,3.362h51.481a3.48,3.48,0,0,0,3.524-3.188V90.8l5.055,4.065a3.348,3.348,0,1,0,4.2-5.217Zm-16,42.722h-44.9V86.126c0-.28,22.369-18.846,22.369-18.846S132.652,85.9,132.652,86.126Z" transform="translate(1058.295 308.494)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

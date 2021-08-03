@@ -15,6 +15,11 @@
   src: url('assets/font/Prompt-Bold.ttf');
 }
 
+@font-face {
+  font-family: 'prompt-italic';
+  src: url('assets/font/Prompt-Italic.ttf');
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -70,6 +75,10 @@
 
 .font-prompt-light {
   font-family: prompt-light;
+}
+
+.font-prompt-italic {
+  font-family: prompt-italic;
 }
 
 .fsize36 {
@@ -88809,16 +88818,6 @@ body {
   }
 }
 
-@media (max-width: 991.98px) {
-  .subheader-enabled .content {
-    padding-top: 0
-  }
-
-  .subheader-enabled .subheader.subheader-solid {
-    margin-bottom: 20px
-  }
-}
-
 .dashboard-tabs .nav-link .nav-icon .svg-icon svg g [fill] {
   -webkit-transition: fill .3s ease;
   transition: fill .3s ease;
@@ -88849,18 +88848,82 @@ body {
   color: #fff
 }
 
-@media (min-width: 992px) {
+.footer01 {
+  height: 176px;
+}
+
+.footer02 {
+  padding-right: 50px;
+}
+
+.vh-70{
+  height: 70vh !important;
+}
+
+.icon-size{
+  height: 167px;
+  width: 167px;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+.show-scrollTop {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+  .subheader-enabled .content {
+    padding-top: 0
+  }
+
+  .subheader-enabled .subheader.subheader-solid {
+    margin-bottom: 20px
+  }
+
   .content {
     padding: 40px 0
   }
+
+  .noDisplay {display: none;}
+
+  .footer01 {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 100%;
+    height: auto;
+  }
+
+
+  .footer02 {
+    padding-right: 20px;
+  }
 }
 
-@media (max-width: 991.98px) {
+@media screen and (max-width: 576px) {
   .content {
     padding: 20px 0
   }
 
+  .noDisplay {display: none;}
+
   .subheader-enabled.subheader-transparent .content {
     padding-top: 0
+  }
+
+  .footer01 {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .footer02 {
+    padding-right: 20px;
   }
 }

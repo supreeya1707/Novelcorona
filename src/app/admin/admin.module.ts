@@ -15,6 +15,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {SharedModule} from "../shared.module";
 import { PrintReportComponent } from './print-report/print-report.component';
+import {AppsModule} from "../apps/apps.module";
 
 
 defineLocale('th-be', thBeLocale);
@@ -37,6 +38,7 @@ defineLocale('th-be', thBeLocale);
         HttpClientModule,
         DigitOnlyModule,
         SharedModule,
+        AppsModule,
     ]
 })
 export class AdminModule { }

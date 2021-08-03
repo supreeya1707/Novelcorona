@@ -2,7 +2,7 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {CommonModule} from '@angular/common';
 import {AppComponent} from './app.component';
-import {FormsComponent} from './forms/forms.component';
+import {Novelcorona2Component} from './frm/novelcorona2/novelcorona2.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
@@ -15,9 +15,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {AdminModule} from './admin/admin.module';
 import {SharedModule} from './shared.module';
-import { ApplayoutComponent } from './applayout/applayout.component';
-import { HomeComponent } from './home/home.component';
-// import { ConfirmComponent } from './confirm/confirm.component';
+import {AppsModule} from './apps/apps.module';
+import {FrmModule} from './frm/frm.module';
+
 
 
 defineLocale('th-be', thBeLocale);
@@ -25,9 +25,6 @@ defineLocale('th-be', thBeLocale);
 @NgModule({
   declarations: [
     AppComponent,
-    FormsComponent,
-    ApplayoutComponent,
-    HomeComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +37,8 @@ defineLocale('th-be', thBeLocale);
     HttpClientModule,
     DigitOnlyModule,
     AdminModule,
+    AppsModule,
+    FrmModule,
     SharedModule,
   ],
   providers: [
