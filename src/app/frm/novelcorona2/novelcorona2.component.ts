@@ -97,6 +97,7 @@ export class Novelcorona2Component implements OnInit {
   datatreat: any;
   datevac1: any;
   datevac2: any;
+  datevac3: any;
   datecome: any;
   d: any;
   fistHosp = 'โรงพยาบาลราชบุรี';
@@ -114,8 +115,10 @@ export class Novelcorona2Component implements OnInit {
 
   namevac1: any;
   namevac2: any;
+  namevac3: any;
   placevac1: any;
   placevac2: any;
+  placevac3: any;
 
 
   assign_fever: any;
@@ -508,6 +511,10 @@ export class Novelcorona2Component implements OnInit {
     data.novel_getvac2 = (this.datevac2 != null) ? moment(this.datevac2).format('YYYY-MM-DD') : null;
     data.novel_namevac2 = this.namevac2;
     data.novel_placevac2 = this.placevac2;
+
+    data.novel_getvac3 = (this.datevac3 != null) ? moment(this.datevac3).format('YYYY-MM-DD') : null;
+    data.novel_namevac3 = this.namevac3;
+    data.novel_placevac3 = this.placevac3;
 
     data.novel_input_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 

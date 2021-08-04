@@ -191,7 +191,7 @@ export class PrintReportComponent implements OnInit {
         {text:  this.dataNovelByID.novel_agepreg, absolutePosition: {x: 292, y: 126}, bold : true},
         {text:  '√', absolutePosition: {x:  this.dataNovelByID.novel_smoke === 0  ? 390 : this.dataNovelByID.novel_smoke === 1 ? 443 : 482, y: 120}, style: 'fSize24'},
         {text:  this.dataNovelByID.novel_worker, absolutePosition: {x: 370, y: 142}, bold : true},
-        {text:  this.dataNovelByID.novel_station, absolutePosition: {x: 210, y: 159}, bold : true},
+        {text:  this.dataNovelByID.novel_station, absolutePosition: {x: 175, y: 159}, bold : true},
         {text:  this.dataNovelByID.novel_phone, absolutePosition: {x: 480, y: 159}, bold : true},
         {text:  this.dataNovelByID.novel_phonedoc, absolutePosition: {x: 217, y: 175}, bold : true},
         (this.dataNovelByID.novel_birthday) ? {text:  moment(this.dataNovelByID.novel_birthday).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 400, y: 175}, bold : true} : {text: ''},

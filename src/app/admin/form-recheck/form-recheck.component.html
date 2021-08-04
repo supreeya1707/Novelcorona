@@ -171,7 +171,7 @@
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>สถานที่ทำงาน/สถานศึกษา <span class="text-danger">*</span></label>
+                <label>สถานที่ทำงาน/สถานศึกษา <span class="text-danger">*</span></label>&nbsp;<small class="text-info">หากเป็นเจ้าหน้าที่โรงพยาบาลกรุณาระบุแผนก/หน่วยงาน</small>
                 <input type="text" class="form-control" placeholder="สถานที่ทำงาน/สถานศึกษา" name="station" id="station"
                        formControlName="station"
                        [ngClass]="{ 'is-invalid': submitted && f.station.errors  || ((f.station.touched || f.station.dirty) && f.station.invalid) }">
@@ -822,7 +822,7 @@
           </div>
 
           <div class="row font-prompt-medium fsize16">
-            <label>● เป็นบุคลาการทางการแพทย์และสาธรณะสุขหรือเจ้าหน้าที่ห้องปฏิบัติการ</label>
+            <label>● เป็นบุคลาการทางการแพทย์และสาธารณสุขหรือเจ้าหน้าที่ห้องปฏิบัติการ</label>
             <div class="radio-inline ml-md-auto" style="padding-left: 20px;">
               <div class="form-check col-sm-6">
                 <input class="form-check-input" type="radio" name="radiolabtest" id="radiolabtest1" formControlName="radiolabtest"
@@ -877,8 +877,6 @@
               </select>
             </div>
           </div>
-
-
 
           <div class="row mt-2 font-prompt-medium fsize16">
             <label class="col-lg-1 m-0 p-0">● อื่นๆ</label>
@@ -1229,6 +1227,35 @@
           </div>
         </div>
 
+        <div class="row mt-5">
+          <div class=" col-md-4 ">
+            <label>ครั้งที่ 3 วันที่ได้รับ </label>
+            <div class="input-group">
+              <!--              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac2">-->
+              <input class="form-control" (bsValueChange)="getDateVac3($event)" #datepickerVac3="bsDatepicker"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                     [value]="vac3">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerVac3.toggle()"
+                     [attr.aria-expanded]="datepickerVac3.isOpen"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label>ชื่อวัคซีน </label>
+            <!--            <input type="text " class="form-control" id="vaccine2" [(ngModel)]="namevac2">-->
+            <select class="form-control" placeholder="ชื่อวัคซีน" name="namevac3" id="namevac3"
+                    [(ngModel)]="namevac3">
+              <option *ngFor="let vac of dataVaccine" [value]="vac.vaccine_name">{{vac.vaccine_name}}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>สถานที่ได้รับ </label>
+            <input type="text " class="form-control" id="placevaccine3" [(ngModel)]="placevac3">
+          </div>
+        </div>
+
         <div class="row mt-10">
           <div class="form-group">
             <label>ผลการตรวจ SARS-CoV2 Antibody</label>
@@ -1447,9 +1474,18 @@
         </div>
 
         <div class="row mt-5">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <label>ผู้รายงาน</label>
             <input type="text " class="form-control" id="reporter" [(ngModel)]="reporter" >
+          </div>
+
+          <div class="col-md-6">
+            <label>พื้นที่งาน</label>
+            <select class="form-control"  name="area" id="area"
+                    [(ngModel)]="area">
+              <option  [value] = null ></option>
+              <option *ngFor="let area of dataArea" [value]="area.value">{{area.viewValue}}</option>
+            </select>
           </div>
 
         </div>

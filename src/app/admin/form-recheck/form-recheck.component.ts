@@ -49,6 +49,11 @@ interface PuiPriority {
   viewValue: string;
 }
 
+interface Area {
+  value: string;
+  viewValue: string;
+}
+
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -145,12 +150,14 @@ export class FormRecheckComponent implements OnInit {
   starttreat: any;
   vac1: any;
   vac2: any;
+  vac3: any;
   edate: any;
 
   dateSsick: any;
   datatreat: any;
   datevac1: any;
   datevac2: any;
+  datevac3: any;
 
   dateSARS1: any;
   dateSARS2: any;
@@ -178,8 +185,10 @@ export class FormRecheckComponent implements OnInit {
 
   namevac1: any;
   namevac2: any;
+  namevac3: any;
   placevac1: any;
   placevac2: any;
+  placevac3: any;
 
   puiPriority: any;
 
@@ -240,6 +249,7 @@ export class FormRecheckComponent implements OnInit {
   scontact3: any;
   scontactplace: any;
   radioStaffContact: any;
+  area: any;
 
   dataSContact: SContact[] = [
     {value: '1', viewValue: 'บุคคลากรใส่ surgical mask ร่วมกับ face shield หรือ อยู่ห่างจากผู้ป่วยเกิน 1 เมตร'},
@@ -261,6 +271,11 @@ export class FormRecheckComponent implements OnInit {
     {value: '4', viewValue: 'Rapid Test'}
   ];
 
+  dataArea: Area[] = [
+    {value: '1', viewValue: 'รพ.ราชบุรี'},
+    {value: '2', viewValue: 'รพ.สต.โรงเจ'},
+  ];
+
   dataSContact1: SContact1[] = [
     {value: '1', viewValue: 'ผู้ติดเชื้อใส่ surgical mask หรือ cloth mask'},
     {value: '2', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส <= 15 นาที'},
@@ -276,7 +291,8 @@ export class FormRecheckComponent implements OnInit {
 
   dataDoctor: Doctor[] = [
     {value: 'นพ.ปิยะณัฐ บุญประดิษฐ์', viewValue: 'นพ.ปิยะณัฐ บุญประดิษฐ์'},
-    {value: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล', viewValue: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล'}
+    {value: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล', viewValue: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล'},
+    {value: 'นพ.สุทธิศักดิ์ เด่นดวงใจ', viewValue: 'นพ. สุทธิศักดิ์ เด่นดวงใจ'}
   ];
 
   dataPname: Pname[] = [
@@ -551,6 +567,15 @@ export class FormRecheckComponent implements OnInit {
       console.error('error');
     }
 
+    if (this.dataNovel['novel_getvac3']){
+      this.vac3 =  moment(this.dataNovel['novel_getvac3']).add(543, 'year').format('DD/MM/YYYY');
+      this.getDateVac3(moment(this.dataNovel['novel_getvac3']).format('YYYY-MM-DD'));
+    }else{
+      this.vac3 = null;
+    }
+    this.namevac3 = this.dataNovel['novel_namevac3'];
+    this.placevac3 = this.dataNovel['novel_placevac3'];
+
     const resDataTL = await this.api.getTimeLineById(novelid);
     if (resDataTL.ok){
       this.dataTL = resDataTL.message[0];
@@ -660,6 +685,10 @@ export class FormRecheckComponent implements OnInit {
 
   getDateVac2(e: any): any {
     this.datevac2 = moment(e).format('YYYY-MM-DD');
+  }
+
+  getDateVac3(e: any): any {
+    this.datevac3 = moment(e).format('YYYY-MM-DD');
   }
 
   getDatetreat(e: any): any {
@@ -777,6 +806,7 @@ export class FormRecheckComponent implements OnInit {
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;
     data.reporter = this.reporter;
+    data.area = this.area;
     data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     infoData.push(data);
@@ -901,6 +931,9 @@ export class FormRecheckComponent implements OnInit {
     data.novel_getvac2 = (this.datevac2 != null) ? moment(this.datevac2).format('YYYY-MM-DD') : null;
     data.novel_namevac2 = this.namevac2;
     data.novel_placevac2 = this.placevac2;
+    data.novel_getva3 = (this.datevac3 != null) ? moment(this.datevac3).format('YYYY-MM-DD') : null;
+    data.novel_namevac3 = this.namevac3;
+    data.novel_placevac3 = this.placevac3;
 
     infoData.push(data);
 
