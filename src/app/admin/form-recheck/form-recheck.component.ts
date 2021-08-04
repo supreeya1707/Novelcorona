@@ -94,6 +94,7 @@ export class FormRecheckComponent implements OnInit {
   dataCluster: any = [];
   dataContact: any = [];
   dataVaccine: any = [];
+  dataStaff: any = [];
   locale = 'th-be';
 
   pname: any;
@@ -401,7 +402,7 @@ export class FormRecheckComponent implements OnInit {
       desDay3: [null, Validators.compose([Validators.required])]
     });
 
-
+    this.getDataStaff(this.novelID);
     this.getData(this.novelID);
     this.getCluster();
     this.getContact();
@@ -617,6 +618,19 @@ export class FormRecheckComponent implements OnInit {
     }
   }
 
+  async getDataStaff(novelid: any): Promise<any> {
+    const res = await this.api.getDataStaff(novelid);
+    // console.log(res);
+    if (res.ok === true){
+      this.dataStaff = res.message;
+      if (this.dataStaff.length > 0){
+
+      }
+    }else {
+      console.log('error');
+    }
+  }
+
   async getCluster(): Promise<any>{
     const resCluster = await this.api.getCluster();
     // console.log(resCluster);
@@ -755,6 +769,7 @@ export class FormRecheckComponent implements OnInit {
     }
   }
 
+
   async updateData(): Promise<any>{
     this.submitted = true;
     if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid) {
@@ -768,7 +783,13 @@ export class FormRecheckComponent implements OnInit {
     }
     const novelResponse = await this.updateNovelData();
     const timelineResponse = await this.updateTLData();
-    const staffResponse = await this.insertRecheck();
+    let staffResponse;
+    // console.log('this.dataStaff.length : ', this.dataStaff.length);
+    if ( this.dataStaff.length > 0){
+      staffResponse = await this.insertRecheck();
+    }else{
+      staffResponse = await this.updateStaff();
+    }
 
     if (novelResponse === true && timelineResponse === true && staffResponse === true) {
       this.successNotification();
@@ -814,6 +835,46 @@ export class FormRecheckComponent implements OnInit {
     infoData.push(data);
     const resStaff = await this.api.insStaff(infoData);
     return resStaff.ok;
+  }
+
+  async updateStaff(): Promise<any>{
+    const data: any = {};
+    const infoData: any = [];
+
+    data.novel_id = this.novelID;
+    data.riskconnect = this.cluster;
+    data.wearmask = this.wearmask;
+    data.place = this.radioPlace;
+
+    data.sars1_date = (this.dateSARS1 != null) ? moment(this.dateSARS1).format('YYYY-MM-DD') : null;
+    data.sars1_type = this.typeSAR1;
+    data.sars1_placesend = this.placesendSAR1;
+    data.sars1_result = this.radiodetect1;
+
+    data.sars2_date = (this.dateSARS2 != null) ? moment(this.dateSARS2).format('YYYY-MM-DD') : null;
+    data.sars2_type = this.typeSAR2;
+    data.sars2_placesend = this.placesendSAR2;
+    data.sars2_result = this.radiodetect2;
+
+    data.doctor = this.radiodoctor;
+    data.doctor_time = this.timefromdoc;
+    data.doctor_comment = this.commentdoctor;
+
+    data.sars_pt_type = this.radioSARtype;
+    data.pui_priority = this.puiPriority;
+    data.date_swab1 = (this.firstswab != null) ? moment(this.firstswab).format('YYYY-MM-DD') : null;
+    data.date_swab2 = (this.secondswab != null) ? moment(this.secondswab).format('YYYY-MM-DD') : null;
+    data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
+    data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
+    data.address_quaran = this.addressquaran;
+    data.reporter = this.reporter;
+    data.area = this.area;
+    // data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
+
+    infoData.push(data);
+    const resStaff = await this.api.updateStaff(this.novelID, infoData);
+    return resStaff.ok;
+
   }
 
   async updateNovelData(): Promise<any> {

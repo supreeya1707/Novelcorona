@@ -190,6 +190,19 @@ export class ApiService {
     return this.http.get(url, this.httpOptions).toPromise();
   }
 
+  getStaffById(novelid: any): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelstaff/${novelid}/novel_id`;
+
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
   getTimeLineById(novelid: any): any {
     // const token = sessionStorage.getTimeLineById('token');
     this.httpOptions = {
@@ -212,6 +225,18 @@ export class ApiService {
     };
     // console.log(dataUpdate);
     const url = `${this.baseURL}/novelcorona/${novelid}/novel_id`;
+    return this.http.put(url, {data: dataUpdate}, this.httpOptions).toPromise();
+  }
+
+  updateStaff(novelid, dataUpdate): any{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    // console.log(dataUpdate);
+    const url = `${this.baseURL}/novelstaff/${novelid}/novel_id`;
     return this.http.put(url, {data: dataUpdate}, this.httpOptions).toPromise();
   }
 

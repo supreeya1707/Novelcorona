@@ -44,6 +44,7 @@
             <td>{{novel.novel_start_sick | thaiDate: 'short'}}</td>
             <td>{{novel.novel_start_treat | thaiDate: 'thdatetime'}}</td>
             <td>
+              <button class="btn btn-xs btn-primary btn-xs" (click)="editNovelcorona2(novel.novel_id)"><i class="fa fa-pencil"></i></button>
               <button class="btn btn-xs btn-outline-primary btn-xs" (click)="printNovelcorona2(novel.novel_id)">Novelcorona 2</button><br>
               <button class="btn btn-xs btn-outline-success btn-xs" (click)="printReport01(novel.novel_id)">จพต.</button>
               <button class="btn btn-xs btn-outline-warning btn-xs" (click)="printReport02(novel.novel_id)">ใบขวาง</button>

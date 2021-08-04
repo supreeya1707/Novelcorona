@@ -6,6 +6,7 @@ import pdfMakeUnicode from 'pdfmake-unicode';
 import * as moment from 'moment';
 import {ApiService} from '../../services/api.service';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
+import {Router} from '@angular/router';
 
 
 // this part is crucial
@@ -119,7 +120,7 @@ export class PrintReportComponent implements OnInit {
   imgSign02: any;
   imgSign03: any;
 
-  constructor(private api: ApiService, private localeService: BsLocaleService,) { }
+  constructor(private api: ApiService, private localeService: BsLocaleService, private router: Router) { }
 
   ngOnInit(): void {
     this.localeService.use(this.locale);
@@ -216,6 +217,11 @@ export class PrintReportComponent implements OnInit {
     } else {
       console.log('error');
     }
+  }
+
+  editNovelcorona2(novelID: any){
+    console.log(novelID);
+    this.router.navigateByUrl('admin/formRecheck', {state: {novelid: novelID}});
   }
 
 
@@ -1280,9 +1286,9 @@ export class PrintReportComponent implements OnInit {
         {text:  this.dataNovelByID.novel_namevac1, absolutePosition: {x: 280, y: 540}, bold : true},
         {text:  this.dataNovelByID.novel_placevac1, absolutePosition: {x: 420, y: 540}, bold : true},
 
-        (this.dataNovelByID.novel_getvac2 != null) ? {text:  moment(this.dataNovelByID.novel_getvac2).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 105, y: 555}, bold : true} : {text: ''},
-        {text:  this.dataNovelByID.novel_namevac2, absolutePosition: {x: 280, y: 555}, bold : true},
-        {text:  this.dataNovelByID.novel_placevac2, absolutePosition: {x: 420, y: 555}, bold : true},
+        (this.dataNovelByID.novel_getvac2 != null) ? {text:  moment(this.dataNovelByID.novel_getvac2).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 105, y: 557}, bold : true} : {text: ''},
+        {text:  this.dataNovelByID.novel_namevac2, absolutePosition: {x: 280, y: 557}, bold : true},
+        {text:  this.dataNovelByID.novel_placevac2, absolutePosition: {x: 420, y: 557}, bold : true},
 
         (this.dataNovelByID.novel_getvac3 != null) ? {text:  moment(this.dataNovelByID.novel_getvac3).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 105, y: 573}, bold : true} : {text: ''},
         {text:  this.dataNovelByID.novel_namevac3, absolutePosition: {x: 280, y: 573}, bold : true},
