@@ -264,18 +264,6 @@ export class FormRecheckComponent implements OnInit {
     {value: '2', viewValue: 'บุคลากรไม่ใส่ surgical mask หรือ cloth mask หรือไม่ได้ใส่ตลอดเวลา'}
   ];
 
-  dataPuiPriority: PuiPriority[] = [
-    {value: '1', viewValue: 'LR Contact'},
-    {value: '2', viewValue: 'HR Contact'},
-    {value: '3', viewValue: 'พื้นที่เสี่ยง'},
-    {value: '4', viewValue: 'Rapid Test'}
-  ];
-
-  dataArea: Area[] = [
-    {value: '1', viewValue: 'รพ.ราชบุรี'},
-    {value: '2', viewValue: 'รพ.สต.โรงเจ'},
-  ];
-
   dataSContact1: SContact1[] = [
     {value: '1', viewValue: 'ผู้ติดเชื้อใส่ surgical mask หรือ cloth mask'},
     {value: '2', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส <= 15 นาที'},
@@ -288,6 +276,20 @@ export class FormRecheckComponent implements OnInit {
     {value: '3', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส <= 15 นาที'},
     {value: '4', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส > 15 นาที'}
   ];
+
+  dataPuiPriority: PuiPriority[] = [
+    {value: '1', viewValue: 'LR Contact'},
+    {value: '2', viewValue: 'HR Contact'},
+    {value: '3', viewValue: 'พื้นที่เสี่ยง'},
+    {value: '4', viewValue: 'Rapid Test'}
+  ];
+
+  dataArea: Area[] = [
+    {value: '1', viewValue: 'รพ.ราชบุรี'},
+    {value: '2', viewValue: 'รพ.สต.โรงเจ'},
+  ];
+
+
 
   dataDoctor: Doctor[] = [
     {value: 'นพ.ปิยะณัฐ บุญประดิษฐ์', viewValue: 'นพ.ปิยะณัฐ บุญประดิษฐ์'},
@@ -931,7 +933,7 @@ export class FormRecheckComponent implements OnInit {
     data.novel_getvac2 = (this.datevac2 != null) ? moment(this.datevac2).format('YYYY-MM-DD') : null;
     data.novel_namevac2 = this.namevac2;
     data.novel_placevac2 = this.placevac2;
-    data.novel_getva3 = (this.datevac3 != null) ? moment(this.datevac3).format('YYYY-MM-DD') : null;
+    data.novel_getvac3 = (this.datevac3 != null) ? moment(this.datevac3).format('YYYY-MM-DD') : null;
     data.novel_namevac3 = this.namevac3;
     data.novel_placevac3 = this.placevac3;
 
