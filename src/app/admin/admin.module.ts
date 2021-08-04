@@ -16,6 +16,7 @@ import {DigitOnlyModule} from '@uiowa/digit-only';
 import {SharedModule} from "../shared.module";
 import { PrintReportComponent } from './print-report/print-report.component';
 import {AppsModule} from "../apps/apps.module";
+import {DataTablesModule} from "angular-datatables";
 
 
 defineLocale('th-be', thBeLocale);
@@ -28,17 +29,18 @@ defineLocale('th-be', thBeLocale);
     PrintReportComponent
   ],
     imports: [
-        CommonModule,
-        AdminRoutingModule,
-        BsDatepickerModule.forRoot(),
-        BrowserAnimationsModule,
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        DigitOnlyModule,
-        SharedModule,
-        AppsModule,
+      DataTablesModule,
+      CommonModule,
+      AdminRoutingModule,
+      BsDatepickerModule.forRoot(),
+      BrowserAnimationsModule,
+      BrowserModule,
+      FormsModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      DigitOnlyModule,
+      SharedModule,
+      AppsModule,
     ]
 })
 export class AdminModule { }

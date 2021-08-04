@@ -213,8 +213,6 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label>สิทธิการรักษา <!--<span class="text-danger">*</span>--></label>
-<!--                <input type="text" class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat"-->
-<!--                       formControlName="treat">-->
                 <select class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat"
                         formControlName="treat" [(ngModel)]="treat">
                   <option *ngFor="let t of dataPTtpye" [value]="t.value">{{t.viewValue}}</option>
@@ -227,18 +225,26 @@
                 <input type="text" class="form-control" placeholder="โปรดระบุสิทธิการรักษา"  [(ngModel)]="other_treat"  [ngModelOptions]="{standalone: true}">
               </div>
             </div>
+
             <div class="col-md-6">
               <div class="form-group">
-                <label>วัน /เดือน/ ปีเกิด</label>
+                <label>วัน /เดือน/ ปีเกิด <span class="text-danger">*</span></label><small class="text-info">&nbsp;หากไม่ทราบวันเกิด/เดือนเกิด ให้ใส่เลือกวันที่ 1 เดือน 1 และตามด้วยปีเกิด</small>
                 <div class="input-group">
-                  <!--[(ngModel)]="birthday" [ngModelOptions]="{standalone: true}"-->
-                  <input class="form-control" #datepickerMDY="bsDatepicker" formControlName="birthday" bsDatepicker>
+                  <input class="form-control" #datepickerMDY="bsDatepicker" formControlName="birthday" bsDatepicker
+                         [ngClass]="{ 'is-invalid': submitted && f.birthday.errors  || ((f.birthday.touched || f.birthday.dirty) && f.birthday.invalid) }">
                   <div class="input-group-append">
-                  <span class="input-group-text">
-                    <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                       [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                    <span class="input-group-text">
+                      <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                         [attr.aria-expanded]="datepickerMDY.isOpen"></i>
+                    </span>
+                  </div>
+                  <div *ngIf="submitted && f.birthday.errors  || ((f.birthday.touched || f.birthday.dirty) && f.birthday.invalid)"
+                       class="invalid-feedback">
+                    <div class="text-left fSize12" *ngIf="f.birthday.errors.required">กรุณาใส่วัน/เดือน/ปีเกิด
+                    </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -251,9 +257,8 @@
           <div class="row mt-3">
             <div class="col-md-4">
               <div class="form-group">
-                <label>เลขที่ </label>
-                <input type="text" class="form-control" placeholder="ใส่บ้านเลขที่" name="addr" id="addr"
-                       formControlName="addr">
+                <label>เลขที่</label>
+                <input type="text" class="form-control" placeholder="ใส่บ้านเลขที่" name="addr" id="addr" formControlName="addr">
               </div>
             </div>
             <div class=" col-md-4">
@@ -1199,7 +1204,7 @@
 <div class="row justify-content-center mt-5 mb-6 font-prompt-medium ">
   <button type="submit" class="mx-2 btn btn-outline-primary btn-lg"  [disabled]="btndisble" (click)="insertData()">บันทึก</button>
 
-  <button type="button" class="btn btn-secondary btn-lg ">ยกเลิก</button>
+  <button type="button" class="btn btn-secondary btn-lg" routerLink="/apps/home">ยกเลิก</button>
 </div>
 
 

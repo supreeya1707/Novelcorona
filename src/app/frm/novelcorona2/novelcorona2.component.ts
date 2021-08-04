@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import Swal from 'sweetalert2';
 import {ApiService} from '../../services/api.service';
+import {Router} from "@angular/router";
 
 interface Pname {
   value: string;
@@ -210,7 +211,7 @@ export class Novelcorona2Component implements OnInit {
   ];
 
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
-              @Inject('baseURL') private baseURL: any) {
+              @Inject('baseURL') private baseURL: any,  private router: Router) {
   }
 
 
@@ -235,7 +236,7 @@ export class Novelcorona2Component implements OnInit {
       telephone: [null, Validators.compose([Validators.required])],
       telephonedoc: [null],
       treat: [null],
-      birthday: [null],
+      birthday: [null, Validators.compose([Validators.required])],
       addr: [null],
       moo: [null],
       mooban: [null],
@@ -326,15 +327,14 @@ export class Novelcorona2Component implements OnInit {
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
       .then(() => {
-        window.location.reload();
+        this.router.navigateByUrl('apps/home');
       });
   }
 
   errorNotification() {
-    Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!', 'error')
+    Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!<br>กรุณาลองอีกครั้ง', 'error')
       .then(() => {
-        window.location.reload();
-        // this.router.navigateByUrl('/date');
+        this.btndisble = false;
       });
   }
 
@@ -378,11 +378,11 @@ export class Novelcorona2Component implements OnInit {
   async insertData(): Promise<any> {
     this.submitted = true;
     // stop here if form is invalid
+    console.log('this.generalFrm.invalid ', this.generalFrm.invalid);
+    console.log('this.riskFrm.invalid ', this.riskFrm.invalid);
+    console.log('this.timelineFrm.invalid ', this.timelineFrm.invalid);
     if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid) {
       // console.log('invalid');
-      console.log('this.generalFrm.invalid ', this.generalFrm.invalid);
-      console.log('this.riskFrm.invalid ', this.riskFrm.invalid);
-      console.log('this.timelineFrm.invalid ', this.timelineFrm.invalid);
       return;
     }else{
       this.btndisble = true;

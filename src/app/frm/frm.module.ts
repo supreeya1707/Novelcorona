@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {Novelcorona2Component} from './novelcorona2/novelcorona2.component';
 import {SharedModule} from '../shared.module';
 import {AppsModule} from "../apps/apps.module";
+import {DigitOnlyModule} from '@uiowa/digit-only';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {AppsModule} from "../apps/apps.module";
     ReactiveFormsModule,
     SharedModule,
     AppsModule,
+    DigitOnlyModule,
   ]
 })
 export class FrmModule { }

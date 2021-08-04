@@ -251,6 +251,11 @@ export class FormRecheckComponent implements OnInit {
   scontactplace: any;
   radioStaffContact: any;
   area: any;
+  sarsdate1: any = null;
+  sarsdate2: any = null;
+  date1swab: any = null;
+  date2swab: any = null;
+  dateSquarantine = null;
 
   dataSContact: SContact[] = [
     {value: '1', viewValue: 'บุคคลากรใส่ surgical mask ร่วมกับ face shield หรือ อยู่ห่างจากผู้ป่วยเกิน 1 เมตร'},
@@ -295,7 +300,7 @@ export class FormRecheckComponent implements OnInit {
   dataDoctor: Doctor[] = [
     {value: 'นพ.ปิยะณัฐ บุญประดิษฐ์', viewValue: 'นพ.ปิยะณัฐ บุญประดิษฐ์'},
     {value: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล', viewValue: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล'},
-    {value: 'นพ.สุทธิศักดิ์ เด่นดวงใจ', viewValue: 'นพ. สุทธิศักดิ์ เด่นดวงใจ'}
+    {value: 'นพ.สุทธิศักดิ์ เด่นดวงใจ', viewValue: 'นพ.สุทธิศักดิ์ เด่นดวงใจ'}
   ];
 
   dataPname: Pname[] = [
@@ -329,20 +334,6 @@ export class FormRecheckComponent implements OnInit {
   ngOnInit(): void {
     this.localeService.use(this.locale);
     this.novelID = history.state.novelid;
-
-    const toDataURL = url => fetch(url)
-      .then(response => response.blob())
-      .then(blob => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      }));
-    toDataURL('../assets/picture/qrcode.png') .then(dataUrl => {
-      this.qrcode = 'data:image;base64,' + dataUrl;
-    });
-
-
 
     this.generalFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
@@ -379,7 +370,7 @@ export class FormRecheckComponent implements OnInit {
       weight: [null],
       high: [null],
       bmi: [null],
-      birthday: [null],
+      birthday: [null, Validators.compose([Validators.required])],
     });
 
     this.riskFrm  = this.formBuilder.group({
@@ -402,11 +393,12 @@ export class FormRecheckComponent implements OnInit {
       desDay3: [null, Validators.compose([Validators.required])]
     });
 
-    this.getDataStaff(this.novelID);
+
     this.getData(this.novelID);
     this.getCluster();
     this.getContact();
     this.getVaccine();
+    this.getDataStaff(this.novelID);
 
   }
 
@@ -622,9 +614,49 @@ export class FormRecheckComponent implements OnInit {
     const res = await this.api.getDataStaff(novelid);
     // console.log(res);
     if (res.ok === true){
-      this.dataStaff = res.message;
-      if (this.dataStaff.length > 0){
+      this.dataStaff = res.message[0];
+      // console.log(res.message[0]);
+      // console.log(res.message);
+      if (this.dataStaff != null){
+        console.log(this.dataStaff['riskconnect']);
+        this.cluster = this.dataStaff['riskconnect'];
+        this.wearmask = this.dataStaff['wearmask'];
+        this.radioPlace = this.dataStaff['place'];
+        if (this.dataStaff['sars1_date'] != null){
+          this.sarsdate1 = (moment(this.dataStaff['sars1_date']).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSARS1(moment(this.dataStaff['sars1_date']).format('YYYY-MM-DD'));
+        }
+        this.typeSAR1 = this.dataStaff['sars1_type'];
+        this.placesendSAR1 = this.dataStaff['sars1_placesend'];
+        this.radiodetect1 = this.dataStaff['sars1_result'];
 
+        if (this.dataStaff['sars2_date'] != null){
+          this.sarsdate2 = (moment(this.dataStaff['sars2_date']).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSARS1(moment(this.dataStaff['sars2_date']).format('YYYY-MM-DD'));
+        }
+        this.typeSAR2 = this.dataStaff['sars2_type'];
+        this.placesendSAR2 = this.dataStaff['sars2_placesend'];
+        this.radiodetect2 = this.dataStaff['sars2_result'];
+        this.radiodoctor = this.dataStaff['doctor'];
+        this.timefromdoc = this.dataStaff['doctor_time'];
+        this.commentdoctor = this.dataStaff['doctor_comment'];
+        this.radioSARtype = this.dataStaff['sars_pt_type'];
+        this.puiPriority = this.dataStaff['pui_priority'];
+        if (this.dataStaff['date_swab1'] != null){
+          this.date1swab = (moment(this.dataStaff['date_swab1']).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSwab1(moment(this.dataStaff['date_swab1']).format('YYYY-MM-DD'));
+        }
+        if (this.dataStaff['date_swab2'] != null){
+          this.date2swab = (moment(this.dataStaff['date_swab2']).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSwab1(moment(this.dataStaff['date_swab2']).format('YYYY-MM-DD'));
+        }
+        if (this.dataStaff['sdate_quaran'] != null){
+          this.dateSquarantine = (moment(this.dataStaff['sdate_quaran']).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDatequarantine(moment(this.dataStaff['sdate_quaran']).format('YYYY-MM-DD'));
+        }
+        this.addressquaran = this.dataStaff['address_quaran'];
+        this.reporter = this.dataStaff['reporter'];
+        this.area =  this.dataStaff['area'];
       }
     }else {
       console.log('error');
@@ -653,7 +685,7 @@ export class FormRecheckComponent implements OnInit {
 
   async getVaccine(): Promise<any>{
     const resVac = await this.api.getVaccine();
-    console.log(resVac);
+    // console.log(resVac);
     if (resVac.ok === true){
       this.dataVaccine = resVac.message;
     }else{
@@ -707,6 +739,22 @@ export class FormRecheckComponent implements OnInit {
     this.datevac3 = moment(e).format('YYYY-MM-DD');
   }
 
+  getDateSARS1(e: any): any {
+    this.dateSARS1 = moment(e).format('YYYY-MM-DD');
+  }
+
+  getDateSARS2(e: any): any {
+    this.dateSARS2 = moment(e).format('YYYY-MM-DD');
+  }
+
+  getDateSwab1(e: any): any {
+    this.firstswab = moment(e).format('YYYY-MM-DD');
+  }
+
+  getDateSwab2(e: any): any {
+    this.secondswab = moment(e).format('YYYY-MM-DD');
+  }
+
   getDatetreat(e: any): any {
     // console.log(e);
     this.datatreat = moment(e).format('YYYY-MM-DD');
@@ -718,13 +766,6 @@ export class FormRecheckComponent implements OnInit {
     this.datecome = moment(e).format('YYYY-MM-DD');
     // console.log('this.datecome ', this.datecome);
   }
-
-  // convertDate(d: any, i: any): any {
-  //   const ss: any = d.toString().split('/');
-  //   const dateString: any = (ss[2]) + '-' + ss[1] + '-' + ss[0];
-  //   const datai: any = -i;
-  //   return moment(dateString).add(datai, 'day').add(543, 'year').format('DD/MMM/YYYY');
-  // }
 
   convertDateQuarantine(d: any, i: any): any {
     const ss: any = d.toString().split('/');
@@ -784,17 +825,18 @@ export class FormRecheckComponent implements OnInit {
     const novelResponse = await this.updateNovelData();
     const timelineResponse = await this.updateTLData();
     let staffResponse;
-    // console.log('this.dataStaff.length : ', this.dataStaff.length);
-    if ( this.dataStaff.length > 0){
-      staffResponse = await this.insertRecheck();
-    }else{
+    console.log('this.dataStaff : ', this.dataStaff);
+    if (this.dataStaff){
       staffResponse = await this.updateStaff();
+    }else{
+      staffResponse = await this.insertRecheck();
     }
 
     if (novelResponse === true && timelineResponse === true && staffResponse === true) {
       this.successNotification();
     } else {
       this.errorNotification();
+      this.btndisble = false;
     }
   }
 
@@ -803,7 +845,7 @@ export class FormRecheckComponent implements OnInit {
     const infoData: any = [];
 
     data.novel_id = this.novelID;
-    data.riskconnect = this.cluster;
+    data.riskconnect = (this.cluster === null || this.cluster === '') ? null : this.cluster;
     data.wearmask = this.wearmask;
     data.place = this.radioPlace;
 
@@ -822,18 +864,24 @@ export class FormRecheckComponent implements OnInit {
     data.doctor_comment = this.commentdoctor;
 
     data.sars_pt_type = this.radioSARtype;
-    data.pui_priority = this.puiPriority;
+    if (this.radioSARtype === 2){
+      data.pui_priority = this.puiPriority;
+    }else{
+      data.pui_priority = null;
+    }
+
     data.date_swab1 = (this.firstswab != null) ? moment(this.firstswab).format('YYYY-MM-DD') : null;
     data.date_swab2 = (this.secondswab != null) ? moment(this.secondswab).format('YYYY-MM-DD') : null;
     data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;
     data.reporter = this.reporter;
-    data.area = this.area;
+    data.area = (this.area === null || this.area === '') ? null : this.area;
     data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     infoData.push(data);
     const resStaff = await this.api.insStaff(infoData);
+    console.log('resStaff : ', resStaff.ok);
     return resStaff.ok;
   }
 
@@ -842,7 +890,7 @@ export class FormRecheckComponent implements OnInit {
     const infoData: any = [];
 
     data.novel_id = this.novelID;
-    data.riskconnect = this.cluster;
+    data.riskconnect = (this.cluster === null || this.cluster === '') ? null : this.cluster;
     data.wearmask = this.wearmask;
     data.place = this.radioPlace;
 
@@ -861,18 +909,23 @@ export class FormRecheckComponent implements OnInit {
     data.doctor_comment = this.commentdoctor;
 
     data.sars_pt_type = this.radioSARtype;
-    data.pui_priority = this.puiPriority;
+    if (this.radioSARtype === 2){
+      data.pui_priority = this.puiPriority;
+    }else{
+      data.pui_priority = null;
+    }
     data.date_swab1 = (this.firstswab != null) ? moment(this.firstswab).format('YYYY-MM-DD') : null;
     data.date_swab2 = (this.secondswab != null) ? moment(this.secondswab).format('YYYY-MM-DD') : null;
     data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;
     data.reporter = this.reporter;
-    data.area = this.area;
+    data.area = (this.area === null || this.area === '') ? null : this.area;
     // data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     infoData.push(data);
     const resStaff = await this.api.updateStaff(this.novelID, infoData);
+    console.log('resStaff : ', resStaff.ok);
     return resStaff.ok;
 
   }
@@ -1001,6 +1054,7 @@ export class FormRecheckComponent implements OnInit {
     infoData.push(data);
 
     const resUpdateNovel: any = await this.api.updateNovelData(this.novelID, infoData);
+    console.log('resUpdateNovel : ', resUpdateNovel.ok);
     return resUpdateNovel.ok;
   }
 
@@ -1042,6 +1096,7 @@ export class FormRecheckComponent implements OnInit {
     info.push(data);
 
     const resUpdateTL: any = await this.api.updateTLData(this.novelID, info);
+    console.log('resUpdateTL : ', resUpdateTL.ok);
     return  resUpdateTL.ok;
   }
 

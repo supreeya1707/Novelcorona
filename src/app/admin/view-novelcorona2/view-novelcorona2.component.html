@@ -1,7 +1,7 @@
-<div class="col-lg-12 text-center mt-20">
+<div class="col-lg-12 text-center mt-25">
   <h1 class="font-prompt-medium">รายชื่อผู้ป่วยที่ทำแบบสอบสวน (Novelcoroana 2)</h1>
 </div>
-<div class="container font-prompt-medium">
+<div class="container-fluid font-prompt-medium">
   <div class="card mt-5">
     <div class="card-body">
       <div class="form-group">
@@ -21,20 +21,21 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container-fluid">
     <div class="card text-center">
       <div class="card-body">
         <div class="table-responsive font-prompt-medium fSize16">
-          <table class="table table-bordered">
+          <table class="table table-bordered table-striped table-hover">
             <thead>
               <tr class="text-center" style="height: 60px" >
-                <th width="15%">เลขประจำตัวประชาชน</th>
-                <th width="25%">ชื่อ-นามสกุล</th>
+                <th width="10%">เลขประจำตัวประชาชน</th>
+                <th width="20%">ชื่อ-นามสกุล</th>
                 <th width="5%">สัญชาติ</th>
-                <th width="15%">เบอร์โทรศัพท์</th>
-                <th width="15%">วันที่มีอาการ</th>
-                <th width="15%">วันที่เข้ารับการรักษา</th>
-                <th width="15%"></th>
+                <th width="20%">สถานที่ทำงาน/สถานศึกษา</th>
+                <th width="10%">เบอร์โทรศัพท์</th>
+                <th width="10%">วันที่มีอาการ</th>
+                <th width="10%">วันที่เข้ารับการรักษา</th>
+                <th width="5%"></th>
               </tr>
             </thead>
             <tbody *ngIf="dataNovel?.length != 0">
@@ -42,11 +43,15 @@
                 <td>{{novel.novel_cid}}</td>
                 <td class="text-left">{{novel.novel_pname + novel.novel_fname + '  ' + novel.novel_lname}}</td>
                 <td>{{novel.novel_national}}</td>
+                <td class="text-left">{{novel.novel_station}}</td>
                 <td>{{novel.novel_phone}}</td>
                 <td>{{novel.novel_start_sick | thaiDate: 'short'}}</td>
                 <td>{{novel.novel_start_treat | thaiDate: 'short'}}</td>
                 <td>
-                  <button class="btn btn-xs btn-outline-primary btn-xs" (click)="viewForm(novel.novel_id)"><i class="fa fa-pencil"></i></button>
+                  <button class="btn btn-xs btn-outline-primary btn-xs"
+                          (click)="viewForm(novel.novel_id)">
+                    <i class="fa fa-pencil fa-xs p-0 m-0"></i>
+                  </button>
                 </td>
               </tr>
             </tbody>

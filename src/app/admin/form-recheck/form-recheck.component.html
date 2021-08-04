@@ -192,8 +192,7 @@
                 <input name="telephone" id="telephone" formControlName="telephone"
                        [ngClass]="{ 'is-invalid': submitted && f.telephone.errors  || ((f.telephone.touched || f.telephone.dirty) && f.telephone.invalid) }"
                        class="form-control" type="text" placeholder="ใส่เบอร์โทรศัพท์ที่ติดต่อได้">
-                <div
-                  *ngIf="submitted && f.telephone.errors  || ((f.telephone.touched || f.telephone.dirty) && f.telephone.invalid)"
+                <div *ngIf="submitted && f.telephone.errors  || ((f.telephone.touched || f.telephone.dirty) && f.telephone.invalid)"
                   class="invalid-feedback">
                   <div class="text-left fSize12" *ngIf="f.telephone.errors.required">กรุณาใส่เบอร์โทรศัพท์ที่ติดต่อได้
                   </div>
@@ -214,8 +213,6 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label>สิทธิการรักษา <!--<span class="text-danger">*</span>--></label>
-                <!--                <input type="text" class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat"-->
-                <!--                       formControlName="treat">-->
                 <select class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat" formControlName="treat" [(ngModel)]="treat">
                   <option *ngFor="let t of dataPTtpye" [value]="t.value">{{t.viewValue}}</option>
                 </select>
@@ -229,15 +226,22 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label>วัน /เดือน/ ปีเกิด</label>
+                <label>วัน /เดือน/ ปีเกิด <span class="text-danger">*</span></label><small class="text-info">&nbsp;หากไม่ทราบวันเกิด/เดือนเกิด ให้ใส่เลือกวันที่ 1 เดือน 1 และตามด้วยปีเกิด</small>
                 <div class="input-group">
                   <input class="form-control" #datepickerMDY="bsDatepicker"
                          formControlName="birthday" (bsValueChange)="getBirthday($event)"
-                         bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                         bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                         [ngClass]="{ 'is-invalid': submitted && f.birthday.errors  || ((f.birthday.touched || f.birthday.dirty) && f.birthday.invalid) }">
                   <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                    <span class="input-group-text">
+                      <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                         [attr.aria-expanded]="datepickerMDY.isOpen"></i>
+                    </span>
+                  </div>
+                  <div *ngIf="submitted && f.birthday.errors  || ((f.birthday.touched || f.birthday.dirty) && f.birthday.invalid)"
+                       class="invalid-feedback">
+                    <div class="text-left fSize12" *ngIf="f.birthday.errors.required">กรุณาใส่วัน/เดือน/ปีเกิด
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1092,10 +1096,8 @@
         <div class="row">
           <label class="col-12">สรุปความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยงกลุ่มใด</label>
           <div class="col-md-12">
-            <select class="form-control"
-                    placeholder="เลือกความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยง"
-                    [(ngModel)]="cluster" name="cluster" id="cluster">
-              <option [value]="null"  selected></option>
+            <select class="form-control" [(ngModel)]="cluster" name="cluster" id="cluster">
+              <option></option>
               <option *ngFor="let clus of dataCluster" [value]="clus.cluster_id">{{clus.cluster_name}}</option>
             </select>
           </div>
@@ -1269,8 +1271,9 @@
           <div class="col-md-3">
             <label>วันที่เก็บ</label>
             <div class="input-group">
-              <input class="form-control" placeholder="โปรดระบุวันที่เก็บตัวอย่าง" #datepickerSARS1="bsDatepicker"
-                     [(ngModel)]="dateSARS1"
+              <input class="form-control" (bsValueChange)="getDateSARS1($event)"
+                     placeholder="โปรดระบุวันที่เก็บตัวอย่าง" #datepickerSARS1="bsDatepicker"
+                     [value]="sarsdate1"
                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
               <div class="input-group-append">
                 <span class="input-group-text">
@@ -1309,8 +1312,9 @@
           <div class="col-md-3">
             <label>วันที่เก็บ</label>
             <div class="input-group">
-              <input class="form-control" placeholder="โปรดระบุวันที่เก็บตัวอย่าง" #datepickerSARS2="bsDatepicker"
-                     [(ngModel)]="dateSARS2"
+              <input class="form-control" (bsValueChange)="getDateSARS2($event)"
+                     placeholder="โปรดระบุวันที่เก็บตัวอย่าง" #datepickerSARS2="bsDatepicker"
+                     [value]="sarsdate2"
                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
               <div class="input-group-append">
                 <span class="input-group-text">
@@ -1411,8 +1415,9 @@
              <label>ครั้งที่ 1</label>
              <div class="input-group">
                <input class="form-control"  #datepickerSwab1="bsDatepicker"
-                      placeholder="เลือกวันที่นัด Swab ครั้งที่ 1"
-                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" id="firstswab" [(ngModel)]="firstswab">
+                      placeholder="เลือกวันที่นัด Swab ครั้งที่ 1" (bsValueChange)="getDateSwab1($event)"
+                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                      id="firstswab" [value]="date1swab">
                <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerSwab1.toggle()"
@@ -1424,8 +1429,9 @@
              <label>ครั้งที่ 2</label>
              <div class="input-group">
                <input class="form-control"  #datepickerSwab2="bsDatepicker"
-                      placeholder="เลือกวันที่นัด Swab ครั้งที่ 2"
-                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" id="secondswab" [(ngModel)]="secondswab">
+                      placeholder="เลือกวันที่นัด Swab ครั้งที่ 2" (bsValueChange)="getDateSwab2($event)"
+                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                      id="secondswab"  [value]="date2swab">
                <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerSwab2.toggle()"
@@ -1440,7 +1446,8 @@
           <div class="col-md-6">
             <label>จพต. 14 วันที่</label>
             <div class="input-group">
-              <input class="form-control" (bsValueChange)="getDatequarantine($event)" #datepickerSDate="bsDatepicker"
+              <input class="form-control" (bsValueChange)="getDatequarantine($event)"
+                     #datepickerSDate="bsDatepicker" [value]="dateSquarantine"
                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" >
               <div class="input-group-append">
                 <span class="input-group-text">
@@ -1483,7 +1490,7 @@
             <label>พื้นที่งาน</label>
             <select class="form-control"  name="area" id="area"
                     [(ngModel)]="area">
-              <option  [value] = null ></option>
+              <option></option>
               <option *ngFor="let area of dataArea" [value]="area.value">{{area.viewValue}}</option>
             </select>
           </div>
@@ -1498,8 +1505,7 @@
 
 <!--  section bottom-->
 <div class="row justify-content-center mt-5 mb-6 font-prompt-medium ">
-  <button type="submit" class="mx-2 btn btn-outline-primary btn-lg" (click)="updateData()">บันทึก</button>
-  <button type="button" class="btn btn-secondary btn-lg ">ยกเลิก</button>
+  <button type="submit" class="mx-2 btn btn-outline-primary btn-lg" [disabled]="btndisble" (click)="updateData()">บันทึก</button>
 </div>
 
 

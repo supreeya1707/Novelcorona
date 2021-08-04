@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -7,6 +7,9 @@ import * as moment from 'moment';
 import {ApiService} from '../../services/api.service';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {Router} from '@angular/router';
+import {Person} from '@angular/cli/utilities/package-json';
+import {any} from 'codelyzer/util/function';
+import {DataTableDirective} from "angular-datatables";
 
 
 // this part is crucial
@@ -71,6 +74,7 @@ interface SContactPlace {
 })
 
 export class PrintReportComponent implements OnInit {
+
   dataNovel: any = [];
   dataNovelByID: any = [];
   dataNovelStaff: any = [];
@@ -81,6 +85,7 @@ export class PrintReportComponent implements OnInit {
   currentDate: any = new Date();
   locale = 'th-be';
   logo: any;
+  dataJson: any;
 
   dataPuiPriority: PuiPriority[] = [
     {value: '1', viewValue: 'LR Contact'},
@@ -120,6 +125,10 @@ export class PrintReportComponent implements OnInit {
   imgSign02: any;
   imgSign03: any;
 
+
+  dtOptions: DataTables.Settings = {};
+
+
   constructor(private api: ApiService, private localeService: BsLocaleService, private router: Router) { }
 
   ngOnInit(): void {
@@ -149,14 +158,43 @@ export class PrintReportComponent implements OnInit {
     toDataURL('assets/picture/sign03.png') .then(dataUrl => {
       this.imgSign03 = 'data:image;base64,' + dataUrl;
     });
+
+
+
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 2,
+      paging: true,
+      // serverSide: true,
+      processing: true,
+      data: this.dataJson,
+      columns: [
+        {title: 'เลขประจำตัวประชาชน', data: 'novel_cid'},
+        {title: 'ชื่อ-นามสกุล', data: 'novel_pname'},
+      ]
+    };
+
+
+
   }
 
   async dateChange(e: any): Promise<any> {
     const dateinput = moment(e).format('YYYY-MM-DD');
     const rs: any = await this.api.getStaffByDate(dateinput);
-    console.log(rs);
+    // console.log(rs);
     if (rs.ok) {
       this.dataNovel = rs.message;
+      const obj = Object.assign(this.dataNovel.map( x => Object.values(x)).
+      map(y => ({novel_cid: y[5], novel_pname: y[2]})));
+      // console.log(obj);
+      this.dataJson = JSON.parse(JSON.stringify(obj));
+      // console.log(this.dataJson);
+
+      // console.log(this.dataNovel);
+      // const json = JSON.stringify(this.dataNovel);
+      // console.log(json);
+      // this.dataJson = json;
     } else {
       console.log('error');
     }
@@ -300,7 +338,7 @@ export class PrintReportComponent implements OnInit {
 
         // ข้อมูลทางคลินิก
         (this.dataNovelByID.novel_start_sick != null) ? {text:  moment(this.dataNovelByID.novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 150, y: 274}, bold : true} : {text: ''},
-        (this.dataNovelByID.novel_start_sick) ? {text:  moment(this.dataNovelByID.novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 450, y: 274}, bold : true} : {text: ''},,
+        (this.dataNovelByID.novel_start_sick) ? {text:  moment(this.dataNovelByID.novel_start_sick).locale('th').add(543, 'year').format('D MMMM YYYY'), absolutePosition: {x: 450, y: 274}, bold : true} : {text: ''}, ,
         {text:  this.dataNovelByID.novel_hospital_first, absolutePosition: {x: 200, y: 290}, bold : true},
         {text:  this.dataNovelByID.novel_province_first, absolutePosition: {x: 430, y: 290}, bold : true},
         {text:  this.dataNovelByID.novel_hospital_now, absolutePosition: {x: 210, y: 306}, bold : true},
@@ -2445,20 +2483,20 @@ export class PrintReportComponent implements OnInit {
             body: [
               [{text: 'อาการและอาการแสดง', alignment: 'center', border: [true, false, true, false]},
                 (this.dataNovelStaff.sdate_quaran) ? {text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('DD/MM/YY'), alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[0], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[1], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[2], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[3], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[4], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[5], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[6], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[7], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[8], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[9], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[10], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[11], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[12], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null,
-                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[13], alignment: 'center', border: [true, true, true, true], style: 'fSize12'}: null
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[0], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[1], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[2], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[3], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[4], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[5], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[6], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[7], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[8], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[9], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[10], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[11], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[12], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null,
+                (this.dataNovelStaff.sdate_quaran) ? {text: this.dateTimeLineShortquaran[13], alignment: 'center', border: [true, true, true, true], style: 'fSize12'} : null
               ],
               [
                 {text: ' ', alignment: 'center', border: [true, false, true, true]},
@@ -2559,7 +2597,7 @@ export class PrintReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
             ]
           }
         },
@@ -2641,7 +2679,7 @@ export class PrintReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
             ]
           }
@@ -2725,7 +2763,7 @@ export class PrintReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
 
             ]
@@ -2767,7 +2805,7 @@ export class PrintReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
             ]
           }
@@ -2808,7 +2846,7 @@ export class PrintReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
             ]
           }
@@ -2891,7 +2929,7 @@ export class PrintReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
             ]
           }
