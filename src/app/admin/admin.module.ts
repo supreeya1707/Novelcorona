@@ -10,13 +10,12 @@ import {LayoutComponent} from './layout/layout.component';
 import {FormRecheckComponent} from './form-recheck/form-recheck.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AppRoutingModule} from '../app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
-import {SharedModule} from "../shared.module";
+import {SharedModule} from '../shared.module';
 import { PrintReportComponent } from './print-report/print-report.component';
-import {AppsModule} from "../apps/apps.module";
-import {DataTablesModule} from "angular-datatables";
+import {AppsModule} from '../apps/apps.module';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 
 
 defineLocale('th-be', thBeLocale);
@@ -29,18 +28,18 @@ defineLocale('th-be', thBeLocale);
     PrintReportComponent
   ],
     imports: [
-      DataTablesModule,
-      CommonModule,
-      AdminRoutingModule,
-      BsDatepickerModule.forRoot(),
-      BrowserAnimationsModule,
-      BrowserModule,
-      FormsModule,
-      ReactiveFormsModule,
-      HttpClientModule,
-      DigitOnlyModule,
-      SharedModule,
-      AppsModule,
+        CommonModule,
+        AdminRoutingModule,
+        BsDatepickerModule.forRoot(),
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        DigitOnlyModule,
+        SharedModule,
+        AppsModule,
+        TooltipModule
     ]
 })
 export class AdminModule { }

@@ -25,35 +25,50 @@
   <div class="card text-center">
     <div class="card-body">
       <div class="table-responsive font-prompt-medium fSize16">
-        <table datatable  class="row-border hover" id="tableReport" datatable [dtOptions]="dtOptions">
-          <thead>
-          <tr class="text-center" style="height: 60px" >
-            <th width="15%">เลขประจำตัวประชาชน</th>
-            <th width="25%">ชื่อ-นามสกุล</th>
-            <th width="15%">เบอร์โทรศัพท์</th>
-            <th width="10%">วันที่มีอาการ</th>
-            <th width="10%">วันที่เข้ารับการรักษา</th>
+        <table class="table table-bordered table-hover" id="tableReport">
+          <thead >
+          <tr class="text-center" style="height: 60px;" >
+            <th width="10%">เลขประจำตัวประชาชน<br>
+              <input type="text" [(ngModel)]="txtSearch"  (ngModelChange)="cidSearch()"
+                     placeholder="ค้นหา cid" class="form-control mt-2" style="font-size: small!important;">
+            </th>
+            <th width="15%">ชื่อ-นามสกุล<br>
+              <input type="text" [(ngModel)]="ptname"  (ngModelChange)="nameSearch()"
+                     placeholder="ค้นหาชื่อ-นามสกุล" class="form-control mt-2" style="font-size: small!important;">
+            </th>
+            <th width="5%">สัญชาติ</th>
+            <th width="15%">สถานที่ทำงาน/สถานศึกษา<br>
+              <input type="text" [(ngModel)]="station"  (ngModelChange)="stationSearch()" placeholder="ค้นหาสถานที่ทำงาน/สถานศึกษา"
+                     class="form-control mt-2" style="font-size: small!important;"></th>
+            <th width="10%">เบอร์โทรศัพท์</th>
+            <th width="7%">สถานะ</th>
+            <th width="20%">คำแนะนำแพทย์</th>
             <th width="15%"></th>
           </tr>
           </thead>
-          <tbody *ngIf="dataJson?.length != 0">
-          <tr *ngFor="let novel of dataJson ; let i=index">
+          <tbody *ngIf="dataSearch?.length != 0">
+          <tr *ngFor="let novel of dataSearch ; let i=index">
             <td>{{novel.novel_cid}}</td>
-            <td class="text-left">{{novel.novel_pname + novel.novel_fname + '  ' + novel.novel_lname}}</td>
+            <td class="text-left">{{novel.ptfullname}}</td>
+            <td>{{novel.novel_national}}</td>
+            <td class="text-left">{{novel.novel_station}}</td>
             <td>{{novel.novel_phone}}</td>
-            <td>{{novel.novel_start_sick | thaiDate: 'short'}}</td>
-            <td>{{novel.novel_start_treat | thaiDate: 'thdatetime'}}</td>
-            <td>
-              <button class="btn btn-xs btn-primary" (click)="editNovelcorona2(novel.novel_id)"><i class="fa fa-pencil fa-xs p-0 m-0"></i></button>
+            <td>{{(novel.sars_pt_type === 0) ? 'ไม่เข้าเกณฑ์ PUI' :
+                  (novel.sars_pt_type === 1) ? 'แนะนำ DMHT' :
+                  (novel.sars_pt_type === 2) ? 'PUI' :
+                  (novel.sars_pt_type === 3) ? 'LR contact' :
+                  (novel.sars_pt_type === 4) ? 'HR contract' : null}}</td>
+            <td class="text-left">{{novel.doctor_comment}}</td>
+            <td class="text-left">
+              <button class="btn btn-xs btn-outline-dark"  (click)="editNovelcorona2(novel.novel_id)"><i class="fa fa-pencil fa-xs p-0 m-0"></i></button>
               <button class="btn btn-xs btn-outline-primary" (click)="printNovelcorona2(novel.novel_id)">Novelcorona 2</button><br>
               <button class="btn btn-xs btn-outline-success" (click)="printReport01(novel.novel_id)">จพต.</button>
               <button class="btn btn-xs btn-outline-warning" (click)="printReport02(novel.novel_id)">ใบขวาง</button>
-
             </td>
           </tr>
           </tbody>
-          <tbody *ngIf="dataJson?.length == 0">
-          <tr><td colspan="6" class="no-data-available">ไม่พบข้อมูล</td></tr>
+          <tbody *ngIf="dataSearch?.length == 0">
+          <tr><td colspan="8" class="no-data-available"><h1>ไม่พบข้อมูล</h1></td></tr>
           </tbody>
         </table>
       </div>

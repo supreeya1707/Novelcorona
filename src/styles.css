@@ -163,7 +163,7 @@ body {
   line-height: 1.5;
   color: #3f4254;
   text-align: left;
-  background-color: #fff
+  background-color: #E1E1E1 !important;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -186,6 +186,16 @@ p {
   margin-top: 0;
   margin-bottom: 1rem;
   margin-left: 100px;
+}
+
+
+.table thead th {
+  vertical-align: middle !important;
+}
+
+
+#tableReport tr {
+  border: 1px solid #000000;
 }
 
 abbr[data-original-title], abbr[title] {
@@ -88856,8 +88866,10 @@ body {
   padding-right: 50px;
 }
 
-.vh-70{
-  height: 70vh !important;
+.min-vh-60{
+  min-height: 60vh !important;
+  display : flex;
+  align-items : center;
 }
 
 .icon-size{
