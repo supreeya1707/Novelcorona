@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86" height="85" viewBox="0 0 86 85">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.25" y1="0.067" x2="0.75" y2="0.933" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#158bff"/>
+      <stop offset="0.299" stop-color="#15b8ea"/>
+      <stop offset="0.604" stop-color="#15ded7"/>
+      <stop offset="0.849" stop-color="#15f6cb"/>
+      <stop offset="1" stop-color="#15ffc7"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.442" y1="0.181" x2="0.746" y2="0.786" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#158bff"/>
+      <stop offset="0.03" stop-color="#1591fc"/>
+      <stop offset="0.23" stop-color="#15b8e9"/>
+      <stop offset="0.44" stop-color="#15d7da"/>
+      <stop offset="0.64" stop-color="#15edd0"/>
+      <stop offset="0.83" stop-color="#15fac9"/>
+      <stop offset="1" stop-color="#15ffc7"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.85" y1="0.858" x2="0.21" y2="0.037" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="blue"/>
+      <stop offset="0.12" stop-color="#0204fc"/>
+      <stop offset="0.24" stop-color="#0911f3"/>
+      <stop offset="0.37" stop-color="#1527e5"/>
+      <stop offset="0.5" stop-color="#2545d0"/>
+      <stop offset="0.63" stop-color="#3a6bb6"/>
+      <stop offset="0.77" stop-color="#539b95"/>
+      <stop offset="0.9" stop-color="#71d270"/>
+      <stop offset="1" stop-color="#89ff51"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_957" data-name="Group 957" transform="translate(0.432 -0.279)">
+    <g id="Group_909" data-name="Group 909" transform="translate(0 0)">
+      <ellipse id="Ellipse_73" data-name="Ellipse 73" cx="43" cy="42.5" rx="43" ry="42.5" transform="translate(-0.432 0.279)" fill="#c8e0f1"/>
+    </g>
+    <g id="Group_910" data-name="Group 910" transform="translate(6.634 5.972)">
+      <ellipse id="Ellipse_74" data-name="Ellipse 74" cx="36.262" cy="36.262" rx="36.262" ry="36.262" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="Group_956" data-name="Group 956" transform="translate(20.027 11.359)">
+      <path id="Path_6537" data-name="Path 6537" d="M119.364,95.656a73.744,73.744,0,0,0-16.843,14.485l-6.3-4.925a21.9,21.9,0,0,0-3.527,3.039L104.145,119.9a.425.425,0,0,0,.315.135.434.434,0,0,0,.088,0,.46.46,0,0,0,.334-.283c1.845-4.723,7.935-14.585,15.71-21.746a.457.457,0,0,0,.11-.513A12.655,12.655,0,0,0,119.364,95.656Z" transform="translate(-82.91 -76.932)" opacity="0.5" fill="url(#linear-gradient-2)"/>
+      <path id="Path_6538" data-name="Path 6538" d="M106.453,43.694c-18.052,0-21.1-6.852-21.132-6.927a.9.9,0,0,0-.831-.567h0a.916.916,0,0,0-.844.567c-.022.072-3.149,6.927-21.129,6.927a.9.9,0,0,0-.9.9V75.3c0,12.57,21.589,22.171,22.5,22.574a.945.945,0,0,0,.727,0c.923-.4,22.508-10,22.508-22.574V44.585A.9.9,0,0,0,106.453,43.694ZM84.786,92.53a.718.718,0,0,1-.6,0c-.749-.315-18.61-8.275-18.61-18.663V48.484a.749.749,0,0,1,.746-.746c14.872,0,17.448-5.668,17.473-5.725a.759.759,0,0,1,.686-.46h0a.734.734,0,0,1,.683.472c.025.05,2.551,5.712,17.476,5.712a.743.743,0,0,1,.74.746V73.867C103.4,84.255,85.545,92.2,84.786,92.53Z" transform="translate(-61.62 -36.2)" opacity="0.1" fill="url(#linear-gradient-3)"/>
+      <path id="Path_6539" data-name="Path 6539" d="M124.818,118.952a1.082,1.082,0,0,0-1.187.945v4.985h-9.277v-5.007a1.093,1.093,0,0,0-1.187-.945,1.082,1.082,0,0,0-1.187.945v12.636a1.223,1.223,0,0,0,2.374,0v-5.923h9.283v5.923a1.223,1.223,0,0,0,2.374,0V119.875A1.089,1.089,0,0,0,124.818,118.952Z" transform="translate(-96.122 -92.879)" fill="#fff"/>
+      <path id="Path_6540" data-name="Path 6540" d="M110.052,74.893,91.669,60.172a1.678,1.678,0,0,0-2.129,0L71.167,74.893a1.739,1.739,0,0,0-.252,2.384,1.634,1.634,0,0,0,2.3.255l2.639-2.122V98.122a1.71,1.71,0,0,0,1.7,1.7h26.038a1.76,1.76,0,0,0,1.782-1.612V75.475l2.557,2.056a1.693,1.693,0,1,0,2.122-2.639ZM101.96,96.5H79.25V73.111c0-.142,11.314-9.532,11.314-9.532s11.4,9.415,11.4,9.532Z" transform="translate(-67.738 -52.362)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

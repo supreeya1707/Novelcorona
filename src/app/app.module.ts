@@ -9,14 +9,14 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {defineLocale} from 'ngx-bootstrap/chronos';
 import {thBeLocale} from 'ngx-bootstrap/locale';
 import {environment} from 'src/environments/environment';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {AdminModule} from './admin/admin.module';
 import {SharedModule} from './shared.module';
-import {AppsModule} from './apps/apps.module';
+// import {AppsModule} from './apps/apps.module';
 import {FrmModule} from './frm/frm.module';
+
 
 
 
@@ -30,6 +30,7 @@ defineLocale('th-be', thBeLocale);
     CommonModule,
     BrowserModule,
     FormsModule,
+    SharedModule,
     BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -37,13 +38,12 @@ defineLocale('th-be', thBeLocale);
     HttpClientModule,
     DigitOnlyModule,
     AdminModule,
-    AppsModule,
+    // AppsModule,
     FrmModule,
-    SharedModule,
+
   ],
   providers: [
     {provide: 'baseURL', useValue: environment.baseURL},
-    {provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: LOCALE_ID, useValue: 'th-TH' }
   ],
   bootstrap: [AppComponent]
