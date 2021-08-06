@@ -9,6 +9,7 @@ import {NcovLayoutComponent} from './ncov-layout/ncov-layout.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {SharedModule} from '../../shared.module';
+import {TooltipModule} from "ngx-bootstrap/tooltip";
 
 
 @NgModule({
@@ -18,13 +19,14 @@ import {SharedModule} from '../../shared.module';
     ReportComponent,
     RecheckComponent
   ],
-  imports: [
-    CommonModule,
-    NcovRoutingModule,
-    FormsModule,
-    BsDatepickerModule.forRoot(),
-    SharedModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        NcovRoutingModule,
+        FormsModule,
+        BsDatepickerModule.forRoot(),
+        SharedModule,
+        ReactiveFormsModule,
+        TooltipModule
+    ]
 })
 export class NcovModule { }

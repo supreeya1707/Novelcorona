@@ -74,6 +74,48 @@ export class ApiService {
     ).toPromise();
   }
 
+  delStaff(novelid: any): any {
+    // const token = sessionStorage.getItem('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+
+    const url = `${this.baseURL}/novelstaff/${novelid}`;
+    console.log(url);
+    return this.http.delete(url, this.httpOptions ).toPromise();
+  }
+
+  delTimeLine(novelid: any): any {
+    // const token = sessionStorage.getItem('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+
+    const url = `${this.baseURL}/noveltimeline/${novelid}`;
+    console.log(url);
+    return this.http.delete(url, this.httpOptions ).toPromise();
+  }
+
+  delNovel(novelid: any): any {
+    // const token = sessionStorage.getItem('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+
+    const url = `${this.baseURL}/novelcorona/${novelid}`;
+    console.log(url);
+    return this.http.delete(url, this.httpOptions ).toPromise();
+  }
+
   getData(cid: any): any {
     // const token = sessionStorage.getByCid('token');
     this.httpOptions = {
@@ -278,4 +320,6 @@ export class ApiService {
     const url = `${this.baseURL}/noveltimeline/${novelid}/novel_id`;
     return this.http.put(url, {data: dataUpdate}, this.httpOptions).toPromise();
   }
+
+
 }

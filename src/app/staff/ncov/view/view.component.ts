@@ -4,8 +4,7 @@ import {FormBuilder} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {Router} from '@angular/router';
-
-
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -20,6 +19,7 @@ export class ViewComponent implements OnInit {
 
   navbarOpen = false;
   cid: any;
+  dateChoose: any;
   dataNovel: any[];
   dataSearch: any = '';
 
@@ -86,6 +86,7 @@ export class ViewComponent implements OnInit {
 
   async dateChange(e: any): Promise<any> {
     const dateinput = moment(e).format('YYYY-MM-DD');
+    this.dateChoose = dateinput;
     const rs: any = await this.api.getByDateRaw(dateinput);
     // console.log(rs);
     if (rs.ok) {
@@ -102,7 +103,35 @@ export class ViewComponent implements OnInit {
   }
 
 
-
+  async delData(novelid: any, ptfullname: any): Promise<any> {
+    console.log(novelid, ' : ', ptfullname);
+    Swal.fire({
+      icon: 'warning',
+      title: 'ลบข้อมูล',
+      text: 'ต้องการลบข้อมูลของ' + ptfullname,
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      cancelButtonText: 'ไม่ใช่',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res01 = await this.api.delTimeLine(novelid);
+        // console.log(res);
+        if (res01.ok === true) {
+          const res02 = await this.api.delNovel(novelid);
+          if (res02.ok === true){
+            Swal.fire('ลบข้อมูลสำเร็จ', '', 'success');
+            this.dateChange(moment(this.dateChoose).format('YYYY-MM-DD'));
+          }else{
+            Swal.fire('ลบข้อมูลไม่สำเร็จ', '', 'error');
+            this.dateChange(moment(this.dateChoose).format('YYYY-MM-DD'));
+          }
+        } else {
+          Swal.fire('ลบข้อมูลไม่สำเร็จ', '', 'error');
+          this.dateChange(moment(this.dateChoose).format('YYYY-MM-DD'));
+        }
+      }
+    });
+  }
 }
 
 

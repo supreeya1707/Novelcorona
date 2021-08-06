@@ -3,10 +3,6 @@ import {FormBuilder,  Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import Swal from 'sweetalert2';
-
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-import pdfMakeUnicode from 'pdfmake-unicode';
 import {Router} from '@angular/router';
 import {ApiService} from '../../../services/api.service';
 
@@ -54,30 +50,6 @@ interface Area {
   value: string;
   viewValue: string;
 }
-
-// this part is crucial
-pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-pdfMake.fonts = {
-  THSarabunNew: {
-    normal: 'THSarabunNew.ttf',
-    bold: 'THSarabunNew Bold.ttf',
-    italics: 'THSarabunNew Italic.ttf',
-    bolditalics: 'THSarabunNew BoldItalic.ttf'
-  },
-  Fontello: {
-    normal: 'fontello.ttf',
-    bold: 'fontello.ttf',
-    italics: 'fontello.ttf',
-    bolditalics: 'fontello.ttf'
-  },
-  Roboto: {
-    normal: 'Roboto Regular.ttf',
-    bold: 'Roboto Medium.ttf',
-    italics: 'Roboto Italic.ttf',
-    bolditalics: 'Roboto MediumItalic.ttf'
-  }
-};
 
 @Component({
   selector: 'app-forms',
@@ -714,7 +686,7 @@ export class RecheckComponent implements OnInit {
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
       .then(() => {
-        this.router.navigateByUrl('/admin/printReport');
+        this.router.navigateByUrl('staff/nCoV/report');
       });
   }
 

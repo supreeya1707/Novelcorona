@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import pdfMakeUnicode from 'pdfmake-unicode';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import pdfMakeUnicode from 'pdfmake-unicode';
+import Swal from 'sweetalert2';
+
+
 import * as moment from 'moment';
 import {ApiService} from '../../../services/api.service';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
@@ -19,16 +22,10 @@ pdfMake.fonts = {
     bolditalics: 'THSarabunNew BoldItalic.ttf'
   },
   THSarabunIT: {
-    normal: 'THSarabunIT-.ttf',
-    bold: 'THSarabunIT-.ttf',
-    italics: 'THSarabunIT-.ttf',
-    bolditalics: 'THSarabunIT-.ttf'
-  },
-  Fontello: {
-    normal: 'fontello.ttf',
-    bold: 'fontello.ttf',
-    italics: 'fontello.ttf',
-    bolditalics: 'fontello.ttf'
+    normal: 'THSarabunIT.ttf',
+    bold: 'THSarabunIT.ttf',
+    italics: 'THSarabunIT.ttf',
+    bolditalics: 'THSarabunIT.ttf'
   },
   Roboto: {
     normal: 'Roboto Regular.ttf',
@@ -135,9 +132,11 @@ export class ReportComponent implements OnInit {
   imgSign01: any;
   imgSign02: any;
   imgSign03: any;
+  dateChoose: any;
 
 
-  constructor(private api: ApiService, private localeService: BsLocaleService, private router: Router) {
+  constructor(private api: ApiService, private localeService: BsLocaleService, private router: Router, ) {
+    (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
   }
 
   ngOnInit(): void {
@@ -206,6 +205,7 @@ export class ReportComponent implements OnInit {
 
   async dateChange(e: any): Promise<any> {
     const dateinput = moment(e).format('YYYY-MM-DD');
+    this.dateChoose = dateinput;
     const rs: any = await this.api.getDataStaffRaw(dateinput);
     // console.log(rs);
     if (rs.ok) {
@@ -228,6 +228,30 @@ export class ReportComponent implements OnInit {
       this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').locale('th').add(543, 'year').format('DD/MM/YY'));
     }
     // console.log(this.dateTimeLineShortquaran);
+  }
+
+  async delData(novelid: any, ptfullname: any): Promise<any> {
+    console.log(novelid, ' : ', ptfullname);
+    Swal.fire({
+      icon: 'warning',
+      title: 'ลบข้อมูล',
+      text: 'ต้องการลบข้อมูลของ' + ptfullname,
+      showCancelButton: true,
+      confirmButtonText: 'ใช่',
+      cancelButtonText: 'ไม่ใช่',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await this.api.delStaff(novelid);
+        // console.log(res);
+        if (res.ok === true) {
+          Swal.fire('ลบข้อมูลสำเร็จ', '', 'success');
+          this.dateChange(moment(this.dateChoose).format('YYYY-MM-DD'));
+        } else {
+          Swal.fire('ลบข้อมูลไม่สำเร็จ', '', 'error');
+          this.dateChange(moment(this.dateChoose).format('YYYY-MM-DD'));
+        }
+      }
+    });
   }
 
   async printNovelcorona2(novelID: any) {
@@ -1325,7 +1349,7 @@ export class ReportComponent implements OnInit {
 
         {text: ' '},
         {
-          margin: [0,17],
+          margin: [0, 17],
           columns: [
             {width: '1%', text: ' ', style: 'fontMid'},
             {
@@ -2816,10 +2840,6 @@ export class ReportComponent implements OnInit {
         lineHeight: 1.1
       },
       styles: {
-        title: {
-          fontSize: 14,
-          bold: true
-        },
         small: {fontSize: 12},
         fontMid: {fontSize: 13},
         fSize24: {fontSize: 24, bold: true}
@@ -3140,7 +3160,7 @@ export class ReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
             ]
           }
         },
@@ -3222,7 +3242,7 @@ export class ReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
             ]
           }
@@ -3306,7 +3326,7 @@ export class ReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
 
             ]
@@ -3348,7 +3368,7 @@ export class ReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
             ]
           }
@@ -3389,7 +3409,7 @@ export class ReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
             ]
           }
@@ -3472,7 +3492,7 @@ export class ReportComponent implements OnInit {
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
-                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},],
+                {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]}, ],
 
             ]
           }
@@ -3724,6 +3744,7 @@ export class ReportComponent implements OnInit {
     };
     return docDefinition;
   }
+
 
 
 }

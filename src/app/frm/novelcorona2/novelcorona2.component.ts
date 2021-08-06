@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import Swal from 'sweetalert2';
 import {ApiService} from '../../services/api.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 interface Pname {
   value: string;

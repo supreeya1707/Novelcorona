@@ -10,7 +10,7 @@ import {ScrollToTopComponent} from "./scroll-to-top/scroll-to-top.component";
   declarations: [ThaiDatePipe, ScrollToTopComponent],
   imports: [
     CommonModule,
-    DigitOnlyModule
+    DigitOnlyModule,
   ],
   exports: [ThaiDatePipe, ScrollToTopComponent]
 })

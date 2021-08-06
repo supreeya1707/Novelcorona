@@ -1,4 +1,4 @@
-<div class="col-lg-12 text-center" style="margin-top: 330px;">
+<div class="col-lg-12 text-center" style="margin-top: 280px;">
   <h1 class="font-prompt-medium">รายชื่อผู้ป่วยที่ทำแบบสอบสวน (Novelcoroana 2)</h1>
 </div>
 <div style="min-height: 50vh">
@@ -44,7 +44,7 @@
               <th width="10%">เบอร์โทรศัพท์</th>
               <th width="10%">วันที่มีอาการ</th>
               <th width="10%">วันที่เข้ารับการรักษา</th>
-              <th width="5%"></th>
+              <th width="10%"></th>
             </tr>
             </thead>
             <tbody *ngIf="dataSearch?.length != 0">
@@ -60,6 +60,10 @@
                 <button class="btn btn-xs btn-outline-primary btn-xs"
                         (click)="viewForm(novel.novel_id)">
                   <i class="fa fa-pencil fa-xs p-0 m-0"></i>
+                </button>
+                <button class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                        (click)="delData(novel.novel_id, novel.ptfullname)">
+                  <i class="fa fa-trash fa-xs p-0 m-0"></i>
                 </button>
               </td>
             </tr>
