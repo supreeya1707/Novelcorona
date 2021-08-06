@@ -412,22 +412,20 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelByID.novel_come_country, absolutePosition: {x: 280, y: 473}, bold: true},
         (this.dataNovelByID.novel_date_come != null) ? {
           text: moment(this.dataNovelByID.novel_date_come).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 480, y: 473}, bold: true
-        } : {text: ''},
-
-        {text: this.dataNovelByID.novel_transportation, absolutePosition: {x: 120, y: 554}, bold: true},
-        {text: this.dataNovelByID.novel_round_tran, absolutePosition: {x: 315, y: 554}, bold: true},
-        {text: this.dataNovelByID.novel_number_seat, absolutePosition: {x: 480, y: 554}, bold: true},
+          absolutePosition: {x: 480, y: 473}, bold: true} : null,
+        {text: this.dataNovelByID.novel_transportation, absolutePosition: {x: 120, y: 489}, bold: true},
+        {text: this.dataNovelByID.novel_round_tran, absolutePosition: {x: 315, y: 489}, bold: true},
+        {text: this.dataNovelByID.novel_number_seat, absolutePosition: {x: 480, y: 489}, bold: true},
         {text: '√', absolutePosition: {x: this.dataNovelByID.novel_takecare_32 === 0 ? 488 : 536, y: 498}, style: 'fSize24'},
         {text: '√', absolutePosition: {x: this.dataNovelByID.novel_touch_his33 === 0 ? 488 : 536, y: 515}, style: 'fSize24'},
-        {text: this.dataNovelByID.novel_assigntouch_34, absolutePosition: {x: 335, y: 535}, bold: true},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_his_touch_34 === 0 ? 488 : 536, y: 596}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_tourist_35 === 0 ? 488 : 536, y: 614}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_manyperson_36 === 0 ? 488 : 536, y: 629}, style: 'fSize24'},
-        {text: this.dataNovelByID.novel_assign_station_36, absolutePosition: {x: 350, y: 635}, bold: true},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_ari_37 === 0 ? 488 : 536, y: 646}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_inject_38 === 0 ? 488 : 536, y: 662}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_doc_39 === 0 ? 488 : 536, y: 679}, style: 'fSize24'},
+        {text: this.dataNovelByID.novel_assigntouch_34, absolutePosition: {x: 335, y: 536}, bold: true},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_his_touch_34 === 0 ? 488 : 536, y: 531}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_tourist_35 === 0 ? 488 : 536, y: 547}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_manyperson_36 === 0 ? 488 : 536, y: 564}, style: 'fSize24'},
+        {text: this.dataNovelByID.novel_assign_station_36, absolutePosition: {x: 350, y: 569}, bold: true},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_ari_37 === 0 ? 488 : 536, y: 581}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_inject_38 === 0 ? 488 : 536, y: 597}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_doc_39 === 0 ? 488 : 536, y: 613}, style: 'fSize24'},
 
         (this.dataNovelByID.novel_staff_contact != null) ? (this.dataNovelByID.novel_staff_contact === 1) ? {
           text: 'สัมผัสผู้ติดเชื้อยืนยัน',
@@ -437,7 +435,7 @@ export class ReportComponent implements OnInit {
         {text: sCon1, absolutePosition: {x: 70, y: 652}, bold: true},
         {text: sCon2, absolutePosition: {x: 70, y: 668}, bold: true},
 
-        {text: this.dataNovelByID.novel_etc_310, absolutePosition: {x: 80, y: 749}, bold: true},
+        {text: this.dataNovelByID.novel_etc_310, absolutePosition: {x: 80, y: 684}, bold: true},
 
         {text: this.dataNovelStaff.reporter, absolutePosition: {x: 80, y: 783}, bold: true},
         (this.dataNovelStaff.report_datetime) ? {
@@ -1338,6 +1336,7 @@ export class ReportComponent implements OnInit {
 
         {text: ' '},
         {
+          margin: [0,17],
           columns: [
             {width: '1%', text: ' ', style: 'fontMid'},
             {
@@ -1510,6 +1509,7 @@ export class ReportComponent implements OnInit {
           bold: true
         },
         {text: this.dataTimeLineByID.timeline_date14, absolutePosition: {x: 130, y: 364}, noWrap: true},
+        {text: this.dataTimeLineByID.timeline_other, absolutePosition: {x: 40, y: 385}, noWrap: true},
 
         {text: '√', absolutePosition: {x: this.dataNovelByID.novel_havevac === 0 ? 32 : 128, y: 517}, style: 'fSize24'},
         {text: '√', absolutePosition: {x: this.dataNovelByID.novel_certificate === 0 ? 501 : 409, y: 517}, style: 'fSize24'},
@@ -1539,7 +1539,7 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelByID.novel_placevac3, absolutePosition: {x: 420, y: 573}, bold: true},
 
         // staff
-        {text: this.dataNovelStaff.riskconnect, absolutePosition: {x: 75, y: 459}, bold: true},
+        {text: this.dataNovelStaff.riskconnect, absolutePosition: {x: 50, y: 459}, bold: true},
         {
           text: '√',
           absolutePosition: {x: 304, y: this.dataNovelStaff.wearmask === 0 ? 475 : this.dataNovelStaff.wearmask === 1 ? 453 : 430},
