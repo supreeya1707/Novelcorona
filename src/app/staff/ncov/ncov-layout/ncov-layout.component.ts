@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html'
+  selector: 'app-ncov-layout',
+  templateUrl: './ncov-layout.component.html',
+  styles: [
+  ]
 })
-export class HomeComponent implements OnInit {
+export class NcovLayoutComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -22,7 +23,4 @@ export class HomeComponent implements OnInit {
       'https://www.hyggemedicalservice.com/rbh/covid19/webcheck.php', '_blank');
   }
 
-  openCoV() {
-    this.router.navigateByUrl('././forms/novelcorona2');
-  }
 }

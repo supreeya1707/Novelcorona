@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from '../../services/api.service';
+import {ApiService} from '../../../services/api.service';
 import {FormBuilder, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
@@ -10,10 +10,10 @@ import * as _ from 'lodash';
 
 @Component({
   selector: 'app-report',
-  templateUrl: './view-novelcorona2.component.html',
+  templateUrl: './view.component.html',
 
 })
-export class ViewNovelcorona2Component implements OnInit {
+export class ViewComponent implements OnInit {
   txtSearch: any = '';
   ptname: any = '';
   station: any = '';

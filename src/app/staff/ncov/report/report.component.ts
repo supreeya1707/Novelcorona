@@ -3,7 +3,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
 import * as moment from 'moment';
-import {ApiService} from '../../services/api.service';
+import {ApiService} from '../../../services/api.service';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {Router} from '@angular/router';
 
@@ -66,10 +66,10 @@ interface SContactPlace {
 
 @Component({
   selector: 'app-print-report',
-  templateUrl: './print-report.component.html'
+  templateUrl: './report.component.html'
 })
 
-export class PrintReportComponent implements OnInit {
+export class ReportComponent implements OnInit {
   txtSearch: any = '';
   ptname: any = '';
   station: any = '';

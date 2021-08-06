@@ -3,11 +3,12 @@ import {FormBuilder,  Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import Swal from 'sweetalert2';
-import {ApiService} from '../../services/api.service';
+
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import pdfMakeUnicode from 'pdfmake-unicode';
 import {Router} from '@angular/router';
+import {ApiService} from '../../../services/api.service';
 
 interface Doctor {
   value: string;
@@ -80,9 +81,9 @@ pdfMake.fonts = {
 
 @Component({
   selector: 'app-forms',
-  templateUrl: './form-recheck.component.html',
+  templateUrl: './recheck.component.html',
 })
-export class FormRecheckComponent implements OnInit {
+export class RecheckComponent implements OnInit {
   generalFrm: any;
   riskFrm: any;
   timelineFrm: any;

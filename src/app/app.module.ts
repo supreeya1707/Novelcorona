@@ -12,9 +12,7 @@ import {environment} from 'src/environments/environment';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
-import {AdminModule} from './admin/admin.module';
 import {SharedModule} from './shared.module';
-// import {AppsModule} from './apps/apps.module';
 import {FrmModule} from './frm/frm.module';
 
 
@@ -37,9 +35,6 @@ defineLocale('th-be', thBeLocale);
     AppRoutingModule,
     HttpClientModule,
     DigitOnlyModule,
-    AdminModule,
-    // AppsModule,
-    FrmModule,
 
   ],
   providers: [
