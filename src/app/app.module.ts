@@ -13,7 +13,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {SharedModule} from './shared.module';
-import {FrmModule} from './frm/frm.module';
+// import {FrmModule} from './frm/frm.module';
 
 
 
@@ -35,6 +35,7 @@ defineLocale('th-be', thBeLocale);
     AppRoutingModule,
     HttpClientModule,
     DigitOnlyModule,
+    // FrmModule
 
   ],
   providers: [
