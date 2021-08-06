@@ -335,10 +335,10 @@ export class ReportComponent implements OnInit {
         } : {text: ''},
         {text: this.dataNovelByID.novel_number_address, absolutePosition: {x: 118, y: 192}, bold: true},
         {text: this.dataNovelByID.novel_moo, absolutePosition: {x: 175, y: 192}, bold: true},
-        {text: this.dataNovelByID.novel_mooban, absolutePosition: {x: 270, y: 192}, bold: true},
+        {text: this.dataNovelByID.novel_mooban, absolutePosition: {x: 245, y: 192}, bold: true},
         {text: this.dataNovelByID.novel_soi, absolutePosition: {x: 400, y: 192}, bold: true},
         {text: this.dataNovelByID.novel_road, absolutePosition: {x: 520, y: 192}, bold: true},
-        {text: this.dataNovelByID.novel_district, absolutePosition: {x: 112, y: 208}, bold: true},
+        {text: this.dataNovelByID.novel_district, absolutePosition: {x: 110, y: 208}, bold: true},
         {text: this.dataNovelByID.novel_amphur, absolutePosition: {x: 275, y: 208}, bold: true},
         {text: this.dataNovelByID.novel_province, absolutePosition: {x: 445, y: 208}, bold: true},
         (this.dataNovelByID.novel_copd === 1) ? {text: '√', absolutePosition: {x: 83, y: 218}, style: 'fSize24'} : null,
@@ -390,20 +390,20 @@ export class ReportComponent implements OnInit {
 
 
         // ประวัติเสี่ยง
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_comefrom_31 === 0 ? 488 : 536, y: 518}, style: 'fSize24'},
-        {text: this.dataNovelByID.novel_come_city, absolutePosition: {x: 115, y: 539}, bold: true},
-        {text: this.dataNovelByID.novel_come_country, absolutePosition: {x: 280, y: 539}, bold: true},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_comefrom_31 === 0 ? 488 : 536, y: 452}, style: 'fSize24'},
+        {text: this.dataNovelByID.novel_come_city, absolutePosition: {x: 115, y: 473}, bold: true},
+        {text: this.dataNovelByID.novel_come_country, absolutePosition: {x: 280, y: 473}, bold: true},
         (this.dataNovelByID.novel_date_come != null) ? {
           text: moment(this.dataNovelByID.novel_date_come).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 480, y: 539}, bold: true
+          absolutePosition: {x: 480, y: 473}, bold: true
         } : {text: ''},
 
         {text: this.dataNovelByID.novel_transportation, absolutePosition: {x: 120, y: 554}, bold: true},
         {text: this.dataNovelByID.novel_round_tran, absolutePosition: {x: 315, y: 554}, bold: true},
         {text: this.dataNovelByID.novel_number_seat, absolutePosition: {x: 480, y: 554}, bold: true},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_takecare_32 === 0 ? 488 : 536, y: 564}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_touch_his33 === 0 ? 488 : 536, y: 580}, style: 'fSize24'},
-        {text: this.dataNovelByID.novel_assigntouch_34, absolutePosition: {x: 330, y: 602}, bold: true},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_takecare_32 === 0 ? 488 : 536, y: 498}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_touch_his33 === 0 ? 488 : 536, y: 515}, style: 'fSize24'},
+        {text: this.dataNovelByID.novel_assigntouch_34, absolutePosition: {x: 335, y: 535}, bold: true},
         {text: '√', absolutePosition: {x: this.dataNovelByID.novel_his_touch_34 === 0 ? 488 : 536, y: 596}, style: 'fSize24'},
         {text: '√', absolutePosition: {x: this.dataNovelByID.novel_tourist_35 === 0 ? 488 : 536, y: 614}, style: 'fSize24'},
         {text: '√', absolutePosition: {x: this.dataNovelByID.novel_manyperson_36 === 0 ? 488 : 536, y: 629}, style: 'fSize24'},
@@ -414,11 +414,11 @@ export class ReportComponent implements OnInit {
 
         (this.dataNovelByID.novel_staff_contact != null) ? (this.dataNovelByID.novel_staff_contact === 1) ? {
           text: 'สัมผัสผู้ติดเชื้อยืนยัน',
-          absolutePosition: {x: 70, y: 701},
+          absolutePosition: {x: 70, y: 636},
           bold: true
-        } : {text: 'ไปสถานที่เสี่ยงสูง', absolutePosition: {x: 80, y: 701}, bold: true} : null,
-        {text: sCon1, absolutePosition: {x: 70, y: 717}, bold: true},
-        {text: sCon2, absolutePosition: {x: 70, y: 734}, bold: true},
+        } : {text: 'ไปสถานที่เสี่ยงสูง', absolutePosition: {x: 80, y: 636}, bold: true} : null,
+        {text: sCon1, absolutePosition: {x: 70, y: 652}, bold: true},
+        {text: sCon2, absolutePosition: {x: 70, y: 668}, bold: true},
 
         {text: this.dataNovelByID.novel_etc_310, absolutePosition: {x: 80, y: 749}, bold: true},
 
@@ -1019,163 +1019,6 @@ export class ReportComponent implements OnInit {
           ],
           columnGap: 5
         },
-        {
-          columns: [
-            {width: '40%', text: 'การให้ยารักษาโรคติดเชื้อไวรัสโคโรนา 2019', style: 'fontMid'},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'ไม่ให้', style: 'fontMid'},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {
-              width: 'auto',
-              text: 'ให้ วันที่รับยาโดสแรก ..........................................................................................',
-              style: 'fontMid'
-            },
-          ],
-          columnGap: 5
-        },
-        {
-          columns: [
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'Darunavir/Ritonavir (DRV/r)', style: 'small', margin: [0, 2]},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'Lopinavir/Ritonavir (LRV/r)', style: 'small', margin: [0, 2]},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'Favipiravir', style: 'small', margin: [0, 2]},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'Chloroquine', style: 'small', margin: [0, 2]},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'Hydroxychloroquine', style: 'small', margin: [0, 2]},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'ยาอื่น ๆ .............................', style: 'small', margin: [0, 2]},
-          ],
-          columnGap: 3
-        },
-        {
-          columns: [
-            {width: '15%', text: 'สถานะผู้ป่วย', style: 'small'},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'หาย', style: 'small', margin: [0, 2]},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'ยังรักษาอยู่', style: 'small', margin: [0, 2]},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'เสียชีวิต', style: 'small', margin: [0, 2]},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {
-              width: 'auto',
-              text: 'ส่งตัวไป รพ. ...............................................................',
-              style: 'small',
-              margin: [0, 2]
-            },
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'อื่น ๆ ระบุ ...............................................', style: 'small', margin: [0, 2]},
-          ],
-          columnGap: 3
-        },
-        {text: ' ', style: 'small'},
         {text: '3. ประวัติเสี่ยง', style: 'title'},
         {
           columns: [
@@ -1472,6 +1315,10 @@ export class ReportComponent implements OnInit {
           ],
           columnGap: 5
         },
+        {text: '............................................................................................................................................................................................................................................'},
+        {text: '............................................................................................................................................................................................................................................'},
+        {text: '............................................................................................................................................................................................................................................'},
+
         {text: ' '},
         {
           columns: [
