@@ -5,42 +5,42 @@
        <div class="col-lg-7">
          <div class="row text-center font-prompt-medium" style="padding-top: 50px;">
            <div class="col-lg-2 col-md-2 col-sm-12 text-center my-5 p-0 m-0">
-             <img src="assets/picture/sicon-vaccine.svg" class="sicon-size img-fluid"
+             <img src="assets/picture/sicon-vaccine.svg" class="sicon-size img-fluid" [routerLink]="'/staff/blankpage'"
                   style="cursor: pointer" >
              <h5 class="mt-5 fSize14">ฉีดวัคซีน</h5>
              <h6 class="fsize12">Vaccine</h6>
            </div>
 
            <div class="col-lg-2 col-md-2 col-sm-12 text-center my-5 p-0 m-0">
-             <img src="assets/picture/sicon-form.svg" class="sicon-size img-fluid"
+             <img src="assets/picture/sicon-form.svg" class="sicon-size img-fluid" [routerLink]="'/staff/nCoV'"
                   style="cursor: pointer">
              <h5 class="mt-5 fSize14">สอบสวนโรค</h5>
              <h6 class="fsize12">Disease Investigation</h6>
            </div>
 
            <div class="col-lg-2 col-md-2 col-sm-12 text-center my-5 p-0 m-0">
-             <img src="assets/picture/sicon-swab.svg" class="sicon-size img-fluid"
+             <img src="assets/picture/sicon-swab.svg" class="sicon-size img-fluid" [routerLink]="'/staff/blankpage'"
                   style="cursor: pointer">
              <h5 class="mt-5 fSize14">ตรวจโควิด</h5>
              <h6 class="fsize12">Swab Test</h6>
            </div>
 
            <div class="col-lg-2 col-md-2 col-sm-12 text-center my-5 p-0 m-0">
-             <img src="assets/picture/sicon-home.svg" class="sicon-size img-fluid"
+             <img src="assets/picture/sicon-home.svg" class="sicon-size img-fluid" [routerLink]="'/staff/blankpage'"
                   style="cursor: pointer">
              <h5 class="mt-5 fSize14">รักษาตัวที่บ้าน</h5>
              <h6 class="fsize12">Home Isolation</h6>
            </div>
 
            <div class="col-lg-2 col-md-2 col-sm-12 text-center my-5 p-0 m-0">
-             <img src="assets/picture/sicon-field-hospital.svg" class="sicon-size img-fluid"
+             <img src="assets/picture/sicon-field-hospital.svg" class="sicon-size img-fluid" [routerLink]="'/staff/blankpage'"
                   style="cursor: pointer" >
              <h5 class="mt-5 fSize14">โรงพยาบาลสนาม</h5>
              <h6 class="fsize12">Field Hospital</h6>
            </div>
 
            <div class="col-lg-2 col-md-2 col-sm-12 text-center my-5 p-0 m-0">
-             <img src="assets/picture/sicon-ward.svg" class="sicon-size img-fluid"
+             <img src="assets/picture/sicon-ward.svg" class="sicon-size img-fluid" (click)="openWardCovid()"
                   style="cursor: pointer" >
              <h5 class="mt-5 fSize14">หอผู้ป่วยโควิด</h5>
              <h6 class="fsize12">Covid Ward</h6>

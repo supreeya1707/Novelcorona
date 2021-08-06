@@ -88875,6 +88875,10 @@ body {
   align-items : center;
 }
 
+#nCoVnav{
+  background: rgb(14,252,185);
+  background: linear-gradient(351deg, rgba(14,252,185,1) 0%, rgba(0,176,255,1) 53%);
+}
 
 .imgHygge{
   height: 100px;

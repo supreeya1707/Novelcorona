@@ -6,13 +6,15 @@ import {SharedModule} from '../shared.module';
 import { MainComponent } from './main/main.component';
 import {LoginNcovComponent} from './login-ncov/login-ncov.component';
 import {FormsModule} from '@angular/forms';
+import {BlankPageComponent} from './blank-page/blank-page.component';
 
 
 @NgModule({
   declarations: [
     StaffLayoutComponent,
     MainComponent,
-    LoginNcovComponent
+    LoginNcovComponent,
+    BlankPageComponent
   ],
   imports: [
     CommonModule,

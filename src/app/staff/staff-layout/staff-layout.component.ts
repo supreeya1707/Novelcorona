@@ -11,4 +11,9 @@ export class StaffLayoutComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openWardCovid(): any {
+    window.open(
+      'http://www.rbhportal.com/covidmonit/', '_blank');
+  }
+
 }

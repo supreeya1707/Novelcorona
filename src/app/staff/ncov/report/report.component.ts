@@ -74,7 +74,6 @@ export class ReportComponent implements OnInit {
   txtSearch: any;
   ptname: any;
   station: any;
-  status: any;
 
 
   dataSearch: any = '';
@@ -205,16 +204,6 @@ export class ReportComponent implements OnInit {
     }
   }
 
-  statusSearch(): any {
-    if (this.status === '') {
-      this.dataSearch = this.dataNovel;
-    } else {
-      this.dataSearch = this.dataNovel.filter((data: any) => {
-        return data.sars_pt_type.match(this.status);
-      });
-    }
-  }
-
   async dateChange(e: any): Promise<any> {
     const dateinput = moment(e).format('YYYY-MM-DD');
     const rs: any = await this.api.getDataStaffRaw(dateinput);
@@ -246,7 +235,7 @@ export class ReportComponent implements OnInit {
     const res: any = await this.api.getDataById(novelID);
     const resTimeLine: any = await this.api.getTimeLineById(novelID);
     const resStaff: any = await this.api.getDataStaff(novelID);
-    console.log(resTimeLine);
+    // console.log(resTimeLine);
     if (res.ok === true && resTimeLine.ok === true && resStaff.ok === true) {
       this.dataNovelByID = res.message[0];
       this.dataTimeLineByID = resTimeLine.message[0];
