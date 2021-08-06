@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ncov-layout',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NcovLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +22,14 @@ export class NcovLayoutComponent implements OnInit {
   openSwab() {
     window.open(
       'https://www.hyggemedicalservice.com/rbh/covid19/webcheck.php', '_blank');
+  }
+
+  openView() {
+    this.router.navigateByUrl('staff/nCoV/view');
+  }
+
+  openReport() {
+    this.router.navigateByUrl('staff/nCoV/report');
   }
 
 }

@@ -9,8 +9,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="p-3 text-gray" style="cursor: pointer" [routerLink]="'/view'">รายชื่อผู้ป่วยที่ทำแบบสอบสวน</a>
-          <a class="p-3 text-gray" style="cursor: pointer" [routerLink]="'/report'">Report</a>
+          <a class="p-3 text-gray" style="cursor: pointer" (click)="openView()">รายชื่อผู้ป่วยที่ทำแบบสอบสวน</a>
+          <a class="p-3 text-gray" style="cursor: pointer" (click)="openReport()">Report</a>
         </div>
       </div>
     </nav>

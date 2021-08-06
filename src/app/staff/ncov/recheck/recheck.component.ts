@@ -222,6 +222,7 @@ export class RecheckComponent implements OnInit {
   desDay12: any;
   desDay13: any;
   desDay14: any;
+  desOther: any;
   date: any;
 
   typeSAR1: any;
@@ -295,8 +296,6 @@ export class RecheckComponent implements OnInit {
     {value: '1', viewValue: 'รพ.ราชบุรี'},
     {value: '2', viewValue: 'รพ.สต.โรงเจ'},
   ];
-
-
 
   dataDoctor: Doctor[] = [
     {value: 'นพ.ปิยะณัฐ บุญประดิษฐ์', viewValue: 'นพ.ปิยะณัฐ บุญประดิษฐ์'},
@@ -385,6 +384,7 @@ export class RecheckComponent implements OnInit {
       radioinject: [null, Validators.compose([Validators.required])],
       radiolabtest: [null, Validators.compose([Validators.required])],
       assignRisk: [null, Validators.compose([Validators.required])],
+      // radioStaffContact: [null, Validators.compose([Validators.required])],
       datecome: [null]
     });
 
@@ -606,6 +606,7 @@ export class RecheckComponent implements OnInit {
       this.desDay12 = this.dataTL['timeline_date12'];
       this.desDay13 = this.dataTL['timeline_date13'];
       this.desDay14 = this.dataTL['timeline_date14'];
+      this.desOther = this.dataTL['timeline_other'];
     }else{
       console.error('error');
     }
@@ -1079,6 +1080,7 @@ export class RecheckComponent implements OnInit {
     data.day14 = this.dateTimeLineShort[13];
 
 
+
     data.timeline_date1 = this.timelineFrm.value.desDay1;
     data.timeline_date2 = this.timelineFrm.value.desDay2;
     data.timeline_date3 = this.timelineFrm.value.desDay3;
@@ -1093,6 +1095,7 @@ export class RecheckComponent implements OnInit {
     data.timeline_date12 = this.desDay12;
     data.timeline_date13 = this.desDay13;
     data.timeline_date14 = this.desDay14;
+    data.timeline_other = this.desOther;
 
     info.push(data);
 

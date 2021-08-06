@@ -23,6 +23,6 @@ export class HomeComponent implements OnInit {
   }
 
   openCoV() {
-    this.router.navigateByUrl('././forms/novelcorona2');
+    this.router.navigateByUrl('forms/novelcorona2');
   }
 }

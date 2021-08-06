@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../../../services/api.service';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {Router} from '@angular/router';
-import * as _ from 'lodash';
+
 
 
 
@@ -37,9 +37,6 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.localeService.use(this.locale);
-    /* this.searchFrm = this.formBuilder.group({
-       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])]
-     });*/
   }
 
   cidSearch(): any {
@@ -95,7 +92,7 @@ export class ViewComponent implements OnInit {
 
   viewForm(novelID: any) {
     console.log(novelID);
-    this.router.navigateByUrl('admin/formRecheck', {state: {novelid: novelID}});
+    this.router.navigateByUrl('staff/nCoV/recheck', {state: {novelid: novelID}});
   }
 
 

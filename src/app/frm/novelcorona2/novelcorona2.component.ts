@@ -150,6 +150,7 @@ export class Novelcorona2Component implements OnInit {
   desDay12: any;
   desDay13: any;
   desDay14: any;
+  desOther: any;
   date: any;
 
 
@@ -552,6 +553,7 @@ export class Novelcorona2Component implements OnInit {
     data.day14 = this.dateTimeLineShort[13];
 
 
+
     data.timeline_date1 = this.timelineFrm.value.desDay1;
     data.timeline_date2 = this.timelineFrm.value.desDay2;
     data.timeline_date3 = this.timelineFrm.value.desDay3;
@@ -566,6 +568,7 @@ export class Novelcorona2Component implements OnInit {
     data.timeline_date12 = this.desDay12;
     data.timeline_date13 = this.desDay13;
     data.timeline_date14 = this.desDay14;
+    data.timeline_other = this.desOther;
 
     info.push(data);
 

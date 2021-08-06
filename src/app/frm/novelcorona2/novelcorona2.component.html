@@ -189,9 +189,9 @@
           <div class="row mt-5">
             <div class="col-md-6">
               <div class="form-group">
-                <label>เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-danger">*</span></label>
+                <label>เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-danger">*</span></label>&nbsp;<small class="text-info">ใส่เฉพาะตัวเลข</small>
                 <!--inputmode="numeric" pattern="[0-9]*" digitOnly-->
-                <input name="telephone" id="telephone" formControlName="telephone"
+                <input name="telephone" id="telephone" formControlName="telephone" inputmode="numeric" pattern="[0-9]*" digitOnly
                        [ngClass]="{ 'is-invalid': submitted && f.telephone.errors  || ((f.telephone.touched || f.telephone.dirty) && f.telephone.invalid) }"
                        class="form-control" type="text" placeholder="ใส่เบอร์โทรศัพท์ที่ติดต่อได้">
                 <div
@@ -846,6 +846,7 @@
               </div>
             </div>
           </div>
+
           <div class="row mt-2 font-prompt-medium fsize16" *ngIf="radiolabtest==1">
             <div class="radio-inline"  style="padding-left: 20px;">
               <div class="form-check">
@@ -861,34 +862,35 @@
 
           <div class="row mt-2">
             <div class="col-lg-12 col-md-12" *ngIf="radioStaffContact === 1">
-              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact2" [ngModelOptions]="{standalone: true}"  name="scontact2" id="scontact21">
+              <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact2" [ngModelOptions]="{standalone: true}"  name="scontact2" id="scontact21">
                 <option  *ngFor="let sc of dataSContact" [value]="sc.value">{{sc.viewValue}}</option>
               </select>
               <div class="row mt-2" [ngSwitch] = "scontact2">
                 <div class="col-lg-12 col-md-12" *ngSwitchCase="1">
-                  <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact31">
+                  <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact31">
                     <option  *ngFor="let sc of dataSContact1"  [value]="sc.value">{{sc.viewValue}}</option>
                   </select>
                 </div>
                 <div class="col-lg-12 col-md-12" *ngSwitchCase="2">
-                  <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact32">
+                  <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact32">
                     <option  *ngFor="let sc of dataSContact2" [value]="sc.value">{{sc.viewValue}}</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="col-lg-12 col-md-12" *ngIf="radioStaffContact === 2">
-              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontactplace" [ngModelOptions]="{standalone: true}" name="scontactplace" id="scontactplace">
+              <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontactplace" [ngModelOptions]="{standalone: true}" name="scontactplace" id="scontactplace">
                 <option  *ngFor="let scp of dataSContactPlace"   [value]="scp.value">{{scp.viewValue}}</option>
               </select>
             </div>
           </div>
 
-          <div class="row mt-2 font-prompt-medium fsize16">
-            <label class="col-lg-1 m-0 p-0">● อื่นๆ</label>
+          <div class="row mt-2 font-prompt-medium fsize16" >
+            <label class="col-lg-1 p-0 m-0">● อื่น ๆ <span class="text-danger">*</span></label>
             <div class="col-lg-11">
-              <input type="text" class="form-control" formControlName="assignRisk" placeholder="ระบุลักษณะความเสี่ยง"
-                     [ngClass]="{ 'is-invalid': submitted && f3.assignRisk.errors  || ((f3.assignRisk.touched || f3.assignRisk.dirty) &&f3.assignRisk.invalid) }"/>
+              <textarea class="form-control" placeholder="ระบุลักษณะความเสี่ยง" name="assignRisk" id="assignRisk"
+                        formControlName="assignRisk" style="resize: none" rows="2"
+                        [ngClass]="{ 'is-invalid': submitted && f3.assignRisk.errors  || ((f3.assignRisk.touched || f3.assignRisk.dirty) &&f3.assignRisk.invalid) }"></textarea>
               <div *ngIf="submitted && f3.assignRisk.errors  || ((f3.assignRisk.touched || f3.assignRisk.dirty) && f3.assignRisk.invalid)" class="invalid-feedback">
                 <div class="text-left fSize12" *ngIf="f3.assignRisk.errors.required">กรุณาระบุลักษณะความเสี่ยง</div>
               </div>
@@ -1084,6 +1086,16 @@
           <div class="col-md-10">
           <textarea class="form-control" name="textTimeLine1" id="textTimeLine13" rows="3"
                     placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย" [(ngModel)]="desDay14"></textarea>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-2 my-auto">
+            <label class="text-info">รายละเอียดอื่นๆ</label>
+          </div>
+          <div class="col-md-10">
+          <textarea class="form-control" name="timelineOther" id="timelineOther" rows="3"
+                    placeholder="ใส่รายละเอียดอื่นๆ" [(ngModel)]="desOther"></textarea>
           </div>
         </div>
       </div>

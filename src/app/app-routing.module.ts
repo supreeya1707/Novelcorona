@@ -10,7 +10,7 @@ const routes: Routes = [
     loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule),
     component: ApplayoutComponent
   },
-  { path: 'form',
+  { path: 'forms',
     loadChildren: () => import('./frm/frm.module').then(m => m.FrmModule),
   },
   { path: 'staff',
