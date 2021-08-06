@@ -1,0 +1,25 @@
+<div style="margin-top: 350px; min-height: 50vh; align-items: center; display: flex">
+  <div class="card col-lg-4 offset-4">
+    <div class="card-body">
+      <div class="col-md-12 text-center">
+        <img src="assets/picture/doctor.png" height="200">
+      </div>
+      <div class="col-md-12 mt-4 font-prompt-medium">
+        <input type="password" placeholder="กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบ" name="password"
+               [(ngModel)]="password" (keydown.enter)="checkLogin()"
+            class="form-control">
+      </div>
+      <div class="col-md-12 d-none" id="errorLogin">
+          <small class="text-danger font-prompt-medium">รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง</small>
+      </div>
+      <div class="col-md-12 mt-4 text-center font-prompt-medium">
+        <button class="btn btn-primary float-right" (click)="checkLogin()">เข้าสู่ระบบ</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+

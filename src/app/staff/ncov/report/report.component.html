@@ -30,22 +30,29 @@
             <table class="table table-bordered table-hover" id="tableReport">
               <thead >
               <tr class="text-center" style="height: 60px;" >
-                <th width="10%">เลขประจำตัวประชาชน<br>
+                <th width="10%">
+                  เลขประจำตัวประชาชน<br>
                   <input type="text" [(ngModel)]="txtSearch"  (ngModelChange)="cidSearch()"
                          placeholder="ค้นหา cid" class="form-control mt-2" style="font-size: small!important;">
                 </th>
-                <th width="15%">ชื่อ-นามสกุล<br>
+                <th width="15%">
+                  ชื่อ-นามสกุล<br>
                   <input type="text" [(ngModel)]="ptname"  (ngModelChange)="nameSearch()"
                          placeholder="ค้นหาชื่อ-นามสกุล" class="form-control mt-2" style="font-size: small!important;">
                 </th>
                 <th width="5%">สัญชาติ</th>
-                <th width="15%">สถานที่ทำงาน/สถานศึกษา<br>
+                <th width="13%">
+                  สถานที่ทำงาน/สถานศึกษา<br>
                   <input type="text" [(ngModel)]="station"  (ngModelChange)="stationSearch()" placeholder="ค้นหาสถานที่ทำงาน/สถานศึกษา"
                          class="form-control mt-2" style="font-size: small!important;"></th>
-                <th width="10%">เบอร์โทรศัพท์</th>
-                <th width="7%">สถานะ</th>
+                <th width="7%">เบอร์โทรศัพท์</th>
+                <th width="8%">สถานะ<br>
+                  <input type="text"  class="form-control mt-2" style="font-size: small!important;"
+                         [(ngModel)]="status"  (ngModelChange)="statusSearch()" placeholder="ค้นหาสถานะ">
+                </th>
                 <th width="20%">คำแนะนำแพทย์</th>
-                <th width="15%"></th>
+                <th width="10%">ผู้รายงาน</th>
+                <th width="12%"></th>
               </tr>
               </thead>
               <tbody *ngIf="dataSearch?.length != 0">
@@ -61,11 +68,19 @@
                       (novel.sars_pt_type === 3) ? 'LR contact' :
                         (novel.sars_pt_type === 4) ? 'HR contract' : null}}</td>
                 <td class="text-left">{{novel.doctor_comment}}</td>
-                <td class="text-left">
-                  <button class="btn btn-xs btn-outline-dark"  (click)="editNovelcorona2(novel.novel_id)"><i class="fa fa-pencil fa-xs p-0 m-0"></i></button>
-                  <button class="btn btn-xs btn-outline-primary" (click)="printNovelcorona2(novel.novel_id)">Novelcorona 2</button><br>
-                  <button class="btn btn-xs btn-outline-success" (click)="printReport01(novel.novel_id)">จพต.</button>
-                  <button class="btn btn-xs btn-outline-warning" (click)="printReport02(novel.novel_id)">ใบขวาง</button>
+                <td class="text-left">{{novel.reporter}}</td>
+                <td class="text-center">
+                  <div *ngIf="novel.sdate_quaran !== null  ">
+                    <button class="btn btn-xs btn-outline-dark"  (click)="editNovelcorona2(novel.novel_id)"><i class="fa fa-pencil fa-xs p-0 m-0"></i></button>
+                    <button class="btn btn-xs btn-outline-primary" (click)="printNovelcorona2(novel.novel_id)">Novelcorona 2</button><br>
+                    <button class="btn btn-xs btn-outline-success" (click)="printReport01(novel.novel_id)">จพต.</button>
+                    <button class="btn btn-xs btn-outline-warning" (click)="printReport02(novel.novel_id)">ใบขวาง</button>
+                  </div>
+                  <div *ngIf="novel.sdate_quaran === null ">
+                    <button class="btn btn-xs btn-outline-dark"  (click)="editNovelcorona2(novel.novel_id)"><i class="fa fa-pencil fa-xs p-0 m-0"></i></button>
+                    <button class="btn btn-xs btn-outline-primary" (click)="printNovelcorona2(novel.novel_id)">Novelcorona 2</button><br>
+                  </div>
+
                 </td>
               </tr>
               </tbody>

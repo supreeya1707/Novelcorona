@@ -29,6 +29,8 @@ export class ViewComponent implements OnInit {
   currentDate: any = new Date();
   locale = 'th-be';
 
+  password: any = 'rbhCoV!9';
+
 
 
   constructor(private api: ApiService, private formBuilder: FormBuilder, private localeService: BsLocaleService,
@@ -37,6 +39,10 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.localeService.use(this.locale);
+    const pass = sessionStorage.getItem('nCoVpass');
+    if (pass !== this.password){
+      this.router.navigateByUrl('staff/login/ncov');
+    }
   }
 
   cidSearch(): any {
