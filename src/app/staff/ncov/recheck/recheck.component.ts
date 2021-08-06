@@ -84,6 +84,7 @@ pdfMake.fonts = {
   templateUrl: './recheck.component.html',
 })
 export class RecheckComponent implements OnInit {
+  password: any = 'rbhCoV!9';
   generalFrm: any;
   riskFrm: any;
   timelineFrm: any;
@@ -332,7 +333,12 @@ export class RecheckComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const pass = sessionStorage.getItem('nCoVpass');
+    if (pass !== this.password){
+      this.router.navigateByUrl('staff/login/ncov');
+    }
     this.localeService.use(this.locale);
+
     this.novelID = history.state.novelid;
 
     this.generalFrm = this.formBuilder.group({

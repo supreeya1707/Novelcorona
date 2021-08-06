@@ -70,9 +70,12 @@ interface SContactPlace {
 })
 
 export class ReportComponent implements OnInit {
-  txtSearch: any = '';
-  ptname: any = '';
-  station: any = '';
+  password: any = 'rbhCoV!9';
+  txtSearch: any;
+  ptname: any;
+  station: any;
+  status: any;
+
 
   dataSearch: any = '';
   dataNovel: any = [];
@@ -139,6 +142,10 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const pass = sessionStorage.getItem('nCoVpass');
+    if (pass !== this.password){
+      this.router.navigateByUrl('staff/login/ncov');
+    }
     this.localeService.use(this.locale);
 
     const toDataURL = url => fetch(url)
@@ -194,6 +201,16 @@ export class ReportComponent implements OnInit {
     } else {
       this.dataSearch = this.dataNovel.filter((data: any) => {
         return data.novel_station.match(this.station);
+      });
+    }
+  }
+
+  statusSearch(): any {
+    if (this.status === '') {
+      this.dataSearch = this.dataNovel;
+    } else {
+      this.dataSearch = this.dataNovel.filter((data: any) => {
+        return data.sars_pt_type.match(this.status);
       });
     }
   }
@@ -269,7 +286,7 @@ export class ReportComponent implements OnInit {
 
   editNovelcorona2(novelID: any) {
     console.log(novelID);
-    this.router.navigateByUrl('admin/formRecheck', {state: {novelid: novelID}});
+    this.router.navigateByUrl('staff/nCoV/recheck', {state: {novelid: novelID}});
   }
 
 
