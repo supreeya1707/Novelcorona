@@ -108,7 +108,7 @@ export class ViewComponent implements OnInit {
     Swal.fire({
       icon: 'warning',
       title: 'ลบข้อมูล',
-      text: 'ต้องการลบข้อมูลของ' + ptfullname,
+      html: 'ต้องการลบข้อมูลของ' + '<br>' + ptfullname,
       showCancelButton: true,
       confirmButtonText: 'ใช่',
       cancelButtonText: 'ไม่ใช่',

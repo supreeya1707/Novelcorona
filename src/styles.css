@@ -85407,7 +85407,7 @@ body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown):not(.sweetalert
 
 .swal2-popup .swal2-title {
   font-weight: 500;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   margin: 2rem 0 0 0;
   color: #181c32
 }
@@ -88897,11 +88897,18 @@ body {
 
 #imgSHeader{
   padding-left: 80px;
+  padding-right: unset;
   display : flex;
   align-items : center;
 }
 
+#nCoVHeader{
+  margin-top: 200px;
+}
 
+#nCoVmarginTop{
+  margin-top: 280px;
+}
 
 
 .scroll-to-top {
@@ -88915,6 +88922,11 @@ body {
   opacity: 1;
   transition: all .2s ease-in-out;
 }
+
+.bs-tooltip-bottom{
+  font-family: prompt-medium;
+}
+
 
 @media screen and (max-width: 768px) {
   .subheader-enabled .content {
@@ -88936,6 +88948,14 @@ body {
     padding-right: 20px;
     max-width: 100%;
     height: auto;
+  }
+
+  #nCoVHeader{
+    margin-top: 150px;
+  }
+
+  #nCoVmarginTop{
+    margin-top: 205px;
   }
 
 
@@ -88964,5 +88984,22 @@ body {
 
   .footer02 {
     padding-right: 20px;
+  }
+
+  .sicon-size{
+    height: 50px;
+    width: 50px;
+  }
+
+  #imgSHeader{
+    display: none;
+  }
+
+  #nCoVHeader{
+    margin-top: 110px;
+  }
+
+  #nCoVmarginTop{
+    margin-top: 160px;
   }
 }

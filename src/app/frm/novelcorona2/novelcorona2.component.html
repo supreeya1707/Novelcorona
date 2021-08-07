@@ -644,7 +644,8 @@
             </div>
             <div class="col-md-4">
               <div class="input-group">
-                <input class="form-control" placeholder="โปรดระบุวันเดินทาง" #datepickerMDY="bsDatepicker"
+                <input class="form-control" placeholder="โปรดระบุวันเดินทาง"
+                       (ngModelChange)="getDatecome($event)"
                        [(ngModel)]="datecome" [ngModelOptions]="{standalone: true}"
                        bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
                 <div class="input-group-append">

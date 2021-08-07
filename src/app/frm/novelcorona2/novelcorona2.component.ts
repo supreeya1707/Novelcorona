@@ -306,7 +306,7 @@ export class Novelcorona2Component implements OnInit {
 
   async getVaccine(): Promise<any>{
     const resVac = await this.api.getVaccine();
-    console.log(resVac);
+    // console.log(resVac);
     if (resVac.ok === true){
       this.dataVaccine = resVac.message;
     }else{
