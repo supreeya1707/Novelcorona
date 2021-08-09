@@ -383,7 +383,13 @@ export class Novelcorona2Component implements OnInit {
     console.log('this.riskFrm.invalid ', this.riskFrm.invalid);
     console.log('this.timelineFrm.invalid ', this.timelineFrm.invalid);
     if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'ข้อมูลไม่ครบถ้วน',
+        html: 'กรุณากรอกข้อมูลในช่องที่เป็นสีแดง' + '<br>' + 'หรือช่องที่มีเครื่องหมาย * ให้ครบ',
+      });
       // console.log('invalid');
+      // console.log('this.btndisble : ', this.btndisble);
       return;
     }else{
       this.btndisble = true;
@@ -522,13 +528,20 @@ export class Novelcorona2Component implements OnInit {
     info.push(data);
 
     const rs: any = await this.api.insRec(info);
-    if (rs.ok) {
-      console.log(rs.message[0]);
+    if (rs.ok === true) {
       const rsins: any = await this.insertRec(rs.message[0]);
-      console.log('rsins ', rsins);
-      this.successNotification();
+      // console.log('rsins ', rsins);
+      if (rsins.ok === true){
+        this.successNotification();
+      }else{
+        this.errorNotification();
+        console.log(rsins.error);
+        this.btndisble =  false;
+      }
     } else {
       this.errorNotification();
+      console.log(rs.error);
+      this.btndisble =  false;
     }
   }
 
@@ -552,8 +565,6 @@ export class Novelcorona2Component implements OnInit {
     data.day13 = this.dateTimeLineShort[12];
     data.day14 = this.dateTimeLineShort[13];
 
-
-
     data.timeline_date1 = this.timelineFrm.value.desDay1;
     data.timeline_date2 = this.timelineFrm.value.desDay2;
     data.timeline_date3 = this.timelineFrm.value.desDay3;
@@ -573,8 +584,8 @@ export class Novelcorona2Component implements OnInit {
     info.push(data);
 
     const rs: any = await this.api.insData(info);
-    console.log(rs);
-
+    // console.log(rs);
+    return rs;
   }
 
 

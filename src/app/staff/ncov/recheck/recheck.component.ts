@@ -798,6 +798,11 @@ export class RecheckComponent implements OnInit {
       console.log('this.generalFrm.invalid ', this.generalFrm.invalid);
       console.log('this.riskFrm.invalid ', this.riskFrm.invalid);
       console.log('this.timelineFrm.invalid ', this.timelineFrm.invalid);
+      Swal.fire({
+        icon: 'warning',
+        title: 'ข้อมูลไม่ครบถ้วน',
+        html: 'กรุณากรอกข้อมูลในช่องที่เป็นสีแดง' + '<br>' + 'หรือช่องที่มีเครื่องหมาย * ให้ครบ',
+      });
       return;
     }else{
       this.btndisble = true;
@@ -816,6 +821,9 @@ export class RecheckComponent implements OnInit {
       this.successNotification();
     } else {
       this.errorNotification();
+      console.log('novelResponse : ', novelResponse.error);
+      console.log('timelineResponse : ', timelineResponse.error);
+      console.log('staffResponse : ', staffResponse.error);
       this.btndisble = false;
     }
   }
