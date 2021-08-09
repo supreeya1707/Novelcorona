@@ -23,7 +23,9 @@
            </div>
 
            <div class="col-2 text-center my-5 p-0 m-0">
-             <img src="assets/picture/sicon-swab.svg" class="sicon-size img-fluid" [routerLink]="'/staff/blankpage'"
+             <img src="assets/picture/sicon-swab.svg" class="sicon-size img-fluid"
+                  [routerLink]="'/staff'"
+                  data-toggle="modal" data-target="#swabModalCenter"
                   style="cursor: pointer">
              <div class="noDisplay mt-5">
                <h5 class="fsize12">ตรวจโควิด</h5>
@@ -71,14 +73,34 @@
        </div>
      </div>
     </div>
-
-
-
-
-
   </div>
 </div>
 
+<!-- Modal Swab-->
+<div class="modal fade" id="swabModalCenter" tabindex="-1" role="dialog" aria-labelledby="swabModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title font-prompt-medium" id="swabModalCenterTitle">Swab Test</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body font-prompt-light">
+        <div class="row-cols-12 text-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="openSwabTest()">
+            <label class="fSize20">ตรวจสอบผลตรวจ Covid-19</label>
+          </button>
+        </div>
+        <div class="row-cols-12 text-center mt-3">
+          <button type="button" class="btn btn-info" data-dismiss="modal" (click)="openSwabQue()">
+            <label class="fSize20">รายชื่อคน Swab ตู้พระราชทาน</label>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <router-outlet></router-outlet>
 <app-scroll-to-top></app-scroll-to-top>

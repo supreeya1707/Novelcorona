@@ -88928,6 +88928,15 @@ body {
 }
 
 
+#rowHomeisolation{
+  margin-top: 250px;
+}
+
+#nCoVlogin{
+  margin-top: 250px;
+}
+
+
 @media screen and (max-width: 768px) {
   .subheader-enabled .content {
     padding-top: 0
@@ -88961,6 +88970,11 @@ body {
 
   .footer02 {
     padding-right: 20px;
+  }
+
+
+  #rowHomeisolation{
+    margin-top: 250px;
   }
 }
 
@@ -89001,5 +89015,10 @@ body {
 
   #nCoVmarginTop{
     margin-top: 160px;
+  }
+
+
+  #rowHomeisolation{
+    margin-top: 200px;
   }
 }

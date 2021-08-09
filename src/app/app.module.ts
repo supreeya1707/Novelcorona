@@ -1,6 +1,6 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {CommonModule} from '@angular/common';
+import {CommonModule, HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AppComponent} from './app.component';
 import {Novelcorona2Component} from './frm/novelcorona2/novelcorona2.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -13,8 +13,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {SharedModule} from './shared.module';
-// import {FrmModule} from './frm/frm.module';
-
+import {AppsModule} from './apps/apps.module';
+import {StaffModule} from './staff/staff.module';
+import {FrmModule} from './frm/frm.module';
 
 
 
@@ -35,11 +36,14 @@ defineLocale('th-be', thBeLocale);
     AppRoutingModule,
     HttpClientModule,
     DigitOnlyModule,
-    // FrmModule
+    // AppsModule,
+    // FrmModule,
+    // StaffModule
 
   ],
   providers: [
     {provide: 'baseURL', useValue: environment.baseURL},
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: LOCALE_ID, useValue: 'th-TH' }
   ],
   bootstrap: [AppComponent]

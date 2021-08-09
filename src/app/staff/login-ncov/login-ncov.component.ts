@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 })
 export class LoginNcovComponent implements OnInit {
   password: any;
+  errorLogin: any = false;
 
   constructor(private router: Router) { }
 
@@ -18,7 +19,8 @@ export class LoginNcovComponent implements OnInit {
       sessionStorage.setItem('nCoVpass', this.password);
       this.router.navigateByUrl('/staff/nCoV');
     }else{
-
+      this.errorLogin = true;
+      console.log(this.errorLogin);
     }
   }
 }

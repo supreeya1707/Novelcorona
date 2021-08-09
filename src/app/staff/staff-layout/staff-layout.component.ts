@@ -16,4 +16,14 @@ export class StaffLayoutComponent implements OnInit {
       'http://www.rbhportal.com/covidmonit/', '_blank');
   }
 
+ openSwabQue(): any {
+    window.open(
+      'http://rbhportal.com/swabque/', '_blank');
+  }
+
+  openSwabTest(): any {
+    window.open(
+      'https://www.hyggemedicalservice.com/rbh/covid19/webcheck.php', '_blank');
+  }
+
 }

@@ -5,13 +5,15 @@ import { ApplayoutComponent } from './applayout/applayout.component';
 import { HomeComponent } from './home/home.component';
 import {BlankPageComponent} from './blank-page/blank-page.component';
 import {SharedModule} from '../shared.module';
+import { HomeisolationComponent } from './homeisolation/homeisolation.component';
 
 
 @NgModule({
   declarations: [
     ApplayoutComponent,
     HomeComponent,
-    BlankPageComponent
+    BlankPageComponent,
+    HomeisolationComponent
   ],
   imports: [
     CommonModule,

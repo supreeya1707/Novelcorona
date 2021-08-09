@@ -1,20 +1,22 @@
-<div style="margin-top: 250px; min-height: 50vh;" class="text-center">
-  <div class="row ">
-    <div class="card col-lg-4 offset-xxl-4">
-      <div class="card-body">
-        <div class="col-md-12 text-center">
-          <img src="assets/picture/doctor.png" height="200">
-        </div>
-        <div class="col-md-12 mt-4 font-prompt-medium">
-          <input type="password" placeholder="กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบ" name="password"
-                 [(ngModel)]="password" (keydown.enter)="checkLogin()"
-                 class="form-control">
-        </div>
-        <div class="col-md-12 d-none" id="errorLogin">
-          <small class="text-danger font-prompt-medium">รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง</small>
-        </div>
-        <div class="col-md-12 mt-4 text-center font-prompt-medium">
-          <button class="btn btn-primary float-right" (click)="checkLogin()">เข้าสู่ระบบ</button>
+<div style="min-height: 60vh;" class="text-center" id="nCoVlogin">
+  <div style="align-items: center; vertical-align: middle">
+    <div class="row">
+      <div class="card col-lg-4 offset-xxl-4">
+        <div class="card-body">
+          <div class="col-md-12 text-center">
+            <img src="assets/picture/doctor.png" height="200">
+          </div>
+          <div class="col-md-12 mt-4 font-prompt-medium">
+            <input type="password" placeholder="กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบ" name="password"
+                   [(ngModel)]="password" (keydown.enter)="checkLogin()"
+                   class="form-control">
+          </div>
+          <div class="col-md-12 mt-2" *ngIf="errorLogin === true">
+            <small class="text-danger font-prompt-medium float-left">รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง</small>
+          </div>
+          <div class="col-md-12 mt-4 text-center font-prompt-medium">
+            <button class="btn btn-primary float-right" (click)="checkLogin()">เข้าสู่ระบบ</button>
+          </div>
         </div>
       </div>
     </div>
