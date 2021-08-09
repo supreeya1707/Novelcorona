@@ -402,7 +402,7 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelByID.novel_assign_fever, absolutePosition: {x: 290, y: 323}, bold: true},
         {text: this.dataNovelByID.novel_assign_oxygen, absolutePosition: {x: 400, y: 323}, bold: true},
         (this.dataNovelByID.novel_respirator === 1) ? {text: '√', absolutePosition: {x: 469, y: 316}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_cough = 1) ? {text: '√', absolutePosition: {x: 32, y: 333}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_cough === 1) ? {text: '√', absolutePosition: {x: 32, y: 333}, style: 'fSize24'} : null,
         (this.dataNovelByID.novel_sorethroat === 1) ? {text: '√', absolutePosition: {x: 86, y: 333}, style: 'fSize24'} : null,
         (this.dataNovelByID.novel_musclepain === 1) ? {text: '√', absolutePosition: {x: 178, y: 333}, style: 'fSize24'} : null,
         (this.dataNovelByID.novel_mucous === 1) ? {text: '√', absolutePosition: {x: 261, y: 333}, style: 'fSize24'} : null,
