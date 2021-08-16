@@ -1574,7 +1574,7 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelStaff.sars1_placesend, absolutePosition: {x: 290, y: 635}, bold: true},
         (this.dataNovelStaff.sars1_result != null) ? {
           text: '√',
-          absolutePosition: {x: this.dataNovelStaff.sars1_result === 0 ? 383 : 472, y: 628},
+          absolutePosition: {x: this.dataNovelStaff.sars1_result === 1 ? 383 : 472, y: 628},
           style: 'fSize24'
         } : null,
 
@@ -1588,7 +1588,7 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelStaff.sars2_placesend, absolutePosition: {x: 290, y: 657}, bold: true},
         (this.dataNovelStaff.sars2_result != null) ? {
           text: '√',
-          absolutePosition: {x: this.dataNovelStaff.sars2_result === 0 ? 383 : 472, y: 648},
+          absolutePosition: {x: this.dataNovelStaff.sars2_result === 1 ? 383 : 472, y: 648},
           style: 'fSize24'
         } : null,
 
