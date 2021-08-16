@@ -88937,6 +88937,44 @@ body {
 }
 
 
+.checkbox-xl .custom-control-label:after, .checkbox-xl .custom-control-label:before {
+  top: 1.2rem;
+  width: 1.85rem;
+  height: 1.85rem;
+  color: #6bb1e1;
+}
+
+.checkbox-xl .custom-control-label:after, .checkbox-xl .custom-control-label:before {
+  top: 1.2rem;
+  width: 1.85rem;
+  height: 1.85rem;
+  color: #6bb1e1;
+}
+.custom-control-label:after {
+  background: no-repeat 50%/50% 50%;
+}
+
+.custom-control-label:after, .custom-control-label:before {
+  position: absolute;
+  top: .25rem;
+  left: -1.5rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  content: "";
+}
+
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(.3rem - 1px);
+  border-top-right-radius: calc(.3rem - 1px);
+}
+
 @media screen and (max-width: 768px) {
   .subheader-enabled .content {
     padding-top: 0

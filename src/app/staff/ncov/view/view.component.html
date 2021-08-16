@@ -44,6 +44,7 @@
               <th width="10%">เบอร์โทรศัพท์</th>
               <th width="10%">วันที่มีอาการ</th>
               <th width="10%">วันที่เข้ารับการรักษา</th>
+              <th width="5%">เวลาลงข้อมูล</th>
               <th width="10%"></th>
             </tr>
             </thead>
@@ -56,6 +57,7 @@
               <td>{{novel.novel_phone}}</td>
               <td>{{novel.novel_start_sick | thaiDate: 'short'}}</td>
               <td>{{novel.novel_start_treat | thaiDate: 'short'}}</td>
+              <td>{{novel.timeinput}}</td>
               <td>
                 <button class="btn btn-xs btn-outline-primary btn-xs"
                       tooltipHtml="ลงข้อมูลเพิ่มเติม" placement="bottom"
@@ -70,7 +72,7 @@
             </tr>
             </tbody>
             <tbody *ngIf="dataSearch?.length == 0">
-            <tr><td colspan="8" class="no-data-available fSize24">ไม่พบข้อมูล</td></tr>
+            <tr><td colspan="9" class="no-data-available fSize24">ไม่พบข้อมูล</td></tr>
             </tbody>
           </table>
         </div>

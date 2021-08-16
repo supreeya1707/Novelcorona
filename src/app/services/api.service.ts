@@ -219,6 +219,30 @@ export class ApiService {
     return this.http.get(url, this.httpOptions).toPromise();
   }
 
+  getServicepoint(): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/servicepoint/`;
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
+  getDHPH(): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/dhph/`;
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
   getStaffByDate(dateinput: any): any {
     // const token = sessionStorage.getByCid('token');
     this.httpOptions = {
