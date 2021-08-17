@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import {BlankPageComponent} from './blank-page/blank-page.component';
 import {SharedModule} from '../shared.module';
 import { HomeisolationComponent } from './homeisolation/homeisolation.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +20,8 @@ import {FormsModule} from '@angular/forms';
         CommonModule,
         AppsRoutingModule,
         SharedModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 export class AppsModule { }

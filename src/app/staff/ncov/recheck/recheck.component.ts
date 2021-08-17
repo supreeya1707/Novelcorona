@@ -46,10 +46,6 @@ interface PuiPriority {
   viewValue: string;
 }
 
-interface Area {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-forms',
@@ -198,10 +194,10 @@ export class RecheckComponent implements OnInit {
   desOther: any;
   date: any;
 
-  typeSAR1: any;
+  typeSAR1: any = 'ATK';
   placesendSAR1: any;
   radiodetect1: any;
-  typeSAR2: any;
+  typeSAR2: any = 'RT-PCR';
   placesendSAR2: any;
   radiodetect2: any;
   radiodoctor: any;
@@ -225,12 +221,12 @@ export class RecheckComponent implements OnInit {
   scontact3: any;
   scontactplace: any;
   radioStaffContact: any;
-  area: any;
   sarsdate1: any = null;
   sarsdate2: any = null;
   date1swab: any = null;
   date2swab: any = null;
   dateSquarantine = null;
+  payment: any;
 
   dataSContact: SContact[] = [
     {value: '1', viewValue: 'บุคคลากรใส่ surgical mask ร่วมกับ face shield หรือ อยู่ห่างจากผู้ป่วยเกิน 1 เมตร'},
@@ -265,11 +261,6 @@ export class RecheckComponent implements OnInit {
     {value: '4', viewValue: 'Rapid Test'}
   ];
 
-  dataArea: Area[] = [
-    {value: '1', viewValue: 'รพ.ราชบุรี'},
-    {value: '2', viewValue: 'รพ.สต.โรงเจ'},
-  ];
-
   dataDoctor: Doctor[] = [
     {value: 'นพ.ปิยะณัฐ บุญประดิษฐ์', viewValue: 'นพ.ปิยะณัฐ บุญประดิษฐ์'},
     {value: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล', viewValue: 'พญ.สุดารัตน์ วิจิตรเศรษฐกุล'},
@@ -298,6 +289,7 @@ export class RecheckComponent implements OnInit {
     {value: 'ชำระเงินเอง', viewValue: 'ชำระเงินเอง'},
     {value: 'อื่น ๆ', viewValue: 'อื่น ๆ'},
   ];
+
 
 
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
@@ -362,8 +354,11 @@ export class RecheckComponent implements OnInit {
       radioinject: [null, Validators.compose([Validators.required])],
       radiolabtest: [null, Validators.compose([Validators.required])],
       assignRisk: [null, Validators.compose([Validators.required])],
-      // radioStaffContact: [null, Validators.compose([Validators.required])],
-      datecome: [null]
+      datecome: [null],
+      radioStaffContact: [null],
+      scontact2: [null],
+      scontact3: [null],
+      scontactplace: [null]
     });
 
     this.timelineFrm  = this.formBuilder.group({
@@ -378,6 +373,53 @@ export class RecheckComponent implements OnInit {
     this.getContact();
     this.getVaccine();
     this.getDataStaff(this.novelID);
+    this.setValidators();
+
+  }
+
+  setValidators(): any {
+    const radioStaffControl = this.riskFrm.get('radioStaffContact');
+    const scontact2Control = this.riskFrm.get('scontact2');
+    const scontact3Control = this.riskFrm.get('scontact3');
+    const scontactplaceControl = this.riskFrm.get('scontactplace');
+
+    this.riskFrm.get('radiolabtest').valueChanges
+      .subscribe(userMethod => {
+        // console.log('userMethod ', userMethod);
+        if (userMethod === 1) {
+          radioStaffControl.setValidators([Validators.required]);
+        } else {
+          radioStaffControl.setValidators(null);
+        }
+        radioStaffControl.updateValueAndValidity();
+      });
+
+    this.riskFrm.get('radioStaffContact').valueChanges
+      .subscribe(radioStaff => {
+        // console.log('radioStaff ', radioStaff);
+        if (radioStaff === 1) {
+          scontact2Control.setValidators([Validators.required]);
+          scontactplaceControl.setValidators(null);
+        }else if (radioStaff === 2){
+          scontact2Control.setValidators(null);
+          scontactplaceControl.setValidators([Validators.required]);
+        }else {
+          scontact2Control.setValidators(null);
+          scontactplaceControl.setValidators(null);
+        }
+        scontact2Control.updateValueAndValidity();
+        scontactplaceControl.updateValueAndValidity();
+      });
+
+    this.riskFrm.get('scontact2').valueChanges
+      .subscribe(scontact2 => {
+        if (scontact2 === '1' || scontact2 === '2') {
+          scontact3Control.setValidators([Validators.required]);
+        }else {
+          scontact3Control.setValidators(null);
+        }
+        scontact3Control.updateValueAndValidity();
+      });
 
   }
 
@@ -636,7 +678,7 @@ export class RecheckComponent implements OnInit {
         }
         this.addressquaran = this.dataStaff['address_quaran'];
         this.reporter = this.dataStaff['reporter'];
-        this.area =  this.dataStaff['area'];
+
       }
     }else {
       console.log('error');
@@ -863,8 +905,8 @@ export class RecheckComponent implements OnInit {
     data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;
+    data.payment = this.payment;
     data.reporter = this.reporter;
-    data.area = (this.area === null || this.area === '') ? null : this.area;
     data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     infoData.push(data);
@@ -908,7 +950,7 @@ export class RecheckComponent implements OnInit {
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;
     data.reporter = this.reporter;
-    data.area = (this.area === null || this.area === '') ? null : this.area;
+    data.payment = this.payment;
     // data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     infoData.push(data);

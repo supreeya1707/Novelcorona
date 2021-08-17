@@ -844,14 +844,19 @@
               </div>
             </div>
           </div>
+
           <div class="row mt-2 font-prompt-medium fsize16" *ngIf="radiolabtest==1">
             <div class="radio-inline"  style="padding-left: 20px;">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioStaffContact" id="radioStaffContact01" [(ngModel)]="radioStaffContact" [ngModelOptions]="{standalone: true}" [value]="1">
+                <input class="form-check-input" type="radio" name="radioStaffContact" formControlName="radioStaffContact"
+                       [ngClass]="{ 'is-invalid': submitted && f3.radioStaffContact.errors || ((f3.radioStaffContact.touched || f3.radioStaffContact.dirty) && f3.radioStaffContact.invalid) }"
+                       id="radioStaffContact01" [(ngModel)]="radioStaffContact"  [value]="1">
                 <label class="form-check-label" for="radioStaffContact01">&nbsp;สัมผัสผู้ติดเชื้อยืนยัน</label>
               </div>&nbsp;
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioStaffContact" id="radioStaffContact02" [(ngModel)]="radioStaffContact" [ngModelOptions]="{standalone: true}"[value]="2">
+                <input class="form-check-input" type="radio" name="radioStaffContact" id="radioStaffContact02"  formControlName="radioStaffContact"
+                       [ngClass]="{ 'is-invalid': submitted && f3.radioStaffContact.errors || ((f3.radioStaffContact.touched || f3.radioStaffContact.dirty) && f3.radioStaffContact.invalid) }"
+                       [(ngModel)]="radioStaffContact" [value]="2">
                 <label class="form-check-label" for="radioStaffContact02">&nbsp;ไปสถานที่เสี่ยงสูง</label>
               </div>
             </div>
@@ -859,26 +864,46 @@
 
           <div class="row mt-2">
             <div class="col-lg-12 col-md-12" *ngIf="radioStaffContact === 1">
-              <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact2" [ngModelOptions]="{standalone: true}"  name="scontact2" id="scontact21">
+              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส"  formControlName="scontact2"
+                      [(ngModel)]="scontact2"  name="scontact2" id="scontact21"
+                      [ngClass]="{ 'is-invalid': submitted && f3.scontact2.errors || ((f3.scontact2.touched || f3.scontact2.dirty) && f3.scontact2.invalid) }">
                 <option  *ngFor="let sc of dataSContact" [value]="sc.value">{{sc.viewValue}}</option>
               </select>
+              <div *ngIf="submitted && f3.scontact2.errors  || ((f3.scontact2.touched || f3.scontact2.dirty) && f3.scontact2.invalid)" class="invalid-feedback">
+                <div class="text-left fSize12" *ngIf="f3.scontact2.errors.required">กรุณาเลือกลักษณะการสัมผัส</div>
+              </div>
               <div class="row mt-2" [ngSwitch] = "scontact2">
                 <div class="col-lg-12 col-md-12" *ngSwitchCase="1">
-                  <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact31">
+                  <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" formControlName="scontact3"
+                          [(ngModel)]="scontact3"  name="scontact3" id="scontact31"
+                          [ngClass]="{ 'is-invalid': submitted && f3.scontact3.errors || ((f3.scontact3.touched || f3.scontact3.dirty) && f3.scontact3.invalid) }">
                     <option  *ngFor="let sc of dataSContact1"  [value]="sc.value">{{sc.viewValue}}</option>
                   </select>
+                  <div *ngIf="submitted && f3.scontact3.errors  || ((f3.scontact3.touched || f3.scontact3.dirty) && f3.scontact3.invalid)" class="invalid-feedback">
+                    <div class="text-left fSize12" *ngIf="f3.scontact3.errors.required">กรุณาเลือกลักษณะการสัมผัส</div>
+                  </div>
                 </div>
                 <div class="col-lg-12 col-md-12" *ngSwitchCase="2">
-                  <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact32">
+                  <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" formControlName="scontact3"
+                          [(ngModel)]="scontact3"  name="scontact3" id="scontact32"
+                          [ngClass]="{ 'is-invalid': submitted && f3.scontact3.errors || ((f3.scontact3.touched || f3.scontact3.dirty) && f3.scontact3.invalid) }">
                     <option  *ngFor="let sc of dataSContact2" [value]="sc.value">{{sc.viewValue}}</option>
                   </select>
+                  <div *ngIf="submitted && f3.scontact3.errors  || ((f3.scontact3.touched || f3.scontact3.dirty) && f3.scontact3.invalid)" class="invalid-feedback">
+                    <div class="text-left fSize12" *ngIf="f3.scontact3.errors.required">กรุณาเลือกลักษณะการสัมผัส</div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-lg-12 col-md-12" *ngIf="radioStaffContact === 2">
-              <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontactplace" [ngModelOptions]="{standalone: true}" name="scontactplace" id="scontactplace">
+              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" formControlName="scontactplace"
+                      [(ngModel)]="scontactplace"  name="scontactplace" id="scontactplace"
+                      [ngClass]="{ 'is-invalid': submitted && f3.scontactplace.errors || ((f3.scontactplace.touched || f3.scontactplace.dirty) && f3.scontactplace.invalid) }">
                 <option  *ngFor="let scp of dataSContactPlace"   [value]="scp.value">{{scp.viewValue}}</option>
               </select>
+              <div *ngIf="submitted && f3.scontactplace.errors  || ((f3.scontactplace.touched || f3.scontactplace.dirty) && f3.scontactplace.invalid)" class="invalid-feedback">
+                <div class="text-left fSize12" *ngIf="f3.scontactplace.errors.required">กรุณาเลือกลักษณะการสัมผัส</div>
+              </div>
             </div>
           </div>
 
@@ -1110,10 +1135,6 @@
             <textarea class="form-control" name="cluster" id="cluster" rows="2" style="resize: none"
                       placeholder="ใส่สรุปความเชื่อมโยง/พื้นที่ระบาด สัมผัสบุคคลเสี่ยงกลุ่มใด"
                       [(ngModel)]="cluster"></textarea>
-<!--            <select class="form-control" [(ngModel)]="cluster" name="cluster" id="cluster">-->
-<!--              <option></option>-->
-<!--              <option *ngFor="let clus of dataCluster" [value]="clus.cluster_id">{{clus.cluster_name}}</option>-->
-<!--            </select>-->
           </div>
         </div>
 
@@ -1190,7 +1211,6 @@
           <div class="col-md-4 ">
             <label>ครั้งที่ 1 วันที่ได้รับ </label>
             <div class="input-group">
-<!--              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac1">-->
               <input class="form-control" (bsValueChange)="getDateVac1($event)" #datepickerVac1="bsDatepicker"
                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [value]="vac1">
               <div class="input-group-append">
@@ -1202,7 +1222,6 @@
           </div>
           <div class="col-md-4">
             <label>ชื่อวัคซีน </label>
-<!--            <input type="text " class="form-control" id="vaccine" [(ngModel)]="namevac1">-->
             <select class="form-control" placeholder="ชื่อวัคซีน" name="namevac1" id="namevac1"
                     [(ngModel)]="namevac1">
               <option *ngFor="let vac of dataVaccine" [value]="vac.vaccine_name">{{vac.vaccine_name}}</option>
@@ -1218,7 +1237,6 @@
           <div class=" col-md-4 ">
             <label>ครั้งที่ 2 วันที่ได้รับ </label>
             <div class="input-group">
-<!--              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac2">-->
               <input class="form-control" (bsValueChange)="getDateVac2($event)" #datepickerVac2="bsDatepicker"
                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                      [value]="vac2">
@@ -1231,7 +1249,6 @@
           </div>
           <div class="col-md-4">
             <label>ชื่อวัคซีน </label>
-<!--            <input type="text " class="form-control" id="vaccine2" [(ngModel)]="namevac2">-->
             <select class="form-control" placeholder="ชื่อวัคซีน" name="namevac2" id="namevac2"
                     [(ngModel)]="namevac2">
               <option *ngFor="let vac of dataVaccine" [value]="vac.vaccine_name">{{vac.vaccine_name}}</option>
@@ -1247,7 +1264,6 @@
           <div class=" col-md-4 ">
             <label>ครั้งที่ 3 วันที่ได้รับ </label>
             <div class="input-group">
-              <!--              <input class="form-control" #datepickerMDY="bsDatepicker" bsDatepicker [(ngModel)]="datevac2">-->
               <input class="form-control" (bsValueChange)="getDateVac3($event)" #datepickerVac3="bsDatepicker"
                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
                      [value]="vac3">
@@ -1260,7 +1276,6 @@
           </div>
           <div class="col-md-4">
             <label>ชื่อวัคซีน </label>
-            <!--            <input type="text " class="form-control" id="vaccine2" [(ngModel)]="namevac2">-->
             <select class="form-control" placeholder="ชื่อวัคซีน" name="namevac3" id="namevac3"
                     [(ngModel)]="namevac3">
               <option *ngFor="let vac of dataVaccine" [value]="vac.vaccine_name">{{vac.vaccine_name}}</option>
@@ -1271,16 +1286,20 @@
             <input type="text " class="form-control" id="placevaccine3" [(ngModel)]="placevac3">
           </div>
         </div>
-
+        <hr class="mt-15">
         <div class="row mt-10">
           <div class="form-group">
             <label>ผลการตรวจ SARS-CoV2 Antibody</label>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-1">
-            <label>ครั้งที่</label>
-            <input type="text " class="form-control" id="sars1" value="1" readonly="true">
+<!--          <div class="col-md-1">-->
+<!--            <label>ครั้งที่</label>-->
+<!--            <input type="text " class="form-control" id="sars1" value="1" readonly="true">-->
+<!--          </div>-->
+          <div class="col-md-3">
+            <label>ชนิดตัวอย่าง</label>
+            <input type="text" class="form-control" id="typeSAR1" [(ngModel)]="typeSAR1" readonly="true">
           </div>
           <div class="col-md-3">
             <label>วันที่เก็บ</label>
@@ -1296,10 +1315,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-2">
-            <label>ชนิดตัวอย่าง</label>
-            <input type="text " class="form-control" id="typeSAR1"[(ngModel)]="typeSAR1" >
-          </div>
+
           <div class="col-md-2">
             <label>สถานที่ส่งตรวจ</label>
             <input type="text " class="form-control" id="placesendSAR1" [(ngModel)]="placesendSAR1">
@@ -1319,9 +1335,13 @@
           </div>
         </div>
         <div class="row mt-5">
-          <div class="col-md-1">
-            <label>ครั้งที่</label>
-            <input type="text " class="form-control" id="sars2" value="2" readonly="true">
+<!--          <div class="col-md-1">-->
+<!--            <label>ครั้งที่</label>-->
+<!--            <input type="text " class="form-control" id="sars2" value="2" readonly="true">-->
+<!--          </div>-->
+          <div class="col-md-3">
+            <label>ชนิดตัวอย่าง</label>
+            <input type="text " class="form-control" id="typeSAR2" [(ngModel)]="typeSAR2" readonly="true" >
           </div>
           <div class="col-md-3">
             <label>วันที่เก็บ</label>
@@ -1336,10 +1356,6 @@
                      [attr.aria-expanded]="datepickerSARS2.isOpen"></i></span>
               </div>
             </div>
-          </div>
-          <div class="col-md-2">
-            <label>ชนิดตัวอย่าง</label>
-            <input type="text " class="form-control" id="typeSAR2" [(ngModel)]="typeSAR2" >
           </div>
           <div class="col-md-2">
             <label>สถานที่ส่งตรวจ</label>
@@ -1362,7 +1378,7 @@
         </div>
 
         <div class="row mt-10">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <label>รายงานแพทย์</label>
             <div class="radio-inline">
               <label class="radio mt-3" *ngFor="let doctor of dataDoctor">
@@ -1371,8 +1387,11 @@
               </label>
             </div>
           </div>
+        </div>
+
+        <div class="row mt-5">
           <div class="col-md-2">
-            <label>เวลา</label>
+            <label>เวลารายงานแพทย์</label>
             <input type="text " class="form-control" id="timefromdoc" [(ngModel)]="timefromdoc">
           </div>
         </div>
@@ -1408,6 +1427,16 @@
               </label>
 
               <label class="radio ">
+                <input type="radio" name="radioSARtype" id="radioSARtype5"  [(ngModel)]="radioSARtype" [value]="5"/>
+                <span></span>MR contract
+              </label>
+
+              <label class="radio ">
+                <input type="radio" name="radioSARtype" id="radioSARtype6"  [(ngModel)]="radioSARtype" [value]="6"/>
+                <span></span>ACF
+              </label>
+
+              <label class="radio ">
                 <input type="radio" name="radioSARtype" id="radioSARtype2"  [(ngModel)]="radioSARtype" [value]="2"/>
                 <span></span>PUI
               </label>
@@ -1421,6 +1450,20 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="form-inline">
+              <div class="form-check text-left">
+                <label class="checkbox checkbox-square">
+                  <input type="checkbox" name="payment" [(ngModel)]="payment"/>
+                  <span></span>&nbsp;ชำระเงิน
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-15">
 
         <div class="div mt-5">
           <label>นัด Swab</label>
@@ -1495,18 +1538,9 @@
         </div>
 
         <div class="row mt-5">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <label>ผู้รายงาน</label>
             <input type="text " class="form-control" id="reporter" [(ngModel)]="reporter" >
-          </div>
-
-          <div class="col-md-6">
-            <label>พื้นที่งาน</label>
-            <select class="form-control"  name="area" id="area"
-                    [(ngModel)]="area">
-              <option></option>
-              <option *ngFor="let area of dataArea" [value]="area.value">{{area.viewValue}}</option>
-            </select>
           </div>
 
         </div>

@@ -851,11 +851,15 @@
           <div class="row mt-2 font-prompt-medium fsize16" *ngIf="radiolabtest==1">
             <div class="radio-inline"  style="padding-left: 20px;">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioStaffContact" id="radioStaffContact01" [(ngModel)]="radioStaffContact" [ngModelOptions]="{standalone: true}" [value]="1">
+                <input class="form-check-input" type="radio" name="radioStaffContact" formControlName="radioStaffContact"
+                       [ngClass]="{ 'is-invalid': submitted && f3.radioStaffContact.errors || ((f3.radioStaffContact.touched || f3.radioStaffContact.dirty) && f3.radioStaffContact.invalid) }"
+                       id="radioStaffContact01" [(ngModel)]="radioStaffContact"  [value]="1">
                 <label class="form-check-label" for="radioStaffContact01">&nbsp;สัมผัสผู้ติดเชื้อยืนยัน</label>
               </div>&nbsp;
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioStaffContact" id="radioStaffContact02" [(ngModel)]="radioStaffContact" [ngModelOptions]="{standalone: true}"[value]="2">
+                <input class="form-check-input" type="radio" name="radioStaffContact" id="radioStaffContact02"  formControlName="radioStaffContact"
+                       [ngClass]="{ 'is-invalid': submitted && f3.radioStaffContact.errors || ((f3.radioStaffContact.touched || f3.radioStaffContact.dirty) && f3.radioStaffContact.invalid) }"
+                       [(ngModel)]="radioStaffContact" [value]="2">
                 <label class="form-check-label" for="radioStaffContact02">&nbsp;ไปสถานที่เสี่ยงสูง</label>
               </div>
             </div>
@@ -863,26 +867,46 @@
 
           <div class="row mt-2">
             <div class="col-lg-12 col-md-12" *ngIf="radioStaffContact === 1">
-              <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact2" [ngModelOptions]="{standalone: true}"  name="scontact2" id="scontact21">
+              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส"  formControlName="scontact2"
+                      [(ngModel)]="scontact2"  name="scontact2" id="scontact21"
+                      [ngClass]="{ 'is-invalid': submitted && f3.scontact2.errors || ((f3.scontact2.touched || f3.scontact2.dirty) && f3.scontact2.invalid) }">
                 <option  *ngFor="let sc of dataSContact" [value]="sc.value">{{sc.viewValue}}</option>
               </select>
+              <div *ngIf="submitted && f3.scontact2.errors  || ((f3.scontact2.touched || f3.scontact2.dirty) && f3.scontact2.invalid)" class="invalid-feedback">
+                <div class="text-left fSize12" *ngIf="f3.scontact2.errors.required">กรุณาเลือกลักษณะการสัมผัส</div>
+              </div>
               <div class="row mt-2" [ngSwitch] = "scontact2">
                 <div class="col-lg-12 col-md-12" *ngSwitchCase="1">
-                  <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact31">
+                  <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" formControlName="scontact3"
+                          [(ngModel)]="scontact3"  name="scontact3" id="scontact31"
+                          [ngClass]="{ 'is-invalid': submitted && f3.scontact3.errors || ((f3.scontact3.touched || f3.scontact3.dirty) && f3.scontact3.invalid) }">
                     <option  *ngFor="let sc of dataSContact1"  [value]="sc.value">{{sc.viewValue}}</option>
                   </select>
+                  <div *ngIf="submitted && f3.scontact3.errors  || ((f3.scontact3.touched || f3.scontact3.dirty) && f3.scontact3.invalid)" class="invalid-feedback">
+                    <div class="text-left fSize12" *ngIf="f3.scontact3.errors.required">กรุณาเลือกลักษณะการสัมผัส</div>
+                  </div>
                 </div>
                 <div class="col-lg-12 col-md-12" *ngSwitchCase="2">
-                  <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontact3" [ngModelOptions]="{standalone: true}" name="scontact3" id="scontact32">
+                  <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" formControlName="scontact3"
+                          [(ngModel)]="scontact3"  name="scontact3" id="scontact32"
+                          [ngClass]="{ 'is-invalid': submitted && f3.scontact3.errors || ((f3.scontact3.touched || f3.scontact3.dirty) && f3.scontact3.invalid) }">
                     <option  *ngFor="let sc of dataSContact2" [value]="sc.value">{{sc.viewValue}}</option>
                   </select>
+                  <div *ngIf="submitted && f3.scontact3.errors  || ((f3.scontact3.touched || f3.scontact3.dirty) && f3.scontact3.invalid)" class="invalid-feedback">
+                    <div class="text-left fSize12" *ngIf="f3.scontact3.errors.required">กรุณาเลือกลักษณะการสัมผัส</div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-lg-12 col-md-12" *ngIf="radioStaffContact === 2">
-              <select class="form-control border-danger" placeholder="เลือกลักษณะการสัมผัส" [(ngModel)]="scontactplace" [ngModelOptions]="{standalone: true}" name="scontactplace" id="scontactplace">
+              <select class="form-control" placeholder="เลือกลักษณะการสัมผัส" formControlName="scontactplace"
+                      [(ngModel)]="scontactplace"  name="scontactplace" id="scontactplace"
+                      [ngClass]="{ 'is-invalid': submitted && f3.scontactplace.errors || ((f3.scontactplace.touched || f3.scontactplace.dirty) && f3.scontactplace.invalid) }">
                 <option  *ngFor="let scp of dataSContactPlace"   [value]="scp.value">{{scp.viewValue}}</option>
               </select>
+              <div *ngIf="submitted && f3.scontactplace.errors  || ((f3.scontactplace.touched || f3.scontactplace.dirty) && f3.scontactplace.invalid)" class="invalid-feedback">
+                <div class="text-left fSize12" *ngIf="f3.scontactplace.errors.required">กรุณาเลือกลักษณะการสัมผัส</div>
+              </div>
             </div>
           </div>
 

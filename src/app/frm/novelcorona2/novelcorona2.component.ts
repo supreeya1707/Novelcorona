@@ -131,7 +131,6 @@ export class Novelcorona2Component implements OnInit {
   come_seat: any;
   assign_touch: any;
   assign_contract: any;
-  assign_etc: any;
   assign_station: any;
   assign_position: any;
   symtom_etc: any;
@@ -159,6 +158,9 @@ export class Novelcorona2Component implements OnInit {
   scontact3: any;
   scontactplace: any;
   radioStaffContact: any;
+
+  servicepoint: any;
+  dhph: any;
 
   dataSContact: SContact[] = [
     {value: '1', viewValue: 'บุคคลากรใส่ surgical mask ร่วมกับ face shield หรือ อยู่ห่างจากผู้ป่วยเกิน 1 เมตร'},
@@ -221,6 +223,9 @@ export class Novelcorona2Component implements OnInit {
     this.genDateTimeLine(moment().format('YYYY-MM-DD'));
     // console.log(this.dateTimeLineShort);
 
+    this.servicepoint = sessionStorage.getItem('servicepoint');
+    this.dhph = sessionStorage.getItem('dhph');
+
     this.generalFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
       pname: [null, Validators.compose([Validators.required])],
@@ -269,7 +274,12 @@ export class Novelcorona2Component implements OnInit {
       radiobreath: [null, Validators.compose([Validators.required])],
       radioinject: [null, Validators.compose([Validators.required])],
       radiolabtest: [null, Validators.compose([Validators.required])],
-      assignRisk: [null, Validators.compose([Validators.required])]
+      assignRisk: [null, Validators.compose([Validators.required])],
+      radioStaffContact: [null],
+      scontact2: [null],
+      scontact3: [null],
+      scontactplace: [null],
+
     });
 
     this.timelineFrm  = this.formBuilder.group({
@@ -280,18 +290,65 @@ export class Novelcorona2Component implements OnInit {
 
     this.getContact();
     this.getVaccine();
+    this.setValidators();
 
   }
 
 
-  get f() {
+  get f(): any {
     return this.generalFrm.controls;
   }
-  get f2() {
+  get f2(): any {
     return this.timelineFrm.controls;
   }
-  get f3() {
+  get f3(): any {
     return this.riskFrm.controls;
+  }
+
+  setValidators(): any {
+    const radioStaffControl = this.riskFrm.get('radioStaffContact');
+    const scontact2Control = this.riskFrm.get('scontact2');
+    const scontact3Control = this.riskFrm.get('scontact3');
+    const scontactplaceControl = this.riskFrm.get('scontactplace');
+
+    this.riskFrm.get('radiolabtest').valueChanges
+      .subscribe(userMethod => {
+        // console.log('userMethod ', userMethod);
+        if (userMethod === 1) {
+          radioStaffControl.setValidators([Validators.required]);
+        } else {
+          radioStaffControl.setValidators(null);
+        }
+        radioStaffControl.updateValueAndValidity();
+      });
+
+    this.riskFrm.get('radioStaffContact').valueChanges
+      .subscribe(radioStaff => {
+        // console.log('radioStaff ', radioStaff);
+        if (radioStaff === 1) {
+          scontact2Control.setValidators([Validators.required]);
+          scontactplaceControl.setValidators(null);
+        }else if (radioStaff === 2){
+          scontact2Control.setValidators(null);
+          scontactplaceControl.setValidators([Validators.required]);
+        }else {
+          scontact2Control.setValidators(null);
+          scontactplaceControl.setValidators(null);
+        }
+        scontact2Control.updateValueAndValidity();
+        scontactplaceControl.updateValueAndValidity();
+      });
+
+    this.riskFrm.get('scontact2').valueChanges
+      .subscribe(scontact2 => {
+        if (scontact2 === '1' || scontact2 === '2') {
+          scontact3Control.setValidators([Validators.required]);
+        }else {
+          scontact3Control.setValidators(null);
+        }
+        scontact3Control.updateValueAndValidity();
+      });
+
   }
 
   async getContact(): Promise<any>{
@@ -323,7 +380,6 @@ export class Novelcorona2Component implements OnInit {
       control.setErrors(null);
     });
   }
-
 
   successNotification() {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
@@ -523,6 +579,8 @@ export class Novelcorona2Component implements OnInit {
     data.novel_namevac3 = this.namevac3;
     data.novel_placevac3 = this.placevac3;
 
+    data.novel_servicepoint = this.servicepoint;
+    data.novel_dhph = this.dhph;
     data.novel_input_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     info.push(data);

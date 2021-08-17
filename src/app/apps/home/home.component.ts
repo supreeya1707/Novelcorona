@@ -2,6 +2,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +14,13 @@ export class HomeComponent implements OnInit {
   hospcode: any;
   dataServicepoint: any = [];
   dataDHPH: any = [];
+  servicepointFrm: any;
+  btndisble: any = false;
   @ViewChild('content01', {read: TemplateRef}) content01: TemplateRef<any>;
   @ViewChild('content02', {read: TemplateRef}) content02: TemplateRef<any>;
 
 
-  constructor(private router: Router, private modalService: NgbModal, private api: ApiService) { }
+  constructor(private router: Router, private modalService: NgbModal, private api: ApiService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.getDataServicepoint();
@@ -39,7 +42,7 @@ export class HomeComponent implements OnInit {
     // this.router.navigateByUrl('forms/novelcorona2');
   }
 
-  btnOK() {
+  btnStep1(): any {
     this.modalService.dismissAll();
     this.modalService.open(this.content02, {size: 'xl', backdrop: 'static'});
   }
@@ -57,10 +60,38 @@ export class HomeComponent implements OnInit {
     const resDHPH = await this.api.getDHPH();
     if (resDHPH.ok === true){
       this.dataDHPH = resDHPH.message;
-      console.log(resDHPH.message);
+      // console.log(resDHPH.message);
     }else{
       console.log('error');
     }
   }
 
+  changeServicepoint(): any {
+    if (this.servicepoint === '5'){
+      this.btndisble = false;
+    }else{
+      this.btndisble = true;
+    }
+  }
+
+  changeDHPH(): any {
+    if (this.hospcode){
+      this.btndisble = true;
+    }else{
+      this.btndisble = false;
+    }
+  }
+
+  btnStep2(): any {
+    this.modalService.dismissAll();
+    if (this.servicepoint === '5'){
+      sessionStorage.setItem('servicepoint', this.servicepoint);
+      sessionStorage.setItem('dhph', this.hospcode);
+    }else{
+      sessionStorage.setItem('servicepoint', this.servicepoint);
+    }
+
+    this.router.navigateByUrl('/forms/novelcorona2');
+
+  }
 }
