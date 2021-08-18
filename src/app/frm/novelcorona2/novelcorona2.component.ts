@@ -371,24 +371,24 @@ export class Novelcorona2Component implements OnInit {
     }
   }
 
-  resetForm(formGroup: FormGroup) {
-    let control: AbstractControl = null;
-    formGroup.reset();
-    formGroup.markAsUntouched();
-    Object.keys(formGroup.controls).forEach((name) => {
-      control = formGroup.controls[name];
-      control.setErrors(null);
+
+  successNotification(): any {
+    Swal.fire({
+      title: 'บันทึกข้อมูลสำเร็จ',
+      icon: 'success',
+      html: '<h3>ขอบคุณสำหรับการให้ข้อมูล</h3>' +
+        '<div class="font-prompt-light fSize18">จะมีเจ้าหน้าที่งานป้องกันควบคุมโรค' +
+        'และระบาดวิทยาโรงพยาบาลราชบุรี<br>' +
+        'ติดต่อท่านกลับภายใน 24 ชั่วโมง<br><br>' +
+        'หากไม่ได้รับการติดต่อกลับไป<br>' +
+        'กรุณาติดต่อ 032-719600 ต่อ 1284</div>',
+      confirmButtonText: 'รับทราบ'
+    }).then(() => {
+      this.router.navigateByUrl('apps/home');
     });
   }
 
-  successNotification() {
-    Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
-      .then(() => {
-        this.router.navigateByUrl('apps/home');
-      });
-  }
-
-  errorNotification() {
+  errorNotification(): any {
     Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!<br>กรุณาลองอีกครั้ง', 'error')
       .then(() => {
         this.btndisble = false;

@@ -1564,10 +1564,10 @@ export class ReportComponent implements OnInit {
           style: 'fSize24'
         },
 
-        {text: 1, absolutePosition: {x: 46, y: 635}, bold: true},
+        // {text: 1, absolutePosition: {x: 46, y: 635}, bold: true},
         (this.dataNovelStaff.sars1_date != null) ? {
           text: moment(this.dataNovelStaff.sars1_date).locale('th').add(543, 'year').format('D MMM YY'),
-          absolutePosition: {x: 85, y: 635},
+          absolutePosition: {x: 65, y: 635},
           bold: true
         } : {text: ''},
         {text: this.dataNovelStaff.sars1_type, absolutePosition: {x: 180, y: 635}, bold: true},
@@ -1578,10 +1578,10 @@ export class ReportComponent implements OnInit {
           style: 'fSize24'
         } : null,
 
-        {text: 2, absolutePosition: {x: 46, y: 657}, bold: true},
+        // {text: 2, absolutePosition: {x: 46, y: 657}, bold: true},
         (this.dataNovelStaff.sars2_date != null) ? {
           text: moment(this.dataNovelStaff.sars2_date).locale('th').add(543, 'year').format('D MMM YY'),
-          absolutePosition: {x: 85, y: 657},
+          absolutePosition: {x: 65, y: 657},
           bold: true
         } : {text: ''},
         {text: this.dataNovelStaff.sars2_type, absolutePosition: {x: 180, y: 657}, bold: true},
@@ -1600,14 +1600,16 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelStaff.doctor_time, absolutePosition: {x: 500, y: 677}, bold: true},
         {text: this.dataNovelStaff.doctor_comment, absolutePosition: {x: 105, y: 698}, bold: true},
 
-        (this.dataNovelStaff.sars_pt_type === 2) ? {text: '√', absolutePosition: {x: 31, y: 724}, style: 'fSize24'} :
-          (this.dataNovelStaff.sars_pt_type === 4) ? {text: '√', absolutePosition: {x: 170, y: 724}, style: 'fSize24'} :
-            (this.dataNovelStaff.sars_pt_type === 3) ? {text: '√', absolutePosition: {x: 232, y: 741}, style: 'fSize24'} :
-              (this.dataNovelStaff.sars_pt_type === 1) ? {text: '√', absolutePosition: {x: 298, y: 741}, style: 'fSize24'} :
-                (this.dataNovelStaff.sars_pt_type === 0) ? {text: '√', absolutePosition: {x: 375, y: 741}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sars_pt_type === 2) ? {text: '√', absolutePosition: {x: 31, y: 723}, style: 'fSize24'} :
+          (this.dataNovelStaff.sars_pt_type === 4) ? {text: '√', absolutePosition: {x: 170, y: 723}, style: 'fSize24'} :
+            (this.dataNovelStaff.sars_pt_type === 3) ? {text: '√', absolutePosition: {x: 232, y: 740}, style: 'fSize24'} :
+              (this.dataNovelStaff.sars_pt_type === 1) ? {text: '√', absolutePosition: {x: 298, y: 740}, style: 'fSize24'} :
+                (this.dataNovelStaff.sars_pt_type === 0) ? {text: '√', absolutePosition: {x: 375, y: 740}, style: 'fSize24'} :
+                  (this.dataNovelStaff.sars_pt_type === 5) ? {text: '√', absolutePosition: {x: 457, y: 740}, style: 'fSize24'} :
+                    (this.dataNovelStaff.sars_pt_type === 6) ? {text: '√', absolutePosition: {x: 499, y: 740}, style: 'fSize24'} : null,
 
-        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 232, y: 741}, style: 'fSize24'} :
-          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 170, y: 724}, style: 'fSize24'} :
+        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 232, y: 740}, style: 'fSize24'} :
+          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 170, y: 723}, style: 'fSize24'} :
             (this.dataNovelStaff.pui_priority === 3) ? {
                 text: this.dataPuiPriority[2].viewValue,
                 absolutePosition: {x: 80, y: 731},
@@ -1789,14 +1791,15 @@ export class ReportComponent implements OnInit {
         {
           table: {
             headerRows: 1,
-            widths: [30, 70, 100, 100, 190],
+            widths: [100, 100, 100, 190],
             body: [
-              [{text: 'ครั้งที่', alignment: 'center'},
+              [
+                // {text: 'ครั้งที่', alignment: 'center'},
                 {text: 'วันที่เก็บ', alignment: 'center'},
                 {text: 'ชนิดตัวอย่าง', alignment: 'center'},
                 {text: 'สถานที่ส่งตรวจ', alignment: 'center'},
                 {text: 'ผลตรวจ', alignment: 'center'}],
-              [{text: ' ', alignment: 'center', style: 'fontMid'}, '', '', '',
+              ['', '', '',
                 {
                   columns: [
                     {width: '3%', text: ' ', style: 'fontMid'},
@@ -1824,7 +1827,7 @@ export class ReportComponent implements OnInit {
                   columnGap: 5
                 }
               ],
-              [' ', '', '', '',
+              ['', '', '',
                 {
                   columns: [
                     {width: '3%', text: ' ', style: 'fontMid'},
@@ -1956,6 +1959,26 @@ export class ReportComponent implements OnInit {
               }
             },
             {width: 'auto', text: 'ไม่เข้าเกณฑ์ PUI'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'MRC'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ACF'},
           ],
           columnGap: 5
         },
