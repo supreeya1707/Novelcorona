@@ -63,7 +63,9 @@
                   (novel.sars_pt_type === 1) ? 'แนะนำ DMHT' :
                     (novel.sars_pt_type === 2) ? 'PUI' :
                       (novel.sars_pt_type === 3) ? 'LR contact' :
-                        (novel.sars_pt_type === 4) ? 'HR contract' : null}}</td>
+                        (novel.sars_pt_type === 4) ? 'HR contract' :
+                          (novel.sars_pt_type === 5) ? 'MRC' :
+                            (novel.sars_pt_type === 6) ? 'ACF' :null}}</td>
                 <td class="text-left">{{novel.doctor_comment}}</td>
                 <td class="text-left">{{novel.reporter}}</td>
                 <td class="text-center">
@@ -78,6 +80,10 @@
                     </button>
                     <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
                             (click)="printNovelcorona2(novel.novel_id)">
+                      <i class="fa fa-print fa-xs p-0 m-0"></i>
+                    </button>
+                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="Novelcorona2" placement="bottom"
+                            (click)="printNovelcorona2_1(novel.novel_id)">
                       <i class="fa fa-print fa-xs p-0 m-0"></i>
                     </button>
                     <button class="btn btn-xs btn-outline-success" tooltipHtml="จพต." placement="bottom"
@@ -98,6 +104,10 @@
                     </button>
                     <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
                             (click)="printNovelcorona2(novel.novel_id)">
+                      <i class="fa fa-print fa-xs p-0 m-0"></i>
+                    </button>
+                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="Novelcorona2" placement="bottom"
+                            (click)="printNovelcorona2_1(novel.novel_id)">
                       <i class="fa fa-print fa-xs p-0 m-0"></i>
                     </button>
                   </div>

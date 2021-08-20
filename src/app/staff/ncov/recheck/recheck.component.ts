@@ -180,6 +180,9 @@ export class RecheckComponent implements OnInit {
   treat: any;
   other_treat: any;
 
+  desDay1: any;
+  desDay2: any;
+  desDay3: any;
   desDay4: any;
   desDay5: any;
   desDay6: any;
@@ -362,9 +365,11 @@ export class RecheckComponent implements OnInit {
     });
 
     this.timelineFrm  = this.formBuilder.group({
-      desDay1: [null, Validators.compose([Validators.required])],
-      desDay2: [null, Validators.compose([Validators.required])],
-      desDay3: [null, Validators.compose([Validators.required])]
+      // desDay1: [null, Validators.compose([Validators.required])],
+      // desDay2: [null, Validators.compose([Validators.required])],
+      // desDay3: [null, Validators.compose([Validators.required])],
+      desOther: [null, Validators.compose([Validators.required])],
+
     });
 
 
@@ -611,10 +616,13 @@ export class RecheckComponent implements OnInit {
       this.dateTimeLineShort[12] = moment(this.dataTL['day12']).format('YYYY-MM-DD');
       this.dateTimeLineShort[13] = moment(this.dataTL['day14']).format('YYYY-MM-DD');
 
-      this.timelineFrm.get('desDay1').setValue(this.dataTL['timeline_date1']);
-      this.timelineFrm.get('desDay2').setValue(this.dataTL['timeline_date2']);
-      this.timelineFrm.get('desDay3').setValue(this.dataTL['timeline_date3']);
+      // this.timelineFrm.get('desDay1').setValue(this.dataTL['timeline_date1']);
+      // this.timelineFrm.get('desDay2').setValue(this.dataTL['timeline_date2']);
+      // this.timelineFrm.get('desDay3').setValue(this.dataTL['timeline_date3']);
 
+      this.desDay1 = this.dataTL['timeline_date1'];
+      this.desDay2 = this.dataTL['timeline_date2'];
+      this.desDay3 = this.dataTL['timeline_date3'];
       this.desDay4 = this.dataTL['timeline_date4'];
       this.desDay5 = this.dataTL['timeline_date5'];
       this.desDay6 = this.dataTL['timeline_date6'];
@@ -626,8 +634,10 @@ export class RecheckComponent implements OnInit {
       this.desDay12 = this.dataTL['timeline_date12'];
       this.desDay13 = this.dataTL['timeline_date13'];
       this.desDay14 = this.dataTL['timeline_date14'];
-      this.desOther = this.dataTL['timeline_other'];
+      // this.desOther = this.dataTL['timeline_other'];
+      this.timelineFrm.get('desOther').setValue(this.dataTL['timeline_other']);
     }else{
+
       console.error('error');
     }
   }
@@ -1039,7 +1049,7 @@ export class RecheckComponent implements OnInit {
     data.novel_comefrom_31 = this.riskFrm.value.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
-    // data.novel_date_come = (this.riskFrm.value.datecome != null) ? moment(this.riskFrm.value.datecome).format('YYYY-MM-DD') : null;
+    data.novel_date_come = (this.riskFrm.value.datecome != null) ? moment(this.riskFrm.value.datecome).format('YYYY-MM-DD') : null;
     // data.novel_date_come = (this.datecome != null) ? moment(this.datecome).format('YYYY-MM-DD') : null;
     data.novel_transportation = this.come_plane;
     data.novel_round_tran = this.come_round;
@@ -1109,9 +1119,12 @@ export class RecheckComponent implements OnInit {
 
 
 
-    data.timeline_date1 = this.timelineFrm.value.desDay1;
-    data.timeline_date2 = this.timelineFrm.value.desDay2;
-    data.timeline_date3 = this.timelineFrm.value.desDay3;
+    // data.timeline_date1 = this.timelineFrm.value.desDay1;
+    // data.timeline_date2 = this.timelineFrm.value.desDay2;
+    // data.timeline_date3 = this.timelineFrm.value.desDay3;
+    data.timeline_date1 = this.desDay1;
+    data.timeline_date2 = this.desDay2;
+    data.timeline_date3 = this.desDay3;
     data.timeline_date4 = this.desDay4;
     data.timeline_date5 = this.desDay5;
     data.timeline_date6 = this.desDay6;
@@ -1123,7 +1136,7 @@ export class RecheckComponent implements OnInit {
     data.timeline_date12 = this.desDay12;
     data.timeline_date13 = this.desDay13;
     data.timeline_date14 = this.desDay14;
-    data.timeline_other = this.desOther;
+    data.timeline_other = this.timelineFrm.value.desOther;
 
     info.push(data);
 

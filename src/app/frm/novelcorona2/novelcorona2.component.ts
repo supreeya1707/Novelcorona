@@ -138,6 +138,9 @@ export class Novelcorona2Component implements OnInit {
   currentDate = new Date();
 
 
+  desDay1: any;
+  desDay2: any;
+  desDay3: any;
   desDay4: any;
   desDay5: any;
   desDay6: any;
@@ -283,9 +286,11 @@ export class Novelcorona2Component implements OnInit {
     });
 
     this.timelineFrm  = this.formBuilder.group({
-      desDay1: [null, Validators.compose([Validators.required])],
-      desDay2: [null, Validators.compose([Validators.required])],
-      desDay3: [null, Validators.compose([Validators.required])]
+      // desDay1: [null, Validators.compose([Validators.required])],
+      // desDay2: [null, Validators.compose([Validators.required])],
+      // desDay3: [null, Validators.compose([Validators.required])],
+      desOther: [null, Validators.compose([Validators.required])],
+
     });
 
     this.getContact();
@@ -409,9 +414,9 @@ export class Novelcorona2Component implements OnInit {
   }
 
   getDatecome(e: any): any {
-    // console.log(e);
+    console.log(e);
     this.datecome = moment(e).format('YYYY-MM-DD');
-    // console.log(this.datecome);
+    console.log('this.datecome ', this.datecome);
   }
 
   convertDate(d: any, i: any): any {
@@ -623,9 +628,12 @@ export class Novelcorona2Component implements OnInit {
     data.day13 = this.dateTimeLineShort[12];
     data.day14 = this.dateTimeLineShort[13];
 
-    data.timeline_date1 = this.timelineFrm.value.desDay1;
-    data.timeline_date2 = this.timelineFrm.value.desDay2;
-    data.timeline_date3 = this.timelineFrm.value.desDay3;
+    // data.timeline_date1 = this.timelineFrm.value.desDay1;
+    // data.timeline_date2 = this.timelineFrm.value.desDay2;
+    // data.timeline_date3 = this.timelineFrm.value.desDay3;
+    data.timeline_date1 = this.desDay1;
+    data.timeline_date2 = this.desDay2;
+    data.timeline_date3 = this.desDay3;
     data.timeline_date4 = this.desDay4;
     data.timeline_date5 = this.desDay5;
     data.timeline_date6 = this.desDay6;
@@ -637,7 +645,7 @@ export class Novelcorona2Component implements OnInit {
     data.timeline_date12 = this.desDay12;
     data.timeline_date13 = this.desDay13;
     data.timeline_date14 = this.desDay14;
-    data.timeline_other = this.desOther;
+    data.timeline_other = this.timelineFrm.value.desOther;
 
     info.push(data);
 
