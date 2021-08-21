@@ -132,6 +132,8 @@ export class ReportComponent implements OnInit {
   imgSign01: any;
   imgSign02: any;
   imgSign03: any;
+  imgSign04: any;
+  imgSign05: any;
   dateChoose: any;
 
 
@@ -169,6 +171,14 @@ export class ReportComponent implements OnInit {
 
     toDataURL('assets/picture/sign03.png').then(dataUrl => {
       this.imgSign03 = 'data:image;base64,' + dataUrl;
+    });
+
+    toDataURL('assets/picture/sign04.png').then(dataUrl => {
+      this.imgSign04 = 'data:image;base64,' + dataUrl;
+    });
+
+    toDataURL('assets/picture/sign05.png').then(dataUrl => {
+      this.imgSign05 = 'data:image;base64,' + dataUrl;
     });
 
   }
@@ -379,6 +389,15 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelByID.novel_district, absolutePosition: {x: 90, y: 137}, bold: true},
         {text: this.dataNovelByID.novel_amphur, absolutePosition: {x: 270, y: 137}, bold: true},
         {text: this.dataNovelByID.novel_province, absolutePosition: {x: 465, y: 137}, bold: true},
+
+        (this.dataNovelByID.novel_copd === 1) ? {text: '√', absolutePosition: {x: 83, y: 148}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_ckd === 1) ? {text: '√', absolutePosition: {x: 127, y: 148}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_cad === 1) ? {text: '√', absolutePosition: {x: 165, y: 148}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_cva === 1) ? {text: '√', absolutePosition: {x: 202, y: 148}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_undm === 1) ? {text: '√', absolutePosition: {x: 237, y: 148}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_pids === 1) ? {text: '√', absolutePosition: {x: 330, y: 148}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_congential === '1') ? {text: '√', absolutePosition: {x: 417, y: 148}, style: 'fSize24'} : null,
+        {text: this.dataNovelByID.novel_congential_etc, absolutePosition: {x: 460, y: 154}, bold: true},
 
         {text: this.dataNovelByID.novel_weight, absolutePosition: {x: 70, y: 170}, bold: true},
         {text: this.dataNovelByID.novel_high, absolutePosition: {x: 170, y: 170}, bold: true},
@@ -1394,8 +1413,8 @@ export class ReportComponent implements OnInit {
         {
           margin: [20, 2, 20, 0],
           columns: [
-            {width: 'auto', text: 'อายุ............ปี...........เดือน'},
-            {width: 'auto', text: 'วัน/เดือน/ปีเกิด .............................................'},
+            {width: 'auto', text: 'อายุ............ปี'},
+            {width: 'auto', text: 'วัน/เดือน/ปีเกิด .............................................................'},
             {width: 'auto', text: 'สิทธิการรักษา ............................................................................'},
           ],
           columnGap: 5
@@ -1417,7 +1436,7 @@ export class ReportComponent implements OnInit {
         },
         {text: 'ความเสี่ยงเข้าเกณฑ์ที่กระทรวงสาธารณสุขกำหนด', margin: [30, 2, 20, 0]},
         {
-          margin: [30, 3, 20, 0],
+          margin: [50, 3, 20, 0],
           columns: [
             {
               width: 'auto', table: {
@@ -1428,7 +1447,7 @@ export class ReportComponent implements OnInit {
                 ]
               }
             },
-            {width: 'auto', text: 'PUI'},
+            {width: '15%', text: 'PUI'},
             {
               width: 'auto', table: {
                 widths: [2],
@@ -1438,7 +1457,7 @@ export class ReportComponent implements OnInit {
                 ]
               }
             },
-            {width: 'auto', text: 'HRC'},
+            {width: '15%', text: 'HRC'},
             {
               width: 'auto', table: {
                 widths: [2],
@@ -1448,7 +1467,7 @@ export class ReportComponent implements OnInit {
                 ]
               }
             },
-            {width: 'auto', text: 'MRC'},
+            {width: '15%', text: 'MRC'},
             {
               width: 'auto', table: {
                 widths: [2],
@@ -1458,7 +1477,7 @@ export class ReportComponent implements OnInit {
                 ]
               }
             },
-            {width: 'auto', text: 'LRC'},
+            {width: '15%', text: 'LRC'},
             {
               width: 'auto', table: {
                 widths: [2],
@@ -1469,41 +1488,47 @@ export class ReportComponent implements OnInit {
               }
             },
             {width: 'auto', text: 'ACF'},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'ไม่เข้าเกณฑ์'},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'ชำระเงินเอง'},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'อื่นๆ .......................................................'},
           ],
           columnGap: 5
         },
-        {text: 'แพทย์ผู้ตรวจรักษาประเมินว่ามีความจำเป็นตามดุลยพินิจของแพทย์ ระบุ', margin: [30, 3, 20, 0]},
-        {text: '.....................................................................................................................................................................................................................', margin: [30, 2, 20, 0]},
+        {
+          margin: [50, 5, 20, 0],
+          columns: [
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: '15%', text: 'ไม่เข้าเกณฑ์'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: '15%', text: 'ชำระเงินเอง'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'อื่นๆ ..................................................................'},
+          ],
+          columnGap: 5
+        },
+        {text: 'แพทย์ผู้ตรวจรักษาประเมินว่ามีความจำเป็นตามดุลยพินิจของแพทย์ ระบุ', margin: [30, 5, 20, 0]},
+        {text: '.....................................................................................................................................................................................................................', margin: [30, 5, 20, 0]},
         {
           margin: [20, 22, 20, 0],
           columns: [
@@ -1586,7 +1611,7 @@ export class ReportComponent implements OnInit {
             },
             {
               width: 'auto',
-              text: '(.........................................................................)',
+              text: '( ว38107 พญ.สุดารัตน์ วิจิตรเศรฐกุล )',
               alignment: 'center'
             },
           ]
@@ -1604,9 +1629,9 @@ export class ReportComponent implements OnInit {
         {text: 'คำยินยอมของผู้ป่วยในการส่งตรวจเชื้อ COVID 19', style: 'title', margin: [20, 15, 0, 0]},
         {text: 'ข้าพเจ้า.....................................................................................................................รับทราบเหตุผลความจำเป็นในการส่งตรวจเชื้อ COVID ',  margin: [20, 0]},
         {text: 'และมีความยินยอมให้เก็บสิ่งส่งตรวจตามที่แพทย์สั่งตรวจเพื่อวินิจฉัยโรค COVID 19',  margin: [20, 2]},
-        {text: 'ลงชื่อผู้ป่วย/ผู้แทน..................................................................................', alignment: 'center',  margin: [0, 15, 0, 0]},
+        {text: 'ลงชื่อผู้ป่วย/ผู้แทน..................................................................................',  margin: [130, 15, 0, 0]},
         {
-          margin: [20, 2, 20, 0],
+          margin: [30, 2, 20, 0],
           alignment: 'center',
           columns: [
             {
@@ -1615,14 +1640,14 @@ export class ReportComponent implements OnInit {
             },
             {
               width: 'auto',
-              text: '(....................................................................)',
+              text: '( ' + ptfullname + ' )',
               alignment: 'center'
             },
           ]
         },
-        {text: 'ลงชื่อเจ้าหน้าที่ผู้เก็บสิ่งส่งตรวจ...................................................................................', alignment: 'center', margin: [0, 20, 0, 0]},
+        {text: 'ลงชื่อเจ้าหน้าที่ผู้เก็บสิ่งส่งตรวจ..........................................................................', margin: [100, 30, 0, 0]},
         {
-          margin: [20, 2, 20, 0],
+          margin: [30, 2, 20, 0],
           alignment: 'center',
           columns: [
             {
@@ -1631,13 +1656,39 @@ export class ReportComponent implements OnInit {
             },
             {
               width: 'auto',
-              text: '(....................................................................)',
+              text: '( นางสาวสาวิตรี  ปัสสาโก)',
               alignment: 'center'
             },
           ]
         },
-        {text: 'ตำแหน่ง....................................................................', alignment: 'center', margin: [35, 2, 0, 0]},
-        {text: 'หน่วยบริการห้อง LAB-COVID19 ที่ส่ง specimen ไปตรวจ ..................................................................................................................', alignment: 'center', margin: [0, 50, 0, 0]},
+        {text: 'ตำแหน่ง นักวิชาการสาธารณสุข', alignment: 'center', margin: [0, 2, 0, 0]},
+        {text: 'หน่วยบริการห้อง LAB-COVID19 ที่ส่ง specimen ไปตรวจ ..................................................................................................................', alignment: 'center', margin: [0, 40, 0, 0]},
+
+        {text: 'โรงพยาบาลราชบุรี', absolutePosition: {x: 200, y: 113}, bold: true},
+        {text: this.dataNovelByID.novel_cid, absolutePosition: {x: 145, y: 132}, bold: true},
+        {text: ptfullname, absolutePosition: {x: 325, y: 132}, bold: true},
+        {text: this.dataNovelByID.novel_age, absolutePosition: {x: 72, y: 150}, bold: true},
+        (this.dataNovelByID.novel_birthday) ? {
+          text: moment(this.dataNovelByID.novel_birthday).locale('th').add(543, 'year').format('D MMMM YYYY'),
+          absolutePosition: {x: 190, y: 150}, bold: true} : null,
+        {text: this.dataNovelByID.novel_treat, absolutePosition: {x: 380, y: 150}, bold: true},
+
+       {text: moment().locale('th').add(543, 'year').format('D MMMM YYYY'),
+          absolutePosition: {x: 150, y: 168}, bold: true},
+        {text: moment().locale('th').add(543, 'year').format('HH:mm'),
+          absolutePosition: {x: 325, y: 168}, bold: true},
+
+        (this.dataNovelStaff.sars_pt_type === 0 || this.dataNovelStaff.sars_pt_type === 1) ? null :
+          {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 2 ? 82 :
+                  this.dataNovelStaff.sars_pt_type === 3 ? 337 :
+                    this.dataNovelStaff.sars_pt_type === 4 ? 166 :
+                      this.dataNovelStaff.sars_pt_type === 5 ? 252 : 422, y: 238}, style: 'fSize24'},
+
+        (this.dataNovelStaff.sars_pt_type === 1) ? {text: '√', absolutePosition: {x: 82, y: 259}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.payment === 1) ? {text: '√', absolutePosition: {x: 169, y: 259}, style: 'fSize24'} : null,
+        {image: this.imgSign04, absolutePosition: {x: 270, y: 437}, fit: [65, 65]},
+        {image: this.imgSign05, absolutePosition: {x: 270, y: 660}, fit: [65, 65]},
+
       ],
       defaultStyle: {
         font: 'THSarabunNew',
@@ -1730,7 +1781,7 @@ export class ReportComponent implements OnInit {
         (this.dataNovelByID.novel_cva === 1) ? {text: '√', absolutePosition: {x: 202, y: 218}, style: 'fSize24'} : null,
         (this.dataNovelByID.novel_undm === 1) ? {text: '√', absolutePosition: {x: 237, y: 218}, style: 'fSize24'} : null,
         (this.dataNovelByID.novel_pids === 1) ? {text: '√', absolutePosition: {x: 330, y: 218}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_congential === 1) ? {text: '√', absolutePosition: {x: 417, y: 218}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_congential === '1') ? {text: '√', absolutePosition: {x: 417, y: 218}, style: 'fSize24'} : null,
         {text: this.dataNovelByID.novel_congential_etc, absolutePosition: {x: 460, y: 225}, bold: true},
         {text: this.dataNovelByID.novel_weight, absolutePosition: {x: 85, y: 241}, bold: true},
         {text: this.dataNovelByID.novel_high, absolutePosition: {x: 180, y: 241}, bold: true},
@@ -2923,10 +2974,8 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelStaff.sars1_type, absolutePosition: {x: 180, y: 635}, bold: true},
         {text: this.dataNovelStaff.sars1_placesend, absolutePosition: {x: 290, y: 635}, bold: true},
         (this.dataNovelStaff.sars1_result != null) ? {
-          text: '√',
-          absolutePosition: {x: this.dataNovelStaff.sars1_result === 1 ? 383 : 472, y: 628},
-          style: 'fSize24'
-        } : null,
+          text: '√', absolutePosition: {x: this.dataNovelStaff.sars1_result === 1 ? 373 : 464, y: 628}, style: 'fSize24'
+      } : null,
 
         // {text: 2, absolutePosition: {x: 46, y: 657}, bold: true},
         (this.dataNovelStaff.sars2_date != null) ? {
@@ -2937,9 +2986,7 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelStaff.sars2_type, absolutePosition: {x: 180, y: 657}, bold: true},
         {text: this.dataNovelStaff.sars2_placesend, absolutePosition: {x: 290, y: 657}, bold: true},
         (this.dataNovelStaff.sars2_result != null) ? {
-          text: '√',
-          absolutePosition: {x: this.dataNovelStaff.sars2_result === 1 ? 383 : 472, y: 648},
-          style: 'fSize24'
+          text: '√', absolutePosition: {x: this.dataNovelStaff.sars2_result === 1 ? 373 : 464, y: 648}, style: 'fSize24'
         } : null,
 
         (this.dataNovelStaff.doctor !== null && this.dataNovelStaff.doctor !== '') ? {
@@ -3340,7 +3387,7 @@ export class ReportComponent implements OnInit {
             },
             {width: 'auto', text: 'หน่วยงาน โรงพยาบาลราชบุรี', style: 'fSize13'},
             {width: 'auto', text: 'วันที่สอบสวน ................................', style: 'fSize13'},
-            {width: 'auto', text: 'เวลา ......................... น.', style: 'fSize13'}
+            {width: 'auto', text: 'เวลา ......................... น.', style: 'fSize13'},
           ],
           columnGap: 5
         }

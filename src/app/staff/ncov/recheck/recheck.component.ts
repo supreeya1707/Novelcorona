@@ -209,6 +209,7 @@ export class RecheckComponent implements OnInit {
   radioSARtype: any;
   firstswab: any;
   secondswab: any;
+  thridswab: any;
   ptSarstype: any;
   addressquaran: any;
   reporter: any;
@@ -228,6 +229,7 @@ export class RecheckComponent implements OnInit {
   sarsdate2: any = null;
   date1swab: any = null;
   date2swab: any = null;
+  date3swab: any = null;
   dateSquarantine = null;
   payment: any;
 
@@ -680,7 +682,11 @@ export class RecheckComponent implements OnInit {
         }
         if (this.dataStaff['date_swab2'] != null){
           this.date2swab = (moment(this.dataStaff['date_swab2']).add(543, 'year').format('DD/MM/YYYY'));
-          this.getDateSwab1(moment(this.dataStaff['date_swab2']).format('YYYY-MM-DD'));
+          this.getDateSwab2(moment(this.dataStaff['date_swab2']).format('YYYY-MM-DD'));
+        }
+        if (this.dataStaff['date_swab3'] != null){
+          this.date3swab = (moment(this.dataStaff['date_swab3']).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSwab3(moment(this.dataStaff['date_swab3']).format('YYYY-MM-DD'));
         }
         if (this.dataStaff['sdate_quaran'] != null){
           this.dateSquarantine = (moment(this.dataStaff['sdate_quaran']).add(543, 'year').format('DD/MM/YYYY'));
@@ -725,24 +731,24 @@ export class RecheckComponent implements OnInit {
     }
   }
 
-  get f() {
+  get f(): any {
     return this.generalFrm.controls;
   }
-  get f2() {
+  get f2(): any {
     return this.timelineFrm.controls;
   }
-  get f3() {
+  get f3(): any {
     return this.riskFrm.controls;
   }
 
-  successNotification() {
+  successNotification(): any {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
       .then(() => {
         this.router.navigateByUrl('staff/nCoV/report');
       });
   }
 
-  errorNotification() {
+  errorNotification(): any {
     Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!', 'error');
   }
 
@@ -785,6 +791,10 @@ export class RecheckComponent implements OnInit {
 
   getDateSwab2(e: any): any {
     this.secondswab = moment(e).format('YYYY-MM-DD');
+  }
+
+  getDateSwab3(e: any): any {
+    this.thridswab = moment(e).format('YYYY-MM-DD');
   }
 
   getDatetreat(e: any): any {
@@ -912,6 +922,7 @@ export class RecheckComponent implements OnInit {
 
     data.date_swab1 = (this.firstswab != null) ? moment(this.firstswab).format('YYYY-MM-DD') : null;
     data.date_swab2 = (this.secondswab != null) ? moment(this.secondswab).format('YYYY-MM-DD') : null;
+    data.date_swab3 = (this.thridswab != null) ? moment(this.thridswab).format('YYYY-MM-DD') : null;
     data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;
@@ -956,6 +967,7 @@ export class RecheckComponent implements OnInit {
     }
     data.date_swab1 = (this.firstswab != null) ? moment(this.firstswab).format('YYYY-MM-DD') : null;
     data.date_swab2 = (this.secondswab != null) ? moment(this.secondswab).format('YYYY-MM-DD') : null;
+    data.date_swab3 = (this.thridswab != null) ? moment(this.thridswab).format('YYYY-MM-DD') : null;
     data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;

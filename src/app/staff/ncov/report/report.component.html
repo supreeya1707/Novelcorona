@@ -46,9 +46,10 @@
                   <input type="text" [(ngModel)]="station"  (ngModelChange)="stationSearch()"
                          class="form-control mt-2" style="font-size: small!important;"></th>
                 <th width="7%">เบอร์โทรศัพท์</th>
-                <th width="8%">สถานะ</th>
+                <th width="5%">สถานะ</th>
                 <th width="15%">คำแนะนำแพทย์</th>
                 <th width="12%">ผู้รายงาน</th>
+                <th width="7%">วันเวลาที่ทำ<br>แบบสอบสวน</th>
                 <th width="10%"></th>
               </tr>
               </thead>
@@ -62,12 +63,16 @@
                 <td>{{(novel.sars_pt_type === 0) ? 'ไม่เข้าเกณฑ์ PUI' :
                   (novel.sars_pt_type === 1) ? 'แนะนำ DMHT' :
                     (novel.sars_pt_type === 2) ? 'PUI' :
-                      (novel.sars_pt_type === 3) ? 'LR contact' :
-                        (novel.sars_pt_type === 4) ? 'HR contract' :
+                      (novel.sars_pt_type === 3) ? 'LRC' :
+                        (novel.sars_pt_type === 4) ? 'HRC' :
                           (novel.sars_pt_type === 5) ? 'MRC' :
                             (novel.sars_pt_type === 6) ? 'ACF' :null}}</td>
                 <td class="text-left">{{novel.doctor_comment}}</td>
                 <td class="text-left">{{novel.reporter}}</td>
+                <td class="text-center">
+                  {{novel.novel_input_datetime | thaiDate: 'short'}}<br>
+                  {{novel.novel_input_datetime | thaiDate: 'shorttime'}} น.
+                </td>
                 <td class="text-center">
                   <div *ngIf="novel.sdate_quaran !== null  ">
                     <button class="btn btn-xs btn-outline-dark" tooltipHtml="แก้ไข" placement="bottom"
@@ -82,9 +87,9 @@
                             (click)="printNovelcorona2(novel.novel_id)">
                       <i class="fa fa-print fa-xs p-0 m-0"></i>
                     </button>
-                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="Novelcorona2" placement="bottom"
+                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="ฉบับย่อ" placement="bottom"
                             (click)="printNovelcorona2_1(novel.novel_id)">
-                      <i class="fa fa-print fa-xs p-0 m-0"></i>
+                      <i class="fa fa-file fa-xs p-0 m-0"></i>
                     </button>
                     <button class="btn btn-xs btn-outline-success" tooltipHtml="จพต." placement="bottom"
                             (click)="printReport01(novel.novel_id)">จพต.
@@ -106,9 +111,9 @@
                             (click)="printNovelcorona2(novel.novel_id)">
                       <i class="fa fa-print fa-xs p-0 m-0"></i>
                     </button>
-                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="Novelcorona2" placement="bottom"
+                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="ฉบับย่อ" placement="bottom"
                             (click)="printNovelcorona2_1(novel.novel_id)">
-                      <i class="fa fa-print fa-xs p-0 m-0"></i>
+                      <i class="fa fa-file fa-xs p-0 m-0"></i>
                     </button>
                   </div>
 

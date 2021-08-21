@@ -1466,7 +1466,7 @@
         <div class="div mt-5">
           <label>นัด Swab</label>
          <div class="row">
-           <div class="col-md-6">
+           <div class="col-md-4">
              <label>ครั้งที่ 1</label>
              <div class="input-group">
                <input class="form-control"  #datepickerSwab1="bsDatepicker"
@@ -1480,7 +1480,7 @@
                </div>
              </div>
            </div>
-           <div class="col-md-6">
+           <div class="col-md-4">
              <label>ครั้งที่ 2</label>
              <div class="input-group">
                <input class="form-control"  #datepickerSwab2="bsDatepicker"
@@ -1491,6 +1491,20 @@
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerSwab2.toggle()"
                      [attr.aria-expanded]="datepickerSwab2.isOpen"></i></span>
+               </div>
+             </div>
+           </div>
+           <div class="col-md-4">
+             <label>ครั้งที่ 3</label>
+             <div class="input-group">
+               <input class="form-control"  #datepickerSwab3="bsDatepicker"
+                      placeholder="เลือกวันที่นัด Swab ครั้งที่ 3" (bsValueChange)="getDateSwab3($event)"
+                      bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                      id="thridswab"  [value]="date3swab">
+               <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerSwab3.toggle()"
+                     [attr.aria-expanded]="datepickerSwab3.isOpen"></i></span>
                </div>
              </div>
            </div>
