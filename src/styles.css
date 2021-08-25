@@ -88979,6 +88979,8 @@ body {
   border-top-right-radius: calc(.3rem - 1px);
 }
 
+.showDisplay {display: none;}
+
 @media screen and (max-width: 768px) {
   .subheader-enabled .content {
     padding-top: 0
@@ -88993,6 +88995,7 @@ body {
   }
 
   .noDisplay {display: none;}
+  .showDisplay {display: block;}
 
   .footer01 {
     padding-left: 20px;
@@ -89026,6 +89029,7 @@ body {
   }
 
   .noDisplay {display: none;}
+  .showDisplay {display: block;}
 
   .subheader-enabled.subheader-transparent .content {
     padding-top: 0

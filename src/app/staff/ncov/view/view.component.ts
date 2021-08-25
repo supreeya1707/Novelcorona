@@ -16,11 +16,14 @@ export class ViewComponent implements OnInit {
   txtSearch: any = '';
   ptname: any = '';
   station: any = '';
+  point: any = '';
+  servicepoint: any;
 
   navbarOpen = false;
   cid: any;
   dateChoose: any;
   dataNovel: any[];
+  dataServicePoint: any[];
   dataSearch: any = '';
 
   data: any = [];
@@ -75,16 +78,28 @@ export class ViewComponent implements OnInit {
     }
   }
 
-  toggleNavbar() {
+  pointSearch(): any {
+    if (this.point === '') {
+      this.dataSearch = this.dataNovel;
+    } else {
+      this.dataSearch = this.dataNovel.filter((data: any) => {
+        return data.servicepoint.match(this.point);
+      });
+    }
+  }
+
+  toggleNavbar(): any {
     this.navbarOpen = !this.navbarOpen;
   }
 
   // function call searchFrm
-  get f() {
+  get f(): any {
     return this.searchFrm.controls;
   }
 
   async dateChange(e: any): Promise<any> {
+    this.dataServicePoint = [];
+    this.servicepoint = '';
     const dateinput = moment(e).format('YYYY-MM-DD');
     this.dateChoose = dateinput;
     const rs: any = await this.api.getByDateRaw(dateinput);
@@ -92,12 +107,44 @@ export class ViewComponent implements OnInit {
     if (rs.ok) {
       this.dataNovel = rs.message;
       this.dataSearch = this.dataNovel;
+      const res: any = await this.api.getDataByDatePoint(dateinput);
+      // console.log(res.message);
+      if (res.ok === true){
+        this.dataServicePoint = res.message;
+      }else {
+        console.log('error');
+      }
     } else {
       console.log('error');
     }
   }
 
-  viewForm(novelID: any) {
+  async changeServicepoint(): Promise<any> {
+    const dateinput = this.dateChoose;
+    const servicepoint = this.servicepoint;
+    // console.log(servicepoint);
+    if (this.servicepoint === 'all'){
+      const rs: any = await this.api.getByDateRaw(dateinput);
+      // console.log(rs);
+      if (rs.ok) {
+        this.dataNovel = rs.message;
+        this.dataSearch = this.dataNovel;
+      } else {
+        console.log('error');
+      }
+    }else{
+      const res = await this.api.getByDateServicepoint(dateinput, servicepoint);
+      if (res.ok === true){
+        this.dataNovel = res.message;
+        this.dataSearch = this.dataNovel;
+      }else{
+        console.log('error');
+      }
+    }
+
+  }
+
+  viewForm(novelID: any): any {
     console.log(novelID);
     this.router.navigateByUrl('staff/nCoV/recheck', {state: {novelid: novelID}});
   }

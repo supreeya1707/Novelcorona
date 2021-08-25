@@ -5,6 +5,7 @@
     </div>
     <h1 class="col-lg-12">แบบสอบสวนผู้ป่วยโรคติดเชื้อไวรัสโคโรนา 2019</h1>
   </div>
+  <h5 class="text-danger">กรุณากรอกข้อมูลในช่องที่มี * ครบ</h5>
   <form [formGroup]="generalFrm">
     <!-- 1.ข้อมูลทั่วไป -->
     <div class="row  ">
@@ -19,6 +20,7 @@
                 <label>คำนำหน้าชื่อ <span class="text-danger">*</span></label>
                 <select class="form-control" placeholder="คำนำหน้าชื่อ" name="pname" id="pname" formControlName="pname"
                         [ngClass]="{ 'is-invalid': submitted && f.pname.errors  || ((f.pname.touched || f.pname.dirty) && f.pname.invalid) }">
+                  <option disabled></option>
                   <option *ngFor="let p of dataPname" [value]="p.value">{{p.viewValue}}</option>
                 </select>
                 <div *ngIf="submitted && f.pname.errors  || ((f.pname.touched || f.pname.dirty) && f.pname.invalid)" class="invalid-feedback">
@@ -104,14 +106,14 @@
                            [(ngModel)]="radioGender"
                            [ngClass]="{ 'is-invalid': submitted && f.radioGender.errors || ((f.radioGender.touched || f.radioGender.dirty) && f.radioGender.invalid) }"
                            [value]="1" formControlName="radioGender">
-                    <label class="form-check-label" for="inlineRadio1">หญิง</label>
+                    <label class="form-check-label" for="inlineRadio1">&nbsp;หญิง</label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="radioGender" id="inlineRadio2"
                            [(ngModel)]="radioGender"
                            [ngClass]="{ 'is-invalid': submitted && f.radioGender.errors || ((f.radioGender.touched || f.radioGender.dirty) && f.radioGender.invalid) }"
                            [value]="2" formControlName="radioGender">
-                    <label class="form-check-label" for="inlineRadio2">ชาย</label>
+                    <label class="form-check-label" for="inlineRadio2">&nbsp;ชาย</label>
                   </div>
                 </div>
                 <div *ngIf="submitted && f.radioGender.errors  || f.radioGender.invalid" class="invalid-feedback">
@@ -129,13 +131,13 @@
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="radioPreg" id="radioPreg1" [(ngModel)]="radioPreg"
                              formControlName="radioPreg" [value]="0" >
-                      <label class="form-check-label" for="radioPreg1">ไม่ได้ตั้งครรภ์</label>
+                      <label class="form-check-label" for="radioPreg1">&nbsp;ไม่ได้ตั้งครรภ์</label>
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="radioPreg" id="radioPreg2"
                              [(ngModel)]="radioPreg"
                              formControlName="radioPreg" [value]="1" >
-                      <label class="form-check-label" for="radioPreg2">ตั้งครรภ์</label>
+                      <label class="form-check-label" for="radioPreg2">&nbsp;ตั้งครรภ์</label>
                     </div>
                   </div>
                 </div>
@@ -205,32 +207,6 @@
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชั่น "หมอชนะ"</label>
-                <input name="telephonedoc" id="telephonedoc" formControlName="telephonedoc"
-                       class="form-control" type="text" placeholder='ใส่เบอร์โทรศัพท์ที่ใช้ลงแอปพลิเคชั่น "หมอชนะ"'>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mt-5">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label>สิทธิการรักษา <!--<span class="text-danger">*</span>--></label>
-                <select class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat"
-                        formControlName="treat" [(ngModel)]="treat">
-                  <option *ngFor="let t of dataPTtpye" [value]="t.value">{{t.viewValue}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6" *ngIf="treat === 'อื่น ๆ'">
-              <div class="form-group">
-                <label>&nbsp;</label>
-                <input type="text" class="form-control" placeholder="โปรดระบุสิทธิการรักษา"  [(ngModel)]="other_treat"  [ngModelOptions]="{standalone: true}">
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
                 <label>วัน /เดือน/ ปีเกิด <span class="text-danger">*</span></label><small class="text-info">&nbsp;หากไม่ทราบวันเกิด/เดือนเกิด ให้ใส่เลือกวันที่ 1 เดือน 1 และตามด้วยปีเกิด</small>
                 <div class="input-group">
                   <input class="form-control" #datepickerMDY="bsDatepicker" formControlName="birthday" bsDatepicker
@@ -248,6 +224,25 @@
                   </div>
                 </div>
 
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label>สิทธิการรักษา <!--<span class="text-danger">*</span>--></label>
+                <select class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat"
+                        formControlName="treat" [(ngModel)]="treat">
+                  <option disabled></option>
+                  <option *ngFor="let t of dataPTtpye" [value]="t.value">{{t.viewValue}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="treat === 'อื่น ๆ'">
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <input type="text" class="form-control" placeholder="โปรดระบุสิทธิการรักษา"  [(ngModel)]="other_treat"  [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
@@ -334,31 +329,28 @@
           <div class="row mt-5">
             <div class="col-md-12">
               <div class="form-group">
-                <label class="form-label">การสูบบุหรี่ <span class="text-danger">*</span></label><br>
+<!--                [ngClass]="{ 'is-invalid': submitted && f.radioSmoke.errors || ((f.radioSmoke.touched || f.radioSmoke.dirty) && f.radioSmoke.invalid) }"-->
+                <label class="form-label">การสูบบุหรี่</label><br>
                 <div class="form-inline text-left">
                   <div class="form-check col-md-2">
                     <input class="form-check-input" type="radio" name="radioSmoke" id="radioSmoke1"
-                           [ngClass]="{ 'is-invalid': submitted && f.radioSmoke.errors || ((f.radioSmoke.touched || f.radioSmoke.dirty) && f.radioSmoke.invalid) }"
                            [value]="0" formControlName="radioSmoke">
                     <label class="form-check-label" for="radioSmoke1">&nbsp;ไม่เคยสูบบุหรี่</label>
                   </div>
                   <div class="form-check col-md-2">
                     <input class="form-check-input" type="radio" name="radioSmoke" id="radioSmoke2"
-                           [ngClass]="{ 'is-invalid': submitted && f.radioSmoke.errors || ((f.radioSmoke.touched || f.radioSmoke.dirty) && f.radioSmoke.invalid) }"
                            [value]="1" formControlName="radioSmoke">
                     <label class="form-check-label" for="radioSmoke2">&nbsp;ยังคงสูบบุหรี่</label>
                   </div>
                   <div class="form-check col-md-3">
-                    <input class="form-check-input" type="radio" name="radioSmoke" id="radioSmoke3"
-                           [ngClass]="{ 'is-invalid': submitted && f.radioSmoke.errors || ((f.radioSmoke.touched || f.radioSmoke.dirty) && f.radioSmoke.invalid) }"
-                           [value]="2" formControlName="radioSmoke">
+                    <input class="form-check-input" type="radio" name="radioSmoke" id="radioSmoke3" [value]="2" formControlName="radioSmoke">
                     <label class="form-check-label" for="radioSmoke3">เคยสูบแต่เลิกแล้ว</label>
                   </div>
                 </div>
-                <div *ngIf="submitted && f.radioSmoke.errors  || f.radioSmoke.invalid" class="invalid-feedback">
-                  <div class="text-left fSize12" *ngIf="f.radioSmoke.errors.required">กรุณาเลือกการสูบบุหรี่
-                  </div>
-                </div>
+<!--                <div *ngIf="submitted && f.radioSmoke.errors  || f.radioSmoke.invalid" class="invalid-feedback">-->
+<!--                  <div class="text-left fSize12" *ngIf="f.radioSmoke.errors.required">กรุณาเลือกการสูบบุหรี่-->
+<!--                  </div>-->
+<!--                </div>-->
               </div>
             </div>
           </div>
@@ -460,53 +452,53 @@
         <h2 class="text-info">2. ข้อมูลทางคลินิก</h2>
       </div>
       <div class="card-body">
+<!--        <div class="row">-->
+<!--          <div class="col-md-6 mt-4">-->
+<!--            <label>วันที่เริ่มป่วย/วันที่เสี่ยง</label>-->
+<!--            <div class="input-group">-->
+<!--              <input class="form-control" (bsValueChange)="getDate($event)" #datepickerMDY="bsDatepicker"-->
+<!--                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [bsValue]="currentDate">-->
+<!--              <div class="input-group-append">-->
+<!--                <span class="input-group-text">-->
+<!--                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"-->
+<!--                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-6 mt-4">-->
+<!--            <label>วันที่เริ่มรักษา</label>-->
+<!--            <div class="input-group">-->
+<!--              <input class="form-control" #datepickerMDY="bsDatepicker" (bsValueChange)="getDatetreat($event)"-->
+<!--                     bsDatepicker [bsValue]="currentDate"-->
+<!--                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">-->
+<!--              <div class="input-group-append">-->
+<!--                <span class="input-group-text">-->
+<!--                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"-->
+<!--                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row ">-->
+<!--          <div class=" col-md-6 mt-4">-->
+<!--            &lt;!&ndash;span class="text-danger">*</span>&ndash;&gt;-->
+<!--            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาครั้งแรก</label>-->
+<!--            <input type="text" [(ngModel)]="fistHosp" class="form-control"/>-->
+<!--          </div>-->
+<!--          <div class=" col-md-6 mt-4 ">-->
+<!--            <label>จังหวัด</label>-->
+<!--            <input type="text" [(ngModel)]="fistChw" class="form-control"/>-->
+<!--          </div>-->
+<!--          <div class=" col-md-6 mt-4 ">-->
+<!--            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาปัจจุบัน</label>-->
+<!--            <input type="text" [(ngModel)]="nowHosp" class="form-control"/>-->
+<!--          </div>-->
+<!--          <div class=" col-md-6 mt-4">-->
+<!--            <label>จังหวัด</label>-->
+<!--            <input type="text" [(ngModel)]="nowChw" class="form-control"/>-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="row">
-          <div class="col-md-6 mt-4">
-            <label>วันที่เริ่มป่วย</label>
-            <div class="input-group">
-              <input class="form-control" (bsValueChange)="getDate($event)" #datepickerMDY="bsDatepicker"
-                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [bsValue]="currentDate">
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 mt-4">
-            <label>วันที่เริ่มรักษา</label>
-            <div class="input-group">
-              <input class="form-control" #datepickerMDY="bsDatepicker" (bsValueChange)="getDatetreat($event)"
-                     bsDatepicker [bsValue]="currentDate"
-                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
-                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row ">
-          <div class=" col-md-6 mt-4">
-            <!--span class="text-danger">*</span>-->
-            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาครั้งแรก</label>
-            <input type="text" [(ngModel)]="fistHosp" class="form-control"/>
-          </div>
-          <div class=" col-md-6 mt-4 ">
-            <label>จังหวัด</label>
-            <input type="text" [(ngModel)]="fistChw" class="form-control"/>
-          </div>
-          <div class=" col-md-6 mt-4 ">
-            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาปัจจุบัน</label>
-            <input type="text" [(ngModel)]="nowHosp" class="form-control"/>
-          </div>
-          <div class=" col-md-6 mt-4">
-            <label>จังหวัด</label>
-            <input type="text" [(ngModel)]="nowChw" class="form-control"/>
-          </div>
-        </div>
-        <div class=" row mt-5">
           <div class="col font-prompt-medium">
             <div class="form-group">
               <label>อาการและอาการแสดงในวันพบผู้ป่วย</label>
@@ -521,6 +513,12 @@
                 <div class="col-md-3 ">
                   <input type="text" class="form-control" [(ngModel)]="assign_oxygen" placeholder="ค่าออกซิเจน(%)"/>
                 </div>
+
+                <label class="checkbox checkbox-square">
+                  <input type="checkbox" name="radiouri" [(ngModel)]="radiouri"/>
+                  <span></span>ปฎิเสธอาการทาง URI
+
+                </label>
               </div>
 
               <div class="checkbox-inline">
@@ -911,14 +909,14 @@
           </div>
 
           <div class="row mt-2 font-prompt-medium fsize16" >
-            <label class="col-lg-1 p-0 m-0">● อื่น ๆ <span class="text-danger">*</span></label>
+<!--            [ngClass]="{ 'is-invalid': submitted && f3.assignRisk.errors  || ((f3.assignRisk.touched || f3.assignRisk.dirty) &&f3.assignRisk.invalid) }"-->
+<!--            <span class="text-danger">*</span>-->
+            <label class="col-lg-1 p-0 m-0">● อื่น ๆ </label>
             <div class="col-lg-11">
-              <textarea class="form-control" placeholder="ระบุลักษณะความเสี่ยง" name="assignRisk" id="assignRisk"
-                        formControlName="assignRisk" style="resize: none" rows="2"
-                        [ngClass]="{ 'is-invalid': submitted && f3.assignRisk.errors  || ((f3.assignRisk.touched || f3.assignRisk.dirty) &&f3.assignRisk.invalid) }"></textarea>
-              <div *ngIf="submitted && f3.assignRisk.errors  || ((f3.assignRisk.touched || f3.assignRisk.dirty) && f3.assignRisk.invalid)" class="invalid-feedback">
-                <div class="text-left fSize12" *ngIf="f3.assignRisk.errors.required">กรุณาระบุลักษณะความเสี่ยง</div>
-              </div>
+              <input class="form-control" placeholder="ระบุลักษณะความเสี่ยง" name="assignRisk" id="assignRisk" formControlName="assignRisk"/>
+<!--              <div *ngIf="submitted && f3.assignRisk.errors  || ((f3.assignRisk.touched || f3.assignRisk.dirty) && f3.assignRisk.invalid)" class="invalid-feedback">-->
+<!--                <div class="text-left fSize12" *ngIf="f3.assignRisk.errors.required">กรุณาระบุลักษณะความเสี่ยง</div>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
@@ -950,176 +948,170 @@
           </div>
         </form>
 
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[0] | thaiDate: 'short'}}
-            <input type="hidden" name="dateTimeLine0" value="{{dateTimeLineShort[0]}}">
-            <!--              <span class="text-danger">*</span>-->
-          </div>
-          <!--            [ngClass]="{ 'is-invalid': submitted && f2.desDay1.errors  || ((f2.desDay1.touched || f2.desDay1.dirty) && f2.desDay1.invalid) }"-->
-          <div class="col-md-10">
-                <textarea class="form-control" name="textTimeLine0" id="textTimeLine0" rows="3"
-                          placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                          [(ngModel)]="desDay1">
-                </textarea>
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[1] | thaiDate: 'short'}}
-            <input type="hidden" name="dateTimeLine1" value="{{dateTimeLineShort[1]}}">
-            <!--              <span class="text-danger">*</span>-->
-          </div>
-          <!--            [ngClass]="{ 'is-invalid': submitted && f2.desDay2.errors  || ((f2.desDay2.touched || f2.desDay2.dirty) && f2.desDay2.invalid) }"-->
-          <div class="col-md-10">
-                <textarea class="form-control" name="textTimeLine1" id="textTimeLine1" rows="3"
-                          placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                          [(ngModel)]="desDay2">
-                </textarea>
-            <!--              <div *ngIf="submitted && f2.desDay2.errors  || ((f2.desDay2.touched || f2.desDay2.dirty) && f2.desDay2.invalid)"-->
-            <!--                class="invalid-feedback">-->
-            <!--                <div class="text-left fSize12" *ngIf="f2.desDay2.errors.required">-->
-            <!--                  กรุณาใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ-->
-            <!--                </div>-->
-            <!--              </div>-->
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[2] | thaiDate: 'short'}}
-            <input type="hidden" name="dateTimeLine1" value="{{dateTimeLineShort[2]}}">
-            <!--              <span class="text-danger">*</span>-->
-          </div>
-          <!--            [ngClass]="{ 'is-invalid': submitted && f2.desDay3.errors  || ((f2.desDay3.touched || f2.desDay3.dirty) && f2.desDay3.invalid) }"-->
-          <div class="col-md-10">
-                <textarea class="form-control" name="textTimeLine2" id="textTimeLine2" rows="3"
-                          placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                          [(ngModel)]="desDay3">
-                </textarea>
-            <!--              <div-->
-            <!--                *ngIf="submitted && f2.desDay3.errors  || ((f2.desDay3.touched || f2.desDay3.dirty) && f2.desDay3.invalid)"-->
-            <!--                class="invalid-feedback">-->
-            <!--                <div class="text-left fSize12" *ngIf="f2.desDay3.errors.required">-->
-            <!--                  กรุณาใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ-->
-            <!--                </div>-->
-            <!--              </div>-->
-          </div>
-        </div>
-
-
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[3] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine3" value="{{dateTimeLineShort[3]}}">
-          </div>
-          <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine1" id="textTimeLine3"
-                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                      [(ngModel)]="desDay4" rows="3"></textarea>
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[4] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine4" value="{{dateTimeLineShort[4]}}">
-          </div>
-          <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine1" id="textTimeLine4"
-                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                      [(ngModel)]="desDay5" rows="3"></textarea>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[5] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine5" value="{{dateTimeLineShort[5]}}">
-          </div>
-          <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine1" id="textTimeLine5"
-                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                      [(ngModel)]="desDay6" rows="3"></textarea>
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[6] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine6" value="{{dateTimeLineShort[6]}}">
-          </div>
-          <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine1" id="textTimeLine6"
-                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                      [(ngModel)]="desDay7" rows="3"></textarea>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[7] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine7" value="{{dateTimeLineShort[7]}}">
-          </div>
-          <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine1" id="textTimeLine7"
-                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                      [(ngModel)]="desDay8" rows="3"></textarea>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[8] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine8" value="{{dateTimeLineShort[8]}}">
-          </div>
-          <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine0" id="textTimeLine8"
-                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                      [(ngModel)]="desDay9" rows="3"></textarea>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[9] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine9" value="{{dateTimeLineShort[9]}}">
-          </div>
-          <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine1" id="textTimeLine9"
-                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                      [(ngModel)]="desDay10" rows="3"></textarea>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[10] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine10" value="{{dateTimeLineShort[10]}}">
-          </div>
-          <div class="col-md-10">
-            <textarea class="form-control" name="textTimeLine1" id="textTimeLine10" rows="3"
-                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                      [(ngModel)]="desDay11"></textarea>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[11] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine11" value="{{dateTimeLineShort[11]}}">
-          </div>
-          <div class="col-md-10">
-          <textarea class="form-control" name="textTimeLine0" id="textTimeLine11" rows="3"
-                    placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                    [(ngModel)]="desDay12"></textarea>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[12] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine12" value="{{dateTimeLineShort[12]}}">
-          </div>
-          <div class="col-md-10">
-          <textarea class="form-control" name="textTimeLine1" id="textTimeLine12" rows="3"
-                    placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"
-                    [(ngModel)]="desDay13"></textarea>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-md-2 my-auto">
-            วันที่ {{dateTimeLineShort[13] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine13" value="{{dateTimeLineShort[13]}}">
-          </div>
-          <div class="col-md-10">
-          <textarea class="form-control" name="textTimeLine1" id="textTimeLine13" rows="3"
-                    placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย" [(ngModel)]="desDay14"></textarea>
-          </div>
-        </div>
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[0] | thaiDate: 'short'}}-->
+<!--            <input type="hidden" name="dateTimeLine0" value="{{dateTimeLineShort[0]}}">-->
+<!--            &lt;!&ndash;              <span class="text-danger">*</span>&ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash;            [ngClass]="{ 'is-invalid': submitted && f2.desDay1.errors  || ((f2.desDay1.touched || f2.desDay1.dirty) && f2.desDay1.invalid) }"&ndash;&gt;-->
+<!--          <div class="col-md-10">-->
+<!--                <textarea class="form-control" name="textTimeLine0" id="textTimeLine0" rows="3"-->
+<!--                          placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                          [(ngModel)]="desDay1">-->
+<!--                </textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[1] | thaiDate: 'short'}}-->
+<!--            <input type="hidden" name="dateTimeLine1" value="{{dateTimeLineShort[1]}}">-->
+<!--            &lt;!&ndash;              <span class="text-danger">*</span>&ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash;            [ngClass]="{ 'is-invalid': submitted && f2.desDay2.errors  || ((f2.desDay2.touched || f2.desDay2.dirty) && f2.desDay2.invalid) }"&ndash;&gt;-->
+<!--          <div class="col-md-10">-->
+<!--                <textarea class="form-control" name="textTimeLine1" id="textTimeLine1" rows="3"-->
+<!--                          placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                          [(ngModel)]="desDay2">-->
+<!--                </textarea>-->
+<!--            &lt;!&ndash;              <div *ngIf="submitted && f2.desDay2.errors  || ((f2.desDay2.touched || f2.desDay2.dirty) && f2.desDay2.invalid)"&ndash;&gt;-->
+<!--            &lt;!&ndash;                class="invalid-feedback">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <div class="text-left fSize12" *ngIf="f2.desDay2.errors.required">&ndash;&gt;-->
+<!--            &lt;!&ndash;                  กรุณาใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ&ndash;&gt;-->
+<!--            &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[2] | thaiDate: 'short'}}-->
+<!--            <input type="hidden" name="dateTimeLine1" value="{{dateTimeLineShort[2]}}">-->
+<!--            &lt;!&ndash;              <span class="text-danger">*</span>&ndash;&gt;-->
+<!--          </div>-->
+<!--          &lt;!&ndash;            [ngClass]="{ 'is-invalid': submitted && f2.desDay3.errors  || ((f2.desDay3.touched || f2.desDay3.dirty) && f2.desDay3.invalid) }"&ndash;&gt;-->
+<!--          <div class="col-md-10">-->
+<!--                <textarea class="form-control" name="textTimeLine2" id="textTimeLine2" rows="3"-->
+<!--                          placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                          [(ngModel)]="desDay3">-->
+<!--                </textarea>-->
+<!--            &lt;!&ndash;              <div&ndash;&gt;-->
+<!--            &lt;!&ndash;                *ngIf="submitted && f2.desDay3.errors  || ((f2.desDay3.touched || f2.desDay3.dirty) && f2.desDay3.invalid)"&ndash;&gt;-->
+<!--            &lt;!&ndash;                class="invalid-feedback">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <div class="text-left fSize12" *ngIf="f2.desDay3.errors.required">&ndash;&gt;-->
+<!--            &lt;!&ndash;                  กรุณาใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ&ndash;&gt;-->
+<!--            &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[3] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine3" value="{{dateTimeLineShort[3]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--            <textarea class="form-control" name="textTimeLine1" id="textTimeLine3"-->
+<!--                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                      [(ngModel)]="desDay4" rows="3"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[4] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine4" value="{{dateTimeLineShort[4]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--            <textarea class="form-control" name="textTimeLine1" id="textTimeLine4"-->
+<!--                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                      [(ngModel)]="desDay5" rows="3"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[5] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine5" value="{{dateTimeLineShort[5]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--            <textarea class="form-control" name="textTimeLine1" id="textTimeLine5"-->
+<!--                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                      [(ngModel)]="desDay6" rows="3"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[6] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine6" value="{{dateTimeLineShort[6]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--            <textarea class="form-control" name="textTimeLine1" id="textTimeLine6"-->
+<!--                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                      [(ngModel)]="desDay7" rows="3"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[7] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine7" value="{{dateTimeLineShort[7]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--            <textarea class="form-control" name="textTimeLine1" id="textTimeLine7"-->
+<!--                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                      [(ngModel)]="desDay8" rows="3"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[8] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine8" value="{{dateTimeLineShort[8]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--            <textarea class="form-control" name="textTimeLine0" id="textTimeLine8"-->
+<!--                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                      [(ngModel)]="desDay9" rows="3"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[9] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine9" value="{{dateTimeLineShort[9]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--            <textarea class="form-control" name="textTimeLine1" id="textTimeLine9"-->
+<!--                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                      [(ngModel)]="desDay10" rows="3"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[10] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine10" value="{{dateTimeLineShort[10]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--            <textarea class="form-control" name="textTimeLine1" id="textTimeLine10" rows="3"-->
+<!--                      placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                      [(ngModel)]="desDay11"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[11] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine11" value="{{dateTimeLineShort[11]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--          <textarea class="form-control" name="textTimeLine0" id="textTimeLine11" rows="3"-->
+<!--                    placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                    [(ngModel)]="desDay12"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[12] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine12" value="{{dateTimeLineShort[12]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--          <textarea class="form-control" name="textTimeLine1" id="textTimeLine12" rows="3"-->
+<!--                    placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย"-->
+<!--                    [(ngModel)]="desDay13"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-md-2 my-auto">-->
+<!--            วันที่ {{dateTimeLineShort[13] | thaiDate: 'short'}} <input type="hidden" name="dateTimeLine13" value="{{dateTimeLineShort[13]}}">-->
+<!--          </div>-->
+<!--          <div class="col-md-10">-->
+<!--          <textarea class="form-control" name="textTimeLine1" id="textTimeLine13" rows="3"-->
+<!--                    placeholder="ใส่รายละเอียดเหตุการณ์ประวัติเสี่ยงการติดเชื้อ**ก่อนเริ่มป่วย" [(ngModel)]="desDay14"></textarea>-->
+<!--          </div>-->
+<!--        </div>-->
 
 
       </div>
@@ -1254,6 +1246,77 @@
     <img src="assets/picture/footer_copyright.svg" class="footer02">
   </div>
 </footer>
+
+<ng-template #content01 let-modal>
+  <div class="modal-body text-center">
+    <img src="assets/picture/icon-form.svg" class="img mt-10">
+    <br><br>
+    <div class="row m-0 font-prompt-light fSize20">
+      <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+        ท่านกำลังจะทำแบบสอบสวนโรค เพื่อประเมินความเสี่ยงต่อการติดเชื้อไวรัสโคโรนา 2019 ของโรงพยาบาลราชบุรี<br>
+        เพื่อความสะดวกรวดเร็วต่อการให้บริการ ขอให้ท่านกรอกข้อมูลในเอกสารอิเล็กทรอนิกส์นี้<br>
+        โดยข้อมูลของท่านจะเป็นประโยชน์ต่อการประเมินความเสี่ยงของตัวท่านเอง
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 text-center font-prompt-medium fSize20">
+        <div class="custom-control custom-checkbox checkbox-xl text-center">
+          <input type="checkbox" [(ngModel)]="agree" class="custom-control-input" id="checkbox05">
+          <label class="pt-4 custom-control-label" for="checkbox05">
+            &nbsp;&nbsp;ขอรับรองว่าข้อมูลที่ให้เป็นความจริงทุกประการ
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-10">
+      <div class="col-lg-4 offset-lg-4 col-md-12 col-sm-12 text-center">
+        <button [disabled]="!agree" (click)="btnStep1(); "
+                class="btn btn-lg font-prompt-light form-control" style="background-color: #15f3cd; font-size: 24px !important;">ถัดไป
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #content02 let-modal>
+  <div class="modal-body text-center">
+    <img src="assets/picture/icon-form.svg" class="img mt-10">
+    <br><br>
+    <div class="row m-0 fSize20">
+      <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+        <h1 class="font-prompt-medium">ท่านรับบริการจากจุดบริการใด</h1>
+        <div class="row mt-5">
+          <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12 font-prompt-light fSize20">
+            <select  class="form-control" [(ngModel)]="servicepoint" (ngModelChange)="changeServicepoint()">
+              <option disabled></option>
+              <option *ngFor="let point of dataServicepoint" [value]="point.servicepoint_id">{{point.servicepoint}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-5" *ngIf="servicepoint === '5'">
+          <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12 font-prompt-light fSize20">
+            <select class="form-control" [(ngModel)]="dhph" (ngModelChange)="changeDHPH()">
+              <option disabled></option>
+              <option *ngFor="let dhph of dataDHPH" [value]="dhph.hospcode">{{dhph.hospname}}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row my-10" *ngIf="btndisble1">
+      <div class="col-lg-4 offset-lg-4 col-md-12 col-sm-12 text-center">
+        <button class="btn btn-lg font-prompt-light form-control" (click)="btnStep2()"
+                style="background-color: #15f3cd; font-size: 24px !important;">ถัดไป</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
 
 
 

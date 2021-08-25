@@ -1,15 +1,18 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, Validators} from '@angular/forms';
+import {Component, Inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import Swal from 'sweetalert2';
 import {ApiService} from '../../services/api.service';
 import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
 
 interface Pname {
   value: string;
   viewValue: string;
 }
+
 interface PTtype {
   value: string;
   viewValue: string;
@@ -161,16 +164,35 @@ export class Novelcorona2Component implements OnInit {
   scontact3: any;
   scontactplace: any;
   radioStaffContact: any;
+  radiouri: any;
 
   servicepoint: any;
   dhph: any;
+  dhphcode: any;
+  agree: any;
+  hospcode1: any;
+  dataServicepoint: any = [];
+  dataDHPH: any = [];
+  servicepointFrm: any;
+  btndisble1: any = false;
+  @ViewChild('content01', {read: TemplateRef}) content01: TemplateRef<any>;
+  @ViewChild('content02', {read: TemplateRef}) content02: TemplateRef<any>;
 
   dataSContact: SContact[] = [
     {value: '1', viewValue: 'บุคคลากรใส่ surgical mask ร่วมกับ face shield หรือ อยู่ห่างจากผู้ป่วยเกิน 1 เมตร'},
     {value: '2', viewValue: 'บุคคลากรใส่ surgical mask'},
-    {value: '3', viewValue: 'บุคลากรใส่แค่ face shield หรือ บุคลากรไม่ใส่เครื่องป้องกันใดๆ หรือ กรณีทำ aerosol-generating procedure และไม่ได้ใส่ N95 respirator และ face shield'},
-    {value: '4', viewValue: 'สัมผัสโดยตรง (direct contact) กับสารคัดหลั่งของผู้ติดเชื้อ เช่น น้ำมูก เสมหะ น้ำลายโดยไม่ได้ใส่ถุงมือ และไม่ได้ล้างมือ ก่อนเอามือสัมผัสบริเวณเยื่อบุตา ปาก จมูกตัวเอง หรือรับประทานอาการโดยใช้ จาน ชาม ช้อน หรือ แก้วน้ำร่วมกัน'},
-    {value: '5', viewValue: 'สัมผัสทางอ้อม (indirect contact) เช่น สัมผัสกับสิ่งของของผู้ติดเชื้อ โดยไม่ได้ใส่ถุงมือ และไม่ได้ล้างมือ ก่อนเอามือสัมผัสบริเวณเยื่อบุตา ปาก จมูกตัวเอง'}
+    {
+      value: '3',
+      viewValue: 'บุคลากรใส่แค่ face shield หรือ บุคลากรไม่ใส่เครื่องป้องกันใดๆ หรือ กรณีทำ aerosol-generating procedure และไม่ได้ใส่ N95 respirator และ face shield'
+    },
+    {
+      value: '4',
+      viewValue: 'สัมผัสโดยตรง (direct contact) กับสารคัดหลั่งของผู้ติดเชื้อ เช่น น้ำมูก เสมหะ น้ำลายโดยไม่ได้ใส่ถุงมือ และไม่ได้ล้างมือ ก่อนเอามือสัมผัสบริเวณเยื่อบุตา ปาก จมูกตัวเอง หรือรับประทานอาการโดยใช้ จาน ชาม ช้อน หรือ แก้วน้ำร่วมกัน'
+    },
+    {
+      value: '5',
+      viewValue: 'สัมผัสทางอ้อม (indirect contact) เช่น สัมผัสกับสิ่งของของผู้ติดเชื้อ โดยไม่ได้ใส่ถุงมือ และไม่ได้ล้างมือ ก่อนเอามือสัมผัสบริเวณเยื่อบุตา ปาก จมูกตัวเอง'
+    }
   ];
 
   dataSContactPlace: SContactPlace[] = [
@@ -191,7 +213,6 @@ export class Novelcorona2Component implements OnInit {
     {value: '3', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส <= 15 นาที'},
     {value: '4', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส > 15 นาที'}
   ];
-
 
   dataPname: Pname[] = [
     {value: 'นาย', viewValue: 'นาย'},
@@ -216,18 +237,15 @@ export class Novelcorona2Component implements OnInit {
     {value: 'อื่น ๆ', viewValue: 'อื่น ๆ'},
   ];
 
+
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
-              @Inject('baseURL') private baseURL: any,  private router: Router) {
-  }
+              @Inject('baseURL') private baseURL: any, private router: Router, private modalService: NgbModal) {}
 
 
   ngOnInit(): void {
+
     this.localeService.use(this.locale);
     this.genDateTimeLine(moment().format('YYYY-MM-DD'));
-    // console.log(this.dateTimeLineShort);
-
-    this.servicepoint = sessionStorage.getItem('servicepoint');
-    this.dhph = sessionStorage.getItem('dhph');
 
     this.generalFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
@@ -243,7 +261,6 @@ export class Novelcorona2Component implements OnInit {
       job: [null, Validators.compose([Validators.required])],
       station: [null, Validators.compose([Validators.required])],
       telephone: [null, Validators.compose([Validators.required])],
-      telephonedoc: [null],
       treat: [null],
       birthday: [null, Validators.compose([Validators.required])],
       addr: [null],
@@ -254,7 +271,7 @@ export class Novelcorona2Component implements OnInit {
       tumbon: [null, Validators.compose([Validators.required])],
       amphur: [null, Validators.compose([Validators.required])],
       province: [null, Validators.compose([Validators.required])],
-      radioSmoke: [null, Validators.compose([Validators.required])],
+      radioSmoke: [null],
       checkcopd: [null],
       checkckd: [null],
       checkcad: [null],
@@ -267,7 +284,7 @@ export class Novelcorona2Component implements OnInit {
       bmi: [null],
     });
 
-    this.riskFrm  = this.formBuilder.group({
+    this.riskFrm = this.formBuilder.group({
       radiofrom: [null, Validators.compose([Validators.required])],
       radiorepair: [null, Validators.compose([Validators.required])],
       radionear: [null, Validators.compose([Validators.required])],
@@ -277,7 +294,7 @@ export class Novelcorona2Component implements OnInit {
       radiobreath: [null, Validators.compose([Validators.required])],
       radioinject: [null, Validators.compose([Validators.required])],
       radiolabtest: [null, Validators.compose([Validators.required])],
-      assignRisk: [null, Validators.compose([Validators.required])],
+      assignRisk: [null],
       radioStaffContact: [null],
       scontact2: [null],
       scontact3: [null],
@@ -285,27 +302,80 @@ export class Novelcorona2Component implements OnInit {
 
     });
 
-    this.timelineFrm  = this.formBuilder.group({
+    this.timelineFrm = this.formBuilder.group({
       // desDay1: [null, Validators.compose([Validators.required])],
       // desDay2: [null, Validators.compose([Validators.required])],
       // desDay3: [null, Validators.compose([Validators.required])],
       desOther: [null, Validators.compose([Validators.required])],
 
     });
-
+    this.getDataServicepoint();
+    this.getDataDHPH();
     this.getContact();
     this.getVaccine();
     this.setValidators();
+    setTimeout(() => {
+      this.openModal();
+    }, 300);
 
   }
 
+  async getDataServicepoint(): Promise<any> {
+    const res = await this.api.getServicepoint();
+    if (res.ok === true) {
+      this.dataServicepoint = res.message;
+    } else {
+      console.log('error');
+    }
+  }
+
+  async getDataDHPH(): Promise<any> {
+    const resDHPH = await this.api.getDHPH();
+    if (resDHPH.ok === true) {
+      this.dataDHPH = resDHPH.message;
+      // console.log(resDHPH.message);
+    } else {
+      console.log('error');
+    }
+  }
+
+  changeServicepoint(): any {
+    if (this.servicepoint === '5') {
+      this.btndisble1 = false;
+    } else {
+      this.btndisble1 = true;
+    }
+  }
+
+  changeDHPH(): any {
+    if (this.dhph) {
+      this.btndisble1 = true;
+    } else {
+      this.btndisble1 = false;
+    }
+  }
+
+  openModal(): any {
+    this.modalService.open(this.content01, {size: 'xl', backdrop: 'static'});
+  }
+
+  btnStep1(): any {
+    this.modalService.dismissAll();
+    this.modalService.open(this.content02, {size: 'xl', backdrop: 'static'});
+  }
+
+  btnStep2(): any {
+    this.modalService.dismissAll();
+  }
 
   get f(): any {
     return this.generalFrm.controls;
   }
+
   get f2(): any {
     return this.timelineFrm.controls;
   }
+
   get f3(): any {
     return this.riskFrm.controls;
   }
@@ -333,10 +403,10 @@ export class Novelcorona2Component implements OnInit {
         if (radioStaff === 1) {
           scontact2Control.setValidators([Validators.required]);
           scontactplaceControl.setValidators(null);
-        }else if (radioStaff === 2){
+        } else if (radioStaff === 2) {
           scontact2Control.setValidators(null);
           scontactplaceControl.setValidators([Validators.required]);
-        }else {
+        } else {
           scontact2Control.setValidators(null);
           scontactplaceControl.setValidators(null);
         }
@@ -348,7 +418,7 @@ export class Novelcorona2Component implements OnInit {
       .subscribe(scontact2 => {
         if (scontact2 === '1' || scontact2 === '2') {
           scontact3Control.setValidators([Validators.required]);
-        }else {
+        } else {
           scontact3Control.setValidators(null);
         }
         scontact3Control.updateValueAndValidity();
@@ -356,26 +426,24 @@ export class Novelcorona2Component implements OnInit {
 
   }
 
-  async getContact(): Promise<any>{
+  async getContact(): Promise<any> {
     const resContact = await this.api.getContact();
     // console.log(resContact);
-    if (resContact.ok === true){
+    if (resContact.ok === true) {
       this.dataContact = resContact.message;
-    }else{
+    } else {
       console.log('error');
     }
   }
 
-  async getVaccine(): Promise<any>{
+  async getVaccine(): Promise<any> {
     const resVac = await this.api.getVaccine();
-    // console.log(resVac);
-    if (resVac.ok === true){
+    if (resVac.ok === true) {
       this.dataVaccine = resVac.message;
-    }else{
+    } else {
       console.log('error');
     }
   }
-
 
   successNotification(): any {
     Swal.fire({
@@ -436,7 +504,6 @@ export class Novelcorona2Component implements OnInit {
     }
   }
 
-
   async insertData(): Promise<any> {
     this.submitted = true;
     // stop here if form is invalid
@@ -452,7 +519,7 @@ export class Novelcorona2Component implements OnInit {
       // console.log('invalid');
       // console.log('this.btndisble : ', this.btndisble);
       return;
-    }else{
+    } else {
       this.btndisble = true;
     }
 
@@ -476,11 +543,10 @@ export class Novelcorona2Component implements OnInit {
     data.novel_worker = this.generalFrm.value.job;
     data.novel_station = this.generalFrm.value.station;
     data.novel_phone = this.generalFrm.value.telephone;
-    data.novel_phonedoc = this.generalFrm.value.telephonedoc;
 
-    if (this.generalFrm.value.treat === 'อื่น ๆ'){
+    if (this.generalFrm.value.treat === 'อื่น ๆ') {
       data.novel_treat = this.other_treat;
-    }else{
+    } else {
       data.novel_treat = this.generalFrm.value.treat;
     }
 
@@ -510,18 +576,19 @@ export class Novelcorona2Component implements OnInit {
     data.novel_bmi = (this.generalFrm.value.weight / ((this.generalFrm.value.high / 100) * (this.generalFrm.value.high / 100)));
 
     data.novel_birthday = (this.generalFrm.value.birthday != null) ? moment(this.generalFrm.value.birthday).format('YYYY-MM-DD') : null;
-    data.novel_start_sick = moment(this.datadate).format('YYYY-MM-DD');
-    data.novel_start_treat = moment(this.datatreat).format('YYYY-MM-DD');
-    data.novel_hospital_first = this.fistHosp;
-    data.novel_province_first = this.fistChw;
-    data.novel_hospital_now = this.nowHosp;
-    data.novel_province_now = this.nowChw;
+    // data.novel_start_sick = moment(this.datadate).format('YYYY-MM-DD');
+    // data.novel_start_treat = moment(this.datatreat).format('YYYY-MM-DD');
+    // data.novel_hospital_first = this.fistHosp;
+    // data.novel_province_first = this.fistChw;
+    // data.novel_hospital_now = this.nowHosp;
+    // data.novel_province_now = this.nowChw;
 
     data.novel_fever = this.radiofever;
     data.novel_assign_fever = this.assign_fever;
     data.novel_assign_oxygen = this.assign_oxygen;
     data.novel_fever = this.radiofever;
     data.novel_respirator = this.radiorespirator;
+    data.novel_uri = this.radiouri;
     data.novel_cough = this.radiocough;
     data.novel_sorethroat = this.radiosorethroat;
     data.novel_musclepain = this.radiomusclepain;
@@ -561,10 +628,10 @@ export class Novelcorona2Component implements OnInit {
     data.novel_doc_39 = this.riskFrm.value.radiolabtest;
 
     data.novel_staff_contact = this.radioStaffContact;
-    if (this.radioStaffContact === 1){
+    if (this.radioStaffContact === 1) {
       data.novel_staff_contact2 = this.scontact2;
       data.novel_staff_contact3 = this.scontact3;
-    }else{
+    } else {
       data.novel_staff_contact2 = this.scontactplace;
     }
 
@@ -594,17 +661,17 @@ export class Novelcorona2Component implements OnInit {
     if (rs.ok === true) {
       const rsins: any = await this.insertRec(rs.message[0]);
       // console.log('rsins ', rsins);
-      if (rsins.ok === true){
+      if (rsins.ok === true) {
         this.successNotification();
-      }else{
+      } else {
         this.errorNotification();
         console.log(rsins.error);
-        this.btndisble =  false;
+        this.btndisble = false;
       }
     } else {
       this.errorNotification();
       console.log(rs.error);
-      this.btndisble =  false;
+      this.btndisble = false;
     }
   }
 
@@ -613,38 +680,38 @@ export class Novelcorona2Component implements OnInit {
     const data: any = {};
     const info: any = [];
     data.novel_id = id;
-    data.day1 = this.dateTimeLineShort[0];
-    data.day2 = this.dateTimeLineShort[1];
-    data.day3 = this.dateTimeLineShort[2];
-    data.day4 = this.dateTimeLineShort[3];
-    data.day5 = this.dateTimeLineShort[4];
-    data.day6 = this.dateTimeLineShort[5];
-    data.day7 = this.dateTimeLineShort[6];
-    data.day8 = this.dateTimeLineShort[7];
-    data.day9 = this.dateTimeLineShort[8];
-    data.day10 = this.dateTimeLineShort[9];
-    data.day11 = this.dateTimeLineShort[10];
-    data.day12 = this.dateTimeLineShort[11];
-    data.day13 = this.dateTimeLineShort[12];
-    data.day14 = this.dateTimeLineShort[13];
+    // data.day1 = this.dateTimeLineShort[0];
+    // data.day2 = this.dateTimeLineShort[1];
+    // data.day3 = this.dateTimeLineShort[2];
+    // data.day4 = this.dateTimeLineShort[3];
+    // data.day5 = this.dateTimeLineShort[4];
+    // data.day6 = this.dateTimeLineShort[5];
+    // data.day7 = this.dateTimeLineShort[6];
+    // data.day8 = this.dateTimeLineShort[7];
+    // data.day9 = this.dateTimeLineShort[8];
+    // data.day10 = this.dateTimeLineShort[9];
+    // data.day11 = this.dateTimeLineShort[10];
+    // data.day12 = this.dateTimeLineShort[11];
+    // data.day13 = this.dateTimeLineShort[12];
+    // data.day14 = this.dateTimeLineShort[13];
 
     // data.timeline_date1 = this.timelineFrm.value.desDay1;
     // data.timeline_date2 = this.timelineFrm.value.desDay2;
     // data.timeline_date3 = this.timelineFrm.value.desDay3;
-    data.timeline_date1 = this.desDay1;
-    data.timeline_date2 = this.desDay2;
-    data.timeline_date3 = this.desDay3;
-    data.timeline_date4 = this.desDay4;
-    data.timeline_date5 = this.desDay5;
-    data.timeline_date6 = this.desDay6;
-    data.timeline_date7 = this.desDay7;
-    data.timeline_date8 = this.desDay8;
-    data.timeline_date9 = this.desDay9;
-    data.timeline_date10 = this.desDay10;
-    data.timeline_date11 = this.desDay11;
-    data.timeline_date12 = this.desDay12;
-    data.timeline_date13 = this.desDay13;
-    data.timeline_date14 = this.desDay14;
+    // data.timeline_date1 = this.desDay1;
+    // data.timeline_date2 = this.desDay2;
+    // data.timeline_date3 = this.desDay3;
+    // data.timeline_date4 = this.desDay4;
+    // data.timeline_date5 = this.desDay5;
+    // data.timeline_date6 = this.desDay6;
+    // data.timeline_date7 = this.desDay7;
+    // data.timeline_date8 = this.desDay8;
+    // data.timeline_date9 = this.desDay9;
+    // data.timeline_date10 = this.desDay10;
+    // data.timeline_date11 = this.desDay11;
+    // data.timeline_date12 = this.desDay12;
+    // data.timeline_date13 = this.desDay13;
+    // data.timeline_date14 = this.desDay14;
     data.timeline_other = this.timelineFrm.value.desOther;
 
     info.push(data);

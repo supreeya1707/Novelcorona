@@ -6,17 +6,30 @@
     <div class="container-fluid font-prompt-medium">
       <div class="card mt-5">
         <div class="card-body">
-          <div class="form-group">
-            <label>เลือกวันที่ต้องการดูข้อมูล</label>
-            <div class="input-group">
-              <input class="form-control" #datepickerMDY="bsDatepicker"
-                     bsDatepicker [bsValue]="currentDate"
-                     (bsValueChange)="dateChange($event)"
-                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-              <div class="input-group-append">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label>เลือกวันที่ต้องการดูข้อมูล</label>
+                <div class="input-group">
+                  <input class="form-control" #datepickerMDY="bsDatepicker"
+                         bsDatepicker [bsValue]="currentDate"
+                         (bsValueChange)="dateChange($event)"
+                         [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                  <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label>เลือกจุดบริการที่ต้องการดูข้อมูล</label>
+                <select class="form-control" [(ngModel)]="servicepoint" (ngModelChange)="changeServicepoint()">
+                  <option [value]="'all'">ทุกจุดบริการ</option>
+                  <option *ngFor="let point of dataServicePoint" [value]="point.servicepoint_id">{{point.servicepoint}}</option>
+                </select>
               </div>
             </div>
           </div>
@@ -30,26 +43,28 @@
             <table class="table table-bordered table-hover" id="tableReport">
               <thead >
               <tr class="text-center" style="height: 60px;" >
-                <th width="10%">
+                <th width="8%">
                   เลขประจำตัวประชาชน<br>
                   <input type="text" [(ngModel)]="txtSearch"  (ngModelChange)="cidSearch()"
                          class="form-control mt-2" style="font-size: small!important;">
                 </th>
-                <th width="13%">
+                <th width="12%">
                   ชื่อ-นามสกุล<br>
                   <input type="text" [(ngModel)]="ptname"  (ngModelChange)="nameSearch()"
                          class="form-control mt-2" style="font-size: small!important;">
                 </th>
-                <th width="5%">สัญชาติ</th>
-                <th width="13%">
+                <th width="4%">สัญชาติ</th>
+                <th width="10%">
                   สถานที่ทำงาน/สถานศึกษา<br>
                   <input type="text" [(ngModel)]="station"  (ngModelChange)="stationSearch()"
                          class="form-control mt-2" style="font-size: small!important;"></th>
                 <th width="7%">เบอร์โทรศัพท์</th>
                 <th width="5%">สถานะ</th>
-                <th width="15%">คำแนะนำแพทย์</th>
-                <th width="12%">ผู้รายงาน</th>
-                <th width="7%">วันเวลาที่ทำ<br>แบบสอบสวน</th>
+                <th width="10%">คำแนะนำแพทย์</th>
+                <th width="9%">ผู้รายงาน</th>
+                <th width="10%">จุดรับบริการ<br>
+                  <input type="text" [(ngModel)]="point"  (ngModelChange)="pointSearch()" class="form-control mt-2" style="font-size: small!important;"></th>
+                <th width="6%">เวลาบันทึกข้อมูล</th>
                 <th width="10%"></th>
               </tr>
               </thead>
@@ -69,18 +84,16 @@
                             (novel.sars_pt_type === 6) ? 'ACF' :null}}</td>
                 <td class="text-left">{{novel.doctor_comment}}</td>
                 <td class="text-left">{{novel.reporter}}</td>
-                <td class="text-center">
-                  {{novel.novel_input_datetime | thaiDate: 'short'}}<br>
-                  {{novel.novel_input_datetime | thaiDate: 'shorttime'}} น.
-                </td>
-                <td class="text-center">
+                <td class="text-left">{{novel.servicepoint}}</td>
+                <td class="text-center">{{novel.timereport}} น.</td>
+                <td class="text-center noDisplay">
                   <div *ngIf="novel.sdate_quaran !== null  ">
                     <button class="btn btn-xs btn-outline-dark" tooltipHtml="แก้ไข" placement="bottom"
                             (click)="editNovelcorona2(novel.novel_id)">
                       <i class="fa fa-pencil fa-xs p-0 m-0"></i>
                     </button>
                     <button class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
-                            (click)="delData(novel.novel_id, novel.ptfullname)">
+                            (click)="delData(novel.id, novel.ptfullname)">
                       <i class="fa fa-trash fa-xs p-0 m-0"></i>
                     </button>
                     <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
@@ -104,7 +117,7 @@
                       <i class="fa fa-pencil fa-xs p-0 m-0"></i>
                     </button>
                     <button class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
-                            (click)="delData(novel.novel_id, novel.ptfullname)">
+                            (click)="delData(novel.id, novel.ptfullname)">
                       <i class="fa fa-trash fa-xs p-0 m-0"></i>
                     </button>
                     <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
@@ -116,12 +129,55 @@
                       <i class="fa fa-file fa-xs p-0 m-0"></i>
                     </button>
                   </div>
-
+                </td>
+                <td class="text-center showDisplay">
+                  <div *ngIf="novel.sdate_quaran !== null  ">
+                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="แก้ไข" placement="bottom"
+                            (click)="editNovelcorona2(novel.novel_id)">
+                      <i class="fa fa-pencil fa-xs p-0 m-0"></i>
+                    </button>
+                    <button class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                            (click)="delData(novel.id, novel.ptfullname)">
+                      <i class="fa fa-trash fa-xs p-0 m-0"></i>
+                    </button>
+                    <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
+                            (click)="downloadNovelcorona2(novel.novel_id)">
+                      <i class="fa fa-print fa-xs p-0 m-0"></i>
+                    </button>
+                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="ฉบับย่อ" placement="bottom"
+                            (click)="downloadNovelcorona2_1(novel.novel_id)">
+                      <i class="fa fa-file fa-xs p-0 m-0"></i>
+                    </button>
+                    <button class="btn btn-xs btn-outline-success" tooltipHtml="จพต." placement="bottom"
+                            (click)="downloadReport01(novel.novel_id)">จพต.
+                    </button>
+                    <button class="btn btn-xs btn-outline-warning" tooltipHtml="ใบขวาง" placement="bottom"
+                            (click)="downloadReport02(novel.novel_id)">บข
+                    </button>
+                  </div>
+                  <div *ngIf="novel.sdate_quaran === null ">
+                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="แก้ไข" placement="bottom"
+                            (click)="editNovelcorona2(novel.novel_id)">
+                      <i class="fa fa-pencil fa-xs p-0 m-0"></i>
+                    </button>
+                    <button class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                            (click)="delData(novel.id, novel.ptfullname)">
+                      <i class="fa fa-trash fa-xs p-0 m-0"></i>
+                    </button>
+                    <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
+                            (click)="downloadNovelcorona2(novel.novel_id)">
+                      <i class="fa fa-print fa-xs p-0 m-0"></i>
+                    </button>
+                    <button class="btn btn-xs btn-outline-dark" tooltipHtml="ฉบับย่อ" placement="bottom"
+                            (click)="downloadNovelcorona2_1(novel.novel_id)">
+                      <i class="fa fa-file fa-xs p-0 m-0"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
               </tbody>
               <tbody *ngIf="dataSearch?.length == 0">
-              <tr><td colspan="9" class="no-data-available"><h1>ไม่พบข้อมูล</h1></td></tr>
+              <tr><td colspan="11" class="no-data-available"><h1>ไม่พบข้อมูล</h1></td></tr>
               </tbody>
             </table>
           </div>

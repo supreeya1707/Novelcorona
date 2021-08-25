@@ -71,12 +71,14 @@ export class ReportComponent implements OnInit {
   txtSearch: any;
   ptname: any;
   station: any;
-
+  point: any;
+  servicepoint: any;
 
   dataSearch: any = '';
   dataNovel: any = [];
   dataNovelByID: any = [];
   dataNovelStaff: any = [];
+  dataServicePoint: any = [];
   dataTimeLineByID: any;
   dateTimeLineShortquaran: any = [];
 
@@ -213,7 +215,19 @@ export class ReportComponent implements OnInit {
     }
   }
 
+  pointSearch(): any {
+    if (this.point === '') {
+      this.dataSearch = this.dataNovel;
+    } else {
+      this.dataSearch = this.dataNovel.filter((data: any) => {
+        return data.servicepoint.match(this.point);
+      });
+    }
+  }
+
   async dateChange(e: any): Promise<any> {
+    this.dataServicePoint = [];
+    this.servicepoint = '';
     const dateinput = moment(e).format('YYYY-MM-DD');
     this.dateChoose = dateinput;
     const rs: any = await this.api.getDataStaffRaw(dateinput);
@@ -221,9 +235,43 @@ export class ReportComponent implements OnInit {
     if (rs.ok) {
       this.dataNovel = rs.message;
       this.dataSearch = this.dataNovel;
+      const res: any = await this.api.getStaffServicepoint(dateinput);
+      // console.log(res.message);
+      if (res.ok === true){
+        this.dataServicePoint = res.message;
+        // console.log(this.dataServicePoint);
+      }else {
+        console.log('error');
+      }
     } else {
       console.log('error');
     }
+  }
+
+  async changeServicepoint(): Promise<any> {
+    const dateinput = this.dateChoose;
+    const servicepoint = this.servicepoint;
+    // console.log(servicepoint);
+    if (this.servicepoint === 'all'){
+      const rs: any = await this.api.getDataStaffRaw(dateinput);
+      // console.log(rs);
+      if (rs.ok) {
+        this.dataNovel = rs.message;
+        this.dataSearch = this.dataNovel;
+      } else {
+        console.log('error');
+      }
+    }else{
+      const res = await this.api.getByDatePointStaff(dateinput, servicepoint);
+      if (res.ok === true){
+        this.dataNovel = res.message;
+        this.dataSearch = this.dataNovel;
+        // console.log(this.dataNovel);
+      }else{
+        console.log('error');
+      }
+    }
+
   }
 
   convertDate(d: any, i: any): any {
@@ -240,8 +288,8 @@ export class ReportComponent implements OnInit {
     // console.log(this.dateTimeLineShortquaran);
   }
 
-  async delData(novelid: any, ptfullname: any): Promise<any> {
-    console.log(novelid, ' : ', ptfullname);
+  async delData(id: any, ptfullname: any): Promise<any> {
+    console.log(id, ' : ', ptfullname);
     Swal.fire({
       icon: 'warning',
       title: 'ลบข้อมูล',
@@ -251,7 +299,7 @@ export class ReportComponent implements OnInit {
       cancelButtonText: 'ไม่ใช่',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await this.api.delStaff(novelid);
+        const res = await this.api.delStaff(id);
         // console.log(res);
         if (res.ok === true) {
           Swal.fire('ลบข้อมูลสำเร็จ', '', 'success');
@@ -279,6 +327,21 @@ export class ReportComponent implements OnInit {
       console.log('error');
     }
   }
+  async downloadNovelcorona2(novelID: any): Promise<any> {
+    // console.log(novelID);
+    const res: any = await this.api.getDataById(novelID);
+    const resTimeLine: any = await this.api.getTimeLineById(novelID);
+    const resStaff: any = await this.api.getDataStaff(novelID);
+    // console.log(resTimeLine);
+    if (res.ok === true && resTimeLine.ok === true && resStaff.ok === true) {
+      this.dataNovelByID = res.message[0];
+      this.dataTimeLineByID = resTimeLine.message[0];
+      this.dataNovelStaff = resStaff.message[0];
+      pdfMake.createPdf(this.docNovelcorona2()).download('novelcoroana2(' + novelID + ').pdf');
+    } else {
+      console.log('error');
+    }
+  }
 
   async printNovelcorona2_1(novelID: any): Promise<any> {
     // console.log(novelID);
@@ -291,6 +354,21 @@ export class ReportComponent implements OnInit {
       this.dataTimeLineByID = resTimeLine.message[0];
       this.dataNovelStaff = resStaff.message[0];
       pdfMake.createPdf(this.docNovelcorona2_1()).open();
+    } else {
+      console.log('error');
+    }
+  }
+  async downloadNovelcorona2_1(novelID: any): Promise<any> {
+    // console.log(novelID);
+    const res: any = await this.api.getDataById(novelID);
+    const resTimeLine: any = await this.api.getTimeLineById(novelID);
+    const resStaff: any = await this.api.getDataStaff(novelID);
+    // console.log(resTimeLine);
+    if (res.ok === true && resTimeLine.ok === true && resStaff.ok === true) {
+      this.dataNovelByID = res.message[0];
+      this.dataTimeLineByID = resTimeLine.message[0];
+      this.dataNovelStaff = resStaff.message[0];
+      pdfMake.createPdf(this.docNovelcorona2_1()).download('ฉบับย่อ(' + novelID + ').pdf');
     } else {
       console.log('error');
     }
@@ -308,6 +386,18 @@ export class ReportComponent implements OnInit {
       console.log('error');
     }
   }
+  async downloadReport01(novelID: any): Promise<any> {
+    // console.log(novelID);
+    const res: any = await this.api.getDataById(novelID);
+    const resStaff: any = await this.api.getDataStaff(novelID);
+    if (res.ok === true && resStaff.ok === true) {
+      this.dataNovelByID = res.message[0];
+      this.dataNovelStaff = resStaff.message[0];
+      pdfMake.createPdf(this.docReport01()).download('จพต.(' + novelID + ').pdf');
+    } else {
+      console.log('error');
+    }
+  }
 
   async printReport02(novelID: any): Promise<any> {
     // console.log(novelID);
@@ -318,6 +408,19 @@ export class ReportComponent implements OnInit {
       this.dataNovelStaff = resStaff.message[0];
       this.genDatequarantine(moment(this.dataNovelStaff.sdate_quaran).format('YYYY-MM-DD'));
       pdfMake.createPdf(this.docReport02()).open();
+    } else {
+      console.log('error');
+    }
+  }
+  async downloadReport02(novelID: any): Promise<any> {
+    // console.log(novelID);
+    const res: any = await this.api.getDataById(novelID);
+    const resStaff: any = await this.api.getDataStaff(novelID);
+    if (res.ok === true && resStaff.ok === true) {
+      this.dataNovelByID = res.message[0];
+      this.dataNovelStaff = resStaff.message[0];
+      this.genDatequarantine(moment(this.dataNovelStaff.sdate_quaran).format('YYYY-MM-DD'));
+      pdfMake.createPdf(this.docReport02()).download('ใบขวาง(' + novelID + ').pdf');
     } else {
       console.log('error');
     }
@@ -381,7 +484,7 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelByID.novel_phone, absolutePosition: {x: 370, y: 105}, bold: true},
 
         {text: this.dataNovelByID.novel_number_address, absolutePosition: {x: 120, y: 121}, bold: true},
-        {text: this.dataNovelByID.novel_moo, absolutePosition: {x: 175, y: 121}, bold: true},
+        {text: this.dataNovelByID.novel_moo, absolutePosition: {x: 191, y: 121}, bold: true},
         {text: this.dataNovelByID.novel_mooban, absolutePosition: {x: 250, y: 121}, bold: true},
         {text: this.dataNovelByID.novel_soi, absolutePosition: {x: 370, y: 121}, bold: true},
         {text: this.dataNovelByID.novel_road, absolutePosition: {x: 490, y: 121}, bold: true},
@@ -405,6 +508,7 @@ export class ReportComponent implements OnInit {
 
         (this.dataNovelByID.novel_fever === 1) ? {text: '√', absolutePosition: {x: 208, y: 180}, style: 'fSize24'} : null,
         {text: this.dataNovelByID.novel_assign_fever, absolutePosition: {x: 300, y: 186 }, bold: true},
+        (this.dataNovelByID.novel_uri === 1) ? {text: '√', absolutePosition: {x: 477, y: 180}, style: 'fSize24'} : null,
         {text: this.dataNovelByID.novel_assign_oxygen, absolutePosition: {x: 400, y: 186}, bold: true},
 
         (this.dataNovelByID.novel_cough === 1) ? {text: '√', absolutePosition: {x: 32, y: 197}, style: 'fSize24'} : null,
@@ -469,7 +573,7 @@ export class ReportComponent implements OnInit {
           {text: 'ไปสถานที่เสี่ยงสูง', absolutePosition: {x: 300, y: 483}, bold: true, style: 'fSize13'} : null,
         {text: sCon1, absolutePosition: {x: 50, y: 501}, bold: true, style: 'fSize13'},
         {text: sCon2, absolutePosition: {x: 50, y: 517}, bold: true, style: 'fSize13'},
-        {text: this.dataNovelByID.novel_symtom_etc, absolutePosition: {x: 105, y: 532}, bold: true, style: 'fSize13'},
+        {text: this.dataNovelByID.novel_etc_310, absolutePosition: {x: 105, y: 532}, bold: true, style: 'fSize13'},
         {text: this.dataTimeLineByID.timeline_other, absolutePosition: {x: 35, y: 570}, style: 'fSize12', lineHeight: 1},
 
         (this.dataNovelByID.novel_havevac === 0) ? {text: '√', absolutePosition: {x: 275 , y: 647}, style: 'fSize24'} : null,
@@ -592,9 +696,9 @@ export class ReportComponent implements OnInit {
         {
           columns: [
             {width: 'auto', text: 'ที่อยู่ที่ติดต่อได้'},
-            {width: 'auto', text: 'เลขที่ ............'},
-            {width: 'auto', text: 'หมู่ที่ .............'},
-            {width: 'auto', text: 'หมู่บ้าน ...........................................'},
+            {width: 'auto', text: 'เลขที่ .......................'},
+            {width: 'auto', text: 'หมู่ที่ ........'},
+            {width: 'auto', text: 'หมู่บ้าน .....................................'},
             {width: 'auto', text: 'ซอย .............................................'},
             {width: 'auto', text: 'ถนน ......................................'},
           ],
@@ -1528,7 +1632,42 @@ export class ReportComponent implements OnInit {
           columnGap: 5
         },
         {text: 'แพทย์ผู้ตรวจรักษาประเมินว่ามีความจำเป็นตามดุลยพินิจของแพทย์ ระบุ', margin: [30, 5, 20, 0]},
-        {text: '.....................................................................................................................................................................................................................', margin: [30, 5, 20, 0]},
+        {
+          margin: [50, 2, 20, 0],
+          columns: [
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: '25%', text: 'Self ATK: positive'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: '25%', text: 'Official ATK: positive'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'อื่นๆ................................................'},
+          ],
+          columnGap: 5
+        },
         {
           margin: [20, 22, 20, 0],
           columns: [
@@ -1678,15 +1817,18 @@ export class ReportComponent implements OnInit {
         {text: moment().locale('th').add(543, 'year').format('HH:mm'),
           absolutePosition: {x: 325, y: 168}, bold: true},
 
+
         (this.dataNovelStaff.sars_pt_type === 0 || this.dataNovelStaff.sars_pt_type === 1) ? null :
           {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 2 ? 82 :
                   this.dataNovelStaff.sars_pt_type === 3 ? 337 :
                     this.dataNovelStaff.sars_pt_type === 4 ? 166 :
                       this.dataNovelStaff.sars_pt_type === 5 ? 252 : 422, y: 238}, style: 'fSize24'},
 
-        (this.dataNovelStaff.sars_pt_type === 1) ? {text: '√', absolutePosition: {x: 82, y: 259}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sars_pt_type === 0) ? {text: '√', absolutePosition: {x: 82, y: 259}, style: 'fSize24'} : null,
+
         (this.dataNovelStaff.payment === 1) ? {text: '√', absolutePosition: {x: 169, y: 259}, style: 'fSize24'} : null,
-        {image: this.imgSign04, absolutePosition: {x: 270, y: 437}, fit: [65, 65]},
+        {text: ptfullname, absolutePosition: {x: 100, y: 575}, bold: true},
+        {image: this.imgSign04, absolutePosition: {x: 270, y: 436}, fit: [65, 65]},
         {image: this.imgSign05, absolutePosition: {x: 270, y: 660}, fit: [65, 65]},
 
       ],
@@ -1707,7 +1849,6 @@ export class ReportComponent implements OnInit {
     };
     return docDefinition;
   }
-
 
   docNovelcorona2(): any {
     let sCon1;

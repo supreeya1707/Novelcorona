@@ -7,7 +7,7 @@ import {Inject, Injectable } from '@angular/core';
 export class ApiService {
   token: any;
   httpOptions: any;
-  constructor(private http: HttpClient, @Inject('baseURL') private baseURL: any) { }
+  constructor(private http: HttpClient, @Inject('baseURL') private baseURL: any, @Inject('baseURLAPI') private baseURLAPI: any) { }
 
   insRec(insRecord: any): any {
     const token = sessionStorage.getItem('token');
@@ -74,7 +74,7 @@ export class ApiService {
     ).toPromise();
   }
 
-  delStaff(novelid: any): any {
+  delStaff(id: any): any {
     // const token = sessionStorage.getItem('token');
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -83,7 +83,7 @@ export class ApiService {
       })
     };
 
-    const url = `${this.baseURL}/novelstaff/${novelid}`;
+    const url = `${this.baseURL}/novelstaff/${id}/id`;
     console.log(url);
     return this.http.delete(url, this.httpOptions ).toPromise();
   }
@@ -219,6 +219,56 @@ export class ApiService {
     return this.http.get(url, this.httpOptions).toPromise();
   }
 
+  getDataByDatePoint(dateinput: any): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelcorona/${dateinput}/servicepoint`;
+
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
+
+  getByDateServicepoint(dateinput: any, servicepoint: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelcorona/${dateinput}/${servicepoint}/dateservicepoint`;
+
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
+  getByDatePointStaff(dateinput: any, servicepoint: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelstaff/${dateinput}/${servicepoint}/dateservicepoint`;
+
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
+  getStaffServicepoint(dateinput: any): any {
+    // const token = sessionStorage.getByCid('token');
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelstaff/${dateinput}/servicepoint`;
+    return this.http.get(url, this.httpOptions).toPromise();
+  }
+
   getServicepoint(): any {
     // const token = sessionStorage.getByCid('token');
     this.httpOptions = {
@@ -343,6 +393,39 @@ export class ApiService {
     // console.log(dataUpdate);
     const url = `${this.baseURL}/noveltimeline/${novelid}/novel_id`;
     return this.http.put(url, {data: dataUpdate}, this.httpOptions).toPromise();
+  }
+
+  chwData(): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURLAPI}/address/province`;
+    return this.http.get(url).toPromise();
+  }
+
+  ampData(chwpart: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURLAPI}/address/${chwpart}/amphur`;
+    return this.http.get(url).toPromise();
+  }
+
+  tmbData(chwpart: any, amppart: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURLAPI}/address/${chwpart}/${amppart}/tambon`;
+    return this.http.get(url).toPromise();
   }
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-ncov-layout',
@@ -9,26 +10,27 @@ import {Router} from '@angular/router';
 })
 export class NcovLayoutComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    // this.modalService.dismissAll();
   }
 
-  openVaccine() {
+  openVaccine(): any {
     window.open(
       'http://www.virtualhos.net/vaccine/home', '_blank');
   }
 
-  openSwab() {
+  openSwab(): any {
     window.open(
       'https://www.hyggemedicalservice.com/rbh/covid19/webcheck.php', '_blank');
   }
 
-  openView() {
+  openView(): any {
     this.router.navigateByUrl('staff/nCoV/view');
   }
 
-  openReport() {
+  openReport(): any {
     this.router.navigateByUrl('staff/nCoV/report');
   }
 

@@ -13,9 +13,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import {SharedModule} from './shared.module';
-import {AppsModule} from './apps/apps.module';
-import {StaffModule} from './staff/staff.module';
-import {FrmModule} from './frm/frm.module';
+
 
 
 
@@ -36,13 +34,12 @@ defineLocale('th-be', thBeLocale);
     AppRoutingModule,
     HttpClientModule,
     DigitOnlyModule,
-    // AppsModule,
-    // FrmModule,
-    // StaffModule
+
 
   ],
   providers: [
     {provide: 'baseURL', useValue: environment.baseURL},
+    {provide: 'baseURLAPI', useValue: environment.baseURLAPI},
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     { provide: LOCALE_ID, useValue: 'th-TH' }
   ],

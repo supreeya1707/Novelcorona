@@ -162,6 +162,7 @@ export class RecheckComponent implements OnInit {
   placevac3: any;
 
   puiPriority: any;
+  radiouri: any;
 
 
   assign_fever: any;
@@ -324,7 +325,6 @@ export class RecheckComponent implements OnInit {
       job: [null, Validators.compose([Validators.required])],
       station: [null, Validators.compose([Validators.required])],
       telephone: [null, Validators.compose([Validators.required])],
-      telephonedoc: [null],
       treat: [null],
       addr: [null],
       moo: [null],
@@ -334,7 +334,7 @@ export class RecheckComponent implements OnInit {
       tumbon: [null, Validators.compose([Validators.required])],
       amphur: [null, Validators.compose([Validators.required])],
       province: [null, Validators.compose([Validators.required])],
-      radioSmoke: [null, Validators.compose([Validators.required])],
+      radioSmoke: [null],
       checkcopd: [null],
       checkckd: [null],
       checkcad: [null],
@@ -358,7 +358,7 @@ export class RecheckComponent implements OnInit {
       radiobreath: [null, Validators.compose([Validators.required])],
       radioinject: [null, Validators.compose([Validators.required])],
       radiolabtest: [null, Validators.compose([Validators.required])],
-      assignRisk: [null, Validators.compose([Validators.required])],
+      assignRisk: [null],
       datecome: [null],
       radioStaffContact: [null],
       scontact2: [null],
@@ -450,7 +450,6 @@ export class RecheckComponent implements OnInit {
       this.generalFrm.get('job').setValue(this.dataNovel['novel_worker']);
       this.generalFrm.get('station').setValue(this.dataNovel['novel_station']);
       this.generalFrm.get('telephone').setValue(this.dataNovel['novel_phone']);
-      this.generalFrm.get('telephonedoc').setValue(this.dataNovel['novel_phonedoc']);
       if (this.dataNovel['novel_treat'] != null){
         for (let i = 0; i < this.dataPTtpye.length; i++){
           if (this.dataNovel['novel_treat'] === this.dataPTtpye[i]['value'] ){
@@ -511,6 +510,7 @@ export class RecheckComponent implements OnInit {
       this.assign_fever = this.dataNovel['novel_assign_fever'];
       this.assign_oxygen = this.dataNovel['novel_assign_oxygen'];
       this.radiorespirator = this.dataNovel['novel_respirator'];
+      this.radiouri = this.dataNovel['novel_uri'];
       this.radiocough = this.dataNovel['novel_cough'];
       this.radiosorethroat = this.dataNovel['novel_sorethroat'];
       this.radiomusclepain = this.dataNovel['novel_musclepain'];
@@ -534,6 +534,7 @@ export class RecheckComponent implements OnInit {
       if (this.dataNovel['novel_date_come'] != null){
         this.riskFrm.get('datecome').setValue(moment(this.dataNovel['novel_date_come']).add(543, 'year').format('DD/MM/YYYY'));
         this.getDatecome(moment(this.dataNovel['novel_date_come']).format('YYYY-MM-DD'));
+        console.log(this.datecome);
       }
       // this.datecome = moment(this.dataNovel['novel_date_come']).format('DD/MM/YYYY');
       this.come_plane = this.dataNovel['novel_transportation'];
@@ -603,39 +604,39 @@ export class RecheckComponent implements OnInit {
     if (resDataTL.ok){
       this.dataTL = resDataTL.message[0];
 
-      this.dateTimeLineShort[0] = moment(this.dataTL['day1']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[1] = moment(this.dataTL['day2']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[2] = moment(this.dataTL['day3']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[3] = moment(this.dataTL['day4']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[4] = moment(this.dataTL['day5']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[5] = moment(this.dataTL['day6']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[6] = moment(this.dataTL['day7']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[7] = moment(this.dataTL['day8']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[8] = moment(this.dataTL['day9']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[9] = moment(this.dataTL['day10']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[10] = moment(this.dataTL['day11']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[11] = moment(this.dataTL['day12']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[12] = moment(this.dataTL['day12']).format('YYYY-MM-DD');
-      this.dateTimeLineShort[13] = moment(this.dataTL['day14']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[0] = moment(this.dataTL['day1']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[1] = moment(this.dataTL['day2']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[2] = moment(this.dataTL['day3']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[3] = moment(this.dataTL['day4']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[4] = moment(this.dataTL['day5']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[5] = moment(this.dataTL['day6']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[6] = moment(this.dataTL['day7']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[7] = moment(this.dataTL['day8']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[8] = moment(this.dataTL['day9']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[9] = moment(this.dataTL['day10']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[10] = moment(this.dataTL['day11']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[11] = moment(this.dataTL['day12']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[12] = moment(this.dataTL['day12']).format('YYYY-MM-DD');
+      // this.dateTimeLineShort[13] = moment(this.dataTL['day14']).format('YYYY-MM-DD');
 
       // this.timelineFrm.get('desDay1').setValue(this.dataTL['timeline_date1']);
       // this.timelineFrm.get('desDay2').setValue(this.dataTL['timeline_date2']);
       // this.timelineFrm.get('desDay3').setValue(this.dataTL['timeline_date3']);
 
-      this.desDay1 = this.dataTL['timeline_date1'];
-      this.desDay2 = this.dataTL['timeline_date2'];
-      this.desDay3 = this.dataTL['timeline_date3'];
-      this.desDay4 = this.dataTL['timeline_date4'];
-      this.desDay5 = this.dataTL['timeline_date5'];
-      this.desDay6 = this.dataTL['timeline_date6'];
-      this.desDay7 = this.dataTL['timeline_date7'];
-      this.desDay8 = this.dataTL['timeline_date8'];
-      this.desDay9 = this.dataTL['timeline_date9'];
-      this.desDay10 = this.dataTL['timeline_date10'];
-      this.desDay11 = this.dataTL['timeline_date11'];
-      this.desDay12 = this.dataTL['timeline_date12'];
-      this.desDay13 = this.dataTL['timeline_date13'];
-      this.desDay14 = this.dataTL['timeline_date14'];
+      // this.desDay1 = this.dataTL['timeline_date1'];
+      // this.desDay2 = this.dataTL['timeline_date2'];
+      // this.desDay3 = this.dataTL['timeline_date3'];
+      // this.desDay4 = this.dataTL['timeline_date4'];
+      // this.desDay5 = this.dataTL['timeline_date5'];
+      // this.desDay6 = this.dataTL['timeline_date6'];
+      // this.desDay7 = this.dataTL['timeline_date7'];
+      // this.desDay8 = this.dataTL['timeline_date8'];
+      // this.desDay9 = this.dataTL['timeline_date9'];
+      // this.desDay10 = this.dataTL['timeline_date10'];
+      // this.desDay11 = this.dataTL['timeline_date11'];
+      // this.desDay12 = this.dataTL['timeline_date12'];
+      // this.desDay13 = this.dataTL['timeline_date13'];
+      // this.desDay14 = this.dataTL['timeline_date14'];
       // this.desOther = this.dataTL['timeline_other'];
       this.timelineFrm.get('desOther').setValue(this.dataTL['timeline_other']);
     }else{
@@ -1000,7 +1001,6 @@ export class RecheckComponent implements OnInit {
     data.novel_worker = this.generalFrm.value.job;
     data.novel_station = this.generalFrm.value.station;
     data.novel_phone = this.generalFrm.value.telephone;
-    data.novel_phonedoc = this.generalFrm.value.telephonedoc;
     data.novel_treat = this.generalFrm.value.treat;
 
     data.novel_number_address = this.generalFrm.value.addr;
@@ -1029,17 +1029,18 @@ export class RecheckComponent implements OnInit {
 
     // data.novel_birthday = (this.generalFrm.value.birthday != null) ? moment(this.generalFrm.value.birthday).format('YYYY-MM-DD') : null;
     data.novel_birthday = (this.birthday != null) ? moment(this.birthday).format('YYYY-MM-DD') : null;
-    data.novel_start_sick = moment(this.dateSsick).format('YYYY-MM-DD');
-    data.novel_start_treat = moment(this.datatreat).format('YYYY-MM-DD');
-    data.novel_hospital_first = this.fistHosp;
-    data.novel_province_first = this.fistChw;
-    data.novel_hospital_now = this.nowHosp;
-    data.novel_province_now = this.nowChw;
+    // data.novel_start_sick = moment(this.dateSsick).format('YYYY-MM-DD');
+    // data.novel_start_treat = moment(this.datatreat).format('YYYY-MM-DD');
+    // data.novel_hospital_first = this.fistHosp;
+    // data.novel_province_first = this.fistChw;
+    // data.novel_hospital_now = this.nowHosp;
+    // data.novel_province_now = this.nowChw;
 
     data.novel_fever = this.radiofever;
     data.novel_assign_fever = this.assign_fever;
     data.novel_assign_oxygen = this.assign_oxygen;
     data.novel_fever = this.radiofever;
+    data.novel_uri = this.radiouri;
     data.novel_respirator = this.radiorespirator;
     data.novel_cough = this.radiocough;
     data.novel_sorethroat = this.radiosorethroat;
@@ -1061,8 +1062,8 @@ export class RecheckComponent implements OnInit {
     data.novel_comefrom_31 = this.riskFrm.value.radiofrom;
     data.novel_come_city = this.come_city;
     data.novel_come_country = this.come_region;
-    data.novel_date_come = (this.riskFrm.value.datecome != null) ? moment(this.riskFrm.value.datecome).format('YYYY-MM-DD') : null;
-    // data.novel_date_come = (this.datecome != null) ? moment(this.datecome).format('YYYY-MM-DD') : null;
+    // data.novel_date_come = (this.riskFrm.value.datecome != null) ? moment(this.riskFrm.value.datecome).format('YYYY-MM-DD') : null;
+    data.novel_date_come = (this.datecome != null) ? moment(this.datecome).format('YYYY-MM-DD') : null;
     data.novel_transportation = this.come_plane;
     data.novel_round_tran = this.come_round;
     data.novel_number_seat = this.come_seat;
@@ -1106,7 +1107,7 @@ export class RecheckComponent implements OnInit {
     infoData.push(data);
 
     const resUpdateNovel: any = await this.api.updateNovelData(this.novelID, infoData);
-    console.log('resUpdateNovel : ', resUpdateNovel.ok);
+    console.log('resUpdateNovel : ', resUpdateNovel);
     return resUpdateNovel.ok;
   }
 
@@ -1114,40 +1115,40 @@ export class RecheckComponent implements OnInit {
     const data: any = {};
     const info: any = [];
 
-    data.day1 = this.dateTimeLineShort[0];
-    data.day2 = this.dateTimeLineShort[1];
-    data.day3 = this.dateTimeLineShort[2];
-    data.day4 = this.dateTimeLineShort[3];
-    data.day5 = this.dateTimeLineShort[4];
-    data.day6 = this.dateTimeLineShort[5];
-    data.day7 = this.dateTimeLineShort[6];
-    data.day8 = this.dateTimeLineShort[7];
-    data.day9 = this.dateTimeLineShort[8];
-    data.day10 = this.dateTimeLineShort[9];
-    data.day11 = this.dateTimeLineShort[10];
-    data.day12 = this.dateTimeLineShort[11];
-    data.day13 = this.dateTimeLineShort[12];
-    data.day14 = this.dateTimeLineShort[13];
+    // data.day1 = this.dateTimeLineShort[0];
+    // data.day2 = this.dateTimeLineShort[1];
+    // data.day3 = this.dateTimeLineShort[2];
+    // data.day4 = this.dateTimeLineShort[3];
+    // data.day5 = this.dateTimeLineShort[4];
+    // data.day6 = this.dateTimeLineShort[5];
+    // data.day7 = this.dateTimeLineShort[6];
+    // data.day8 = this.dateTimeLineShort[7];
+    // data.day9 = this.dateTimeLineShort[8];
+    // data.day10 = this.dateTimeLineShort[9];
+    // data.day11 = this.dateTimeLineShort[10];
+    // data.day12 = this.dateTimeLineShort[11];
+    // data.day13 = this.dateTimeLineShort[12];
+    // data.day14 = this.dateTimeLineShort[13];
 
 
 
     // data.timeline_date1 = this.timelineFrm.value.desDay1;
     // data.timeline_date2 = this.timelineFrm.value.desDay2;
     // data.timeline_date3 = this.timelineFrm.value.desDay3;
-    data.timeline_date1 = this.desDay1;
-    data.timeline_date2 = this.desDay2;
-    data.timeline_date3 = this.desDay3;
-    data.timeline_date4 = this.desDay4;
-    data.timeline_date5 = this.desDay5;
-    data.timeline_date6 = this.desDay6;
-    data.timeline_date7 = this.desDay7;
-    data.timeline_date8 = this.desDay8;
-    data.timeline_date9 = this.desDay9;
-    data.timeline_date10 = this.desDay10;
-    data.timeline_date11 = this.desDay11;
-    data.timeline_date12 = this.desDay12;
-    data.timeline_date13 = this.desDay13;
-    data.timeline_date14 = this.desDay14;
+    // data.timeline_date1 = this.desDay1;
+    // data.timeline_date2 = this.desDay2;
+    // data.timeline_date3 = this.desDay3;
+    // data.timeline_date4 = this.desDay4;
+    // data.timeline_date5 = this.desDay5;
+    // data.timeline_date6 = this.desDay6;
+    // data.timeline_date7 = this.desDay7;
+    // data.timeline_date8 = this.desDay8;
+    // data.timeline_date9 = this.desDay9;
+    // data.timeline_date10 = this.desDay10;
+    // data.timeline_date11 = this.desDay11;
+    // data.timeline_date12 = this.desDay12;
+    // data.timeline_date13 = this.desDay13;
+    // data.timeline_date14 = this.desDay14;
     data.timeline_other = this.timelineFrm.value.desOther;
 
     info.push(data);

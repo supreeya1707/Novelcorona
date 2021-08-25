@@ -38,85 +38,85 @@
 
 </div>
 
-<ng-template #content01 let-modal>
-  <div class="modal-body text-center">
-    <div class="mb-20 col-lg-12 col-md-12 col-sm-12 text-right">
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <img src="assets/picture/icon_close.svg">
-      </button>
-    </div>
-    <img src="assets/picture/icon-form.svg" class="img">
-    <br><br>
-    <div class="row m-0 font-prompt-light fSize20">
-      <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-        ท่านกำลังจะทำแบบสอบสวนโรค เพื่อประเมินความเสี่ยงต่อการติดเชื้อไวรัสโคโรนา 2019 ของโรงพยาบาลราชบุรี<br>
-        เพื่อความสะดวกรวดเร็วต่อการให้บริการ ขอให้ท่านกรอกข้อมูลในเอกสารอิเล็กทรอนิกส์นี้<br>
-        โดยข้อมูลของท่านจะเป็นประโยชน์ต่อการประเมินความเสี่ยงของตัวท่านเอง
-      </div>
+<!--<ng-template #content01 let-modal>-->
+<!--  <div class="modal-body text-center">-->
+<!--    <div class="mb-20 col-lg-12 col-md-12 col-sm-12 text-right">-->
+<!--      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
+<!--        <img src="assets/picture/icon_close.svg">-->
+<!--      </button>-->
+<!--    </div>-->
+<!--    <img src="assets/picture/icon-form.svg" class="img">-->
+<!--    <br><br>-->
+<!--    <div class="row m-0 font-prompt-light fSize20">-->
+<!--      <div class="col-lg-12 col-md-12 col-sm-12 text-center">-->
+<!--        ท่านกำลังจะทำแบบสอบสวนโรค เพื่อประเมินความเสี่ยงต่อการติดเชื้อไวรัสโคโรนา 2019 ของโรงพยาบาลราชบุรี<br>-->
+<!--        เพื่อความสะดวกรวดเร็วต่อการให้บริการ ขอให้ท่านกรอกข้อมูลในเอกสารอิเล็กทรอนิกส์นี้<br>-->
+<!--        โดยข้อมูลของท่านจะเป็นประโยชน์ต่อการประเมินความเสี่ยงของตัวท่านเอง-->
+<!--      </div>-->
 
-    </div>
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 text-center font-prompt-medium fSize20">
-        <div class="custom-control custom-checkbox checkbox-xl text-center">
-          <input type="checkbox" [(ngModel)]="agree" class="custom-control-input" id="checkbox05">
-          <label class="pt-4 custom-control-label" for="checkbox05">
-            &nbsp;&nbsp;ขอรับรองว่าข้อมูลที่ให้เป็นความจริงทุกประการ
-          </label>
-        </div>
-      </div>
-    </div>
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--      <div class="col-lg-12 col-md-12 col-sm-12 text-center font-prompt-medium fSize20">-->
+<!--        <div class="custom-control custom-checkbox checkbox-xl text-center">-->
+<!--          <input type="checkbox" [(ngModel)]="agree" class="custom-control-input" id="checkbox05">-->
+<!--          <label class="pt-4 custom-control-label" for="checkbox05">-->
+<!--            &nbsp;&nbsp;ขอรับรองว่าข้อมูลที่ให้เป็นความจริงทุกประการ-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <div class="row my-10">
-      <div class="col-lg-4 offset-lg-4 col-md-12 col-sm-12 text-center">
-        <button [disabled]="!agree" (click)="btnStep1(); "
-                class="btn btn-lg font-prompt-light form-control" style="background-color: #15f3cd; font-size: 24px !important;">ถัดไป
-        </button>
-      </div>
-    </div>
-  </div>
-</ng-template>
+<!--    <div class="row my-10">-->
+<!--      <div class="col-lg-4 offset-lg-4 col-md-12 col-sm-12 text-center">-->
+<!--        <button [disabled]="!agree" (click)="btnStep1(); "-->
+<!--                class="btn btn-lg font-prompt-light form-control" style="background-color: #15f3cd; font-size: 24px !important;">ถัดไป-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</ng-template>-->
 
-<ng-template #content02 let-modal>
-  <div class="modal-body text-center">
-    <div class="mb-20 col-lg-12 col-md-12 col-sm-12 text-right">
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <img src="assets/picture/icon_close.svg">
-      </button>
-    </div>
-    <img src="assets/picture/icon-form.svg" class="img">
-    <br><br>
-      <div class="row m-0 fSize20">
-        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-          <h1 class="font-prompt-medium">ท่านรับบริการจากจุดบริการใด</h1>
-          <div class="row mt-5">
-            <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12 font-prompt-light fSize20">
-              <select  class="form-control" [(ngModel)]="servicepoint" (ngModelChange)="changeServicepoint()">
-                <option disabled></option>
-                <option *ngFor="let point of dataServicepoint" [value]="point.servicepoint_id">{{point.servicepoint}}</option>
-              </select>
-            </div>
-          </div>
+<!--<ng-template #content02 let-modal>-->
+<!--  <div class="modal-body text-center">-->
+<!--    <div class="mb-20 col-lg-12 col-md-12 col-sm-12 text-right">-->
+<!--      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
+<!--        <img src="assets/picture/icon_close.svg">-->
+<!--      </button>-->
+<!--    </div>-->
+<!--    <img src="assets/picture/icon-form.svg" class="img">-->
+<!--    <br><br>-->
+<!--      <div class="row m-0 fSize20">-->
+<!--        <div class="col-lg-12 col-md-12 col-sm-12 text-center">-->
+<!--          <h1 class="font-prompt-medium">ท่านรับบริการจากจุดบริการใด</h1>-->
+<!--          <div class="row mt-5">-->
+<!--            <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12 font-prompt-light fSize20">-->
+<!--              <select  class="form-control" [(ngModel)]="servicepoint" (ngModelChange)="changeServicepoint()">-->
+<!--                <option disabled></option>-->
+<!--                <option *ngFor="let point of dataServicepoint" [value]="point.servicepoint_id">{{point.servicepoint}}</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="row mt-5" *ngIf="servicepoint === '5'">
-            <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12 font-prompt-light fSize20">
-              <select class="form-control" [(ngModel)]="hospcode" (ngModelChange)="changeDHPH()">
-                <option disabled></option>
-                <option *ngFor="let dhph of dataDHPH" [value]="dhph.hospcode">{{dhph.hospname}}</option>
-              </select>
-            </div>
-          </div>
+<!--          <div class="row mt-5" *ngIf="servicepoint === '5'">-->
+<!--            <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12 font-prompt-light fSize20">-->
+<!--              <select class="form-control" [(ngModel)]="hospcode" (ngModelChange)="changeDHPH()">-->
+<!--                <option disabled></option>-->
+<!--                <option *ngFor="let dhph of dataDHPH" [value]="dhph.hospcode">{{dhph.hospname}}</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
 
-        </div>
-      </div>
+<!--        </div>-->
+<!--      </div>-->
 
 
-    <div class="row my-10" *ngIf="btndisble">
-      <div class="col-lg-4 offset-lg-4 col-md-12 col-sm-12 text-center">
-        <button class="btn btn-lg font-prompt-light form-control" (click)="btnStep2()"
-                style="background-color: #15f3cd; font-size: 24px !important;">ถัดไป</button>
-      </div>
-    </div>
-  </div>
-</ng-template>
+<!--    <div class="row my-10" *ngIf="btndisble">-->
+<!--      <div class="col-lg-4 offset-lg-4 col-md-12 col-sm-12 text-center">-->
+<!--        <button class="btn btn-lg font-prompt-light form-control" (click)="btnStep2()"-->
+<!--                style="background-color: #15f3cd; font-size: 24px !important;">ถัดไป</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</ng-template>-->
 
 

@@ -38,8 +38,8 @@ export class HomeComponent implements OnInit {
   }
 
   openCoV(): any {
-    this.modalService.open(this.content01, {size: 'xl', backdrop: 'static'});
-    // this.router.navigateByUrl('forms/novelcorona2');
+    // this.modalService.open(this.content01, {size: 'xl', backdrop: 'static'});
+    this.router.navigateByUrl('forms/novelcorona2');
   }
 
   btnStep1(): any {

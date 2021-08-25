@@ -6,11 +6,14 @@ import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {Novelcorona2Component} from './novelcorona2/novelcorona2.component';
 import {SharedModule} from '../shared.module';
 import {DigitOnlyModule} from '@uiowa/digit-only';
+import { SwabComponent } from './swab/swab.component';
+import {ModalModule} from 'ngx-bootstrap/modal';
 
 
 @NgModule({
   declarations: [
     Novelcorona2Component,
+    SwabComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +23,7 @@ import {DigitOnlyModule} from '@uiowa/digit-only';
     ReactiveFormsModule,
     SharedModule,
     DigitOnlyModule,
+    ModalModule.forRoot()
   ]
 })
 export class FrmModule {}

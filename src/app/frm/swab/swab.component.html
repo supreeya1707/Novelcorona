@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="font-prompt-light mt-15">
+    <div class="col-lg-12 text-center">
+      <img class="mb-3 img-fluid" src="assets/picture/hygge.png" width="100">
+    </div>
+
+   <div class="card mt-10">
+     <div class="card-body">
+       <form [formGroup]="registerFrm">
+         <div class="row my-2">
+           <div class="col-md-4 my-2">
+             <div class="form-group">
+               <label>วันที่ต้องการมาตรวจ</label>
+               <div class="input-group">
+                 <input class="form-control" #datepickerMDY="bsDatepicker" formControlName="appDate" bsDatepicker
+                        [ngClass]="{ 'is-invalid': submitted && f.appDate.errors  || ((f.appDate.touched || f.appDate.dirty) && f.appDate.invalid) }">
+                 <div class="input-group-append">
+                    <span class="input-group-text">
+                      <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
+                         [attr.aria-expanded]="datepickerMDY.isOpen"></i>
+                    </span>
+                 </div>
+                 <div *ngIf="submitted && f.appDate.errors  || ((f.appDate.touched || f.appDate.dirty) && f.appDate.invalid)"
+                      class="invalid-feedback">
+                   <div class="text-left fSize12" *ngIf="f.appDate.errors.required">กรุณาเลือกวันที่ต้องการมาตรวจ
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+           <div class="col-md-4 my-2">
+             <div class="form-group">
+               <label class="form-label">เลขประจำตัวประชาชน</label>
+               <input name="cid" id="cid" formControlName="cid"
+                      maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly
+                      [ngClass]="{ 'is-invalid': submitted && f.cid.errors  || ((f.cid.touched || f.cid.dirty) && f.cid.invalid) }"
+                      class="form-control" type="text" placeholder="ใส่เลขประจำตัวประชาชน 13 หลัก">
+               <div *ngIf="submitted && f.cid.errors  || ((f.cid.touched || f.cid.dirty) && f.cid.invalid)"
+                    class="invalid-feedback">
+                 <div class="text-left fSize12" *ngIf="f.cid.errors.required">กรุณาใส่เลขประจำตัวประชาชน</div>
+                 <div class="text-left fSize12" *ngIf="f.cid.errors.minlength">กรุณาใส่เลขประจำตัวประชาชน 13 หลัก
+                 </div>
+               </div>
+             </div>
+
+           </div>
+           <div class="col-md-4 my-2">
+             <div class="form-group">
+               <label class="form-label">เบอร์ติดต่อ</label><small class="text-primary">&nbsp;ใส่เฉพาะตัวเลข เช่น
+               0123456789</small>
+               <input type="text" maxlength="10" inputmode="numeric" pattern="[0-9]*" digitOnly
+                      [ngClass]="{ 'is-invalid': submitted && f.tel.errors  || ((f.tel.touched || f.tel.dirty) && f.tel.invalid) }"
+                      class="form-control " id="tel" name="tel" formControlName="tel"
+                      placeholder="ใส่เบอร์ติดต่อ" autocomplete="off">
+               <div *ngIf="submitted && f.tel.errors  || ((f.tel.touched || f.tel.dirty) && f.tel.invalid)"
+                    class="invalid-feedback">
+                 <div class="text-left fSize12" *ngIf="f.tel.errors.required">กรุณาใส่เบอร์ติดต่อ</div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="row my-2">
+           <div class="col-md-4 my-2">
+             <div class="form-group">
+               <label class="form-label">คำนำหน้าชื่อ</label>
+               <select class="form-control" name="pname" id="pname" formControlName="pname"
+                       [ngClass]="{ 'is-invalid': submitted && f.pname.errors || ((f.pname.touched || f.pname.dirty) && f.pname.invalid) }">
+                 <option value="null" selected disabled>เลือกคำนำหน้าชื่อ</option>
+                 <option class="text-dark" *ngFor="let pname of dataPName;"
+                         [value]="pname.value">{{pname.viewValue}}</option>
+               </select>
+               <div *ngIf="submitted && f.pname.errors  || ((f.pname.touched || f.pname.dirty) && f.pname.invalid)"
+                    class="invalid-feedback">
+                 <div class="text-left fSize12" *ngIf="f.pname.errors.required">กรุณาเลือกคำนำหน้าชื่อ</div>
+               </div>
+
+             </div>
+           </div>
+           <div class="col-md-4 my-2">
+             <div class="form-group">
+               <label class="form-label">ชื่อ</label>
+               <input name="fname" id="fname" formControlName="fname" class="form-control" type="text"
+                      placeholder="ใส่ชื่อ"
+                      [ngClass]="{ 'is-invalid': submitted && f.fname.errors  || ((f.fname.touched || f.fname.dirty) && f.fname.invalid) }">
+               <div *ngIf="submitted && f.fname.errors  || ((f.fname.touched || f.fname.dirty) && f.fname.invalid)"
+                    class="invalid-feedback">
+                 <div class="text-left fSize12" *ngIf="f.fname.errors.required">กรุณาใส่ชื่อ</div>
+               </div>
+             </div>
+           </div>
+           <div class="col-md-4 my-2">
+             <div class="form-group">
+               <label class="form-label">นามสกุล</label>
+               <input name="lname" id="lname" formControlName="lname" class="form-control" type="text"
+                      placeholder="ใส่นามสกุล"
+                      [ngClass]="{ 'is-invalid': submitted && f.lname.errors  || ((f.lname.touched || f.lname.dirty) && f.lname.invalid) }">
+               <div *ngIf="submitted && f.lname.errors  || ((f.lname.touched || f.lname.dirty) && f.lname.invalid)"
+                    class="invalid-feedback">
+                 <div class="text-left fSize12" *ngIf="f.lname.errors.required">กรุณาใส่นามสกุล</div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+         <div class="row my-3 mx-1">
+           <div class="col-lg-12 text-center">
+             <button type="button" class="btn btn-lg btn-outline-dark" [disabled]="btndisble" (click)="btnSubmit()">บันทึกข้อมูล</button>
+           </div>
+         </div>
+
+       </form>
+     </div>
+   </div>
+  </div>
+</div>
