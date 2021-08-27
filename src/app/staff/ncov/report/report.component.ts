@@ -36,7 +36,7 @@ pdfMake.fonts = {
 };
 
 interface PuiPriority {
-  value: string;
+  value: number;
   viewValue: string;
 }
 
@@ -67,12 +67,14 @@ interface SContactPlace {
 })
 
 export class ReportComponent implements OnInit {
-  password: any = 'rbhCoV!9';
   txtSearch: any;
   ptname: any;
   station: any;
   point: any;
   servicepoint: any;
+
+  status: any;
+  clinic: any;
 
   dataSearch: any = '';
   dataNovel: any = [];
@@ -89,10 +91,10 @@ export class ReportComponent implements OnInit {
   dataJson: any;
 
   dataPuiPriority: PuiPriority[] = [
-    {value: '1', viewValue: 'LR Contact'},
-    {value: '2', viewValue: 'HR Contact'},
-    {value: '3', viewValue: 'พื้นที่เสี่ยง'},
-    {value: '4', viewValue: 'Rapid Test'}
+    {value: 1, viewValue: 'LRC'},
+    {value: 2, viewValue: 'HRC'},
+    {value: 3, viewValue: 'พื้นที่เสี่ยง'},
+    {value: 4, viewValue: 'Rapid Test'}
   ];
 
   dataSContact: SContact[] = [
@@ -138,14 +140,18 @@ export class ReportComponent implements OnInit {
   imgSign05: any;
   dateChoose: any;
 
+  password: any = 'rbhCoV!9';
+  password2: any = 'adminCoV!9';
+  pass: any;
+
 
   constructor(private api: ApiService, private localeService: BsLocaleService, private router: Router, ) {
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
   }
 
   ngOnInit(): void {
-    const pass = sessionStorage.getItem('nCoVpass');
-    if (pass !== this.password){
+    this.pass = sessionStorage.getItem('nCoVpass');
+    if ( this.pass !== this.password && this.pass !== this.password2){
       this.router.navigateByUrl('staff/login/ncov');
     }
     this.localeService.use(this.locale);
@@ -211,6 +217,26 @@ export class ReportComponent implements OnInit {
     } else {
       this.dataSearch = this.dataNovel.filter((data: any) => {
         return data.novel_station.match(this.station);
+      });
+    }
+  }
+
+  statusSearch(): any {
+    if (this.status === '') {
+      this.dataSearch = this.dataNovel;
+    } else {
+      this.dataSearch = this.dataNovel.filter((data: any) => {
+        return data.sars_pt_type.match(this.status);
+      });
+    }
+  }
+
+  clinicSearch(): any {
+    if (this.clinic === '') {
+      this.dataSearch = this.dataNovel;
+    } else {
+      this.dataSearch = this.dataNovel.filter((data: any) => {
+        return data.report_point.match(this.clinic);
       });
     }
   }
@@ -606,6 +632,9 @@ export class ReportComponent implements OnInit {
                   this.dataNovelStaff.sars_pt_type === 4 ? 127 :
                     this.dataNovelStaff.sars_pt_type === 5 ? 162 : 229, y: 722}, style: 'fSize24'} :
           {text: '√', absolutePosition: {x: 501, y: 738}, style: 'fSize24'},
+
+        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 197, y: 722}, style: 'fSize24'} :
+          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 127, y: 722}, style: 'fSize24'} : null,
 
         (this.dataNovelStaff.date_swab1 != null || this.dataNovelStaff.date_swab2 != null) ? {
           text: '√', absolutePosition: {x: 45, y: 738}, style: 'fSize24'} : null,
@@ -1823,6 +1852,9 @@ export class ReportComponent implements OnInit {
                   this.dataNovelStaff.sars_pt_type === 3 ? 337 :
                     this.dataNovelStaff.sars_pt_type === 4 ? 166 :
                       this.dataNovelStaff.sars_pt_type === 5 ? 252 : 422, y: 238}, style: 'fSize24'},
+
+        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 337, y: 238}, style: 'fSize24'} :
+          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 166, y: 238}, style: 'fSize24'} : null,
 
         (this.dataNovelStaff.sars_pt_type === 0) ? {text: '√', absolutePosition: {x: 82, y: 259}, style: 'fSize24'} : null,
 
@@ -5302,7 +5334,5 @@ export class ReportComponent implements OnInit {
     };
     return docDefinition;
   }
-
-
 
 }

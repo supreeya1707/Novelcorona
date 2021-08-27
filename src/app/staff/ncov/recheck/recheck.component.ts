@@ -52,7 +52,6 @@ interface PuiPriority {
   templateUrl: './recheck.component.html',
 })
 export class RecheckComponent implements OnInit {
-  password: any = 'rbhCoV!9';
   generalFrm: any;
   riskFrm: any;
   timelineFrm: any;
@@ -163,6 +162,7 @@ export class RecheckComponent implements OnInit {
 
   puiPriority: any;
   radiouri: any;
+  reportpoint: any;
 
 
   assign_fever: any;
@@ -261,8 +261,8 @@ export class RecheckComponent implements OnInit {
   ];
 
   dataPuiPriority: PuiPriority[] = [
-    {value: '1', viewValue: 'LR Contact'},
-    {value: '2', viewValue: 'HR Contact'},
+    {value: '1', viewValue: 'LRC'},
+    {value: '2', viewValue: 'HRC'},
     {value: '3', viewValue: 'พื้นที่เสี่ยง'},
     {value: '4', viewValue: 'Rapid Test'}
   ];
@@ -296,15 +296,17 @@ export class RecheckComponent implements OnInit {
     {value: 'อื่น ๆ', viewValue: 'อื่น ๆ'},
   ];
 
-
+  password: any = 'rbhCoV!9';
+  password2: any = 'adminCoV!9';
+  pass: any;
 
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
               @Inject('baseURL') private baseURL: any,  private router: Router) {}
 
 
   ngOnInit(): void {
-    const pass = sessionStorage.getItem('nCoVpass');
-    if (pass !== this.password){
+    this.pass = sessionStorage.getItem('nCoVpass');
+    if ( this.pass !== this.password && this.pass !== this.password2){
       this.router.navigateByUrl('staff/login/ncov');
     }
     this.localeService.use(this.locale);
@@ -929,11 +931,12 @@ export class RecheckComponent implements OnInit {
     data.address_quaran = this.addressquaran;
     data.payment = this.payment;
     data.reporter = this.reporter;
+    data.report_point = this.reportpoint;
     data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     infoData.push(data);
     const resStaff = await this.api.insStaff(infoData);
-    console.log('resStaff : ', resStaff.ok);
+    // console.log('resStaff : ', resStaff.ok);
     return resStaff.ok;
   }
 
@@ -973,12 +976,13 @@ export class RecheckComponent implements OnInit {
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;
     data.reporter = this.reporter;
+    data.report_point = this.reportpoint;
     data.payment = this.payment;
     // data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     infoData.push(data);
     const resStaff = await this.api.updateStaff(this.novelID, infoData);
-    console.log('resStaff : ', resStaff.ok);
+    // console.log('resStaff : ', resStaff);
     return resStaff.ok;
 
   }

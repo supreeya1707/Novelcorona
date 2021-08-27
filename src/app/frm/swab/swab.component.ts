@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ApiService} from '../../services/api.service';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import * as moment from 'moment';
+import Swal from 'sweetalert2';
 
 interface BMonth {
   value: string;
@@ -71,88 +72,54 @@ export class SwabComponent implements OnInit {
       this.dataBYear.push(i);
     }
 
-    this.getChwData();
-
-
     this.registerFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
       pname: [null, Validators.compose([Validators.required])],
       fname: [null, Validators.compose([Validators.required])],
       lname: [null, Validators.compose([Validators.required])],
       tel: [null, Validators.compose([Validators.required])],
-      bdate: [null, Validators.compose([Validators.required])],
-      bmonth: [null, Validators.compose([Validators.required])],
-      byear: [null, Validators.compose([Validators.required])],
       appDate: [null, Validators.compose([Validators.required])],
-      // chw: [null, Validators.compose([Validators.required])],
-      // amp: [null],
-      // tmb: [null],
     });
 
-    // this.setValidators();
   }
 
   get f(): any {
     return this.registerFrm.controls;
   }
 
-  // setValidators(): any {
-  //   const ampControl = this.registerFrm.get('amp');
-  //   const tmbControl = this.registerFrm.get('tmb');
-  //
-  //   this.registerFrm.get('chw').valueChanges
-  //     .subscribe((chwSelect: any | null) => {
-  //       if (chwSelect !== '' && chwSelect != null) {
-  //         ampControl.setValidators([Validators.required]);
-  //         this.getAmpData(chwSelect);
-  //         this.registerFrm.get('amp').valueChanges
-  //           .subscribe((ampSelect: any | null) => {
-  //             if (ampSelect !== '' && ampSelect != null) {
-  //               tmbControl.setValidators([Validators.required]);
-  //               this.getTmbData(chwSelect, ampSelect);
-  //             }
-  //           });
-  //       }
-  //       ampControl.updateValueAndValidity();
-  //       tmbControl.updateValueAndValidity();
-  //     });
-  //
-  // }
-
-  async getChwData(): Promise<any> {
-    const resChwData: any = await this.api.chwData();
-    if (resChwData.ok) {
-      this.dataChw = resChwData.message;
+  async btnSubmit(): Promise<any> {
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.registerFrm.invalid) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'ข้อมูลไม่ครบถ้วน',
+        html: 'กรุณากรอกข้อมูลในช่องที่เป็นสีแดงให้ครบ',
+      });
+      return;
     } else {
+      this.btndisble = true;
+    }
+    const data: any = {};
+    const info: any = [];
+
+    data.cid = this.registerFrm.value.cid;
+    data.pname = this.registerFrm.value.pname;
+    data.fname = this.registerFrm.value.fname;
+    data.lname = this.registerFrm.value.lname;
+    data.ptfullname = this.registerFrm.value.pname + this.registerFrm.value.fname + '  ' + this.registerFrm.value.lname;
+    data.phone = this.registerFrm.value.tel;
+    data.appointment_date = moment(this.registerFrm.value.appDate).format('YYYY-MM-DD');
+    data.inputdatetime = moment().format('YYYY-MM-DD HH:mm:ss');
+
+    info.push(data);
+
+    const res = await this.api.insSwabque(info);
+    if (res.ok === true){
+
+    }else {
       console.log('error');
     }
-  }
-
-  async getAmpData(chwpart: any): Promise<any> {
-    const resAmpData: any = await this.api.ampData(chwpart);
-    // console.log(resChwData);
-    if (resAmpData.ok) {
-      this.dataAmp = resAmpData.message;
-      // console.log(this.dataChw);
-    } else {
-      console.log('error');
-    }
-  }
-
-  async getTmbData(chwpart: any, amppart: any): Promise<any> {
-    const resTmbData: any = await this.api.tmbData(chwpart, amppart);
-    // console.log(resChwData);
-    if (resTmbData.ok) {
-      this.dataTmb = resTmbData.message;
-      // console.log(this.dataChw);
-    } else {
-      console.log('error');
-    }
-  }
-
-
-  btnSubmit(): any {
-
   }
 
   getDate(e: any): any {

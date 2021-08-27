@@ -1402,17 +1402,17 @@
 
               <label class="radio ">
                 <input type="radio" name="radioSARtype" id="radioSARtype3"  [(ngModel)]="radioSARtype" [value]="3"/>
-                <span></span>LR contract
+                <span></span>LRC
               </label>
 
               <label class="radio ">
                 <input type="radio" name="radioSARtype" id="radioSARtype4"  [(ngModel)]="radioSARtype" [value]="4"/>
-                <span></span>HR contract
+                <span></span>HRC
               </label>
 
               <label class="radio ">
                 <input type="radio" name="radioSARtype" id="radioSARtype5"  [(ngModel)]="radioSARtype" [value]="5"/>
-                <span></span>MR contract
+                <span></span>MRC
               </label>
 
               <label class="radio ">
@@ -1536,9 +1536,13 @@
         </div>
 
         <div class="row mt-5">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <label>ผู้รายงาน</label>
             <input type="text " class="form-control" id="reporter" [(ngModel)]="reporter" >
+          </div>
+          <div class="col-md-6">
+            <label>คลินิก</label>
+            <input type="text " class="form-control" id="reportpoint" [(ngModel)]="reportpoint" >
           </div>
 
         </div>

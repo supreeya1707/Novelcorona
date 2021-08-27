@@ -33,6 +33,8 @@ export class ViewComponent implements OnInit {
   locale = 'th-be';
 
   password: any = 'rbhCoV!9';
+  password2: any = 'adminCoV!9';
+  pass: any;
 
 
 
@@ -42,8 +44,9 @@ export class ViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.localeService.use(this.locale);
-    const pass = sessionStorage.getItem('nCoVpass');
-    if (pass !== this.password){
+    this.pass = sessionStorage.getItem('nCoVpass');
+    console.log(this.pass !== this.password);
+    if ( this.pass !== this.password && this.pass !== this.password2){
       this.router.navigateByUrl('staff/login/ncov');
     }
   }

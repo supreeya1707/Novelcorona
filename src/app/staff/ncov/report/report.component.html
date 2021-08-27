@@ -39,11 +39,16 @@
     <div class="container-fluid">
       <div class="card text-center">
         <div class="card-body">
+         <div class="font-prompt-medium my-4 text-right"><h2>จำนวนข้อมูล {{dataNovel?.length}}</h2></div>
           <div class="table-responsive font-prompt-medium fSize16">
             <table class="table table-bordered table-hover" id="tableReport">
-              <thead >
-              <tr class="text-center" style="height: 60px;" >
-                <th width="8%">
+              <thead>
+              <tr class="text-center" style="height: 60px;">
+                <th width="4%">คลินิก
+                  <input type="text" [(ngModel)]="clinic"  (ngModelChange)="clinicSearch()"
+                         class="form-control mt-2" style="font-size: small!important;">
+                </th>
+                <th width="7%">
                   เลขประจำตัวประชาชน<br>
                   <input type="text" [(ngModel)]="txtSearch"  (ngModelChange)="cidSearch()"
                          class="form-control mt-2" style="font-size: small!important;">
@@ -54,34 +59,30 @@
                          class="form-control mt-2" style="font-size: small!important;">
                 </th>
                 <th width="4%">สัญชาติ</th>
-                <th width="10%">
-                  สถานที่ทำงาน/สถานศึกษา<br>
+                <th width="9%">
+                  สถานที่ทำงาน<br>สถานศึกษา<br>
                   <input type="text" [(ngModel)]="station"  (ngModelChange)="stationSearch()"
                          class="form-control mt-2" style="font-size: small!important;"></th>
-                <th width="7%">เบอร์โทรศัพท์</th>
-                <th width="5%">สถานะ</th>
-                <th width="10%">คำแนะนำแพทย์</th>
+                <th width="5%">เบอร์โทรศัพท์</th>
+                <th width="7%">สถานะ
+                  <input type="text" [(ngModel)]="status" (ngModelChange)="statusSearch()" class="form-control mt-2" style="font-size: small!important;"></th>
+                <th width="11%">คำแนะนำแพทย์</th>
                 <th width="9%">ผู้รายงาน</th>
-                <th width="10%">จุดรับบริการ<br>
-                  <input type="text" [(ngModel)]="point"  (ngModelChange)="pointSearch()" class="form-control mt-2" style="font-size: small!important;"></th>
-                <th width="6%">เวลาบันทึกข้อมูล</th>
+                <th width="8%">จุดรับบริการ<br>
+                  <input type="text" [(ngModel)]="point" (ngModelChange)="pointSearch()" class="form-control mt-2" style="font-size: small!important;"></th>
+                <th width="5%">เวลาบันทึกข้อมูล</th>
                 <th width="10%"></th>
               </tr>
               </thead>
               <tbody *ngIf="dataSearch?.length != 0">
-              <tr *ngFor="let novel of dataSearch ; let i=index" id="{{novel.novel_id}}">
-                <td>{{novel.novel_cid}}</td>
+              <tr *ngFor="let novel of dataSearch ; let i=index;" id="{{novel.novel_id}}">
+                <td>{{novel.report_point}}</td>
+                <td class="text-left">{{novel.novel_cid}}</td>
                 <td class="text-left">{{novel.ptfullname}}</td>
                 <td>{{novel.novel_national}}</td>
                 <td class="text-left">{{novel.novel_station}}</td>
-                <td>{{novel.novel_phone}}</td>
-                <td>{{(novel.sars_pt_type === 0) ? 'ไม่เข้าเกณฑ์ PUI' :
-                  (novel.sars_pt_type === 1) ? 'แนะนำ DMHT' :
-                    (novel.sars_pt_type === 2) ? 'PUI' :
-                      (novel.sars_pt_type === 3) ? 'LRC' :
-                        (novel.sars_pt_type === 4) ? 'HRC' :
-                          (novel.sars_pt_type === 5) ? 'MRC' :
-                            (novel.sars_pt_type === 6) ? 'ACF' :null}}</td>
+                <td class="text-left">{{novel.novel_phone}}</td>
+                <td class="text-left">{{novel.sars_pt_type}}</td>
                 <td class="text-left">{{novel.doctor_comment}}</td>
                 <td class="text-left">{{novel.reporter}}</td>
                 <td class="text-left">{{novel.servicepoint}}</td>
@@ -92,7 +93,7 @@
                             (click)="editNovelcorona2(novel.novel_id)">
                       <i class="fa fa-pencil fa-xs p-0 m-0"></i>
                     </button>
-                    <button class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                    <button *ngIf="pass === 'adminCoV!9'" class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
                             (click)="delData(novel.id, novel.ptfullname)">
                       <i class="fa fa-trash fa-xs p-0 m-0"></i>
                     </button>
@@ -116,7 +117,7 @@
                             (click)="editNovelcorona2(novel.novel_id)">
                       <i class="fa fa-pencil fa-xs p-0 m-0"></i>
                     </button>
-                    <button class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                    <button *ngIf="pass === 'adminCoV!9'" class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
                             (click)="delData(novel.id, novel.ptfullname)">
                       <i class="fa fa-trash fa-xs p-0 m-0"></i>
                     </button>
@@ -136,7 +137,7 @@
                             (click)="editNovelcorona2(novel.novel_id)">
                       <i class="fa fa-pencil fa-xs p-0 m-0"></i>
                     </button>
-                    <button class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                    <button *ngIf="pass === 'adminCoV!9'" class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
                             (click)="delData(novel.id, novel.ptfullname)">
                       <i class="fa fa-trash fa-xs p-0 m-0"></i>
                     </button>
@@ -160,7 +161,7 @@
                             (click)="editNovelcorona2(novel.novel_id)">
                       <i class="fa fa-pencil fa-xs p-0 m-0"></i>
                     </button>
-                    <button class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                    <button *ngIf="pass === 'adminCoV!9'" class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
                             (click)="delData(novel.id, novel.ptfullname)">
                       <i class="fa fa-trash fa-xs p-0 m-0"></i>
                     </button>
@@ -177,7 +178,7 @@
               </tr>
               </tbody>
               <tbody *ngIf="dataSearch?.length == 0">
-              <tr><td colspan="11" class="no-data-available"><h1>ไม่พบข้อมูล</h1></td></tr>
+              <tr><td colspan="12" class="no-data-available"><h1>ไม่พบข้อมูล</h1></td></tr>
               </tbody>
             </table>
           </div>

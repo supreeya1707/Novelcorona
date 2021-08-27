@@ -428,5 +428,17 @@ export class ApiService {
     return this.http.get(url).toPromise();
   }
 
+  insSwabque(insData: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/swabque`;
+    return this.http.post(url, {data: insData},
+      this.httpOptions
+    ).toPromise();
+  }
 
 }
