@@ -8,12 +8,13 @@
      <div class="card-body">
        <form [formGroup]="registerFrm">
          <div class="row my-2">
-           <div class="col-md-4 my-2">
+           <div class="col-md-12 my-2">
              <div class="form-group">
                <label>วันที่ต้องการมาตรวจ</label>
                <div class="input-group">
-                 <input class="form-control" #datepickerMDY="bsDatepicker" formControlName="appDate" bsDatepicker
-                        [ngClass]="{ 'is-invalid': submitted && f.appDate.errors  || ((f.appDate.touched || f.appDate.dirty) && f.appDate.invalid) }">
+                 <input class="form-control" #datepickerMDY="bsDatepicker" formControlName="appDate" bsDatepicker [minDate]="minDate"
+                        (ngModelChange)="changeDate($event)"
+                        [ngClass]="{ 'is-invalid': submitted && f.appDate.errors  || ((f.appDate.touched || f.appDate.dirty) && f.appDate.invalid)}">
                  <div class="input-group-append">
                     <span class="input-group-text">
                       <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
@@ -28,8 +29,25 @@
                </div>
              </div>
            </div>
+<!--           <div class="col-md-6 my-2">-->
+<!--             <div class="form-group">-->
+<!--               <label class="form-label">Passcode</label>-->
+<!--               <input name="cid" id="passcode" formControlName="passcode"-->
+<!--                      maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly-->
+<!--                      [ngClass]="{ 'is-invalid': submitted && f.passcode.errors  || ((f.passcode.touched || f.passcode.dirty) && f.passcode.invalid) }"-->
+<!--                      class="form-control" type="text" placeholder="ใส่เลข passcode 6 หลัก">-->
+<!--               <div *ngIf="submitted && f.passcode.errors  || ((f.passcode.touched || f.passcode.dirty) && f.passcode.invalid)"-->
+<!--                    class="invalid-feedback">-->
+<!--                 <div class="text-left fSize12" *ngIf="f.passcode.errors.required">กรุณาใส่เลข passcode</div>-->
+<!--                 <div class="text-left fSize12" *ngIf="f.passcode.errors.minlength">กรุณาใส่เลข passcode 6 หลัก-->
+<!--                 </div>-->
+<!--               </div>-->
+<!--             </div>-->
+<!--           </div>-->
+         </div>
 
-           <div class="col-md-4 my-2">
+         <div class="row my-2">
+           <div class="col-md-6 my-2">
              <div class="form-group">
                <label class="form-label">เลขประจำตัวประชาชน</label>
                <input name="cid" id="cid" formControlName="cid"
@@ -45,7 +63,7 @@
              </div>
 
            </div>
-           <div class="col-md-4 my-2">
+           <div class="col-md-6 my-2">
              <div class="form-group">
                <label class="form-label">เบอร์ติดต่อ</label><small class="text-primary">&nbsp;ใส่เฉพาะตัวเลข เช่น
                0123456789</small>
@@ -60,6 +78,7 @@
              </div>
            </div>
          </div>
+
          <div class="row my-2">
            <div class="col-md-4 my-2">
              <div class="form-group">

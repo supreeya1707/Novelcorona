@@ -8,12 +8,14 @@ import {SharedModule} from '../shared.module';
 import {DigitOnlyModule} from '@uiowa/digit-only';
 import { SwabComponent } from './swab/swab.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import { Swab2Component } from './swab2/swab2.component';
 
 
 @NgModule({
   declarations: [
     Novelcorona2Component,
     SwabComponent,
+    Swab2Component,
   ],
   imports: [
     CommonModule,

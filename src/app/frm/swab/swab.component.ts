@@ -4,11 +4,8 @@ import {ApiService} from '../../services/api.service';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
-interface BMonth {
-  value: string;
-  viewValue: string;
-}
 
 interface PName {
   value: string;
@@ -25,52 +22,30 @@ export class SwabComponent implements OnInit {
   btndisble = false;
   locale = 'th-be';
 
-  dateChoose: any;
+  group = 1;
 
-  dataBDate: any = [];
-  dataBYear: any = [];
-  dataChw: any = [];
-  dataAmp: any = [];
-  dataTmb: any = [];
+  dateChoose: any;
   dataVaccine: any = [];
 
-  chw: any;
-  amp: any;
-  tmb: any;
-
-  dataBMonth: BMonth[] = [
-    {value: '01', viewValue: 'มกราคม'},
-    {value: '02', viewValue: 'กุมภาพันธ์'},
-    {value: '03', viewValue: 'มีนาคม'},
-    {value: '04', viewValue: 'เมษายน'},
-    {value: '05', viewValue: 'พฤษภาคม'},
-    {value: '06', viewValue: 'มิถุนายน'},
-    {value: '07', viewValue: 'กรกฏาคม'},
-    {value: '08', viewValue: 'สิงหาคม'},
-    {value: '09', viewValue: 'กันยายน'},
-    {value: '10', viewValue: 'ตุลาคม'},
-    {value: '11', viewValue: 'พฤศจิกายน'},
-    {value: '12', viewValue: 'ธันวาคม'}
-  ];
+  limit: any;
+  countQue: any;
+  minDate: Date;
 
   dataPName: PName[] = [
     {value: 'นาย', viewValue: 'นาย'},
     {value: 'นาง', viewValue: 'นาง'},
-    {value: 'นางสาว', viewValue: 'นางสาว'}
+    {value: 'นางสาว', viewValue: 'นางสาว'},
+    {value: 'ด.ช.', viewValue: 'ด.ช.'},
+    {value: 'ด.ญ.', viewValue: 'ด.ญ.'},
   ];
 
-  constructor(private formBuilder: FormBuilder, private api: ApiService, private localeService: BsLocaleService) { }
+  constructor(private formBuilder: FormBuilder, private api: ApiService, private localeService: BsLocaleService, private router: Router, ) {
+    this.minDate = new Date();
+    this.minDate.setDate(this.minDate.getDate());
+  }
 
   ngOnInit(): void {
     this.localeService.use(this.locale);
-
-    for (let i = 1; i <= 31; i++) {
-      this.dataBDate.push(i);
-    }
-
-    for (let i = 2460; i <= 2558; i++) {
-      this.dataBYear.push(i);
-    }
 
     this.registerFrm = this.formBuilder.group({
       cid: [null, Validators.compose([Validators.required, Validators.minLength(13)])],
@@ -80,7 +55,6 @@ export class SwabComponent implements OnInit {
       tel: [null, Validators.compose([Validators.required])],
       appDate: [null, Validators.compose([Validators.required])],
     });
-
   }
 
   get f(): any {
@@ -109,6 +83,7 @@ export class SwabComponent implements OnInit {
     data.lname = this.registerFrm.value.lname;
     data.ptfullname = this.registerFrm.value.pname + this.registerFrm.value.fname + '  ' + this.registerFrm.value.lname;
     data.phone = this.registerFrm.value.tel;
+    data.groupid = this.group;
     data.appointment_date = moment(this.registerFrm.value.appDate).format('YYYY-MM-DD');
     data.inputdatetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
@@ -116,14 +91,59 @@ export class SwabComponent implements OnInit {
 
     const res = await this.api.insSwabque(info);
     if (res.ok === true){
-
+      // console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: 'บันทึกข้อมูลสำเร็จ'
+      }).then((result) => {
+        this.registerFrm.reset();
+        this.router.navigateByUrl('apps/home');
+      });
     }else {
-      console.log('error');
+      console.log(res.error);
     }
   }
 
-  getDate(e: any): any {
+  async changeDate(e: any): Promise<any> {
     this.dateChoose = moment(e).format('YYYY-MM-DD');
-    console.log(this.dateChoose);
+    const res = await this.api.getSwabque(this.dateChoose, this.group);
+    if (res.ok === true){
+      this.countQue = res.message.length;
+      const resLimit = await this.api.getLimit(this.dateChoose, this.group);
+      // console.log(resLimit.message);
+      if (resLimit.ok === true){
+        if (resLimit.message.length !== 0){
+          this.limit = resLimit.message[0]['limit'];
+        }else{
+          const resGroup = await this.api.getGroup(this.group);
+          if (resGroup.ok === true){
+            this.limit = resGroup.message[0]['limit_default'];
+          }else{
+            console.log('error');
+            console.log(resGroup.error);
+          }
+        }
+        // console.log(this.limit);
+        if (this.countQue < this.limit){
+          this.btndisble = false;
+          console.log('น้อยกว่าเท่ากับ');
+        }
+        else{
+          this.registerFrm.get('appDate').setValue();
+          this.btndisble = true;
+          Swal.fire({
+            icon: 'warning',
+            title: 'คิวเต็มแล้ว',
+            html: 'วันที่ท่านเลือกมีการจองคิวเต็มแล้ว<br>' +
+              'กรุณาเลือกวันนัดใหม่อีกครั้งค่ะ',
+          });
+        }
+      }else {
+        console.log('error');
+        console.log(resLimit.error);
+      }
+    }else{
+      console.log('error');
+    }
   }
 }

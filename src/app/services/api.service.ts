@@ -441,4 +441,48 @@ export class ApiService {
     ).toPromise();
   }
 
+  getSwabque(date: any, groupid: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/swabque/${date}/${groupid}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getLimit(date: any, groupid: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/swabque/${date}/${groupid}/limit`;
+    return this.http.get(url).toPromise();
+  }
+
+  getGroup(groupid: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/swabque/${groupid}/group`;
+    return this.http.get(url).toPromise();
+  }
+
+  getGroupByPass(passcode: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/swabque/${passcode}/passcode`;
+    return this.http.get(url).toPromise();
+  }
+
 }
