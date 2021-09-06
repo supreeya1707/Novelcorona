@@ -1,42 +1,42 @@
-<div class="col-lg-12 text-center" style="margin-top: 280px;">
-  <h1 class="font-prompt-medium">รายชื่อผู้ป่วยที่ทำแบบสอบสวน (Novelcoroana 2)</h1>
-</div>
-<div style="min-height: 50vh">
-  <div class="container-fluid font-prompt-medium">
+<div style="padding-top: 280px;">
+  <div class="col-lg-12 text-center" >
+    <h1 class="font-prompt-medium">รายชื่อผู้ป่วยที่ทำแบบสอบสวน (Novelcoroana 2)</h1>
+  </div>
+  <div class="container-fluid font-prompt-medium" >
     <div class="card mt-5">
       <div class="card-body">
-       <div class="row">
-         <div class="col-lg-6">
-           <div class="form-group">
-             <label>เลือกวันที่ต้องการดูข้อมูล</label>
-             <div class="input-group">
-               <input class="form-control" #datepickerMDY="bsDatepicker"
-                      bsDatepicker [bsValue]="currentDate"
-                      (bsValueChange)="dateChange($event)"
-                      [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
-               <div class="input-group-append">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>เลือกวันที่ต้องการดูข้อมูล</label>
+              <div class="input-group">
+                <input class="form-control" #datepickerMDY="bsDatepicker"
+                       bsDatepicker [bsValue]="currentDate"
+                       (bsValueChange)="dateChange($event)"
+                       [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+                <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"
                      [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>
-               </div>
-             </div>
-           </div>
-         </div>
-         <div class="col-lg-6">
-           <div class="form-group">
-             <label>เลือกจุดบริการที่ต้องการดูข้อมูล</label>
-             <select class="form-control" [(ngModel)]="servicepoint" (ngModelChange)="changeServicepoint()">
-               <option [value]="'all'">ทุกจุดบริการ</option>
-               <option *ngFor="let point of dataServicePoint" [value]="point.servicepoint_id">{{point.servicepoint}}</option>
-             </select>
-           </div>
-         </div>
-       </div>
-
-
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label>เลือกจุดบริการที่ต้องการดูข้อมูล</label>
+              <select class="form-control" [(ngModel)]="servicepoint" (ngModelChange)="changeServicepoint()">
+                <option [value]="'all'">ทุกจุดบริการ</option>
+                <option *ngFor="let point of dataServicePoint" [value]="point.servicepoint_id">{{point.servicepoint}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
+<div style="min-height: 50vh">
   <div class="container-fluid">
     <div class="card text-center">
       <div class="card-body">

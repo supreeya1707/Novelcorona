@@ -58,8 +58,8 @@ export class RecheckComponent implements OnInit {
   submitted = false;
   btndisble = false;
   novelID: any;
-  dataNovel: any[];
-  dataTL: any[];
+  dataNovel: any = [];
+  dataTL: any = [];
   dataCluster: any = [];
   dataContact: any = [];
   dataVaccine: any = [];
@@ -439,168 +439,168 @@ export class RecheckComponent implements OnInit {
       this.dataNovel = resDataNovel.message[0];
 
       // this.generalFrm.get('pname').setValue(this.dataNovel['novel_pname']);
-      this.pname = this.dataNovel['novel_pname'];
-      this.generalFrm.get('fname').setValue(this.dataNovel['novel_fname']);
-      this.generalFrm.get('lname').setValue(this.dataNovel['novel_lname']);
-      this.generalFrm.get('cid').setValue(this.dataNovel['novel_cid']);
-      this.generalFrm.get('age').setValue(this.dataNovel['novel_age']);
-      this.generalFrm.get('national').setValue(this.dataNovel['novel_national']);
-      this.radioGender = this.dataNovel['novel_gender'];
-      this.radioPreg = this.dataNovel['novel_preg'];
-      this.generalFrm.get('numPreg').setValue(this.dataNovel['novel_numpreg']);
-      this.generalFrm.get('pregAge').setValue(this.dataNovel['novel_agepreg']);
-      this.generalFrm.get('job').setValue(this.dataNovel['novel_worker']);
-      this.generalFrm.get('station').setValue(this.dataNovel['novel_station']);
-      this.generalFrm.get('telephone').setValue(this.dataNovel['novel_phone']);
-      if (this.dataNovel['novel_treat'] != null){
+      this.pname = this.dataNovel.novel_pname;
+      this.generalFrm.get('fname').setValue(this.dataNovel.novel_fname);
+      this.generalFrm.get('lname').setValue(this.dataNovel.novel_lname);
+      this.generalFrm.get('cid').setValue(this.dataNovel.novel_cid);
+      this.generalFrm.get('age').setValue(this.dataNovel.novel_age);
+      this.generalFrm.get('national').setValue(this.dataNovel.novel_national);
+      this.radioGender = this.dataNovel.novel_gender;
+      this.radioPreg = this.dataNovel.novel_preg;
+      this.generalFrm.get('numPreg').setValue(this.dataNovel.novel_numpreg);
+      this.generalFrm.get('pregAge').setValue(this.dataNovel.novel_agepreg);
+      this.generalFrm.get('job').setValue(this.dataNovel.novel_worker);
+      this.generalFrm.get('station').setValue(this.dataNovel.novel_station);
+      this.generalFrm.get('telephone').setValue(this.dataNovel.novel_phone);
+      if (this.dataNovel.novel_treat != null){
         for (let i = 0; i < this.dataPTtpye.length; i++){
-          if (this.dataNovel['novel_treat'] === this.dataPTtpye[i]['value'] ){
-            this.generalFrm.get('treat').setValue(this.dataNovel['novel_treat']);
+          if (this.dataNovel.novel_treat === this.dataPTtpye[i]['value'] ){
+            this.generalFrm.get('treat').setValue(this.dataNovel.novel_treat);
           }else{
             this.generalFrm.get('treat').setValue('อื่น ๆ');
-            this.other_treat = this.dataNovel['novel_treat'];
+            this.other_treat = (this.dataNovel.novel_treat === 'อื่น ๆ') ? null : this.dataNovel.novel_treat;
           }
         }
       }
 
       // this.generalFrm.get('treat').setValue(this.dataNovel['novel_treat']);
       // this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).format('DD/MM/YYYY'));
-      if (this.dataNovel['novel_birthday'] != null){
-        this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).add(543, 'year').format('DD/MM/YYYY'));
-        this.getBirthday(moment(this.dataNovel['novel_birthday']).format('YYYY-MM-DD'));
+      if (this.dataNovel.novel_birthday != null){
+        this.generalFrm.get('birthday').setValue(moment(this.dataNovel.novel_birthday).add(543, 'year').format('DD/MM/YYYY'));
+        this.getBirthday(moment(this.dataNovel.novel_birthday).format('YYYY-MM-DD'));
       }
       // this.birthday = moment(this.dataNovel['novel_birthday']).format('DD/MM/YYYY');
-      this.generalFrm.get('addr').setValue(this.dataNovel['novel_number_address']);
-      this.generalFrm.get('moo').setValue(this.dataNovel['novel_moo']);
-      this.generalFrm.get('mooban').setValue(this.dataNovel['novel_mooban']);
-      this.generalFrm.get('soi').setValue(this.dataNovel['novel_soi']);
-      this.generalFrm.get('road').setValue(this.dataNovel['novel_road']);
-      this.generalFrm.get('tumbon').setValue(this.dataNovel['novel_district']);
-      this.generalFrm.get('amphur').setValue(this.dataNovel['novel_amphur']);
-      this.generalFrm.get('province').setValue(this.dataNovel['novel_province']);
-      this.generalFrm.get('radioSmoke').setValue(this.dataNovel['novel_smoke']);
-      this.generalFrm.get('checkcopd').setValue(this.dataNovel['novel_copd']);
-      this.generalFrm.get('checkckd').setValue(this.dataNovel['novel_ckd']);
-      this.generalFrm.get('checkcad').setValue(this.dataNovel['novel_cad']);
-      this.generalFrm.get('checkcva').setValue(this.dataNovel['novel_cva']);
-      this.generalFrm.get('checkundm').setValue(this.dataNovel['novel_undm']);
-      this.generalFrm.get('checkpids').setValue(this.dataNovel['novel_pids']);
-      this.congential = this.dataNovel['novel_congential'];
-      this.generalFrm.get('congential_etc').setValue(this.dataNovel['novel_congential_etc']);
-      this.generalFrm.get('weight').setValue(this.dataNovel['novel_weight']);
-      this.generalFrm.get('high').setValue(this.dataNovel['novel_high']);
-      this.generalFrm.get('bmi').setValue(this.dataNovel['novel_bmi']);
+      this.generalFrm.get('addr').setValue(this.dataNovel.novel_number_address);
+      this.generalFrm.get('moo').setValue(this.dataNovel.novel_moo);
+      this.generalFrm.get('mooban').setValue(this.dataNovel.novel_mooban);
+      this.generalFrm.get('soi').setValue(this.dataNovel.novel_soi);
+      this.generalFrm.get('road').setValue(this.dataNovel.novel_road);
+      this.generalFrm.get('tumbon').setValue(this.dataNovel.novel_district);
+      this.generalFrm.get('amphur').setValue(this.dataNovel.novel_amphur);
+      this.generalFrm.get('province').setValue(this.dataNovel.novel_province);
+      this.generalFrm.get('radioSmoke').setValue(this.dataNovel.novel_smoke);
+      this.generalFrm.get('checkcopd').setValue(this.dataNovel.novel_copd);
+      this.generalFrm.get('checkckd').setValue(this.dataNovel.novel_ckd);
+      this.generalFrm.get('checkcad').setValue(this.dataNovel.novel_cad);
+      this.generalFrm.get('checkcva').setValue(this.dataNovel.novel_cva);
+      this.generalFrm.get('checkundm').setValue(this.dataNovel.novel_undm);
+      this.generalFrm.get('checkpids').setValue(this.dataNovel.novel_pids);
+      this.congential = this.dataNovel.novel_congential;
+      this.generalFrm.get('congential_etc').setValue(this.dataNovel.novel_congential_etc);
+      this.generalFrm.get('weight').setValue(this.dataNovel.novel_weight);
+      this.generalFrm.get('high').setValue(this.dataNovel.novel_high);
+      this.generalFrm.get('bmi').setValue(this.dataNovel.novel_bmi);
 
       // this.startsick = moment(this.dataNovel['novel_start_sick']).format('DD/MM/YYYY');
 
-      if (this.dataNovel['novel_start_sick'] != null){
-        this.startsick = moment(this.dataNovel['novel_start_sick']).add(543, 'year').format('DD/MM/YYYY');
-        this.getSsick(moment(this.dataNovel['novel_start_sick']).format('YYYY-MM-DD'));
+      if (this.dataNovel.novel_start_sick !== null){
+        this.startsick = moment(this.dataNovel.novel_start_sick).add(543, 'year').format('DD/MM/YYYY');
+        this.getSsick(moment(this.dataNovel.novel_start_sick).format('YYYY-MM-DD'));
       }
 
       // this.starttreat = moment(this.dataNovel['novel_start_treat']).format('DD/MM/YYYY');
-      if (this.dataNovel['novel_start_treat'] != null){
-        this.starttreat = moment(this.dataNovel['novel_start_treat']).add(543, 'year').format('DD/MM/YYYY');
-        this.getDatetreat(moment(this.dataNovel['novel_start_treat']).format('YYYY-MM-DD'));
+      if (this.dataNovel.novel_start_treat != null){
+        this.starttreat = moment(this.dataNovel.novel_start_treat).add(543, 'year').format('DD/MM/YYYY');
+        this.getDatetreat(moment(this.dataNovel.novel_start_treat).format('YYYY-MM-DD'));
       }
-      this.fistHosp = this.dataNovel['novel_hospital_first'];
-      this.fistChw = this.dataNovel['novel_province_first'];
-      this.nowHosp = this.dataNovel['novel_hospital_now'];
-      this.nowChw = this.dataNovel['novel_province_now'];
+      this.fistHosp = this.dataNovel.novel_hospital_first;
+      this.fistChw = this.dataNovel.novel_province_first;
+      this.nowHosp = this.dataNovel.novel_hospital_now;
+      this.nowChw = this.dataNovel.novel_province_now;
 
-      this.radiofever = this.dataNovel['novel_fever'];
-      this.assign_fever = this.dataNovel['novel_assign_fever'];
-      this.assign_oxygen = this.dataNovel['novel_assign_oxygen'];
-      this.radiorespirator = this.dataNovel['novel_respirator'];
-      this.radiouri = this.dataNovel['novel_uri'];
-      this.radiocough = this.dataNovel['novel_cough'];
-      this.radiosorethroat = this.dataNovel['novel_sorethroat'];
-      this.radiomusclepain = this.dataNovel['novel_musclepain'];
-      this.radiomucous = this.dataNovel['novel_mucous'];
-      this.radiophlegm = this.dataNovel['novel_phlegm'];
-      this.radiodifficulbreathing = this.dataNovel['novel_difficulbreathing'];
-      this.radioheadache = this.dataNovel['novel_headache'];
-      this.radiopurify = this.dataNovel['novel_purify'];
-      this.radiosmell = this.dataNovel['novel_smell'];
-      this.radiotaste = this.dataNovel['novel_taste'];
-      this.radioredeye = this.dataNovel['novel_redeye'];
-      this.radiorash = this.dataNovel['novel_rash'];
-      this.assign_position = this.dataNovel['novel_position'];
-      this.radiosymptom = this.dataNovel['novel_symtom'];
-      this.symtom_etc = this.dataNovel['novel_symtom_etc'];
+      this.radiofever = this.dataNovel.novel_fever;
+      this.assign_fever = this.dataNovel.novel_assign_fever;
+      this.assign_oxygen = this.dataNovel.novel_assign_oxygen;
+      this.radiorespirator = this.dataNovel.novel_respirator;
+      this.radiouri = this.dataNovel.novel_uri;
+      this.radiocough = this.dataNovel.novel_cough;
+      this.radiosorethroat = this.dataNovel.novel_sorethroat;
+      this.radiomusclepain = this.dataNovel.novel_musclepain;
+      this.radiomucous = this.dataNovel.novel_mucous;
+      this.radiophlegm = this.dataNovel.novel_phlegm;
+      this.radiodifficulbreathing = this.dataNovel.novel_difficulbreathing;
+      this.radioheadache = this.dataNovel.novel_headache;
+      this.radiopurify = this.dataNovel.novel_purify;
+      this.radiosmell = this.dataNovel.novel_smell;
+      this.radiotaste = this.dataNovel.novel_taste;
+      this.radioredeye = this.dataNovel.novel_redeye;
+      this.radiorash = this.dataNovel.novel_rash;
+      this.assign_position = this.dataNovel.novel_position;
+      this.radiosymptom = this.dataNovel.novel_symtom;
+      this.symtom_etc = this.dataNovel.novel_symtom_etc;
 
-      this.radiofrom = this.dataNovel['novel_comefrom_31'];
-      this.come_city = this.dataNovel['novel_come_city'];
-      this.come_region = this.dataNovel['novel_come_country'];
+      this.radiofrom = this.dataNovel.novel_comefrom_31;
+      this.come_city = this.dataNovel.novel_come_city;
+      this.come_region = this.dataNovel.novel_come_country;
       // this.riskFrm.get('datecome').setValue((this.dataNovel['novel_date_come'] != null) ? moment(this.dataNovel['novel_date_come']).format('DD/MM/YYYY') : null);
-      if (this.dataNovel['novel_date_come'] != null){
-        this.riskFrm.get('datecome').setValue(moment(this.dataNovel['novel_date_come']).add(543, 'year').format('DD/MM/YYYY'));
-        this.getDatecome(moment(this.dataNovel['novel_date_come']).format('YYYY-MM-DD'));
+      if (this.dataNovel.novel_date_come != null){
+        this.riskFrm.get('datecome').setValue(moment(this.dataNovel.novel_date_come).add(543, 'year').format('DD/MM/YYYY'));
+        this.getDatecome(moment(this.dataNovel.novel_date_come).format('YYYY-MM-DD'));
         console.log(this.datecome);
       }
       // this.datecome = moment(this.dataNovel['novel_date_come']).format('DD/MM/YYYY');
-      this.come_plane = this.dataNovel['novel_transportation'];
-      this.come_round = this.dataNovel['novel_round_tran'];
-      this.come_seat = this.dataNovel['novel_number_seat'];
+      this.come_plane = this.dataNovel.novel_transportation;
+      this.come_round = this.dataNovel.novel_round_tran;
+      this.come_seat = this.dataNovel.novel_number_seat;
 
-      this.radiorepair = this.dataNovel['novel_takecare_32'];
-      this.radionear = this.dataNovel['novel_touch_his33'];
-      this.radiotouch = this.dataNovel['novel_his_touch_34'];
-      this.assign_touch = this.dataNovel['novel_assigntouch_34'];
-      this.contactid = this.dataNovel['novel_contact'];
+      this.radiorepair = this.dataNovel.novel_takecare_32;
+      this.radionear = this.dataNovel.novel_touch_his33;
+      this.radiotouch = this.dataNovel.novel_his_touch_34;
+      this.assign_touch = this.dataNovel.novel_assigntouch_34;
+      this.contactid = this.dataNovel.novel_contact;
 
-      this.radiovisitor = this.dataNovel['novel_tourist_35'];
-      this.radiocrowded = this.dataNovel['novel_manyperson_36'];
-      this.assign_station = this.dataNovel['novel_assign_station_36'];
-      this.radiobreath = this.dataNovel['novel_ari_37'];
-      this.radioinject = this.dataNovel['novel_inject_38'];
-      this.radiolabtest = this.dataNovel['novel_doc_39'];
+      this.radiovisitor = this.dataNovel.novel_tourist_35;
+      this.radiocrowded = this.dataNovel.novel_manyperson_36;
+      this.assign_station = this.dataNovel.novel_assign_station_36;
+      this.radiobreath = this.dataNovel.novel_ari_37;
+      this.radioinject = this.dataNovel.novel_inject_38;
+      this.radiolabtest = this.dataNovel.novel_doc_39;
 
-      this.radioStaffContact = this.dataNovel['novel_staff_contact'];
-      if (this.dataNovel['novel_staff_contact'] === 1){
-        this.scontact2 = this.dataNovel['novel_staff_contact2'];
-        this.scontact3 = this.dataNovel['novel_staff_contact3'];
+      this.radioStaffContact = this.dataNovel.novel_staff_contact ;
+      if (this.dataNovel.novel_staff_contact === 1){
+        this.scontact2 = this.dataNovel.novel_staff_contact2;
+        this.scontact3 = this.dataNovel.novel_staff_contact3;
       }else{
-        this.scontactplace = this.dataNovel['novel_staff_contact2'];
+        this.scontactplace = this.dataNovel.novel_staff_contact2;
       }
 
       // this.assign_etc = this.dataNovel['novel_etc_310'];
-      this.riskFrm.get('assignRisk').setValue(this.dataNovel['novel_etc_310']);
+      this.riskFrm.get('assignRisk').setValue(this.dataNovel.novel_etc_310);
 
-      this.havevac = this.dataNovel['novel_havevac'];
-      this.havecertificate = this.dataNovel['novel_certificate'];
+      this.havevac = this.dataNovel.novel_havevac;
+      this.havecertificate = this.dataNovel.novel_certificate;
       // this.datevac1 = (this.dataNovel['novel_getvac1'] != null) ? moment(this.dataNovel['novel_getvac1']).add(543, 'year').format('DD/MM/YYYY') : null;
-      if (this.dataNovel['novel_getvac1']){
-        this.vac1 =  moment(this.dataNovel['novel_getvac1']).add(543, 'year').format('DD/MM/YYYY');
-        this.getDateVac1(moment(this.dataNovel['novel_getvac1']).format('YYYY-MM-DD'));
+      if (this.dataNovel.novel_getvac1){
+        this.vac1 =  moment(this.dataNovel.novel_getvac1).add(543, 'year').format('DD/MM/YYYY');
+        this.getDateVac1(moment(this.dataNovel.novel_getvac1).format('YYYY-MM-DD'));
       }else{
         this.vac1 = null;
       }
-      this.namevac1 = this.dataNovel['novel_namevac1'];
-      this.placevac1 = this.dataNovel['novel_placevac1'];
+      this.namevac1 = this.dataNovel.novel_namevac1;
+      this.placevac1 = this.dataNovel.novel_placevac1;
 
 
       // this.datevac2 = (this.dataNovel['novel_getvac2'] != null) ? moment(this.dataNovel['novel_getvac2']).add(543, 'year').format('DD/MM/YYYY') : null;
-      if (this.dataNovel['novel_getvac2'] != null){
-        this.vac2 =  moment(this.dataNovel['novel_getvac2']).add(543, 'year').format('DD/MM/YYYY');
-        this.getDateVac2(moment(this.dataNovel['novel_getvac2']).format('YYYY-MM-DD'));
+      if (this.dataNovel.novel_getvac2 != null){
+        this.vac2 =  moment(this.dataNovel.novel_getvac2).add(543, 'year').format('DD/MM/YYYY');
+        this.getDateVac2(moment(this.dataNovel.novel_getvac2).format('YYYY-MM-DD'));
       }else{
         this.vac2 = null;
       }
-      this.namevac2 = this.dataNovel['novel_namevac2'];
-      this.placevac2 = this.dataNovel['novel_placevac2'];
+      this.namevac2 = this.dataNovel.novel_namevac2;
+      this.placevac2 = this.dataNovel.novel_placevac2;
     }else{
       console.error('error');
     }
 
-    if (this.dataNovel['novel_getvac3']){
-      this.vac3 =  moment(this.dataNovel['novel_getvac3']).add(543, 'year').format('DD/MM/YYYY');
-      this.getDateVac3(moment(this.dataNovel['novel_getvac3']).format('YYYY-MM-DD'));
+    if (this.dataNovel.novel_getvac3){
+      this.vac3 =  moment(this.dataNovel.novel_getvac3).add(543, 'year').format('DD/MM/YYYY');
+      this.getDateVac3(moment(this.dataNovel.novel_getvac3).format('YYYY-MM-DD'));
     }else{
       this.vac3 = null;
     }
-    this.namevac3 = this.dataNovel['novel_namevac3'];
-    this.placevac3 = this.dataNovel['novel_placevac3'];
+    this.namevac3 = this.dataNovel.novel_namevac3;
+    this.placevac3 = this.dataNovel.novel_placevac3;
 
     const resDataTL = await this.api.getTimeLineById(novelid);
     if (resDataTL.ok){
@@ -640,7 +640,7 @@ export class RecheckComponent implements OnInit {
       // this.desDay13 = this.dataTL['timeline_date13'];
       // this.desDay14 = this.dataTL['timeline_date14'];
       // this.desOther = this.dataTL['timeline_other'];
-      this.timelineFrm.get('desOther').setValue(this.dataTL['timeline_other']);
+      this.timelineFrm.get('desOther').setValue(this.dataTL.timeline_other);
     }else{
 
       console.error('error');
@@ -655,48 +655,49 @@ export class RecheckComponent implements OnInit {
       // console.log(res.message[0]);
       // console.log(res.message);
       if (this.dataStaff != null){
-        console.log(this.dataStaff['riskconnect']);
-        this.cluster = this.dataStaff['riskconnect'];
-        this.wearmask = this.dataStaff['wearmask'];
-        this.radioPlace = this.dataStaff['place'];
-        if (this.dataStaff['sars1_date'] != null){
-          this.sarsdate1 = (moment(this.dataStaff['sars1_date']).add(543, 'year').format('DD/MM/YYYY'));
-          this.getDateSARS1(moment(this.dataStaff['sars1_date']).format('YYYY-MM-DD'));
+        console.log(this.dataStaff.riskconnect);
+        this.cluster = this.dataStaff.riskconnect;
+        this.wearmask = this.dataStaff.wearmask;
+        this.radioPlace = this.dataStaff.place;
+        if (this.dataStaff.sars1_date != null){
+          this.sarsdate1 = (moment(this.dataStaff.sars1_date).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSARS1(moment(this.dataStaff.sars1_date).format('YYYY-MM-DD'));
         }
-        this.typeSAR1 = this.dataStaff['sars1_type'];
-        this.placesendSAR1 = this.dataStaff['sars1_placesend'];
-        this.radiodetect1 = this.dataStaff['sars1_result'];
+        this.typeSAR1 = this.dataStaff.sars1_type;
+        this.placesendSAR1 = this.dataStaff.sars1_placesend;
+        this.radiodetect1 = this.dataStaff.sars1_result;
 
-        if (this.dataStaff['sars2_date'] != null){
-          this.sarsdate2 = (moment(this.dataStaff['sars2_date']).add(543, 'year').format('DD/MM/YYYY'));
-          this.getDateSARS1(moment(this.dataStaff['sars2_date']).format('YYYY-MM-DD'));
+        if (this.dataStaff.sars2_date != null){
+          this.sarsdate2 = (moment(this.dataStaff.sars2_date).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSARS1(moment(this.dataStaff.sars2_date).format('YYYY-MM-DD'));
         }
-        this.typeSAR2 = this.dataStaff['sars2_type'];
-        this.placesendSAR2 = this.dataStaff['sars2_placesend'];
-        this.radiodetect2 = this.dataStaff['sars2_result'];
-        this.radiodoctor = this.dataStaff['doctor'];
-        this.timefromdoc = this.dataStaff['doctor_time'];
-        this.commentdoctor = this.dataStaff['doctor_comment'];
-        this.radioSARtype = this.dataStaff['sars_pt_type'];
-        this.puiPriority = this.dataStaff['pui_priority'];
-        if (this.dataStaff['date_swab1'] != null){
-          this.date1swab = (moment(this.dataStaff['date_swab1']).add(543, 'year').format('DD/MM/YYYY'));
-          this.getDateSwab1(moment(this.dataStaff['date_swab1']).format('YYYY-MM-DD'));
+        this.typeSAR2 = this.dataStaff.sars2_type;
+        this.placesendSAR2 = this.dataStaff.sars2_placesend;
+        this.radiodetect2 = this.dataStaff.sars2_result;
+        this.radiodoctor = this.dataStaff.doctor;
+        this.timefromdoc = this.dataStaff.doctor_time;
+        this.commentdoctor = this.dataStaff.doctor_comment;
+        this.radioSARtype = this.dataStaff.sars_pt_type;
+        this.puiPriority = this.dataStaff.pui_priority;
+        if (this.dataStaff.date_swab1 != null){
+          this.date1swab = (moment(this.dataStaff.date_swab1).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSwab1(moment(this.dataStaff.date_swab1).format('YYYY-MM-DD'));
         }
-        if (this.dataStaff['date_swab2'] != null){
-          this.date2swab = (moment(this.dataStaff['date_swab2']).add(543, 'year').format('DD/MM/YYYY'));
-          this.getDateSwab2(moment(this.dataStaff['date_swab2']).format('YYYY-MM-DD'));
+        if (this.dataStaff.date_swab2 != null){
+          this.date2swab = (moment(this.dataStaff.date_swab2).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSwab2(moment(this.dataStaff.date_swab2).format('YYYY-MM-DD'));
         }
-        if (this.dataStaff['date_swab3'] != null){
-          this.date3swab = (moment(this.dataStaff['date_swab3']).add(543, 'year').format('DD/MM/YYYY'));
-          this.getDateSwab3(moment(this.dataStaff['date_swab3']).format('YYYY-MM-DD'));
+        if (this.dataStaff.date_swab3 != null){
+          this.date3swab = (moment(this.dataStaff.date_swab3).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSwab3(moment(this.dataStaff.date_swab3).format('YYYY-MM-DD'));
         }
-        if (this.dataStaff['sdate_quaran'] != null){
-          this.dateSquarantine = (moment(this.dataStaff['sdate_quaran']).add(543, 'year').format('DD/MM/YYYY'));
-          this.getDatequarantine(moment(this.dataStaff['sdate_quaran']).format('YYYY-MM-DD'));
+        if (this.dataStaff.sdate_quaran != null){
+          this.dateSquarantine = (moment(this.dataStaff.sdate_quaran).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDatequarantine(moment(this.dataStaff.sdate_quaran).format('YYYY-MM-DD'));
         }
-        this.addressquaran = this.dataStaff['address_quaran'];
-        this.reporter = this.dataStaff['reporter'];
+        this.addressquaran = this.dataStaff.address_quaran;
+        this.reporter = this.dataStaff.reporter;
+        this.reportpoint = this.dataStaff.report_point;
 
       }
     }else {
@@ -855,7 +856,6 @@ export class RecheckComponent implements OnInit {
     }
   }
 
-
   async updateData(): Promise<any>{
     this.submitted = true;
     if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid) {
@@ -1005,7 +1005,7 @@ export class RecheckComponent implements OnInit {
     data.novel_worker = this.generalFrm.value.job;
     data.novel_station = this.generalFrm.value.station;
     data.novel_phone = this.generalFrm.value.telephone;
-    data.novel_treat = this.generalFrm.value.treat;
+    data.novel_treat = (this.generalFrm.value.treat === 'อื่น ๆ') ? this.other_treat : this.generalFrm.value.treat;
 
     data.novel_number_address = this.generalFrm.value.addr;
     data.novel_moo = this.generalFrm.value.moo;

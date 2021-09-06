@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ApiService} from '../../services/api.service';
 import {BsLocaleService} from 'ngx-bootstrap/datepicker';
+import {Router} from '@angular/router';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
-import {Router} from '@angular/router';
-
 
 interface PName {
   value: string;
@@ -13,16 +12,17 @@ interface PName {
 }
 
 @Component({
-  selector: 'app-swab',
-  templateUrl: './swab.component.html'
+  selector: 'app-swab2',
+  templateUrl: './swab2.component.html'
 })
-export class SwabComponent implements OnInit {
+export class Swab2Component implements OnInit {
   registerFrm: any;
   submitted = false;
   btndisble = false;
   locale = 'th-be';
 
-  group = 1;
+  group: any;
+  passcode: any;
 
   dateChoose: any;
   dataVaccine: any = [];
@@ -39,7 +39,7 @@ export class SwabComponent implements OnInit {
     {value: 'ด.ญ.', viewValue: 'ด.ญ.'},
   ];
 
-  constructor(private formBuilder: FormBuilder, private api: ApiService, private localeService: BsLocaleService, private router: Router, ) {
+  constructor(private formBuilder: FormBuilder, private api: ApiService, private localeService: BsLocaleService) {
     this.minDate = new Date();
     this.minDate.setDate(this.minDate.getDate());
   }
@@ -54,11 +54,29 @@ export class SwabComponent implements OnInit {
       lname: [null, Validators.compose([Validators.required])],
       tel: [null, Validators.compose([Validators.required])],
       appDate: [null, Validators.compose([Validators.required])],
+      passcode:  [null, Validators.compose([Validators.required, Validators.minLength(6)])],
     });
   }
 
   get f(): any {
     return this.registerFrm.controls;
+  }
+
+  async dataGroup(e: any): Promise<any>{
+    if (e.length === 6){
+      const res = await this.api.getGroupByPass(this.registerFrm.value.passcode);
+      if (res.ok === true){
+        // console.log(res.message);
+        this.group = res.message[0]['group_id'];
+        this.limit = res.message[0]['limit_default'];
+        this.passcode = res.message[0]['passcode'];
+        // console.log(this.group);
+        // console.log(this.limit);
+      }else{
+        console.log('getGroupByPass : error');
+        console.log(res.error);
+      }
+    }
   }
 
   async btnSubmit(): Promise<any> {
@@ -97,7 +115,8 @@ export class SwabComponent implements OnInit {
         title: 'บันทึกข้อมูลสำเร็จ'
       }).then((result) => {
         this.registerFrm.reset();
-        this.router.navigateByUrl('apps/home');
+        this.registerFrm.get('passcode').setValue(this.passcode);
+        // this.router.navigateByUrl('apps/home');
       });
     }else {
       console.log(res.error);
@@ -110,20 +129,10 @@ export class SwabComponent implements OnInit {
     if (res.ok === true){
       this.countQue = res.message.length;
       const resLimit = await this.api.getLimit(this.dateChoose, this.group);
-      // console.log(resLimit.message);
       if (resLimit.ok === true){
         if (resLimit.message.length !== 0){
           this.limit = resLimit.message[0].limit;
-        }else{
-          const resGroup = await this.api.getGroup(this.group);
-          if (resGroup.ok === true){
-            this.limit = resGroup.message[0].limit_default;
-          }else{
-            console.log('error');
-            console.log(resGroup.error);
-          }
         }
-        // console.log(this.limit);
         if (this.countQue < this.limit){
           this.btndisble = false;
           console.log('น้อยกว่าเท่ากับ');
@@ -140,10 +149,10 @@ export class SwabComponent implements OnInit {
         }
       }else {
         console.log('error');
-        console.log(resLimit.error);
       }
     }else{
       console.log('error');
     }
   }
 }
+

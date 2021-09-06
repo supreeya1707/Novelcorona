@@ -58,15 +58,16 @@
                   <input type="text" [(ngModel)]="ptname"  (ngModelChange)="nameSearch()"
                          class="form-control mt-2" style="font-size: small!important;">
                 </th>
-                <th width="4%">สัญชาติ</th>
-                <th width="9%">
+                <th width="8%">
                   สถานที่ทำงาน<br>สถานศึกษา<br>
                   <input type="text" [(ngModel)]="station"  (ngModelChange)="stationSearch()"
                          class="form-control mt-2" style="font-size: small!important;"></th>
                 <th width="5%">เบอร์โทรศัพท์</th>
                 <th width="7%">สถานะ
                   <input type="text" [(ngModel)]="status" (ngModelChange)="statusSearch()" class="form-control mt-2" style="font-size: small!important;"></th>
-                <th width="11%">คำแนะนำแพทย์</th>
+                <th width="5%">นัด Swab 1</th>
+                <th width="5%">นัด Swab 2</th>
+                <th width="5%">นัด Swab 3</th>
                 <th width="9%">ผู้รายงาน</th>
                 <th width="8%">จุดรับบริการ<br>
                   <input type="text" [(ngModel)]="point" (ngModelChange)="pointSearch()" class="form-control mt-2" style="font-size: small!important;"></th>
@@ -76,14 +77,18 @@
               </thead>
               <tbody *ngIf="dataSearch?.length != 0">
               <tr *ngFor="let novel of dataSearch ; let i=index;" id="{{novel.novel_id}}">
-                <td>{{novel.report_point}}</td>
+                <td class="text-left">{{novel.report_point}}</td>
                 <td class="text-left">{{novel.novel_cid}}</td>
                 <td class="text-left">{{novel.ptfullname}}</td>
-                <td>{{novel.novel_national}}</td>
                 <td class="text-left">{{novel.novel_station}}</td>
                 <td class="text-left">{{novel.novel_phone}}</td>
                 <td class="text-left">{{novel.sars_pt_type}}</td>
-                <td class="text-left">{{novel.doctor_comment}}</td>
+                <td class="text-center" *ngIf="novel.date_swab1 != null">{{novel.date_swab1 | thaiDate  : 'short'}}</td>
+                <td class="text-center" *ngIf="novel.date_swab1 === null"></td>
+                <td class="text-center" *ngIf="novel.date_swab2 != null">{{novel.date_swab2 | thaiDate  : 'short'}}</td>
+                <td class="text-center" *ngIf="novel.date_swab2 === null"></td>
+                <td class="text-center" *ngIf="novel.date_swab3 != null">{{novel.date_swab3 | thaiDate  : 'short'}}</td>
+                <td class="text-center" *ngIf="novel.date_swab3 === null"></td>
                 <td class="text-left">{{novel.reporter}}</td>
                 <td class="text-left">{{novel.servicepoint}}</td>
                 <td class="text-center">{{novel.timereport}} น.</td>
@@ -178,7 +183,7 @@
               </tr>
               </tbody>
               <tbody *ngIf="dataSearch?.length == 0">
-              <tr><td colspan="12" class="no-data-available"><h1>ไม่พบข้อมูล</h1></td></tr>
+              <tr><td colspan="13" class="no-data-available"><h1>ไม่พบข้อมูล</h1></td></tr>
               </tbody>
             </table>
           </div>
