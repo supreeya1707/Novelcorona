@@ -485,4 +485,26 @@ export class ApiService {
     return this.http.get(url).toPromise();
   }
 
+  getPatient(patient: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelstaff/${patient}/patient`;
+    return this.http.get(url).toPromise();
+  }
+
+  getDataByCid(cid: any): any {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer '
+      })
+    };
+    const url = `${this.baseURL}/novelstaff/${cid}/novel_cid`;
+    return this.http.get(url).toPromise();
+  }
+
 }

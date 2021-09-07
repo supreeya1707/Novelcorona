@@ -88980,6 +88980,15 @@ body {
 }
 
 .showDisplay {display: none;}
+.select2-results__options{
+  font-family: prompt-light;
+  font-size: 16px;
+}
+
+.select2-search__field{
+  font-family: prompt-light;
+  font-size: 16px;
+}
 
 @media screen and (max-width: 768px) {
   .subheader-enabled .content {

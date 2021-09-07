@@ -260,7 +260,7 @@ export class Novelcorona2Component implements OnInit {
       pregAge: [null],
       job: [null, Validators.compose([Validators.required])],
       station: [null, Validators.compose([Validators.required])],
-      telephone: [null, Validators.compose([Validators.required])],
+      telephone: [null, Validators.compose([Validators.required, Validators.minLength(10)])],
       treat: [null],
       birthday: [null, Validators.compose([Validators.required])],
       addr: [null],

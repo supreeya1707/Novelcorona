@@ -34,4 +34,8 @@ export class NcovLayoutComponent implements OnInit {
     this.router.navigateByUrl('staff/nCoV/report');
   }
 
+  openSearch(): any {
+    this.router.navigateByUrl('staff/nCoV/search');
+  }
+
 }

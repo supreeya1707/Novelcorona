@@ -1,0 +1,153 @@
+<div style="min-height: 55vh; margin-top: 280px;">
+  <div class="container-fluid font-prompt-medium">
+    <div class="card mt-5">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group"><label class="form-label">เลขประจำตัวประชาชน หรือ ชื่อ-นามสกุล</label>
+              <div class="input-group mb-3">
+                <l-select2 class=" col-lg-12 font-prompt-light" [options]="optionPatient"  (valueChange)="getPTdata($event.id)"></l-select2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-5">
+      <div class="card-body">
+        <div class="table-responsive font-prompt-medium fSize16">
+          <table class="table table-bordered table-hover" id="tableReport">
+            <thead>
+            <tr class="text-center" style="height: 60px;">
+              <th width="4%">คลินิก</th>
+              <th width="7%">เลขประจำตัวประชาชน</th>
+              <th width="12%">ชื่อ-นามสกุล</th>
+              <th width="8%">สถานที่ทำงาน<br>สถานศึกษา</th>
+              <th width="5%">เบอร์โทรศัพท์</th>
+              <th width="7%">สถานะ</th>
+              <th width="5%">นัด Swab 1</th>
+              <th width="5%">นัด Swab 2</th>
+              <th width="5%">นัด Swab 3</th>
+              <th width="9%">ผู้รายงาน</th>
+              <th width="8%">จุดรับบริการ</th>
+              <th width="5%">เวลาบันทึกข้อมูล</th>
+              <th width="10%"></th>
+            </tr>
+            </thead>
+            <tbody *ngIf="dataSearch?.length !== 0">
+              <tr *ngFor="let novel of dataSearch ; let i=index;" id="{{novel.novel_id}}">
+              <td class="text-left">{{novel.report_point}}</td>
+              <td class="text-left">{{novel.novel_cid}}</td>
+              <td class="text-left">{{novel.ptfullname}}</td>
+              <td class="text-left">{{novel.novel_station}}</td>
+              <td class="text-left">{{novel.novel_phone}}</td>
+              <td class="text-left">{{novel.sars_pt_type}}</td>
+              <td class="text-center" *ngIf="novel.date_swab1 != null">{{novel.date_swab1 | thaiDate  : 'short'}}</td>
+              <td class="text-center" *ngIf="novel.date_swab1 === null"></td>
+              <td class="text-center" *ngIf="novel.date_swab2 != null">{{novel.date_swab2 | thaiDate  : 'short'}}</td>
+              <td class="text-center" *ngIf="novel.date_swab2 === null"></td>
+              <td class="text-center" *ngIf="novel.date_swab3 != null">{{novel.date_swab3 | thaiDate  : 'short'}}</td>
+              <td class="text-center" *ngIf="novel.date_swab3 === null"></td>
+              <td class="text-left">{{novel.reporter}}</td>
+              <td class="text-left">{{novel.servicepoint}}</td>
+              <td class="text-center">{{novel.timereport}} น.</td>
+              <td class="text-center noDisplay">
+                <div *ngIf="novel.sdate_quaran !== null  ">
+                  <button class="btn btn-xs btn-outline-dark" tooltipHtml="แก้ไข" placement="bottom"
+                          (click)="editNovelcorona2(novel.novel_id)">
+                    <i class="fa fa-pencil fa-xs p-0 m-0"></i>
+                  </button>
+                  <button *ngIf="pass === 'adminCoV!9'" class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                          (click)="delData(novel.id, novel.ptfullname)">
+                    <i class="fa fa-trash fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
+                          (click)="printNovelcorona2(novel.novel_id)">
+                    <i class="fa fa-print fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-dark" tooltipHtml="ฉบับย่อ" placement="bottom"
+                          (click)="printNovelcorona2_1(novel.novel_id)">
+                    <i class="fa fa-file fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-success" tooltipHtml="จพต." placement="bottom"
+                          (click)="printReport01(novel.novel_id)">จพต.
+                  </button>
+                  <button class="btn btn-xs btn-outline-warning" tooltipHtml="ใบขวาง" placement="bottom"
+                          (click)="printReport02(novel.novel_id)">บข
+                  </button>
+                </div>
+                <div *ngIf="novel.sdate_quaran === null ">
+                  <button class="btn btn-xs btn-outline-dark" tooltipHtml="แก้ไข" placement="bottom"
+                          (click)="editNovelcorona2(novel.novel_id)">
+                    <i class="fa fa-pencil fa-xs p-0 m-0"></i>
+                  </button>
+                  <button *ngIf="pass === 'adminCoV!9'" class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                          (click)="delData(novel.id, novel.ptfullname)">
+                    <i class="fa fa-trash fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
+                          (click)="printNovelcorona2(novel.novel_id)">
+                    <i class="fa fa-print fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-dark" tooltipHtml="ฉบับย่อ" placement="bottom"
+                          (click)="printNovelcorona2_1(novel.novel_id)">
+                    <i class="fa fa-file fa-xs p-0 m-0"></i>
+                  </button>
+                </div>
+              </td>
+              <td class="text-center showDisplay">
+                <div *ngIf="novel.sdate_quaran !== null  ">
+                  <button class="btn btn-xs btn-outline-dark" tooltipHtml="แก้ไข" placement="bottom"
+                          (click)="editNovelcorona2(novel.novel_id)">
+                    <i class="fa fa-pencil fa-xs p-0 m-0"></i>
+                  </button>
+                  <button *ngIf="pass === 'adminCoV!9'" class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                          (click)="delData(novel.id, novel.ptfullname)">
+                    <i class="fa fa-trash fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
+                          (click)="downloadNovelcorona2(novel.novel_id)">
+                    <i class="fa fa-print fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-dark" tooltipHtml="ฉบับย่อ" placement="bottom"
+                          (click)="downloadNovelcorona2_1(novel.novel_id)">
+                    <i class="fa fa-file fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-success" tooltipHtml="จพต." placement="bottom"
+                          (click)="downloadReport01(novel.novel_id)">จพต.
+                  </button>
+                  <button class="btn btn-xs btn-outline-warning" tooltipHtml="ใบขวาง" placement="bottom"
+                          (click)="downloadReport02(novel.novel_id)">บข
+                  </button>
+                </div>
+                <div *ngIf="novel.sdate_quaran === null ">
+                  <button class="btn btn-xs btn-outline-dark" tooltipHtml="แก้ไข" placement="bottom"
+                          (click)="editNovelcorona2(novel.novel_id)">
+                    <i class="fa fa-pencil fa-xs p-0 m-0"></i>
+                  </button>
+                  <button *ngIf="pass === 'adminCoV!9'" class="btn btn-xs btn-outline-info" tooltipHtml="ลบ" placement="bottom"
+                          (click)="delData(novel.id, novel.ptfullname)">
+                    <i class="fa fa-trash fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-primary" tooltipHtml="Novelcorona2" placement="bottom"
+                          (click)="downloadNovelcorona2(novel.novel_id)">
+                    <i class="fa fa-print fa-xs p-0 m-0"></i>
+                  </button>
+                  <button class="btn btn-xs btn-outline-dark" tooltipHtml="ฉบับย่อ" placement="bottom"
+                          (click)="downloadNovelcorona2_1(novel.novel_id)">
+                    <i class="fa fa-file fa-xs p-0 m-0"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+            <tbody *ngIf="dataSearch?.length === 0">
+              <tr><td colspan="13" class="text-center no-data-available"><h1>ไม่พบข้อมูล</h1></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

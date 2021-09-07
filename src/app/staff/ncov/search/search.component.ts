@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {ApiService} from '../../../services/api.service';
+import {environment} from '../../../../environments/environment';
+import * as moment from 'moment';
+import Swal from 'sweetalert2';
 import pdfMakeUnicode from 'pdfmake-unicode';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import Swal from 'sweetalert2';
-import * as moment from 'moment';
-import {ApiService} from '../../../services/api.service';
-import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 import {Router} from '@angular/router';
-
+import {BsLocaleService} from 'ngx-bootstrap/datepicker';
 
 // this part is crucial
 pdfMake.vfs = pdfMakeUnicode.pdfMake.vfs;
@@ -32,7 +32,6 @@ pdfMake.fonts = {
     bolditalics: 'Roboto MediumItalic.ttf'
   }
 };
-
 interface PuiPriority {
   value: number;
   viewValue: string;
@@ -58,35 +57,34 @@ interface SContactPlace {
   viewValue: string;
 }
 
-
 @Component({
-  selector: 'app-print-report',
-  templateUrl: './report.component.html'
+  selector: 'app-search',
+  templateUrl: './search.component.html'
 })
 
-export class ReportComponent implements OnInit {
-  txtSearch: any;
-  ptname: any;
-  station: any;
-  point: any;
-  servicepoint: any;
-
-  status: any;
-  clinic: any;
-
-  dataSearch: any = '';
-  dataNovel: any = [];
+export class SearchComponent implements OnInit {
+  public optionPatient: any;
+  public ajaxOptionPatient: any;
+  dataPT: any = [];
+  dataSearch: any = [];
   dataNovelByID: any = [];
+  dataTimeLineByID: any = [];
   dataNovelStaff: any = [];
-  dataServicePoint: any = [];
-  dataTimeLineByID: any;
   dateTimeLineShortquaran: any = [];
 
-  submitted = false;
-  currentDate: any = new Date();
-  locale = 'th-be';
   logo: any;
-  dataJson: any;
+  imgSign01: any;
+  imgSign02: any;
+  imgSign03: any;
+  imgSign04: any;
+  imgSign05: any;
+
+  password: any = 'rbhCoV!9';
+  password2: any = 'adminCoV!9';
+  pass: any;
+
+  locale = 'th-be';
+
 
   dataPuiPriority: PuiPriority[] = [
     {value: 1, viewValue: 'LRC'},
@@ -130,22 +128,7 @@ export class ReportComponent implements OnInit {
     {value: '4', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส > 15 นาที'}
   ];
 
-
-  imgSign01: any;
-  imgSign02: any;
-  imgSign03: any;
-  imgSign04: any;
-  imgSign05: any;
-  dateChoose: any;
-
-  password: any = 'rbhCoV!9';
-  password2: any = 'adminCoV!9';
-  pass: any;
-
-
-  constructor(private api: ApiService, private localeService: BsLocaleService, private router: Router, ) {
-    (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
-  }
+  constructor(private api: ApiService, private router: Router, private localeService: BsLocaleService,) { }
 
   ngOnInit(): void {
     this.pass = sessionStorage.getItem('nCoVpass');
@@ -187,115 +170,41 @@ export class ReportComponent implements OnInit {
       this.imgSign05 = 'data:image;base64,' + dataUrl;
     });
 
+    this.ajaxOptionPatient = {
+      url: `${environment.baseURL}/novelstaff/patient`,
+      dataType: 'json',
+      cache: false,
+      data: (params: any) => {
+        // console.log('aa ', params);
+        return {query: params.term};
+      },
+      results: (term: any) => {
+        console.log(term);
+        return term;
+      }
+
+    };
+    this.optionPatient = {
+      ajax: this.ajaxOptionPatient,
+      placeholder: 'กรุณาเลือกข้อมูลผู้ป่วยที่ต้องการ',
+      allowClear: true,
+      dropdownAutoWidth: true,
+      multiple: false,
+      width: '100%'
+    };
   }
 
-  cidSearch(): any {
-    if (this.txtSearch === '') {
-      this.dataSearch = this.dataNovel;
-    } else {
-      this.dataSearch = this.dataNovel.filter((data: any) => {
-        return data.novel_cid.match(this.txtSearch);
-      });
-    }
-  }
-
-  nameSearch(): any {
-    if (this.ptname === '') {
-      this.dataSearch = this.dataNovel;
-    } else {
-      this.dataSearch = this.dataNovel.filter((data: any) => {
-        return data.ptfullname.match(this.ptname);
-      });
-    }
-  }
-
-  stationSearch(): any {
-    if (this.station === '') {
-      this.dataSearch = this.dataNovel;
-    } else {
-      this.dataSearch = this.dataNovel.filter((data: any) => {
-        return data.novel_station.match(this.station);
-      });
-    }
-  }
-
-  statusSearch(): any {
-    if (this.status === '') {
-      this.dataSearch = this.dataNovel;
-    } else {
-      this.dataSearch = this.dataNovel.filter((data: any) => {
-        return data.sars_pt_type.match(this.status);
-      });
-    }
-  }
-
-  clinicSearch(): any {
-    if (this.clinic === '') {
-      this.dataSearch = this.dataNovel;
-    } else {
-      this.dataSearch = this.dataNovel.filter((data: any) => {
-        return data.report_point.match(this.clinic);
-      });
-    }
-  }
-
-  pointSearch(): any {
-    if (this.point === '') {
-      this.dataSearch = this.dataNovel;
-    } else {
-      this.dataSearch = this.dataNovel.filter((data: any) => {
-        return data.servicepoint.match(this.point);
-      });
-    }
-  }
-
-  async dateChange(e: any): Promise<any> {
-    this.dataServicePoint = [];
-    this.servicepoint = '';
-    const dateinput = moment(e).format('YYYY-MM-DD');
-    this.dateChoose = dateinput;
-    const rs: any = await this.api.getDataStaffRaw(dateinput);
+  async getPTdata(cid: any): Promise<any> {
+    this.dataPT = [];
+    this.dataSearch = [];
+    const rs: any = await this.api.getDataByCid(cid);
     // console.log(rs);
     if (rs.ok) {
-      this.dataNovel = rs.message;
-      this.dataSearch = this.dataNovel;
-      const res: any = await this.api.getStaffServicepoint(dateinput);
-      // console.log(res.message);
-      if (res.ok === true){
-        this.dataServicePoint = res.message;
-        // console.log(this.dataServicePoint);
-      }else {
-        console.log('error');
-      }
+      this.dataPT = rs.message;
+      this.dataSearch = this.dataPT;
     } else {
-      console.log('error');
+      this.dataPT = [];
     }
-  }
-
-  async changeServicepoint(): Promise<any> {
-    const dateinput = this.dateChoose;
-    const servicepoint = this.servicepoint;
-    // console.log(servicepoint);
-    if (this.servicepoint === 'all'){
-      const rs: any = await this.api.getDataStaffRaw(dateinput);
-      // console.log(rs);
-      if (rs.ok) {
-        this.dataNovel = rs.message;
-        this.dataSearch = this.dataNovel;
-      } else {
-        console.log('error');
-      }
-    }else{
-      const res = await this.api.getByDatePointStaff(dateinput, servicepoint);
-      if (res.ok === true){
-        this.dataNovel = res.message;
-        this.dataSearch = this.dataNovel;
-        // console.log(this.dataNovel);
-      }else{
-        console.log('error');
-      }
-    }
-
   }
 
   convertDate(d: any, i: any): any {
@@ -307,6 +216,7 @@ export class ReportComponent implements OnInit {
 
   genDatequarantine(e: any): any {
     for (let i = 1; i <= 14; i++) {
+      // console.log(moment(e).add(i, 'day').locale('th').add(543, 'year').format('DD/MM/YY'));
       this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').locale('th').add(543, 'year').format('DD/MM/YY'));
     }
     // console.log(this.dateTimeLineShortquaran);
@@ -327,10 +237,8 @@ export class ReportComponent implements OnInit {
         // console.log(res);
         if (res.ok === true) {
           Swal.fire('ลบข้อมูลสำเร็จ', '', 'success');
-          this.dateChange(moment(this.dateChoose).format('YYYY-MM-DD'));
         } else {
           Swal.fire('ลบข้อมูลไม่สำเร็จ', '', 'error');
-          this.dateChange(moment(this.dateChoose).format('YYYY-MM-DD'));
         }
       }
     });
@@ -443,7 +351,7 @@ export class ReportComponent implements OnInit {
     if (res.ok === true && resStaff.ok === true) {
       this.dataNovelByID = res.message[0];
       this.dataNovelStaff = resStaff.message[0];
-      this.genDatequarantine(moment(this.dataNovelStaff.sdate_quaran).format('YYYY-MM-DD'));
+      // this.genDatequarantine(moment(this.dataNovelStaff.sdate_quaran).format('YYYY-MM-DD'));
       pdfMake.createPdf(this.docReport02()).download('ใบขวาง(' + novelID + ').pdf');
     } else {
       console.log('error');
@@ -625,10 +533,10 @@ export class ReportComponent implements OnInit {
 
         (this.dataNovelStaff.sars_pt_type !== 1) ?
           {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 0 ? 263 :
-              this.dataNovelStaff.sars_pt_type === 2 ? 97 :
-                this.dataNovelStaff.sars_pt_type === 3 ? 197 :
-                  this.dataNovelStaff.sars_pt_type === 4 ? 127 :
-                    this.dataNovelStaff.sars_pt_type === 5 ? 162 : 229, y: 722}, style: 'fSize24'} :
+                this.dataNovelStaff.sars_pt_type === 2 ? 97 :
+                  this.dataNovelStaff.sars_pt_type === 3 ? 197 :
+                    this.dataNovelStaff.sars_pt_type === 4 ? 127 :
+                      this.dataNovelStaff.sars_pt_type === 5 ? 162 : 229, y: 722}, style: 'fSize24'} :
           {text: '√', absolutePosition: {x: 501, y: 738}, style: 'fSize24'},
 
         (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 197, y: 722}, style: 'fSize24'} :
@@ -862,7 +770,7 @@ export class ReportComponent implements OnInit {
               }
             },
             {width: 'auto', text: 'ปฎิเสธอาการทาง URI', style: 'fSize13'},
-        ],
+          ],
           columnGap: 3
         },
         {
@@ -1839,7 +1747,7 @@ export class ReportComponent implements OnInit {
           absolutePosition: {x: 190, y: 150}, bold: true} : null,
         {text: this.dataNovelByID.novel_treat, absolutePosition: {x: 380, y: 150}, bold: true},
 
-       {text: moment().locale('th').add(543, 'year').format('D MMMM YYYY'),
+        {text: moment().locale('th').add(543, 'year').format('D MMMM YYYY'),
           absolutePosition: {x: 150, y: 168}, bold: true},
         {text: moment().locale('th').add(543, 'year').format('HH:mm'),
           absolutePosition: {x: 325, y: 168}, bold: true},
@@ -1847,9 +1755,9 @@ export class ReportComponent implements OnInit {
 
         (this.dataNovelStaff.sars_pt_type === 0 || this.dataNovelStaff.sars_pt_type === 1) ? null :
           {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 2 ? 82 :
-                  this.dataNovelStaff.sars_pt_type === 3 ? 337 :
-                    this.dataNovelStaff.sars_pt_type === 4 ? 166 :
-                      this.dataNovelStaff.sars_pt_type === 5 ? 252 : 422, y: 238}, style: 'fSize24'},
+                this.dataNovelStaff.sars_pt_type === 3 ? 337 :
+                  this.dataNovelStaff.sars_pt_type === 4 ? 166 :
+                    this.dataNovelStaff.sars_pt_type === 5 ? 252 : 422, y: 238}, style: 'fSize24'},
 
         (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 337, y: 238}, style: 'fSize24'} :
           (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 166, y: 238}, style: 'fSize24'} : null,
@@ -3146,7 +3054,7 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelStaff.sars1_placesend, absolutePosition: {x: 290, y: 635}, bold: true},
         (this.dataNovelStaff.sars1_result != null) ? {
           text: '√', absolutePosition: {x: this.dataNovelStaff.sars1_result === 1 ? 373 : 464, y: 628}, style: 'fSize24'
-      } : null,
+        } : null,
 
         // {text: 2, absolutePosition: {x: 46, y: 657}, bold: true},
         (this.dataNovelStaff.sars2_date != null) ? {
@@ -4372,7 +4280,7 @@ export class ReportComponent implements OnInit {
         {
           columns: [
             {width: '5%', text: ' '},
-            {width: '45%', text: (this.dataNovelByID.novel_servicepoint === 5) ? null :  '(นพ.ปิยะณัฐ บุญประดิษฐ์)', alignment: 'center'},
+            {width: '45%', text: (this.dataNovelByID.novel_servicepoint === 5) ? null : '(นพ.ปิยะณัฐ บุญประดิษฐ์)', alignment: 'center'},
             {width: '5%', text: ' '},
             {width: '45%', text: '(' + ptfullname + ')', alignment: 'center'}
           ],
@@ -4417,7 +4325,7 @@ export class ReportComponent implements OnInit {
           ],
           columnGap: 5
         },
-        (this.dataNovelByID.novel_servicepoint === 5) ? null : {image: this.imgSign01, absolutePosition: {x: 150, y: 650}, fit: [70, 70]},
+        (this.dataNovelByID.novel_servicepoint === 5) ? null :  {image: this.imgSign01, absolutePosition: {x: 150, y: 650}, fit: [70, 70]},
         (this.dataNovelByID.novel_servicepoint === 5) ? null : {image: this.imgSign02, absolutePosition: {x: 175, y: 738}, fit: [30, 30]},
         (this.dataNovelByID.novel_servicepoint === 5) ? null : {image: this.imgSign03, absolutePosition: {x: 405, y: 738}, fit: [70, 70]},
 
@@ -4798,7 +4706,6 @@ export class ReportComponent implements OnInit {
           table: {
             widths: [95, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5],
             body: [
-
               [
                 {text: 'เจ็บคอ', style: 'fSize10', alignment: 'left', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},
@@ -5333,8 +5240,5 @@ export class ReportComponent implements OnInit {
     return docDefinition;
   }
 
-  exportExcel(): any {
-    window.open(
-      'http://www.rbhportal.com/export/corona.php?dateinput=' + this.dateChoose, '_parent');
-  }
+
 }

@@ -194,8 +194,8 @@
                        class="form-control" type="text" placeholder="ใส่เบอร์โทรศัพท์ที่ติดต่อได้">
                 <div *ngIf="submitted && f.telephone.errors  || ((f.telephone.touched || f.telephone.dirty) && f.telephone.invalid)"
                   class="invalid-feedback">
-                  <div class="text-left fSize12" *ngIf="f.telephone.errors.required">กรุณาใส่เบอร์โทรศัพท์ที่ติดต่อได้
-                  </div>
+                  <div class="text-left fSize12" *ngIf="f.telephone.errors.required">กรุณาใส่เบอร์โทรศัพท์ที่ติดต่อได้</div>
+                  <div class="text-left fSize12" *ngIf="f.telephone.errors.minlength">กรุณาใส่เบอร์โทรศัพท์ที่ติดต่อได้ 10 หลัก</div>
                 </div>
               </div>
             </div>
@@ -555,7 +555,7 @@
 
                 <label class="checkbox checkbox-square mt-8">
                   <input type="checkbox" name="Checkboxes6" [(ngModel)]="radioheadache"/>
-                  <span></span>ปวดศรีษะ
+                  <span></span>ปวดศีรษะ
                 </label>
 
                 <label class="checkbox checkbox-square mt-8">

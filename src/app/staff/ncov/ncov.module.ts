@@ -10,6 +10,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {SharedModule} from '../../shared.module';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {SearchComponent } from './search/search.component';
+import {LSelect2Module} from 'ngx-select2';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
     NcovLayoutComponent,
     ViewComponent,
     ReportComponent,
-    RecheckComponent
+    RecheckComponent,
+    SearchComponent
   ],
     imports: [
         CommonModule,
@@ -26,7 +29,9 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
         BsDatepickerModule.forRoot(),
         SharedModule,
         ReactiveFormsModule,
-        TooltipModule
+        TooltipModule,
+        LSelect2Module
+
     ]
 })
 export class NcovModule { }
