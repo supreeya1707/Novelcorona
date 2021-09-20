@@ -650,7 +650,7 @@
               </div>
             </div>
             <div class="col-md-4">
-              <input type="text" class="form-control fsize4" placeholder="โปรดระบุโดยสารการบิน"
+              <input type="text" class="form-control fsize4" placeholder="โปรดระบุโดยสายการบิน"
                      [ngModelOptions]="{standalone: true}" [(ngModel)]="come_plane"/>
             </div>
             <div class="col-md-4">
@@ -1273,7 +1273,7 @@
         <hr class="mt-15">
         <div class="row mt-10">
           <div class="form-group">
-            <label>ผลการตรวจ SARS-CoV2 Antibody</label>
+            <label>ผลการตรวจ SARS-CoV2</label>
           </div>
         </div>
         <div class="row">
@@ -1283,7 +1283,11 @@
 <!--          </div>-->
           <div class="col-md-3">
             <label>ชนิดตัวอย่าง</label>
-            <input type="text" class="form-control" id="typeSAR1" [(ngModel)]="typeSAR1" readonly="true">
+            <select [(ngModel)]="typeSAR1" id="typeSAR1" class="form-control">
+              <option disabled></option>
+              <option *ngFor="let type of dataSarsType" [value]="type.value">{{type.viewValue}}</option>
+            </select>
+<!--            <input type="text" class="form-control" id="typeSAR1" [(ngModel)]="typeSAR1" readonly="true">-->
           </div>
           <div class="col-md-3">
             <label>วันที่เก็บ</label>
@@ -1325,7 +1329,11 @@
 <!--          </div>-->
           <div class="col-md-3">
             <label>ชนิดตัวอย่าง</label>
-            <input type="text " class="form-control" id="typeSAR2" [(ngModel)]="typeSAR2" readonly="true" >
+<!--            <input type="text " class="form-control" id="typeSAR2" [(ngModel)]="typeSAR2" readonly="true" >-->
+            <select [(ngModel)]="typeSAR2" id="typeSAR2" class="form-control">
+              <option disabled></option>
+              <option *ngFor="let type of dataSarsType" [value]="type.value">{{type.viewValue}}</option>
+            </select>
           </div>
           <div class="col-md-3">
             <label>วันที่เก็บ</label>
@@ -1354,6 +1362,53 @@
               </label>
               <label class="radio mt-3 ">
                 <input type="radio" id="radioSAR2_2" name="radioSAR2" [(ngModel)]="radiodetect2"  [value]="0"/>
+                <span></span>NOT DETECTED
+              </label>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <!--          <div class="col-md-1">-->
+          <!--            <label>ครั้งที่</label>-->
+          <!--            <input type="text " class="form-control" id="sars2" value="2" readonly="true">-->
+          <!--          </div>-->
+          <div class="col-md-3">
+            <label>ชนิดตัวอย่าง</label>
+            <!--            <input type="text " class="form-control" id="typeSAR2" [(ngModel)]="typeSAR2" readonly="true" >-->
+            <select [(ngModel)]="typeSAR3" id="typeSAR3" class="form-control">
+              <option disabled></option>
+              <option *ngFor="let type of dataSarsType" [value]="type.value">{{type.viewValue}}</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>วันที่เก็บ</label>
+            <div class="input-group">
+              <input class="form-control" (bsValueChange)="getDateSARS3($event)"
+                     placeholder="โปรดระบุวันที่เก็บตัวอย่าง" #datepickerSARS3="bsDatepicker"
+                     [value]="sarsdate3"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerSARS3.toggle()"
+                     [attr.aria-expanded]="datepickerSARS3.isOpen"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label>สถานที่ส่งตรวจ</label>
+            <input type="text " class="form-control" id="placeSAR3" [(ngModel)]="placesendSAR3">
+          </div>
+          <div class="col-md-4">
+            <label>ผลตรวจ</label>
+            <div class="radio-inline">
+              <label class="radio mt-3 ">
+                <input type="radio" id="radioSAR3_1" name="radioSAR3" [(ngModel)]="radiodetect3" [value]="1"/>
+                <span></span>DETECTED
+              </label>
+              <label class="radio mt-3 ">
+                <input type="radio" id="radioSAR3_2" name="radioSAR3" [(ngModel)]="radiodetect3"  [value]="0"/>
                 <span></span>NOT DETECTED
               </label>
 
@@ -1390,6 +1445,16 @@
         <div class="row mt-4">
           <div class="col-md-auto">
             <div class="radio-inline">
+              <label class="radio">
+                <input type="radio" name="radioSARtype" id="radioSARtype7"  [(ngModel)]="radioSARtype" [value]="7"/>
+                <span></span>O-ATK+
+              </label>
+
+              <label class="radio">
+                <input type="radio" name="radioSARtype" id="radioSARtype8"  [(ngModel)]="radioSARtype" [value]="8"/>
+                <span></span>S-ATK+
+              </label>
+
               <label class="radio ">
                 <input type="radio" name="radioSARtype" id="radioSARtype0"  [(ngModel)]="radioSARtype" [value]="0"/>
                 <span></span>ไม่เข้าเกณฑ์ PUI

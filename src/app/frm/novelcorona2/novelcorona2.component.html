@@ -193,7 +193,7 @@
               <div class="form-group">
                 <label>เบอร์โทรศัพท์ที่ติดต่อได้ <span class="text-danger">*</span></label>&nbsp;<small class="text-info">ใส่เฉพาะตัวเลข</small>
                 <!--inputmode="numeric" pattern="[0-9]*" digitOnly-->
-                <input name="telephone" id="telephone" formControlName="telephone" inputmode="numeric" pattern="[0-9]*" digitOnly
+                <input name="telephone" maxlength="10" id="telephone" formControlName="telephone" inputmode="numeric" pattern="[0-9]*" digitOnly
                        [ngClass]="{ 'is-invalid': submitted && f.telephone.errors  || ((f.telephone.touched || f.telephone.dirty) && f.telephone.invalid) }"
                        class="form-control" type="text" placeholder="ใส่เบอร์โทรศัพท์ที่ติดต่อได้">
                 <div
@@ -654,7 +654,7 @@
               </div>
             </div>
             <div class="col-md-4">
-              <input type="text" class="form-control fsize4" placeholder="โปรดระบุโดยสารการบิน"
+              <input type="text" class="form-control fsize4" placeholder="โปรดระบุโดยสายการบิน"
                      [ngModelOptions]="{standalone: true}" [(ngModel)]="come_plane"/>
             </div>
             <div class="col-md-4">

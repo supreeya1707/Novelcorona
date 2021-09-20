@@ -46,6 +46,11 @@ interface PuiPriority {
   viewValue: string;
 }
 
+interface SarsType {
+  value: string;
+  viewValue: string;
+}
+
 
 @Component({
   selector: 'app-forms',
@@ -131,6 +136,7 @@ export class RecheckComponent implements OnInit {
 
   dateSARS1: any;
   dateSARS2: any;
+  dateSARS3: any;
   startquaran: any;
   endquaran: any;
 
@@ -198,12 +204,15 @@ export class RecheckComponent implements OnInit {
   desOther: any;
   date: any;
 
-  typeSAR1: any = 'ATK';
+  typeSAR1: any;
   placesendSAR1: any;
   radiodetect1: any;
-  typeSAR2: any = 'RT-PCR';
+  typeSAR2: any;
   placesendSAR2: any;
   radiodetect2: any;
+  typeSAR3: any;
+  placesendSAR3: any;
+  radiodetect3: any;
   radiodoctor: any;
   timefromdoc: any;
   commentdoctor: any;
@@ -228,6 +237,7 @@ export class RecheckComponent implements OnInit {
   radioStaffContact: any;
   sarsdate1: any = null;
   sarsdate2: any = null;
+  sarsdate3: any = null;
   date1swab: any = null;
   date2swab: any = null;
   date3swab: any = null;
@@ -294,6 +304,11 @@ export class RecheckComponent implements OnInit {
     {value: 'โครงการพิเศษ', viewValue: 'โครงการพิเศษ'},
     {value: 'ชำระเงินเอง', viewValue: 'ชำระเงินเอง'},
     {value: 'อื่น ๆ', viewValue: 'อื่น ๆ'},
+  ];
+
+  dataSarsType: SarsType[] = [
+    {value: 'ATK', viewValue: 'ATK'},
+    {value: 'RT-PCR', viewValue: 'RT-PCR'}
   ];
 
   password: any = 'rbhCoV!9';
@@ -669,11 +684,20 @@ export class RecheckComponent implements OnInit {
 
         if (this.dataStaff.sars2_date != null){
           this.sarsdate2 = (moment(this.dataStaff.sars2_date).add(543, 'year').format('DD/MM/YYYY'));
-          this.getDateSARS1(moment(this.dataStaff.sars2_date).format('YYYY-MM-DD'));
+          this.getDateSARS2(moment(this.dataStaff.sars2_date).format('YYYY-MM-DD'));
         }
         this.typeSAR2 = this.dataStaff.sars2_type;
         this.placesendSAR2 = this.dataStaff.sars2_placesend;
         this.radiodetect2 = this.dataStaff.sars2_result;
+
+        if (this.dataStaff.sars3_date != null){
+          this.sarsdate3 = (moment(this.dataStaff.sars3_date).add(543, 'year').format('DD/MM/YYYY'));
+          this.getDateSARS3(moment(this.dataStaff.sars3_date).format('YYYY-MM-DD'));
+        }
+        this.typeSAR3 = this.dataStaff.sars3_type;
+        this.placesendSAR3 = this.dataStaff.sars3_placesend;
+        this.radiodetect3 = this.dataStaff.sars3_result;
+
         this.radiodoctor = this.dataStaff.doctor;
         this.timefromdoc = this.dataStaff.doctor_time;
         this.commentdoctor = this.dataStaff.doctor_comment;
@@ -787,6 +811,10 @@ export class RecheckComponent implements OnInit {
 
   getDateSARS2(e: any): any {
     this.dateSARS2 = moment(e).format('YYYY-MM-DD');
+  }
+
+  getDateSARS3(e: any): any {
+    this.dateSARS3 = moment(e).format('YYYY-MM-DD');
   }
 
   getDateSwab1(e: any): any {
@@ -912,6 +940,12 @@ export class RecheckComponent implements OnInit {
     data.sars2_placesend = this.placesendSAR2;
     data.sars2_result = this.radiodetect2;
 
+
+    data.sars3_date = (this.dateSARS3 != null) ? moment(this.dateSARS3).format('YYYY-MM-DD') : null;
+    data.sars3_type = this.typeSAR3;
+    data.sars3_placesend = this.placesendSAR3;
+    data.sars3_result = this.radiodetect3;
+
     data.doctor = this.radiodoctor;
     data.doctor_time = this.timefromdoc;
     data.doctor_comment = this.commentdoctor;
@@ -958,6 +992,11 @@ export class RecheckComponent implements OnInit {
     data.sars2_type = this.typeSAR2;
     data.sars2_placesend = this.placesendSAR2;
     data.sars2_result = this.radiodetect2;
+
+    data.sars3_date = (this.dateSARS3 != null) ? moment(this.dateSARS3).format('YYYY-MM-DD') : null;
+    data.sars3_type = this.typeSAR3;
+    data.sars3_placesend = this.placesendSAR3;
+    data.sars3_result = this.radiodetect3;
 
     data.doctor = this.radiodoctor;
     data.doctor_time = this.timefromdoc;
