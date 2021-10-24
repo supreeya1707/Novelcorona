@@ -443,163 +443,169 @@
   </form>
 
   <!--  section 2 -->
-  <div class="row mt-5 ">
-    <div class="card col-md-12 shadow-xs">
-      <div class="card-header">
-        <h2 class="text-info">2. ข้อมูลทางคลินิก</h2>
-      </div>
-      <div class="card-body">
-<!--        <div class="row">-->
-<!--          <div class="col-md-6 mt-4">-->
-<!--            <label>วันที่เริ่มป่วย</label>-->
-<!--            <div class="input-group">-->
-<!--              <input class="form-control"-->
-<!--                     [value]="startsick" (bsValueChange)="getSsick($event)" #datepickerMDY01="bsDatepicker"-->
-<!--                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">-->
-<!--              <div class="input-group-append">-->
-<!--                <span class="input-group-text">-->
-<!--                  <i class="fa fa-calendar" (click)="datepickerMDY01.toggle()"-->
-<!--                     [attr.aria-expanded]="datepickerMDY01.isOpen"></i></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="col-md-6 mt-4">-->
-<!--            <label>วันที่เริ่มรักษา</label>-->
-<!--            <div class="input-group">-->
-<!--              <input class="form-control" #datepickerMDY02="bsDatepicker" (bsValueChange)="getDatetreat($event)"-->
-<!--                     bsDatepicker [value]="starttreat"-->
-<!--                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">-->
-<!--              <div class="input-group-append">-->
-<!--                <span class="input-group-text">-->
-<!--                  <i class="fa fa-calendar" (click)="datepickerMDY02.toggle()"-->
-<!--                     [attr.aria-expanded]="datepickerMDY02.isOpen"></i></span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row ">-->
-<!--          <div class=" col-md-6 mt-4">-->
-<!--            &lt;!&ndash;span class="text-danger">*</span>&ndash;&gt;-->
-<!--            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาครั้งแรก</label>-->
-<!--            <input type="text" [(ngModel)]="fistHosp" class="form-control"/>-->
-<!--          </div>-->
-<!--          <div class=" col-md-6 mt-4 ">-->
-<!--            <label>จังหวัด</label>-->
-<!--            <input type="text" [(ngModel)]="fistChw" class="form-control"/>-->
-<!--          </div>-->
-<!--          <div class=" col-md-6 mt-4 ">-->
-<!--            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาปัจจุบัน</label>-->
-<!--            <input type="text" [(ngModel)]="nowHosp" class="form-control"/>-->
-<!--          </div>-->
-<!--          <div class=" col-md-6 mt-4">-->
-<!--            <label>จังหวัด</label>-->
-<!--            <input type="text" [(ngModel)]="nowChw" class="form-control"/>-->
-<!--          </div>-->
-<!--        </div>-->
-        <div class="row">
-          <div class="col font-prompt-medium">
-            <div class="form-group">
-              <label>อาการและอาการแสดงในวันพบผู้ป่วย</label>
-              <div class="checkbox-inline">
-                <label class="checkbox checkbox-square">
-                  <input type="checkbox" name="Checkboxes13_1" [(ngModel)]="radiofever"/>
-                  <span></span>ไข้
-                </label>
-                <div class=" col-md-3">
-                  <input type="text" class="form-control" [(ngModel)]="assign_fever" placeholder="องศาเซลเซียส"/>
-                </div>
-                <div class="col-md-3 ">
-                  <input type="text" class="form-control" [(ngModel)]="assign_oxygen" placeholder="ค่าออกซิเจน(%)"/>
-                </div>
-
-                <label class="checkbox checkbox-square">
-                  <input type="checkbox" name="radiouri" [(ngModel)]="radiouri"/>
-                  <span></span>ปฎิเสธอาการทาง URI
-                </label>
-              </div>
-
-              <div class="checkbox-inline">
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiorespirator"/>
-                  <span></span>ใส่เครื่องช่วยหายใจ
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiocough"/>
-                  <span></span>ไอ
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiosorethroat"/>
-                  <span></span>เจ็บคอ
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6"  [(ngModel)]="radiomusclepain"/>
-                  <span></span>ปวดกล้ามเนื้อ
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiomucous"/>
-                  <span></span>มีน้ำมูก
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6"  [(ngModel)]="radiophlegm"/>
-                  <span></span>มีเสมหะ
-                </label>
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6"  [(ngModel)]="radiodifficulbreathing"/>
-                  <span></span>หายใจลำบาก
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radioheadache"/>
-                  <span></span>ปวดศีรษะ
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiopurify"/>
-                  <span></span>ถ่ายเหลว
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6"  [(ngModel)]="radiosmell"/>
-                  <span></span>จมูกไม่ได้กลิ่น
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiotaste"/>
-                  <span></span>ลิ้นไม่รับรส
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radioredeye"/>
-                  <span></span>ตาแดง
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiorash"/>
-                  <span></span>ผื่น
-                  <div class="form-inline  col-lg-5">
-                    <input type="text" class="form-control" [(ngModel)]="assign_position" placeholder="โปรดระบุตำแหน่ง"/>
+  <form [formGroup]="clinicFrm">
+    <div class="row mt-5 ">
+      <div class="card col-md-12 shadow-xs">
+        <div class="card-header">
+          <h2 class="text-info">2. ข้อมูลทางคลินิก</h2>
+        </div>
+        <div class="card-body">
+          <!--        <div class="row">-->
+          <!--          <div class="col-md-6 mt-4">-->
+          <!--            <label>วันที่เริ่มป่วย/วันที่เสี่ยง</label>-->
+          <!--            <div class="input-group">-->
+          <!--              <input class="form-control" (bsValueChange)="getDate($event)" #datepickerMDY="bsDatepicker"-->
+          <!--                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" [bsValue]="currentDate">-->
+          <!--              <div class="input-group-append">-->
+          <!--                <span class="input-group-text">-->
+          <!--                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"-->
+          <!--                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--          <div class="col-md-6 mt-4">-->
+          <!--            <label>วันที่เริ่มรักษา</label>-->
+          <!--            <div class="input-group">-->
+          <!--              <input class="form-control" #datepickerMDY="bsDatepicker" (bsValueChange)="getDatetreat($event)"-->
+          <!--                     bsDatepicker [bsValue]="currentDate"-->
+          <!--                     [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }">-->
+          <!--              <div class="input-group-append">-->
+          <!--                <span class="input-group-text">-->
+          <!--                  <i class="fa fa-calendar" (click)="datepickerMDY.toggle()"-->
+          <!--                     [attr.aria-expanded]="datepickerMDY.isOpen"></i></span>-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--        <div class="row ">-->
+          <!--          <div class=" col-md-6 mt-4">-->
+          <!--            &lt;!&ndash;span class="text-danger">*</span>&ndash;&gt;-->
+          <!--            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาครั้งแรก</label>-->
+          <!--            <input type="text" [(ngModel)]="fistHosp" class="form-control"/>-->
+          <!--          </div>-->
+          <!--          <div class=" col-md-6 mt-4 ">-->
+          <!--            <label>จังหวัด</label>-->
+          <!--            <input type="text" [(ngModel)]="fistChw" class="form-control"/>-->
+          <!--          </div>-->
+          <!--          <div class=" col-md-6 mt-4 ">-->
+          <!--            <label>ชื่อสถานพยาบาลทีเข้ารับการรักษาปัจจุบัน</label>-->
+          <!--            <input type="text" [(ngModel)]="nowHosp" class="form-control"/>-->
+          <!--          </div>-->
+          <!--          <div class=" col-md-6 mt-4">-->
+          <!--            <label>จังหวัด</label>-->
+          <!--            <input type="text" [(ngModel)]="nowChw" class="form-control"/>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <div class="row">
+            <div class="col font-prompt-medium">
+              <div class="form-group">
+                <label>อาการและอาการแสดงในวันพบผู้ป่วย</label>
+                <div class="checkbox-inline">
+                  <label class="checkbox checkbox-square">
+                    <input type="checkbox" name="Checkboxes13_1" [(ngModel)]="radiofever" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ไข้
+                  </label>
+                  <div class=" col-md-3">
+                    <input type="text" class="form-control" [(ngModel)]="assign_fever"  formControlName="assign_fever" placeholder="องศาเซลเซียส"
+                           [ngClass]="{ 'is-invalid': submitted && f4.assign_fever.errors  || ((f4.assign_fever.touched || f4.assign_fever.dirty) && f4.assign_fever.invalid) }"/>
+                    <div *ngIf="submitted && f4.assign_fever.errors  || ((f4.assign_fever.touched || f4.assign_fever.dirty) && f4.assign_fever.invalid)" class="invalid-feedback">
+                      <div class="text-left fSize12" *ngIf="f4.assign_fever.errors.required">กรุณาใส่อุณหภูมิร่างกาย</div>
+                    </div>
                   </div>
-                </label>
-
-                <label class="checkbox checkbox-square mt-8">
-                  <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiosymptom"/>
-                  <span></span>อื่นๆ
-                  <div class="form-inline col-lg-5">
-                    <input type="text" class="form-control" placeholder="โปรดระบุ" [(ngModel)]="symtom_etc"/>
+                  <div class="col-md-3 ">
+                    <input type="text" class="form-control" [(ngModel)]="assign_oxygen"  [ngModelOptions]="{standalone: true}"placeholder="ค่าออกซิเจน(%)"/>
                   </div>
-                </label>
+
+                  <label class="checkbox checkbox-square">
+                    <input type="checkbox" name="radiouri" [(ngModel)]="radiouri" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ปฎิเสธอาการทาง URI
+
+                  </label>
+                </div>
+
+                <div class="checkbox-inline">
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiorespirator" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ใส่เครื่องช่วยหายใจ
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiocough" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ไอ
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiosorethroat" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>เจ็บคอ
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6"  [(ngModel)]="radiomusclepain" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ปวดกล้ามเนื้อ
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiomucous" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>มีน้ำมูก
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6"  [(ngModel)]="radiophlegm" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>มีเสมหะ
+                  </label>
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6"  [(ngModel)]="radiodifficulbreathing" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>หายใจลำบาก
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radioheadache" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ปวดศีรษะ
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiopurify" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ถ่ายเหลว
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6"  [(ngModel)]="radiosmell" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>จมูกไม่ได้กลิ่น
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiotaste" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ลิ้นไม่รับรส
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radioredeye" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ตาแดง
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiorash" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>ผื่น
+                    <div class="form-inline  col-lg-5">
+                      <input type="text" class="form-control" [(ngModel)]="assign_position" [ngModelOptions]="{standalone: true}" placeholder="โปรดระบุตำแหน่ง"/>
+                    </div>
+                  </label>
+
+                  <label class="checkbox checkbox-square mt-8">
+                    <input type="checkbox" name="Checkboxes6" [(ngModel)]="radiosymptom" [ngModelOptions]="{standalone: true}"/>
+                    <span></span>อื่นๆ
+                    <div class="form-inline col-lg-5">
+                      <input type="text" class="form-control" placeholder="โปรดระบุ" [(ngModel)]="symtom_etc" [ngModelOptions]="{standalone: true}"/>
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 
   <!--section 3 -->
   <form [formGroup]="riskFrm">
@@ -1483,6 +1489,11 @@
               <label class="radio ">
                 <input type="radio" name="radioSARtype" id="radioSARtype6"  [(ngModel)]="radioSARtype" [value]="6"/>
                 <span></span>ACF
+              </label>
+
+              <label class="radio ">
+                <input type="radio" name="radioSARtype" id="radioSARtype9"  [(ngModel)]="radioSARtype" [value]="9"/>
+                <span></span>Pre-op
               </label>
 
               <label class="radio ">

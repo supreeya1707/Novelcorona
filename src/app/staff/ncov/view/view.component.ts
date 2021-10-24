@@ -22,8 +22,8 @@ export class ViewComponent implements OnInit {
   navbarOpen = false;
   cid: any;
   dateChoose: any;
-  dataNovel: any[];
-  dataServicePoint: any[];
+  dataNovel: any = [];
+  dataServicePoint: any = [];
   dataSearch: any = '';
 
   data: any = [];
@@ -34,7 +34,10 @@ export class ViewComponent implements OnInit {
 
   password: any = 'rbhCoV!9';
   password2: any = 'adminCoV!9';
+  password3: any = 'preopCoV!9';
   pass: any;
+
+  divServicepoint: any = true;
 
 
 
@@ -45,8 +48,8 @@ export class ViewComponent implements OnInit {
   ngOnInit(): void {
     this.localeService.use(this.locale);
     this.pass = sessionStorage.getItem('nCoVpass');
-    console.log(this.pass !== this.password);
-    if ( this.pass !== this.password && this.pass !== this.password2){
+    // console.log(this.pass !== this.password);
+    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3){
       this.router.navigateByUrl('staff/login/ncov');
     }
   }
@@ -101,31 +104,47 @@ export class ViewComponent implements OnInit {
   }
 
   async dateChange(e: any): Promise<any> {
-    this.dataServicePoint = [];
-    this.servicepoint = '';
     const dateinput = moment(e).format('YYYY-MM-DD');
     this.dateChoose = dateinput;
-    const rs: any = await this.api.getByDateRaw(dateinput);
-    // console.log(rs);
-    if (rs.ok) {
-      this.dataNovel = rs.message;
-      this.dataSearch = this.dataNovel;
-      const res: any = await this.api.getDataByDatePoint(dateinput);
-      // console.log(res.message);
+    if (this.pass === this.password3){
+      this.divServicepoint = false;
+      this.servicepoint = 9;
+      const res = await this.api.getByDateServicepoint(dateinput, this.servicepoint);
       if (res.ok === true){
-        this.dataServicePoint = res.message;
-      }else {
+        this.dataNovel = res.message;
+        this.dataSearch = this.dataNovel;
+        console.log(this.dataNovel);
+      }else{
         console.log('error');
       }
-    } else {
-      console.log('error');
+    }else{
+      this.divServicepoint = true;
+      this.dataServicePoint = [];
+      this.servicepoint = '';
+      const rs: any = await this.api.getByDateRaw(dateinput);
+      // console.log(rs);
+      if (rs.ok) {
+        this.dataNovel = rs.message;
+        this.dataSearch = this.dataNovel;
+        const res: any = await this.api.getDataByDatePoint(dateinput);
+        // console.log(res.message);
+        if (res.ok === true){
+          this.dataServicePoint = res.message;
+        }else {
+          console.log('error');
+        }
+      } else {
+        console.log('error');
+      }
     }
+
+
   }
 
   async changeServicepoint(): Promise<any> {
     const dateinput = this.dateChoose;
     const servicepoint = this.servicepoint;
-    // console.log(servicepoint);
+    console.log(servicepoint);
     if (this.servicepoint === 'all'){
       const rs: any = await this.api.getByDateRaw(dateinput);
       // console.log(rs);

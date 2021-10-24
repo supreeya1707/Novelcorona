@@ -47,6 +47,7 @@ export class Novelcorona2Component implements OnInit {
   generalFrm: any;
   timelineFrm: any;
   riskFrm: any;
+  clinicFrm: any;
   submitted = false;
   btndisble = false;
 
@@ -307,8 +308,13 @@ export class Novelcorona2Component implements OnInit {
       // desDay2: [null, Validators.compose([Validators.required])],
       // desDay3: [null, Validators.compose([Validators.required])],
       desOther: [null, Validators.compose([Validators.required])],
-
     });
+
+    this.clinicFrm = this.formBuilder.group({
+      assign_fever: [null, Validators.compose([Validators.required])]
+    });
+
+
     this.getDataServicepoint();
     this.getDataDHPH();
     this.getContact();
@@ -378,6 +384,10 @@ export class Novelcorona2Component implements OnInit {
 
   get f3(): any {
     return this.riskFrm.controls;
+  }
+
+  get f4(): any {
+    return this.clinicFrm.controls;
   }
 
   setValidators(): any {
@@ -510,7 +520,8 @@ export class Novelcorona2Component implements OnInit {
     console.log('this.generalFrm.invalid ', this.generalFrm.invalid);
     console.log('this.riskFrm.invalid ', this.riskFrm.invalid);
     console.log('this.timelineFrm.invalid ', this.timelineFrm.invalid);
-    if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid) {
+    console.log('this.clinicFrm.invalid ', this.clinicFrm.invalid);
+    if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid || this.clinicFrm.invalid) {
       Swal.fire({
         icon: 'warning',
         title: 'ข้อมูลไม่ครบถ้วน',

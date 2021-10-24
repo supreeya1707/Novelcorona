@@ -22,7 +22,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-6" *ngIf="divServicepoint">
             <div class="form-group">
               <label>เลือกจุดบริการที่ต้องการดูข้อมูล</label>
               <select class="form-control" [(ngModel)]="servicepoint" (ngModelChange)="changeServicepoint()">

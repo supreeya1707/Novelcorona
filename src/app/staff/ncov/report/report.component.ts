@@ -140,7 +140,9 @@ export class ReportComponent implements OnInit {
 
   password: any = 'rbhCoV!9';
   password2: any = 'adminCoV!9';
+  password3: any = 'preopCoV!9';
   pass: any;
+  divServicepoint: any = true;
 
 
   constructor(private api: ApiService, private localeService: BsLocaleService, private router: Router, ) {
@@ -149,7 +151,7 @@ export class ReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.pass = sessionStorage.getItem('nCoVpass');
-    if ( this.pass !== this.password && this.pass !== this.password2){
+    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3){
       this.router.navigateByUrl('staff/login/ncov');
     }
     this.localeService.use(this.locale);
@@ -250,26 +252,42 @@ export class ReportComponent implements OnInit {
   }
 
   async dateChange(e: any): Promise<any> {
-    this.dataServicePoint = [];
-    this.servicepoint = '';
     const dateinput = moment(e).format('YYYY-MM-DD');
     this.dateChoose = dateinput;
-    const rs: any = await this.api.getDataStaffRaw(dateinput);
-    // console.log(rs);
-    if (rs.ok) {
-      this.dataNovel = rs.message;
-      this.dataSearch = this.dataNovel;
-      const res: any = await this.api.getStaffServicepoint(dateinput);
-      // console.log(res.message);
+    if (this.pass === this.password3){
+      this.divServicepoint = false;
+      this.servicepoint = 9;
+      const res = await this.api.getByDatePointStaff(dateinput, this.servicepoint);
       if (res.ok === true){
-        this.dataServicePoint = res.message;
-        // console.log(this.dataServicePoint);
-      }else {
+        this.dataNovel = res.message;
+        this.dataSearch = this.dataNovel;
+        // console.log(this.dataNovel);
+      }else{
         console.log('error');
       }
-    } else {
-      console.log('error');
+    }else{
+      this.divServicepoint = true;
+      this.dataServicePoint = [];
+      this.servicepoint = '';
+      const rs: any = await this.api.getDataStaffRaw(dateinput);
+      // console.log(rs);
+      if (rs.ok) {
+        this.dataNovel = rs.message;
+        this.dataSearch = this.dataNovel;
+        const res: any = await this.api.getStaffServicepoint(dateinput);
+        // console.log(res.message);
+        if (res.ok === true){
+          this.dataServicePoint = res.message;
+          // console.log(this.dataServicePoint);
+        }else {
+          console.log('error');
+        }
+      } else {
+        console.log('error');
+      }
     }
+
+
   }
 
   async changeServicepoint(): Promise<any> {
@@ -295,7 +313,6 @@ export class ReportComponent implements OnInit {
         console.log('error');
       }
     }
-
   }
 
   convertDate(d: any, i: any): any {
@@ -639,7 +656,9 @@ export class ReportComponent implements OnInit {
                   this.dataNovelStaff.sars_pt_type === 2 ? 188 :
                     this.dataNovelStaff.sars_pt_type === 4 ? 220 :
                       this.dataNovelStaff.sars_pt_type === 5 ? 254 :
-                        this.dataNovelStaff.sars_pt_type === 3 ? 289 : 322, y: 732}, style: 'fSize24'} :
+                        this.dataNovelStaff.sars_pt_type === 3 ? 289 :
+                          this.dataNovelStaff.sars_pt_type === 6 ? 322 :
+                            this.dataNovelStaff.sars_pt_type === 9 ? 355 : 400, y: 732}, style: 'fSize24'} :
           {text: '√', absolutePosition: {x: 502, y: 749}, style: 'fSize24'},
 
         (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 289, y: 732}, style: 'fSize24'} :
@@ -1528,6 +1547,16 @@ export class ReportComponent implements OnInit {
                 ]
               }
             },
+            {width: 'auto', text: 'Pre-op', style: 'fSize13', margin: [0, 1]},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
             {width: 'auto', text: 'ไม่เข้าเกณฑ์', style: 'fSize13', margin: [0, 1]},
           ],
           columnGap: 3
@@ -1704,6 +1733,16 @@ export class ReportComponent implements OnInit {
               }
             },
             {width: '15%', text: 'ชำระเงินเอง'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: '15%', text: 'Pre-op'},
             {
               width: 'auto', table: {
                 widths: [2],
@@ -1904,7 +1943,7 @@ export class ReportComponent implements OnInit {
           absolutePosition: {x: 325, y: 158}, bold: true},
 
 
-        (this.dataNovelStaff.sars_pt_type === 0 || this.dataNovelStaff.sars_pt_type === 1 || this.dataNovelStaff.sars_pt_type === 7 || this.dataNovelStaff.sars_pt_type === 8) ? null :
+        (this.dataNovelStaff.sars_pt_type === 0 || this.dataNovelStaff.sars_pt_type === 1 || this.dataNovelStaff.sars_pt_type === 7 || this.dataNovelStaff.sars_pt_type === 8 || this.dataNovelStaff.sars_pt_type === 9 ) ? null :
           {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 2 ? 82 :
                   this.dataNovelStaff.sars_pt_type === 3 ? 337 :
                     this.dataNovelStaff.sars_pt_type === 4 ? 166 :
@@ -1919,6 +1958,8 @@ export class ReportComponent implements OnInit {
         (this.dataNovelStaff.sars_pt_type === 8) ? {text: 'S-ATK+', absolutePosition: {x: 300, y: 255}} : null,
 
         (this.dataNovelStaff.payment === 1) ? {text: '√', absolutePosition: {x: 169, y: 249}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sars_pt_type === 9) ? {text: '√', absolutePosition: {x: 254, y: 249}, style: 'fSize24'} : null,
+
         {text: ptfullname, absolutePosition: {x: 100, y: 566}, bold: true},
         {image: this.imgSign04, absolutePosition: {x: 270, y: 425}, fit: [65, 65]},
         {image: this.imgSign05, absolutePosition: {x: 270, y: 650}, fit: [65, 65]},

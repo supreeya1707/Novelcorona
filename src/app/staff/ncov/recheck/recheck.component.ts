@@ -60,6 +60,7 @@ export class RecheckComponent implements OnInit {
   generalFrm: any;
   riskFrm: any;
   timelineFrm: any;
+  clinicFrm: any;
   submitted = false;
   btndisble = false;
   novelID: any;
@@ -313,6 +314,7 @@ export class RecheckComponent implements OnInit {
 
   password: any = 'rbhCoV!9';
   password2: any = 'adminCoV!9';
+  password3: any = 'preopCoV!9';
   pass: any;
 
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
@@ -321,7 +323,7 @@ export class RecheckComponent implements OnInit {
 
   ngOnInit(): void {
     this.pass = sessionStorage.getItem('nCoVpass');
-    if ( this.pass !== this.password && this.pass !== this.password2){
+    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3){
       this.router.navigateByUrl('staff/login/ncov');
     }
     this.localeService.use(this.locale);
@@ -388,8 +390,12 @@ export class RecheckComponent implements OnInit {
       // desDay2: [null, Validators.compose([Validators.required])],
       // desDay3: [null, Validators.compose([Validators.required])],
       desOther: [null, Validators.compose([Validators.required])],
-
     });
+
+    this.clinicFrm = this.formBuilder.group({
+      assign_fever: [null, Validators.compose([Validators.required])]
+    });
+
 
 
     this.getData(this.novelID);
@@ -768,6 +774,9 @@ export class RecheckComponent implements OnInit {
   get f3(): any {
     return this.riskFrm.controls;
   }
+  get f4(): any {
+    return this.clinicFrm.controls;
+  }
 
   successNotification(): any {
     Swal.fire('สำเร็จ', 'บันทึกข้อมูลสำเร็จ!', 'success')
@@ -886,11 +895,12 @@ export class RecheckComponent implements OnInit {
 
   async updateData(): Promise<any>{
     this.submitted = true;
-    if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid) {
+    if (this.generalFrm.invalid || this.timelineFrm.invalid || this.riskFrm.invalid || this.clinicFrm.invalid) {
       // console.log('invalid');
       console.log('this.generalFrm.invalid ', this.generalFrm.invalid);
       console.log('this.riskFrm.invalid ', this.riskFrm.invalid);
       console.log('this.timelineFrm.invalid ', this.timelineFrm.invalid);
+      console.log('this.clinicFrm.invalid ', this.clinicFrm.invalid);
       Swal.fire({
         icon: 'warning',
         title: 'ข้อมูลไม่ครบถ้วน',
