@@ -81,6 +81,7 @@ export class SearchComponent implements OnInit {
 
   password: any = 'rbhCoV!9';
   password2: any = 'adminCoV!9';
+
   pass: any;
 
   locale = 'th-be';
