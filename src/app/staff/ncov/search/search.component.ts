@@ -81,6 +81,8 @@ export class SearchComponent implements OnInit {
 
   password: any = 'rbhCoV!9';
   password2: any = 'adminCoV!9';
+  password3: any = 'preopCoV!9';
+  password4: any = 'jailCoV!9';
 
   pass: any;
 
@@ -133,7 +135,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.pass = sessionStorage.getItem('nCoVpass');
-    if ( this.pass !== this.password && this.pass !== this.password2){
+    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3 && this.pass !== this.password4){
       this.router.navigateByUrl('staff/login/ncov');
     }
     this.localeService.use(this.locale);
@@ -216,7 +218,7 @@ export class SearchComponent implements OnInit {
   }
 
   genDatequarantine(e: any): any {
-    for (let i = 1; i <= 14; i++) {
+    for (let i = 1; i <= 10; i++) {
       // console.log(moment(e).add(i, 'day').locale('th').add(543, 'year').format('DD/MM/YY'));
       this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').locale('th').add(543, 'year').format('DD/MM/YY'));
     }
@@ -399,177 +401,191 @@ export class SearchComponent implements OnInit {
       pageSize: 'A4',
       pageOrientation: 'portrait',
       // [left, top, right, bottom]
-      pageMargins: [30, 30, 30, 25],
+      pageMargins: [30, 20, 30, 20],
       content: [
-        {text: this.dataNovelByID.novel_cid, absolutePosition: {x: 260, y: 56}, bold: true},
-        {text: this.dataNovelByID.novel_treat, absolutePosition: {x: 415, y: 56}, bold: true},
-        {text: ptfullname, absolutePosition: {x: 90, y: 72}, bold: true},
-        {text: (this.dataNovelByID.novel_gender === 2) ? 'ชาย' : 'หญิง' , absolutePosition: {x: 345, y: 72}, bold: true},
-        {text: this.dataNovelByID.novel_age, absolutePosition: {x: 402, y: 72}, bold: true},
-        {text: this.dataNovelByID.novel_national, absolutePosition: {x: 525, y: 72}, bold: true},
-        {text: this.dataNovelByID.novel_worker, absolutePosition: {x: 70, y: 88}, bold: true},
-        {text: this.dataNovelByID.novel_station, absolutePosition: {x: 345, y: 88}, bold: true},
+        {text: this.dataNovelByID.novel_cid, absolutePosition: {x: 260, y: 45}, bold: true},
+        {text: this.dataNovelByID.novel_treat, absolutePosition: {x: 415, y: 45}, bold: true},
+        {text: ptfullname, absolutePosition: {x: 90, y: 62}, bold: true},
+        {text: (this.dataNovelByID.novel_gender === 2) ? 'ชาย' : 'หญิง' , absolutePosition: {x: 345, y: 62}, bold: true},
+        {text: this.dataNovelByID.novel_age, absolutePosition: {x: 402, y: 62}, bold: true},
+        {text: this.dataNovelByID.novel_national, absolutePosition: {x: 525, y: 62}, bold: true},
+        {text: this.dataNovelByID.novel_worker, absolutePosition: {x: 70, y: 79}, bold: true},
+        {text: this.dataNovelByID.novel_station, absolutePosition: {x: 345, y: 79}, bold: true},
         (this.dataNovelByID.novel_birthday) ? {
           text: moment(this.dataNovelByID.novel_birthday).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 105, y: 105},
+          absolutePosition: {x: 105, y: 95},
           bold: true
         } : null,
-        {text: this.dataNovelByID.novel_phone, absolutePosition: {x: 370, y: 105}, bold: true},
+        {text: this.dataNovelByID.novel_phone, absolutePosition: {x: 370, y: 95}, bold: true},
 
-        {text: this.dataNovelByID.novel_number_address, absolutePosition: {x: 120, y: 121}, bold: true},
-        {text: this.dataNovelByID.novel_moo, absolutePosition: {x: 191, y: 121}, bold: true},
-        {text: this.dataNovelByID.novel_mooban, absolutePosition: {x: 250, y: 121}, bold: true},
-        {text: this.dataNovelByID.novel_soi, absolutePosition: {x: 370, y: 121}, bold: true},
-        {text: this.dataNovelByID.novel_road, absolutePosition: {x: 490, y: 121}, bold: true},
+        {text: this.dataNovelByID.novel_number_address, absolutePosition: {x: 120, y: 112}, bold: true},
+        {text: this.dataNovelByID.novel_moo, absolutePosition: {x: 191, y: 112}, bold: true},
+        {text: this.dataNovelByID.novel_mooban, absolutePosition: {x: 250, y: 112}, bold: true},
+        {text: this.dataNovelByID.novel_soi, absolutePosition: {x: 370, y: 112}, bold: true},
+        {text: this.dataNovelByID.novel_road, absolutePosition: {x: 490, y: 112}, bold: true},
 
-        {text: this.dataNovelByID.novel_district, absolutePosition: {x: 90, y: 137}, bold: true},
-        {text: this.dataNovelByID.novel_amphur, absolutePosition: {x: 270, y: 137}, bold: true},
-        {text: this.dataNovelByID.novel_province, absolutePosition: {x: 465, y: 137}, bold: true},
+        {text: this.dataNovelByID.novel_district, absolutePosition: {x: 90, y: 127}, bold: true},
+        {text: this.dataNovelByID.novel_amphur, absolutePosition: {x: 270, y: 127}, bold: true},
+        {text: this.dataNovelByID.novel_province, absolutePosition: {x: 465, y: 127}, bold: true},
 
-        (this.dataNovelByID.novel_copd === 1) ? {text: '√', absolutePosition: {x: 83, y: 148}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_ckd === 1) ? {text: '√', absolutePosition: {x: 127, y: 148}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_cad === 1) ? {text: '√', absolutePosition: {x: 165, y: 148}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_cva === 1) ? {text: '√', absolutePosition: {x: 202, y: 148}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_undm === 1) ? {text: '√', absolutePosition: {x: 237, y: 148}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_pids === 1) ? {text: '√', absolutePosition: {x: 330, y: 148}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_congential === '1') ? {text: '√', absolutePosition: {x: 417, y: 148}, style: 'fSize24'} : null,
-        {text: this.dataNovelByID.novel_congential_etc, absolutePosition: {x: 460, y: 154}, bold: true},
+        (this.dataNovelByID.novel_copd === 1) ? {text: '√', absolutePosition: {x: 83, y: 138}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_ckd === 1) ? {text: '√', absolutePosition: {x: 127, y: 138}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_cad === 1) ? {text: '√', absolutePosition: {x: 165, y: 138}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_cva === 1) ? {text: '√', absolutePosition: {x: 202, y: 138}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_undm === 1) ? {text: '√', absolutePosition: {x: 237, y: 138}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_pids === 1) ? {text: '√', absolutePosition: {x: 330, y: 138}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_congential === '1') ? {text: '√', absolutePosition: {x: 417, y: 138}, style: 'fSize24'} : null,
+        {text: this.dataNovelByID.novel_congential_etc, absolutePosition: {x: 460, y: 144}, bold: true},
 
-        {text: this.dataNovelByID.novel_weight, absolutePosition: {x: 70, y: 170}, bold: true},
-        {text: this.dataNovelByID.novel_high, absolutePosition: {x: 170, y: 170}, bold: true},
-        {text: this.dataNovelByID.novel_bmi, absolutePosition: {x: 265, y: 170}, bold: true},
+        {text: this.dataNovelByID.novel_weight, absolutePosition: {x: 70, y: 160}, bold: true},
+        {text: this.dataNovelByID.novel_high, absolutePosition: {x: 170, y: 160}, bold: true},
+        {text: this.dataNovelByID.novel_bmi, absolutePosition: {x: 265, y: 160}, bold: true},
 
-        (this.dataNovelByID.novel_fever === 1) ? {text: '√', absolutePosition: {x: 208, y: 180}, style: 'fSize24'} : null,
-        {text: this.dataNovelByID.novel_assign_fever, absolutePosition: {x: 300, y: 186 }, bold: true},
-        (this.dataNovelByID.novel_uri === 1) ? {text: '√', absolutePosition: {x: 477, y: 180}, style: 'fSize24'} : null,
-        {text: this.dataNovelByID.novel_assign_oxygen, absolutePosition: {x: 400, y: 186}, bold: true},
+        (this.dataNovelByID.novel_fever === 1) ? {text: '√', absolutePosition: {x: 208, y: 170}, style: 'fSize24'} : null,
+        {text: this.dataNovelByID.novel_assign_fever, absolutePosition: {x: 300, y: 176}, bold: true},
+        (this.dataNovelByID.novel_uri === 1) ? {text: '√', absolutePosition: {x: 477, y: 170}, style: 'fSize24'} : null,
+        {text: this.dataNovelByID.novel_assign_oxygen, absolutePosition: {x: 400, y: 176}, bold: true},
 
-        (this.dataNovelByID.novel_cough === 1) ? {text: '√', absolutePosition: {x: 32, y: 197}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_sorethroat === 1) ? {text: '√', absolutePosition: {x: 86, y: 197}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_musclepain === 1) ? {text: '√', absolutePosition: {x: 178, y: 197}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_mucous === 1) ? {text: '√', absolutePosition: {x: 261, y: 197}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_phlegm === 1) ? {text: '√', absolutePosition: {x: 315, y: 197}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_difficulbreathing === 1) ? {text: '√', absolutePosition: {x: 379, y: 197}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_headache === 1) ? {text: '√', absolutePosition: {x: 455, y: 197}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_cough === 1) ? {text: '√', absolutePosition: {x: 32, y: 187}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_sorethroat === 1) ? {text: '√', absolutePosition: {x: 86, y: 187}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_musclepain === 1) ? {text: '√', absolutePosition: {x: 178, y: 187}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_mucous === 1) ? {text: '√', absolutePosition: {x: 261, y: 187}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_phlegm === 1) ? {text: '√', absolutePosition: {x: 315, y: 187}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_difficulbreathing === 1) ? {text: '√', absolutePosition: {x: 379, y: 187}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_headache === 1) ? {text: '√', absolutePosition: {x: 455, y: 187}, style: 'fSize24'} : null,
 
-        (this.dataNovelByID.novel_purify === 1) ? {text: '√', absolutePosition: {x: 32, y: 213}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_smell === 1) ? {text: '√', absolutePosition: {x: 86, y: 213}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_taste === 1) ? {text: '√', absolutePosition: {x: 179, y: 213}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_redeye === 1) ? {text: '√', absolutePosition: {x: 263, y: 213}, style: 'fSize24'} : null,
-        (this.dataNovelByID.novel_rash === 1) ? {text: '√', absolutePosition: {x: 312, y: 213}, style: 'fSize24'} : null,
-        {text: this.dataNovelByID.novel_position, absolutePosition: {x: 380, y: 220}, bold: true},
-        (this.dataNovelByID.novel_symtom === 1) ? {text: '√', absolutePosition: {x: 427, y: 213}, style: 'fSize24'} : null,
-        {text: this.dataNovelByID.novel_symtom_etc, absolutePosition: {x: 485, y: 220}, bold: true},
+        (this.dataNovelByID.novel_purify === 1) ? {text: '√', absolutePosition: {x: 32, y: 203}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_smell === 1) ? {text: '√', absolutePosition: {x: 86, y: 203}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_taste === 1) ? {text: '√', absolutePosition: {x: 179, y: 203}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_redeye === 1) ? {text: '√', absolutePosition: {x: 263, y: 203}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_rash === 1) ? {text: '√', absolutePosition: {x: 312, y: 203}, style: 'fSize24'} : null,
+        {text: this.dataNovelByID.novel_position, absolutePosition: {x: 380, y: 210}, bold: true},
+        (this.dataNovelByID.novel_symtom === 1) ? {text: '√', absolutePosition: {x: 427, y: 203}, style: 'fSize24'} : null,
+        {text: this.dataNovelByID.novel_symtom_etc, absolutePosition: {x: 485, y: 210}, bold: true},
 
-        {text: this.dataNovelStaff.sars1_type, absolutePosition: {x: 70, y: 279}, bold: true},
+        {text: this.dataNovelStaff.sars1_type, absolutePosition: {x: 70, y: 270}, bold: true},
         (this.dataNovelStaff.sars1_date != null) ? {
           text: moment(this.dataNovelStaff.sars1_date).locale('th').add(543, 'year').format('D MMM YY'),
-          absolutePosition: {x: 170, y: 279}, bold: true} : null,
-        {text: this.dataNovelStaff.sars1_placesend, absolutePosition: {x: 280, y: 279}, bold: true},
+          absolutePosition: {x: 170, y: 270}, bold: true} : null,
+        {text: this.dataNovelStaff.sars1_placesend, absolutePosition: {x: 280, y: 270}, bold: true},
         (this.dataNovelStaff.sars1_result != null) ? {
-          text: '√', absolutePosition: {x: this.dataNovelStaff.sars1_result === 1 ? 374 : 466, y: 272},
+          text: '√', absolutePosition: {x: this.dataNovelStaff.sars1_result === 1 ? 374 : 466, y: 262},
           style: 'fSize24'} : null,
 
-        {text: this.dataNovelStaff.sars2_type, absolutePosition: {x: 65, y: 300}, bold: true},
+        {text: this.dataNovelStaff.sars2_type, absolutePosition: {x: 70, y: 290}, bold: true},
         (this.dataNovelStaff.sars2_date != null) ? {
           text: moment(this.dataNovelStaff.sars2_date).locale('th').add(543, 'year').format('D MMM YY'),
-          absolutePosition: {x: 170, y: 300}, bold: true} : null,
-        {text: this.dataNovelStaff.sars2_placesend, absolutePosition: {x: 280, y: 300}, bold: true},
+          absolutePosition: {x: 170, y: 290}, bold: true} : null,
+        {text: this.dataNovelStaff.sars2_placesend, absolutePosition: {x: 280, y: 290}, bold: true},
         (this.dataNovelStaff.sars2_result != null) ? {
-          text: '√', absolutePosition: {x: this.dataNovelStaff.sars2_result === 1 ? 374 : 466, y: 292},
+          text: '√', absolutePosition: {x: this.dataNovelStaff.sars2_result === 1 ? 374 : 466, y: 282},
+          style: 'fSize24'} : null,
+
+        {text: this.dataNovelStaff.sars3_type, absolutePosition: {x: 70, y: 310}, bold: true},
+        (this.dataNovelStaff.sars3_date != null) ? {
+          text: moment(this.dataNovelStaff.sars3_date).locale('th').add(543, 'year').format('D MMM YY'),
+          absolutePosition: {x: 170, y: 310}, bold: true} : null,
+        {text: this.dataNovelStaff.sars3_placesend, absolutePosition: {x: 280, y: 310}, bold: true},
+        (this.dataNovelStaff.sars3_result != null) ? {
+          text: '√', absolutePosition: {x: this.dataNovelStaff.sars3_result === 1 ? 374 : 466, y: 302},
           style: 'fSize24'} : null,
 
         // ประวัติเสี่ยง
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_comefrom_31 === 0 ? 488 : 536, y: 330}, style: 'fSize24'},
-        {text: this.dataNovelByID.novel_come_city, absolutePosition: {x: 290, y: 338}, bold: true, style: 'fSize12'},
-        {text: this.dataNovelByID.novel_come_country, absolutePosition: {x: 400, y: 338}, bold: true, style: 'fSize12'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_comefrom_31 === 0 ? 488 : 536, y: 341}, style: 'fSize24'},
+        {text: this.dataNovelByID.novel_come_city, absolutePosition: {x: 290, y: 349}, bold: true, style: 'fSize12'},
+        {text: this.dataNovelByID.novel_come_country, absolutePosition: {x: 400, y: 349}, bold: true, style: 'fSize12'},
 
         (this.dataNovelByID.novel_date_come != null) ? {
           text: moment(this.dataNovelByID.novel_date_come).locale('th').add(543, 'year').format('D MMM YYYY'),
-          absolutePosition: {x: 150, y: 355}, bold: true, style: 'fSize12'} : null,
-        {text: this.dataNovelByID.novel_transportation, absolutePosition: {x: 290, y: 355}, bold: true, style: 'fSize12'},
-        {text: this.dataNovelByID.novel_round_tran, absolutePosition: {x: 410, y: 355}, bold: true, style: 'fSize12'},
-        {text: this.dataNovelByID.novel_number_seat, absolutePosition: {x: 510, y: 355}, bold: true, style: 'fSize12'},
+          absolutePosition: {x: 150, y: 365}, bold: true, style: 'fSize12'} : null,
+        {text: this.dataNovelByID.novel_transportation, absolutePosition: {x: 290, y: 365}, bold: true, style: 'fSize12'},
+        {text: this.dataNovelByID.novel_round_tran, absolutePosition: {x: 410, y: 365}, bold: true, style: 'fSize12'},
+        {text: this.dataNovelByID.novel_number_seat, absolutePosition: {x: 510, y: 365}, bold: true, style: 'fSize12'},
 
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_takecare_32 === 0 ? 488 : 536, y: 363}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_touch_his33 === 0 ? 488 : 536, y: 379}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_his_touch_34 === 0 ? 488 : 536, y: 395}, style: 'fSize24'},
-        {text: this.dataNovelByID.novel_assigntouch_34, absolutePosition: {x: 330, y: 402}, bold: true, style: 'fSize13'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_tourist_35 === 0 ? 488 : 536, y: 412}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_manyperson_36 === 0 ? 488 : 536, y: 428}, style: 'fSize24'},
-        {text: this.dataNovelByID.novel_assign_station_36, absolutePosition: {x: 347, y: 435}, bold: true, style: 'fSize13'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_ari_37 === 0 ? 488 : 536, y: 444}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_inject_38 === 0 ? 488 : 536, y: 461}, style: 'fSize24'},
-        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_doc_39 === 0 ? 488 : 536, y: 477}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_takecare_32 === 0 ? 488 : 536, y: 372}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_touch_his33 === 0 ? 488 : 536, y: 388}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_his_touch_34 === 0 ? 488 : 536, y: 406}, style: 'fSize24'},
+        {text: this.dataNovelByID.novel_assigntouch_34, absolutePosition: {x: 330, y: 412}, bold: true, style: 'fSize13'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_tourist_35 === 0 ? 488 : 536, y: 422}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_manyperson_36 === 0 ? 488 : 536, y: 438}, style: 'fSize24'},
+        {text: this.dataNovelByID.novel_assign_station_36, absolutePosition: {x: 347, y: 445}, bold: true, style: 'fSize13'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_ari_37 === 0 ? 488 : 536, y: 454}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_inject_38 === 0 ? 488 : 536, y: 471}, style: 'fSize24'},
+        {text: '√', absolutePosition: {x: this.dataNovelByID.novel_doc_39 === 0 ? 488 : 536, y: 487}, style: 'fSize24'},
         (this.dataNovelByID.novel_staff_contact != null) ? (this.dataNovelByID.novel_staff_contact === 1) ?
-          {text: 'สัมผัสผู้ติดเชื้อยืนยัน', absolutePosition: {x: 300, y: 483}, bold: true, style: 'fSize13'} :
-          {text: 'ไปสถานที่เสี่ยงสูง', absolutePosition: {x: 300, y: 483}, bold: true, style: 'fSize13'} : null,
-        {text: sCon1, absolutePosition: {x: 50, y: 501}, bold: true, style: 'fSize13'},
-        {text: sCon2, absolutePosition: {x: 50, y: 517}, bold: true, style: 'fSize13'},
-        {text: this.dataNovelByID.novel_etc_310, absolutePosition: {x: 105, y: 532}, bold: true, style: 'fSize13'},
-        {text: this.dataTimeLineByID.timeline_other, absolutePosition: {x: 35, y: 570}, style: 'fSize12', lineHeight: 1},
+          {text: 'สัมผัสผู้ติดเชื้อยืนยัน', absolutePosition: {x: 300, y: 493}, bold: true, style: 'fSize13'} :
+          {text: 'ไปสถานที่เสี่ยงสูง', absolutePosition: {x: 300, y: 493}, bold: true, style: 'fSize13'} : null,
+        {text: sCon1, absolutePosition: {x: 50, y: 511}, bold: true, style: 'fSize13'},
+        {text: sCon2, absolutePosition: {x: 50, y: 527}, bold: true, style: 'fSize13'},
+        {text: this.dataNovelByID.novel_etc_310, absolutePosition: {x: 105, y: 543}, bold: true, style: 'fSize13'},
+        {text: this.dataTimeLineByID.timeline_other, absolutePosition: {x: 35, y: 581}, style: 'fSize12', lineHeight: 1},
 
-        (this.dataNovelByID.novel_havevac === 0) ? {text: '√', absolutePosition: {x: 275 , y: 647}, style: 'fSize24'} : null,
+        (this.dataNovelByID.novel_havevac === 0) ? {text: '√', absolutePosition: {x: 274 , y: 657}, style: 'fSize24'} : null,
         (this.dataNovelByID.novel_getvac1 != null) ? {
           text: moment(this.dataNovelByID.novel_getvac1).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 105, y: 671}, bold: true, style: 'fSize12'} : null,
-        {text: this.dataNovelByID.novel_namevac1, absolutePosition: {x: 280, y: 671}, bold: true, style: 'fSize12'},
-        {text: this.dataNovelByID.novel_placevac1, absolutePosition: {x: 420, y: 671}, bold: true, style: 'fSize12'},
+          absolutePosition: {x: 105, y: 683}, bold: true, style: 'fSize12'} : null,
+        {text: this.dataNovelByID.novel_namevac1, absolutePosition: {x: 280, y: 683}, bold: true, style: 'fSize12'},
+        {text: this.dataNovelByID.novel_placevac1, absolutePosition: {x: 420, y: 683}, bold: true, style: 'fSize12'},
 
         (this.dataNovelByID.novel_getvac2 != null) ? {
           text: moment(this.dataNovelByID.novel_getvac2).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 105, y: 685}, bold: true, style: 'fSize12'} : null,
-        {text: this.dataNovelByID.novel_namevac2, absolutePosition: {x: 280, y: 685}, bold: true, style: 'fSize12'},
-        {text: this.dataNovelByID.novel_placevac2, absolutePosition: {x: 420, y: 685}, bold: true, style: 'fSize12'},
+          absolutePosition: {x: 105, y: 696}, bold: true, style: 'fSize12'} : null,
+        {text: this.dataNovelByID.novel_namevac2, absolutePosition: {x: 280, y: 696}, bold: true, style: 'fSize12'},
+        {text: this.dataNovelByID.novel_placevac2, absolutePosition: {x: 420, y: 696}, bold: true, style: 'fSize12'},
 
         (this.dataNovelByID.novel_getvac3 != null) ? {
           text: moment(this.dataNovelByID.novel_getvac3).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 105, y: 700}, bold: true, style: 'fSize12'} : null,
-        {text: this.dataNovelByID.novel_namevac3, absolutePosition: {x: 280, y: 700}, bold: true, style: 'fSize12'},
-        {text: this.dataNovelByID.novel_placevac3, absolutePosition: {x: 420, y: 700}, bold: true, style: 'fSize12'},
+          absolutePosition: {x: 105, y: 710}, bold: true, style: 'fSize12'} : null,
+        {text: this.dataNovelByID.novel_namevac3, absolutePosition: {x: 280, y: 710}, bold: true, style: 'fSize12'},
+        {text: this.dataNovelByID.novel_placevac3, absolutePosition: {x: 420, y: 710}, bold: true, style: 'fSize12'},
 
         (this.dataNovelStaff.doctor !== null && this.dataNovelStaff.doctor !== '') ? {
-          text: this.dataNovelStaff.doctor, absolutePosition: {x: 100, y: 713}, bold: 'true', style: 'fSize12'} : null,
-        {text: this.dataNovelStaff.doctor_time, absolutePosition: {x: 500, y: 713}, bold: true, style: 'fSize12'},
+          text: this.dataNovelStaff.doctor, absolutePosition: {x: 100, y: 725}, bold: 'true', style: 'fSize12'} : null,
+        {text: this.dataNovelStaff.doctor_time, absolutePosition: {x: 500, y: 725}, bold: true, style: 'fSize12'},
 
         (this.dataNovelStaff.sars_pt_type !== 1) ?
-          {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 0 ? 263 :
-                this.dataNovelStaff.sars_pt_type === 2 ? 97 :
-                  this.dataNovelStaff.sars_pt_type === 3 ? 197 :
-                    this.dataNovelStaff.sars_pt_type === 4 ? 127 :
-                      this.dataNovelStaff.sars_pt_type === 5 ? 162 : 229, y: 722}, style: 'fSize24'} :
-          {text: '√', absolutePosition: {x: 501, y: 738}, style: 'fSize24'},
+          {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 0 ? 355 :
+                this.dataNovelStaff.sars_pt_type === 7 ? 97 :
+                  this.dataNovelStaff.sars_pt_type === 8 ? 144 :
+                    this.dataNovelStaff.sars_pt_type === 2 ? 188 :
+                      this.dataNovelStaff.sars_pt_type === 4 ? 220 :
+                        this.dataNovelStaff.sars_pt_type === 5 ? 254 :
+                          this.dataNovelStaff.sars_pt_type === 3 ? 289 :
+                            this.dataNovelStaff.sars_pt_type === 6 ? 322 :
+                              this.dataNovelStaff.sars_pt_type === 9 ? 355 :
+                                this.dataNovelStaff.sars_pt_type === 10 ? 398 : 430, y: 732}, style: 'fSize24'} :
+          {text: '√', absolutePosition: {x: 502, y: 749}, style: 'fSize24'},
 
-        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 197, y: 722}, style: 'fSize24'} :
-          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 127, y: 722}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 289, y: 732}, style: 'fSize24'} :
+          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 220, y: 732}, style: 'fSize24'} : null,
 
         (this.dataNovelStaff.date_swab1 != null || this.dataNovelStaff.date_swab2 != null) ? {
-          text: '√', absolutePosition: {x: 45, y: 738}, style: 'fSize24'} : null,
+          text: '√', absolutePosition: {x: 46, y: 749}, style: 'fSize24'} : null,
         (this.dataNovelStaff.date_swab1 != null) ? {
           text: moment(this.dataNovelStaff.date_swab1).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 140, y: 747}, bold: true, style: 'fSize12'} : null,
+          absolutePosition: {x: 140, y: 758}, bold: true, style: 'fSize12'} : null,
         (this.dataNovelStaff.date_swab2 != null) ? {
           text: moment(this.dataNovelStaff.date_swab2).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 270, y: 747}, bold: true, style: 'fSize12'} : null,
+          absolutePosition: {x: 270, y: 758}, bold: true, style: 'fSize12'} : null,
         (this.dataNovelStaff.date_swab3 != null) ? {
           text: moment(this.dataNovelStaff.date_swab3).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 405, y: 747}, bold: true, style: 'fSize12'} : null,
+          absolutePosition: {x: 405, y: 758}, bold: true, style: 'fSize12'} : null,
 
         (this.dataNovelStaff.sdate_quaran != null) ? {
           text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 77, y: 763}, bold: true, style: 'fSize12'} : null,
+          absolutePosition: {x: 77, y: 774}, bold: true, style: 'fSize12'} : null,
         (this.dataNovelStaff.edate_quaran != null) ? {
           text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 157, y: 763}, bold: true, style: 'fSize12'} : null,
-        {text: this.dataNovelStaff.address_quaran, absolutePosition: {x: 300, y: 763}, bold: true, style: 'fSize12'},
+          absolutePosition: {x: 157, y: 774}, bold: true, style: 'fSize12'} : null,
+        {text: this.dataNovelStaff.address_quaran, absolutePosition: {x: 300, y: 774}, bold: true, style: 'fSize12'},
 
-        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 75, y: 795}, bold: true, style: 'fSize12'},
+        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 75, y: 805}, bold: true, style: 'fSize12'},
         (this.dataNovelStaff.report_datetime) ? {
           text: moment(this.dataNovelStaff.report_datetime).locale('th').add('year', '543').format('D MMMM YYYY'),
-          absolutePosition: {x: 432, y: 795}, bold: true, style: 'fSize12'} : null,
+          absolutePosition: {x: 432, y: 805}, bold: true, style: 'fSize12'} : null,
         (this.dataNovelStaff.report_datetime) ? {
           text: moment(this.dataNovelStaff.report_datetime).format('HH:mm'),
-          absolutePosition: {x: 533, y: 795}, bold: true, style: 'fSize12'} : null,
+          absolutePosition: {x: 533, y: 805}, bold: true, style: 'fSize12'} : null,
 
         {
           columns: [
@@ -981,6 +997,34 @@ export class SearchComponent implements OnInit {
                   columnGap: 5
                 }
               ],
+              ['', '', '',
+                {
+                  columns: [
+                    {width: '3%', text: ' ', style: 'fSize13'},
+                    {
+                      width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                          [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }
+                    },
+                    {width: '40%', text: 'Detected', style: 'fSize13'},
+                    {
+                      width: 'auto', table: {
+                        widths: [2],
+                        body: [
+                          [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                          [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                        ]
+                      }
+                    },
+                    {width: 'auto', text: 'Not detected', style: 'fSize13'}
+                  ],
+                  columnGap: 5
+                }
+              ],
             ]
           }
         },
@@ -1328,6 +1372,26 @@ export class SearchComponent implements OnInit {
                 ]
               }
             },
+            {width: 'auto', text: 'O-ATK+', style: 'fSize13', margin: [0, 1]},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'S-ATK+', style: 'fSize13', margin: [0, 1]},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
             {width: 'auto', text: 'PUI', style: 'fSize13', margin: [0, 1]},
             {
               width: 'auto', table: {
@@ -1378,6 +1442,26 @@ export class SearchComponent implements OnInit {
                 ]
               }
             },
+            {width: 'auto', text: 'Pre-op', style: 'fSize13', margin: [0, 1]},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'AS', style: 'fSize13', margin: [0, 1]},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
             {width: 'auto', text: 'ไม่เข้าเกณฑ์', style: 'fSize13', margin: [0, 1]},
           ],
           columnGap: 3
@@ -1413,7 +1497,7 @@ export class SearchComponent implements OnInit {
         },
         {
           columns: [
-            {width: 'auto', text: 'จพต.14 (วันที่.....................................ถึง.......................................)', style: 'fSize12'},
+            {width: 'auto', text: 'จพต.10 (วันที่.....................................ถึง.......................................)', style: 'fSize12'},
             {width: 'auto', text: 'ที่อยู่สำหรับกักตัว............................................................................................................................................', style: 'fSize12'}
           ],
           columnGap: 5
@@ -1563,7 +1647,27 @@ export class SearchComponent implements OnInit {
                 ]
               }
             },
-            {width: 'auto', text: 'อื่นๆ ..................................................................'},
+            {width: '15%', text: 'Pre-op'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: '15%', text: 'AS'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'อื่นๆ .......................................'},
           ],
           columnGap: 5
         },
@@ -1739,36 +1843,42 @@ export class SearchComponent implements OnInit {
         {text: 'ตำแหน่ง นักวิชาการสาธารณสุข', alignment: 'center', margin: [0, 2, 0, 0]},
         {text: 'หน่วยบริการห้อง LAB-COVID19 ที่ส่ง specimen ไปตรวจ ..................................................................................................................', alignment: 'center', margin: [0, 40, 0, 0]},
 
-        {text: 'โรงพยาบาลราชบุรี', absolutePosition: {x: 200, y: 113}, bold: true},
-        {text: this.dataNovelByID.novel_cid, absolutePosition: {x: 145, y: 132}, bold: true},
-        {text: ptfullname, absolutePosition: {x: 325, y: 132}, bold: true},
-        {text: this.dataNovelByID.novel_age, absolutePosition: {x: 72, y: 150}, bold: true},
+        {text: 'โรงพยาบาลราชบุรี', absolutePosition: {x: 200, y: 103}, bold: true},
+        {text: this.dataNovelByID.novel_cid, absolutePosition: {x: 145, y: 121}, bold: true},
+        {text: ptfullname, absolutePosition: {x: 325, y: 121}, bold: true},
+        {text: this.dataNovelByID.novel_age, absolutePosition: {x: 72, y: 140}, bold: true},
         (this.dataNovelByID.novel_birthday) ? {
           text: moment(this.dataNovelByID.novel_birthday).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 190, y: 150}, bold: true} : null,
-        {text: this.dataNovelByID.novel_treat, absolutePosition: {x: 380, y: 150}, bold: true},
+          absolutePosition: {x: 190, y: 140}, bold: true} : null,
+        {text: this.dataNovelByID.novel_treat, absolutePosition: {x: 380, y: 140}, bold: true},
 
         {text: moment().locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 150, y: 168}, bold: true},
+          absolutePosition: {x: 160, y: 158}, bold: true},
         {text: moment().locale('th').add(543, 'year').format('HH:mm'),
-          absolutePosition: {x: 325, y: 168}, bold: true},
+          absolutePosition: {x: 325, y: 158}, bold: true},
 
 
-        (this.dataNovelStaff.sars_pt_type === 0 || this.dataNovelStaff.sars_pt_type === 1) ? null :
+        (this.dataNovelStaff.sars_pt_type === 0 || this.dataNovelStaff.sars_pt_type === 1 || this.dataNovelStaff.sars_pt_type === 7 || this.dataNovelStaff.sars_pt_type === 8 || this.dataNovelStaff.sars_pt_type === 9 || this.dataNovelStaff.sars_pt_type === 10 ) ? null :
           {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 2 ? 82 :
                 this.dataNovelStaff.sars_pt_type === 3 ? 337 :
                   this.dataNovelStaff.sars_pt_type === 4 ? 166 :
-                    this.dataNovelStaff.sars_pt_type === 5 ? 252 : 422, y: 238}, style: 'fSize24'},
+                    this.dataNovelStaff.sars_pt_type === 5 ? 252 : 422, y: 228}, style: 'fSize24'},
 
-        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 337, y: 238}, style: 'fSize24'} :
-          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 166, y: 238}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 337, y: 228}, style: 'fSize24'} :
+          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 166, y: 228}, style: 'fSize24'} : null,
 
-        (this.dataNovelStaff.sars_pt_type === 0) ? {text: '√', absolutePosition: {x: 82, y: 259}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sars_pt_type === 0) ? {text: '√', absolutePosition: {x: 82, y: 249}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sars_pt_type === 7 || this.dataNovelStaff.sars_pt_type === 8) ? {text: '√', absolutePosition: {x: 422, y: 249}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sars_pt_type === 7) ? {text: 'O-ATK+', absolutePosition: {x: 460, y: 255}} : null,
+        (this.dataNovelStaff.sars_pt_type === 8) ? {text: 'S-ATK+', absolutePosition: {x: 460, y: 255}} : null,
 
-        (this.dataNovelStaff.payment === 1) ? {text: '√', absolutePosition: {x: 169, y: 259}, style: 'fSize24'} : null,
-        {text: ptfullname, absolutePosition: {x: 100, y: 575}, bold: true},
-        {image: this.imgSign04, absolutePosition: {x: 270, y: 436}, fit: [65, 65]},
-        {image: this.imgSign05, absolutePosition: {x: 270, y: 660}, fit: [65, 65]},
+        (this.dataNovelStaff.payment === 1) ? {text: '√', absolutePosition: {x: 169, y: 249}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sars_pt_type === 9) ? {text: '√', absolutePosition: {x: 254, y: 249}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.sars_pt_type === 10) ? {text: '√', absolutePosition: {x: 336, y: 249}, style: 'fSize24'} : null,
+
+        {text: ptfullname, absolutePosition: {x: 100, y: 566}, bold: true},
+        {image: this.imgSign04, absolutePosition: {x: 270, y: 425}, fit: [65, 65]},
+        {image: this.imgSign05, absolutePosition: {x: 270, y: 650}, fit: [65, 65]},
 
       ],
       defaultStyle: {
@@ -1954,7 +2064,7 @@ export class SearchComponent implements OnInit {
             {width: 'auto', text: 'LR contact นัด'},
             {width: 'auto', text: '[  ]'},
             {width: 'auto', text: 'Swab 2......................'},
-            {width: 'auto', text: 'จพต 14 วัน'},
+            {width: 'auto', text: 'จพต 10 วัน'},
             {width: 'auto', text: '(วันที่..........ถึง..................)'}
           ],
           columnGap: 5
@@ -3402,7 +3512,7 @@ export class SearchComponent implements OnInit {
         },
         {
           columns: [
-            {width: 'auto', text: 'จพต.14 (วันที่.............................ถึง.............................)'},
+            {width: 'auto', text: 'จพต.10 (วันที่.............................ถึง.............................)'},
             {
               width: 'auto', table: {
                 widths: [2],
@@ -3559,19 +3669,19 @@ export class SearchComponent implements OnInit {
 
         (this.dataNovelStaff.sdate_quaran != null) ? {text: '√', absolutePosition: {x: 425, y: 429}, style: 'fSize24'} : null,
         (this.dataNovelStaff.sdate_quaran != null) ? {
-          text: moment(this.dataNovelStaff.report_datetime).format('D'),
+          text: moment(this.dataNovelStaff.sdate_quaran).format('D'),
           absolutePosition: {x: 120, y: 449}
         } : null,
         (this.dataNovelStaff.sdate_quaran != null) ? {
-          text: moment(this.dataNovelStaff.report_datetime).locale('th').format('MMMM'),
+          text: moment(this.dataNovelStaff.sdate_quaran).locale('th').format('MMMM'),
           absolutePosition: {x: 250, y: 449}
         } : null,
         (this.dataNovelStaff.sdate_quaran != null) ? {
-          text: moment(this.dataNovelStaff.report_datetime).locale('th').add(543, 'year').format('YYYY'),
+          text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('YYYY'),
           absolutePosition: {x: 375, y: 449}
         } : null,
         (this.dataNovelStaff.sdate_quaran != null) ? {
-          text: moment(this.dataNovelStaff.report_datetime).format('HH:mm'),
+          text: moment(this.dataNovelStaff.sdate_quaran).format('HH:mm'),
           absolutePosition: {x: 480, y: 449}
         } : null,
 
@@ -4281,7 +4391,7 @@ export class SearchComponent implements OnInit {
         {
           columns: [
             {width: '5%', text: ' '},
-            {width: '45%', text: (this.dataNovelByID.novel_servicepoint === 5) ? null : '(นพ.ปิยะณัฐ บุญประดิษฐ์)', alignment: 'center'},
+            {width: '45%', text: (this.dataNovelByID.novel_servicepoint === 5) ? null :  '(นพ.ปิยะณัฐ บุญประดิษฐ์)', alignment: 'center'},
             {width: '5%', text: ' '},
             {width: '45%', text: '(' + ptfullname + ')', alignment: 'center'}
           ],
@@ -4326,7 +4436,7 @@ export class SearchComponent implements OnInit {
           ],
           columnGap: 5
         },
-        (this.dataNovelByID.novel_servicepoint === 5) ? null :  {image: this.imgSign01, absolutePosition: {x: 150, y: 650}, fit: [70, 70]},
+        (this.dataNovelByID.novel_servicepoint === 5) ? null : {image: this.imgSign01, absolutePosition: {x: 150, y: 650}, fit: [70, 70]},
         (this.dataNovelByID.novel_servicepoint === 5) ? null : {image: this.imgSign02, absolutePosition: {x: 175, y: 738}, fit: [30, 30]},
         (this.dataNovelByID.novel_servicepoint === 5) ? null : {image: this.imgSign03, absolutePosition: {x: 405, y: 738}, fit: [70, 70]},
 
@@ -4449,7 +4559,7 @@ export class SearchComponent implements OnInit {
           margin: [17, 0]
         },
         {
-          text: 'วันที่ Admit................................................วันที่ Discharge.................................................. วันที่สังเกตอาการ.......................................................วันที่สังเกตอาการครบ 14 วัน.................................................',
+          text: 'วันที่ Admit................................................วันที่ Discharge.................................................. วันที่สังเกตอาการ.......................................................วันที่สังเกตอาการครบ 10 วัน.................................................',
           margin: [17, 0]
         },
         // {text: ' '},
@@ -4534,25 +4644,25 @@ export class SearchComponent implements OnInit {
                   style: 'fSize12'
                 } : null,
                 (this.dataNovelStaff.sdate_quaran) ? {
-                  text: this.dateTimeLineShortquaran[10],
+                  text: (this.dateTimeLineShortquaran[10]) ? this.dateTimeLineShortquaran[10] : null,
                   alignment: 'center',
                   border: [true, true, true, true],
                   style: 'fSize12'
                 } : null,
                 (this.dataNovelStaff.sdate_quaran) ? {
-                  text: this.dateTimeLineShortquaran[11],
+                  text: (this.dateTimeLineShortquaran[11]) ? this.dateTimeLineShortquaran[11] : null,
                   alignment: 'center',
                   border: [true, true, true, true],
                   style: 'fSize12'
                 } : null,
                 (this.dataNovelStaff.sdate_quaran) ? {
-                  text: this.dateTimeLineShortquaran[12],
+                  text: (this.dateTimeLineShortquaran[12]) ? this.dateTimeLineShortquaran[12] : null,
                   alignment: 'center',
                   border: [true, true, true, true],
                   style: 'fSize12'
                 } : null,
                 (this.dataNovelStaff.sdate_quaran) ? {
-                  text: this.dateTimeLineShortquaran[13],
+                  text: (this.dateTimeLineShortquaran[13]) ? this.dateTimeLineShortquaran[13] : null,
                   alignment: 'center',
                   border: [true, true, true, true],
                   style: 'fSize12'
@@ -4707,6 +4817,7 @@ export class SearchComponent implements OnInit {
           table: {
             widths: [95, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5, 13.5],
             body: [
+
               [
                 {text: 'เจ็บคอ', style: 'fSize10', alignment: 'left', border: [true, true, true, false]},
                 {text: '', style: 'fSize10', alignment: 'center', border: [true, true, true, false]},

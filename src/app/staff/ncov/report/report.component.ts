@@ -335,10 +335,11 @@ export class ReportComponent implements OnInit {
   }
 
   genDatequarantine(e: any): any {
-    for (let i = 1; i <= 14; i++) {
+    this.dateTimeLineShortquaran = [];
+    for (let i = 1; i <= 10; i++) {
       this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').locale('th').add(543, 'year').format('DD/MM/YY'));
     }
-    // console.log(this.dateTimeLineShortquaran);
+    console.log(this.dateTimeLineShortquaran);
   }
 
   async delData(id: any, ptfullname: any): Promise<any> {
@@ -1615,7 +1616,7 @@ export class ReportComponent implements OnInit {
         },
         {
           columns: [
-            {width: 'auto', text: 'จพต.14 (วันที่.....................................ถึง.......................................)', style: 'fSize12'},
+            {width: 'auto', text: 'จพต.10 (วันที่.....................................ถึง.......................................)', style: 'fSize12'},
             {width: 'auto', text: 'ที่อยู่สำหรับกักตัว............................................................................................................................................', style: 'fSize12'}
           ],
           columnGap: 5
@@ -2182,7 +2183,7 @@ export class ReportComponent implements OnInit {
             {width: 'auto', text: 'LR contact นัด'},
             {width: 'auto', text: '[  ]'},
             {width: 'auto', text: 'Swab 2......................'},
-            {width: 'auto', text: 'จพต 14 วัน'},
+            {width: 'auto', text: 'จพต 10 วัน'},
             {width: 'auto', text: '(วันที่..........ถึง..................)'}
           ],
           columnGap: 5
@@ -3630,7 +3631,7 @@ export class ReportComponent implements OnInit {
         },
         {
           columns: [
-            {width: 'auto', text: 'จพต.14 (วันที่.............................ถึง.............................)'},
+            {width: 'auto', text: 'จพต.10 (วันที่.............................ถึง.............................)'},
             {
               width: 'auto', table: {
                 widths: [2],
@@ -4677,7 +4678,7 @@ export class ReportComponent implements OnInit {
           margin: [17, 0]
         },
         {
-          text: 'วันที่ Admit................................................วันที่ Discharge.................................................. วันที่สังเกตอาการ.......................................................วันที่สังเกตอาการครบ 14 วัน.................................................',
+          text: 'วันที่ Admit................................................วันที่ Discharge.................................................. วันที่สังเกตอาการ.......................................................วันที่สังเกตอาการครบ 10 วัน.................................................',
           margin: [17, 0]
         },
         // {text: ' '},
@@ -4762,25 +4763,25 @@ export class ReportComponent implements OnInit {
                   style: 'fSize12'
                 } : null,
                 (this.dataNovelStaff.sdate_quaran) ? {
-                  text: this.dateTimeLineShortquaran[10],
+                  text: (this.dateTimeLineShortquaran[10]) ? this.dateTimeLineShortquaran[10] : null,
                   alignment: 'center',
                   border: [true, true, true, true],
                   style: 'fSize12'
                 } : null,
                 (this.dataNovelStaff.sdate_quaran) ? {
-                  text: this.dateTimeLineShortquaran[11],
+                  text: (this.dateTimeLineShortquaran[11]) ? this.dateTimeLineShortquaran[11] : null,
                   alignment: 'center',
                   border: [true, true, true, true],
                   style: 'fSize12'
                 } : null,
                 (this.dataNovelStaff.sdate_quaran) ? {
-                  text: this.dateTimeLineShortquaran[12],
+                  text: (this.dateTimeLineShortquaran[12]) ? this.dateTimeLineShortquaran[12] : null,
                   alignment: 'center',
                   border: [true, true, true, true],
                   style: 'fSize12'
                 } : null,
                 (this.dataNovelStaff.sdate_quaran) ? {
-                  text: this.dateTimeLineShortquaran[13],
+                  text: (this.dateTimeLineShortquaran[13]) ? this.dateTimeLineShortquaran[13] : null,
                   alignment: 'center',
                   border: [true, true, true, true],
                   style: 'fSize12'

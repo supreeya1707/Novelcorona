@@ -872,14 +872,14 @@ export class RecheckComponent implements OnInit {
   genDatequarantine(e: any): any {
     this.dateTimeLinequarantine = [];
     this.dateTimeLineShortquaran = [];
-    for (let i = 1; i <= 14; i++) {
+    for (let i = 1; i <= 10; i++) {
       this.dateTimeLinequarantine.push(this.convertDateQuarantine(e, i));
       this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').format('YYYY-MM-DD'));
     }
     // console.log(this.dateTimeLinequarantine);
 
-    this.edate = this.dateTimeLinequarantine[13];
-    this.endquaran = this.dateTimeLineShortquaran[13];
+    this.edate = this.dateTimeLinequarantine[9];
+    this.endquaran = this.dateTimeLineShortquaran[9];
     // console.log('this.edate : ', this.edate);
     // console.log('this.endquaran : ', this.endquaran);
   }
@@ -887,7 +887,7 @@ export class RecheckComponent implements OnInit {
   genDateTimeLine(e: any): any {
     // this.dateTimeLine = [];
     this.dateTimeLineShort = [];
-    for (let i = 1; i <= 14; i++) {
+    for (let i = 1; i <= 10; i++) {
       // this.dateTimeLine.push(this.convertDate(e, i));
       this.dateTimeLineShort.push(moment(e).add(-i, 'day').format('YYYY-MM-DD'));
       // console.log(this.dateTimeLineShort);
