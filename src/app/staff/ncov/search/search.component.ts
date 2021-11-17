@@ -218,7 +218,7 @@ export class SearchComponent implements OnInit {
   }
 
   genDatequarantine(e: any): any {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 14; i++) {
       // console.log(moment(e).add(i, 'day').locale('th').add(543, 'year').format('DD/MM/YY'));
       this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').locale('th').add(543, 'year').format('DD/MM/YY'));
     }
@@ -572,10 +572,10 @@ export class SearchComponent implements OnInit {
           absolutePosition: {x: 405, y: 758}, bold: true, style: 'fSize12'} : null,
 
         (this.dataNovelStaff.sdate_quaran != null) ? {
-          text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('D MMMM YYYY'),
+          text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('D MMM YY'),
           absolutePosition: {x: 77, y: 774}, bold: true, style: 'fSize12'} : null,
         (this.dataNovelStaff.edate_quaran != null) ? {
-          text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMMM YYYY'),
+          text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMM YY'),
           absolutePosition: {x: 157, y: 774}, bold: true, style: 'fSize12'} : null,
         {text: this.dataNovelStaff.address_quaran, absolutePosition: {x: 300, y: 774}, bold: true, style: 'fSize12'},
 
@@ -1497,7 +1497,7 @@ export class SearchComponent implements OnInit {
         },
         {
           columns: [
-            {width: 'auto', text: 'จพต.10 (วันที่.....................................ถึง.......................................)', style: 'fSize12'},
+            {width: 'auto', text: 'จพต. (วันที่.....................................ถึง.......................................)', style: 'fSize12'},
             {width: 'auto', text: 'ที่อยู่สำหรับกักตัว............................................................................................................................................', style: 'fSize12'}
           ],
           columnGap: 5
@@ -3512,7 +3512,7 @@ export class SearchComponent implements OnInit {
         },
         {
           columns: [
-            {width: 'auto', text: 'จพต.10 (วันที่.............................ถึง.............................)'},
+            {width: 'auto', text: 'จพต. (วันที่.............................ถึง.............................)'},
             {
               width: 'auto', table: {
                 widths: [2],
@@ -4488,16 +4488,16 @@ export class SearchComponent implements OnInit {
         } : null,
         (this.dataNovelStaff.edate_quaran != null) ? {
           text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 695, y: 110},
+          absolutePosition: {x: 650, y: 110},
           bold: 'true'
         } : null,
 
 
-        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 135, y: 488}, bold: 'true'},
+        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 110, y: 488}, bold: 'true'},
         {text: 'โรงพยาบาลราชบุรี', absolutePosition: {x: 340, y: 488}, bold: 'true'},
         (this.dataNovelStaff.date_swab2 != null) ? {
           text: moment(this.dataNovelStaff.date_swab2).locale('th').add(543, 'year').format('D MMM YY'),
-          absolutePosition: {x: 530, y: 488}, bold: 'true'
+          absolutePosition: {x: 525, y: 488}, bold: 'true'
         } : null,
         {text: '032-719600', absolutePosition: {x: 635, y: 488}, bold: 'true'},
         {text: '1284', absolutePosition: {x: 748, y: 488}, bold: 'true'},
@@ -4559,7 +4559,7 @@ export class SearchComponent implements OnInit {
           margin: [17, 0]
         },
         {
-          text: 'วันที่ Admit................................................วันที่ Discharge.................................................. วันที่สังเกตอาการ.......................................................วันที่สังเกตอาการครบ 10 วัน.................................................',
+          text: 'วันที่ Admit................................................วันที่ Discharge.................................................. วันที่สังเกตอาการ.............................................................  ถึง ................................................................................',
           margin: [17, 0]
         },
         // {text: ' '},

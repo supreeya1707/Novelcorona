@@ -243,6 +243,7 @@ export class RecheckComponent implements OnInit {
   date2swab: any = null;
   date3swab: any = null;
   dateSquarantine = null;
+  dateEquarantine = null;
   payment: any;
 
   dataSContact: SContact[] = [
@@ -722,9 +723,17 @@ export class RecheckComponent implements OnInit {
           this.date3swab = (moment(this.dataStaff.date_swab3).add(543, 'year').format('DD/MM/YYYY'));
           this.getDateSwab3(moment(this.dataStaff.date_swab3).format('YYYY-MM-DD'));
         }
+
         if (this.dataStaff.sdate_quaran != null){
           this.dateSquarantine = (moment(this.dataStaff.sdate_quaran).add(543, 'year').format('DD/MM/YYYY'));
-          this.getDatequarantine(moment(this.dataStaff.sdate_quaran).format('YYYY-MM-DD'));
+          if (this.dataStaff.edate_quaran != null){
+            this.edate = (moment(this.dataStaff.edate_quaran).add(543, 'year').format('DD/MM/YYYY'));
+            this.endquaran = (moment(this.dataStaff.edate_quaran).add(543, 'year').format('DD/MM/YYYY'));
+            //console.log(this.dateEquarantine);
+          }else{
+            this.getDatequarantine(moment(this.dataStaff.sdate_quaran).format('YYYY-MM-DD'));
+          }
+
         }
         this.addressquaran = this.dataStaff.address_quaran;
         this.reporter = this.dataStaff.reporter;
@@ -872,14 +881,14 @@ export class RecheckComponent implements OnInit {
   genDatequarantine(e: any): any {
     this.dateTimeLinequarantine = [];
     this.dateTimeLineShortquaran = [];
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 14; i++) {
       this.dateTimeLinequarantine.push(this.convertDateQuarantine(e, i));
       this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').format('YYYY-MM-DD'));
     }
     // console.log(this.dateTimeLinequarantine);
+    this.edate = this.dateTimeLinequarantine[13];
+    this.endquaran = this.dateTimeLineShortquaran[13];
 
-    this.edate = this.dateTimeLinequarantine[9];
-    this.endquaran = this.dateTimeLineShortquaran[9];
     // console.log('this.edate : ', this.edate);
     // console.log('this.endquaran : ', this.endquaran);
   }
@@ -887,7 +896,7 @@ export class RecheckComponent implements OnInit {
   genDateTimeLine(e: any): any {
     // this.dateTimeLine = [];
     this.dateTimeLineShort = [];
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 14; i++) {
       // this.dateTimeLine.push(this.convertDate(e, i));
       this.dateTimeLineShort.push(moment(e).add(-i, 'day').format('YYYY-MM-DD'));
       // console.log(this.dateTimeLineShort);
