@@ -477,7 +477,7 @@ export class RecheckComponent implements OnInit {
       this.generalFrm.get('telephone').setValue(this.dataNovel.novel_phone);
       if (this.dataNovel.novel_treat != null){
         for (let i = 0; i < this.dataPTtpye.length; i++){
-          if (this.dataNovel.novel_treat === this.dataPTtpye[i]['value'] ){
+          if (this.dataNovel.novel_treat === this.dataPTtpye[i].value ){
             this.generalFrm.get('treat').setValue(this.dataNovel.novel_treat);
           }else{
             this.generalFrm.get('treat').setValue('อื่น ๆ');
@@ -724,16 +724,14 @@ export class RecheckComponent implements OnInit {
           this.getDateSwab3(moment(this.dataStaff.date_swab3).format('YYYY-MM-DD'));
         }
 
+        if (this.dataStaff.edate_quaran != null){
+          this.edate = (moment(this.dataStaff.edate_quaran).add(543, 'year').format('DD/MM/YYYY'));
+          this.getEDatequarantine(moment(this.dataStaff.edate_quaran).format('YYYY-MM-DD'));
+        }
+
         if (this.dataStaff.sdate_quaran != null){
           this.dateSquarantine = (moment(this.dataStaff.sdate_quaran).add(543, 'year').format('DD/MM/YYYY'));
-          if (this.dataStaff.edate_quaran != null){
-            this.edate = (moment(this.dataStaff.edate_quaran).add(543, 'year').format('DD/MM/YYYY'));
-            this.endquaran = (moment(this.dataStaff.edate_quaran).add(543, 'year').format('DD/MM/YYYY'));
-            //console.log(this.dateEquarantine);
-          }else{
-            this.getDatequarantine(moment(this.dataStaff.sdate_quaran).format('YYYY-MM-DD'));
-          }
-
+          this.getDatequarantine(moment(this.dataStaff.sdate_quaran).format('YYYY-MM-DD'));
         }
         this.addressquaran = this.dataStaff.address_quaran;
         this.reporter = this.dataStaff.reporter;
@@ -885,12 +883,20 @@ export class RecheckComponent implements OnInit {
       this.dateTimeLinequarantine.push(this.convertDateQuarantine(e, i));
       this.dateTimeLineShortquaran.push(moment(e).add(i, 'day').format('YYYY-MM-DD'));
     }
-    // console.log(this.dateTimeLinequarantine);
-    this.edate = this.dateTimeLinequarantine[13];
-    this.endquaran = this.dateTimeLineShortquaran[13];
 
-    // console.log('this.edate : ', this.edate);
-    // console.log('this.endquaran : ', this.endquaran);
+    if (moment(this.dataStaff.sdate_quaran).format('YYYY-MM-DD') !== this.startquaran){
+      // console.log(this.dateTimeLinequarantine);
+      this.edate = this.dateTimeLinequarantine[13];
+      this.endquaran = this.dateTimeLineShortquaran[13];
+    }else {
+      if (moment(this.dataStaff.edate_quaran).format('YYYY-MM-DD') !== this.endquaran){
+        this.edate = this.dateTimeLinequarantine[13];
+        this.endquaran = this.dateTimeLineShortquaran[13];
+      }
+    }
+
+    console.log('this.edate : ', this.edate);
+    console.log('this.endquaran : ', this.endquaran);
   }
 
   genDateTimeLine(e: any): any {
@@ -995,6 +1001,10 @@ export class RecheckComponent implements OnInit {
   }
 
   async updateStaff(): Promise<any>{
+
+    console.log(this.startquaran);
+    console.log(this.endquaran);
+
     const data: any = {};
     const infoData: any = [];
 
@@ -1028,6 +1038,7 @@ export class RecheckComponent implements OnInit {
     }else{
       data.pui_priority = null;
     }
+
     data.date_swab1 = (this.firstswab != null) ? moment(this.firstswab).format('YYYY-MM-DD') : null;
     data.date_swab2 = (this.secondswab != null) ? moment(this.secondswab).format('YYYY-MM-DD') : null;
     data.date_swab3 = (this.thridswab != null) ? moment(this.thridswab).format('YYYY-MM-DD') : null;
@@ -1041,7 +1052,7 @@ export class RecheckComponent implements OnInit {
 
     infoData.push(data);
     const resStaff = await this.api.updateStaff(this.novelID, infoData);
-    // console.log('resStaff : ', resStaff);
+    console.log('resStaff : ', resStaff);
     return resStaff.ok;
 
   }
