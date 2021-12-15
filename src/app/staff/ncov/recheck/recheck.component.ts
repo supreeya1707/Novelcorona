@@ -317,6 +317,7 @@ export class RecheckComponent implements OnInit {
   password2: any = 'adminCoV!9';
   password3: any = 'preopCoV!9';
   password4: any = 'jailCoV!9';
+  password5: any = 'childCoV!9';
   pass: any;
 
   constructor(private localeService: BsLocaleService, private api: ApiService, private formBuilder: FormBuilder,
@@ -325,7 +326,7 @@ export class RecheckComponent implements OnInit {
 
   ngOnInit(): void {
     this.pass = sessionStorage.getItem('nCoVpass');
-    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3 && this.pass !== this.password4){
+    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3 && this.pass !== this.password4  && this.pass !== this.password5){
       this.router.navigateByUrl('staff/login/ncov');
     }
     this.localeService.use(this.locale);

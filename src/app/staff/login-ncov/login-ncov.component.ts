@@ -15,7 +15,7 @@ export class LoginNcovComponent implements OnInit {
   }
 
   checkLogin(): any {
-    if (this.password === 'rbhCoV!9' || this.password === 'adminCoV!9' || this.password === 'preopCoV!9' || this.password === 'jailCoV!9'){
+    if (this.password === 'rbhCoV!9' || this.password === 'adminCoV!9' || this.password === 'preopCoV!9' || this.password === 'jailCoV!9' || this.password === 'childCoV!9'){
       sessionStorage.setItem('nCoVpass', this.password);
       this.router.navigateByUrl('/staff/nCoV');
     }else{

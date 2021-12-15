@@ -83,6 +83,7 @@ export class SearchComponent implements OnInit {
   password2: any = 'adminCoV!9';
   password3: any = 'preopCoV!9';
   password4: any = 'jailCoV!9';
+  password5: any = 'childCoV!9';
 
   pass: any;
 
@@ -131,11 +132,11 @@ export class SearchComponent implements OnInit {
     {value: '4', viewValue: 'ผู้ติดเชื้อไม่ใส่ surgical mask หรือ cloth mask และสัมผัส > 15 นาที'}
   ];
 
-  constructor(private api: ApiService, private router: Router, private localeService: BsLocaleService,) { }
+  constructor(private api: ApiService, private router: Router, private localeService: BsLocaleService) { }
 
   ngOnInit(): void {
     this.pass = sessionStorage.getItem('nCoVpass');
-    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3 && this.pass !== this.password4){
+    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3 && this.pass !== this.password4 && this.pass !== this.password5){
       this.router.navigateByUrl('staff/login/ncov');
     }
     this.localeService.use(this.locale);

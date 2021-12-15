@@ -36,6 +36,7 @@ export class ViewComponent implements OnInit {
   password2: any = 'adminCoV!9';
   password3: any = 'preopCoV!9';
   password4: any = 'jailCoV!9';
+  password5: any = 'childCoV!9';
   pass: any;
 
   divServicepoint: any = true;
@@ -50,7 +51,7 @@ export class ViewComponent implements OnInit {
     this.localeService.use(this.locale);
     this.pass = sessionStorage.getItem('nCoVpass');
     // console.log(this.pass !== this.password);
-    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3 && this.pass !== this.password4){
+    if ( this.pass !== this.password && this.pass !== this.password2 && this.pass !== this.password3 && this.pass !== this.password4 && this.pass !== this.password5){
       this.router.navigateByUrl('staff/login/ncov');
     }
   }
@@ -116,6 +117,19 @@ export class ViewComponent implements OnInit {
         this.dataSearch = this.dataNovel;
         console.log(this.dataNovel);
       }else{
+        console.log('error');
+      }
+    }else if (this.pass === this.password5) {
+      this.divServicepoint = false;
+      this.servicepoint = 8;
+      console.log(this.servicepoint);
+      const res = await this.api.getByDateServicepoint(dateinput, this.servicepoint);
+      console.log(res);
+      if (res.ok === true) {
+        this.dataNovel = res.message;
+        this.dataSearch = this.dataNovel;
+        console.log(this.dataNovel);
+      } else {
         console.log('error');
       }
     }else if (this.pass === this.password4){
