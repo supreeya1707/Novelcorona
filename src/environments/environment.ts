@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   // baseURL: 'http://192.168.5.134:8080',
-  // baseURL: 'http://rbhportal.com:8081',
-  baseURL: 'http://localhost:8081',
+  baseURL: 'http://rbhportal.com:8081',
+  // baseURL: 'http://localhost:8081',
   baseURLAPI: 'http://35.198.244.98:8089',
 };
 

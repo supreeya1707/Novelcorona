@@ -362,7 +362,7 @@ export class Novelcorona2Component implements OnInit {
   }
 
   openModal(): any {
-    this.modalService.open(this.content01, {size: 'xl', backdrop: 'static'});
+    this.modalService.open(this.content01, {size: 'xl', backdrop: 'static'});this.modalService.open(this.content01, {size: 'xl', backdrop: 'static'});
   }
 
   btnStep1(): any {
@@ -675,13 +675,29 @@ export class Novelcorona2Component implements OnInit {
       if (rsins.ok === true) {
         this.successNotification();
       } else {
-        this.errorNotification();
+        const result = rsins.error.indexOf('Incorrect');
+        const txtError = rsins.error.substr(result);
+
+        // this.errorNotification();
         console.log(rsins.error);
+        Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!<br><br>' + txtError, 'error')
+          .then(() => {
+            this.btndisble = false;
+          });
         this.btndisble = false;
       }
     } else {
-      this.errorNotification();
-      console.log(rs.error);
+      // this.errorNotification();
+      // console.log(rs.error);
+      const result = rs.error.indexOf('Incorrect');
+      const txtError = rs.error.substr(result);
+
+      // this.errorNotification();
+      // console.log(rs.error);
+      Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!<br><br>' + txtError, 'error')
+        .then(() => {
+          this.btndisble = false;
+        });
       this.btndisble = false;
     }
   }
