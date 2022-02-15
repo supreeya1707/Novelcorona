@@ -654,69 +654,76 @@ export class ReportComponent implements OnInit {
         (this.dataNovelByID.novel_havevac === 0) ? {text: '√', absolutePosition: {x: 274 , y: 657}, style: 'fSize24'} : null,
         (this.dataNovelByID.novel_getvac1 != null) ? {
           text: moment(this.dataNovelByID.novel_getvac1).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 105, y: 683}, bold: true, style: 'fSize12'} : null,
-        {text: this.dataNovelByID.novel_namevac1, absolutePosition: {x: 280, y: 683}, bold: true, style: 'fSize12'},
-        {text: this.dataNovelByID.novel_placevac1, absolutePosition: {x: 420, y: 683}, bold: true, style: 'fSize12'},
+          absolutePosition: {x: 105, y: 682}, bold: true, style: 'fSize11'} : null,
+        {text: this.dataNovelByID.novel_namevac1, absolutePosition: {x: 280, y: 682}, bold: true, style: 'fSize11'},
+        {text: this.dataNovelByID.novel_placevac1, absolutePosition: {x: 420, y: 682}, bold: true, style: 'fSize11'},
 
         (this.dataNovelByID.novel_getvac2 != null) ? {
           text: moment(this.dataNovelByID.novel_getvac2).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 105, y: 696}, bold: true, style: 'fSize12'} : null,
-        {text: this.dataNovelByID.novel_namevac2, absolutePosition: {x: 280, y: 696}, bold: true, style: 'fSize12'},
-        {text: this.dataNovelByID.novel_placevac2, absolutePosition: {x: 420, y: 696}, bold: true, style: 'fSize12'},
+          absolutePosition: {x: 105, y: 695}, bold: true, style: 'fSize11'} : null,
+        {text: this.dataNovelByID.novel_namevac2, absolutePosition: {x: 280, y: 695}, bold: true, style: 'fSize11'},
+        {text: this.dataNovelByID.novel_placevac2, absolutePosition: {x: 420, y: 695}, bold: true, style: 'fSize11'},
 
         (this.dataNovelByID.novel_getvac3 != null) ? {
           text: moment(this.dataNovelByID.novel_getvac3).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 105, y: 710}, bold: true, style: 'fSize12'} : null,
-        {text: this.dataNovelByID.novel_namevac3, absolutePosition: {x: 280, y: 710}, bold: true, style: 'fSize12'},
-        {text: this.dataNovelByID.novel_placevac3, absolutePosition: {x: 420, y: 710}, bold: true, style: 'fSize12'},
+          absolutePosition: {x: 105, y: 708}, bold: true, style: 'fSize11'} : null,
+        {text: this.dataNovelByID.novel_namevac3, absolutePosition: {x: 280, y: 708}, bold: true, style: 'fSize11'},
+        {text: this.dataNovelByID.novel_placevac3, absolutePosition: {x: 420, y: 708}, bold: true, style: 'fSize11'},
+
+        (this.dataNovelByID.novel_getvac4 != null) ? {
+          text: moment(this.dataNovelByID.novel_getvac4).locale('th').add(543, 'year').format('D MMMM YYYY'),
+          absolutePosition: {x: 105, y: 721}, bold: true, style: 'fSize11'} : null,
+        {text: this.dataNovelByID.novel_namevac4, absolutePosition: {x: 280, y: 721}, bold: true, style: 'fSize11'},
+        {text: this.dataNovelByID.novel_placevac4, absolutePosition: {x: 420, y: 721}, bold: true, style: 'fSize11'},
 
         (this.dataNovelStaff.doctor !== null && this.dataNovelStaff.doctor !== '') ? {
-          text: this.dataNovelStaff.doctor, absolutePosition: {x: 100, y: 725}, bold: 'true', style: 'fSize12'} : null,
-        {text: this.dataNovelStaff.doctor_time, absolutePosition: {x: 500, y: 725}, bold: true, style: 'fSize12'},
+          text: this.dataNovelStaff.doctor, absolutePosition: {x: 100, y: 734}, bold: 'true', style: 'fSize11'} : null,
+        {text: this.dataNovelStaff.doctor_time, absolutePosition: {x: 245, y: 734}, bold: true, style: 'fSize11'},
 
-        (this.dataNovelStaff.sars_pt_type !== 1) ?
-          {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 0 ? 355 :
-              this.dataNovelStaff.sars_pt_type === 7 ? 97 :
-                this.dataNovelStaff.sars_pt_type === 8 ? 144 :
-                  this.dataNovelStaff.sars_pt_type === 2 ? 188 :
-                    this.dataNovelStaff.sars_pt_type === 4 ? 220 :
-                      this.dataNovelStaff.sars_pt_type === 5 ? 254 :
-                        this.dataNovelStaff.sars_pt_type === 3 ? 289 :
-                          this.dataNovelStaff.sars_pt_type === 6 ? 322 :
-                            this.dataNovelStaff.sars_pt_type === 9 ? 355 :
-                              this.dataNovelStaff.sars_pt_type === 10 ? 398 : 430, y: 732}, style: 'fSize24'} :
-          {text: '√', absolutePosition: {x: 502, y: 749}, style: 'fSize24'},
+        (this.dataNovelStaff.sars_pt_type !== null) ?
+          {text: '√', absolutePosition: {x: this.dataNovelStaff.sars_pt_type === 0 ? 382 :
+              this.dataNovelStaff.sars_pt_type === 7 ? 87 :
+                this.dataNovelStaff.sars_pt_type === 8 ? 127 :
+                  this.dataNovelStaff.sars_pt_type === 2 ? 168 :
+                    this.dataNovelStaff.sars_pt_type === 4 ? 197 :
+                      this.dataNovelStaff.sars_pt_type === 5 ? 227 :
+                        this.dataNovelStaff.sars_pt_type === 3 ? 258 :
+                          this.dataNovelStaff.sars_pt_type === 6 ? 287 :
+                            this.dataNovelStaff.sars_pt_type === 9 ? 318 :
+                              this.dataNovelStaff.sars_pt_type === 10 ? 356 : 433, y: 738}, style: 'fSize24'} : null,
 
-        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 289, y: 732}, style: 'fSize24'} :
-          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 220, y: 732}, style: 'fSize24'} : null,
+        (this.dataNovelStaff.pui_priority === 1) ? {text: '√', absolutePosition: {x: 258, y: 738}, style: 'fSize24'} :
+          (this.dataNovelStaff.pui_priority === 2) ? {text: '√', absolutePosition: {x: 197, y: 738}, style: 'fSize24'} : null,
 
         (this.dataNovelStaff.date_swab1 != null || this.dataNovelStaff.date_swab2 != null) ? {
-          text: '√', absolutePosition: {x: 46, y: 749}, style: 'fSize24'} : null,
+          text: '√', absolutePosition: {x: 46, y: 753}, style: 'fSize24'} : null,
         (this.dataNovelStaff.date_swab1 != null) ? {
-          text: moment(this.dataNovelStaff.date_swab1).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 140, y: 758}, bold: true, style: 'fSize12'} : null,
+          text: moment(this.dataNovelStaff.date_swab1).locale('th').add(543, 'year').format('D MMM YY'),
+          absolutePosition: {x: 120, y: 763}, bold: true, style: 'fSize11'} : null,
         (this.dataNovelStaff.date_swab2 != null) ? {
-          text: moment(this.dataNovelStaff.date_swab2).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 270, y: 758}, bold: true, style: 'fSize12'} : null,
+          text: moment(this.dataNovelStaff.date_swab2).locale('th').add(543, 'year').format('D MMM YY'),
+          absolutePosition: {x: 213, y: 763}, bold: true, style: 'fSize11'} : null,
         (this.dataNovelStaff.date_swab3 != null) ? {
-          text: moment(this.dataNovelStaff.date_swab3).locale('th').add(543, 'year').format('D MMMM YYYY'),
-          absolutePosition: {x: 405, y: 758}, bold: true, style: 'fSize12'} : null,
+          text: moment(this.dataNovelStaff.date_swab3).locale('th').add(543, 'year').format('D MMM YY'),
+          absolutePosition: {x: 300, y: 763}, bold: true, style: 'fSize11'} : null,
 
         (this.dataNovelStaff.sdate_quaran != null) ? {
           text: moment(this.dataNovelStaff.sdate_quaran).locale('th').add(543, 'year').format('D MMM YY'),
-          absolutePosition: {x: 77, y: 774}, bold: true, style: 'fSize12'} : null,
+          absolutePosition: {x: 415, y: 763}, bold: true, style: 'fSize11'} : null,
         (this.dataNovelStaff.edate_quaran != null) ? {
           text: moment(this.dataNovelStaff.edate_quaran).locale('th').add(543, 'year').format('D MMM YY'),
-          absolutePosition: {x: 157, y: 774}, bold: true, style: 'fSize12'} : null,
-        {text: this.dataNovelStaff.address_quaran, absolutePosition: {x: 300, y: 774}, bold: true, style: 'fSize12'},
+          absolutePosition: {x: 495, y: 763}, bold: true, style: 'fSize11'} : null,
 
-        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 75, y: 805}, bold: true, style: 'fSize12'},
+        {text: this.dataNovelStaff.address_quaran, absolutePosition: {x: 85, y: 776}, bold: true, style: 'fSize11'},
+        (this.dataNovelStaff.homei === 0) ? {text: '√', absolutePosition: {x: 464, y: 768}, style: 'fSize24'} : (this.dataNovelStaff.homei === 1) ? {text: '√', absolutePosition: {x: 498, y: 768}, style: 'fSize24'} : null,
+
+        {text: this.dataNovelStaff.reporter, absolutePosition: {x: 65, y: 805}, bold: true, style: 'fSize11'},
         (this.dataNovelStaff.report_datetime) ? {
-          text: moment(this.dataNovelStaff.report_datetime).locale('th').add('year', '543').format('D MMMM YYYY'),
-          absolutePosition: {x: 432, y: 805}, bold: true, style: 'fSize12'} : null,
+          text: moment(this.dataNovelStaff.report_datetime).locale('th').add('year', '543').format('D MMM YY'),
+          absolutePosition: {x: 450, y: 805}, bold: true, style: 'fSize11'} : null,
         (this.dataNovelStaff.report_datetime) ? {
           text: moment(this.dataNovelStaff.report_datetime).format('HH:mm'),
-          absolutePosition: {x: 533, y: 805}, bold: true, style: 'fSize12'} : null,
+          absolutePosition: {x: 528, y: 805}, bold: true, style: 'fSize11'} : null,
 
         {
           columns: [
@@ -1476,174 +1483,196 @@ export class ReportComponent implements OnInit {
           ],
           columnGap: 5
         },
-        {text: 'ครั้งที่ 1 วันที่ได้รับ...........................................................ชื่อวัคซีน...................................................................สถานที่ได้รับ....................................................................................', style: 'fSize12'},
-        {text: 'ครั้งที่ 2 วันที่ได้รับ...........................................................ชื่อวัคซีน...................................................................สถานที่ได้รับ....................................................................................', style: 'fSize12'},
-        {text: 'ครั้งที่ 3 วันที่ได้รับ...........................................................ชื่อวัคซีน...................................................................สถานที่ได้รับ....................................................................................', style: 'fSize12'},
+        {text: 'ครั้งที่ 1 วันที่ได้รับ.........................................................................ชื่อวัคซีน.............................................................................สถานที่ได้รับ....................................................................................', style: 'fSize11'},
+        {text: 'ครั้งที่ 2 วันที่ได้รับ.........................................................................ชื่อวัคซีน.............................................................................สถานที่ได้รับ....................................................................................', style: 'fSize11'},
+        {text: 'ครั้งที่ 3 วันที่ได้รับ.........................................................................ชื่อวัคซีน.............................................................................สถานที่ได้รับ....................................................................................', style: 'fSize11'},
+        {text: 'ครั้งที่ 4 วันที่ได้รับ.........................................................................ชื่อวัคซีน.............................................................................สถานที่ได้รับ....................................................................................', style: 'fSize11'},
         {
           columns: [
-            {width: 'auto', text: 'รายงานแพทย์', style: 'fSize12'},
+            {width: 'auto', text: 'รายงานแพทย์', style: 'fSize11'},
             {
               width: 'auto',
-              text: '................................................................................................................................................................................................'
-              , style: 'fSize12'
+              text: '.............................................................................'
+              , style: 'fSize11'
             },
-            {width: 'auto', text: 'เวลา............................................น.', style: 'fSize12'},
+            {width: 'auto', text: 'เวลา.............................น.           ', style: 'fSize11'},
           ],
           columnGap: 3
         },
         {
           columns: [
-            {width: 'auto', text: 'แพทย์ลงความเห็น', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'แพทย์ลงความเห็น', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'O-ATK+', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'O-ATK+', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'S-ATK+', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'S-ATK+', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'PUI', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'PUI', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'HRC', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'HRC', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'MRC' , style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'MRC' , style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'LRC', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'LRC', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'ACF', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'ACF', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'Pre-op', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'Pre-op', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'AS', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'AS', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'ไม่เข้าเกณฑ์', style: 'fSize13', margin: [0, 1]},
+            {width: 'auto', text: 'ไม่เข้าเกณฑ์', style: 'fSize11', margin: [0, 1]},
+            {
+              width: 'auto', table: {
+                widths: [1],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'แนะนำ DMHT', style: 'fSize11', margin: [0, 1]},
           ],
           columnGap: 3
         },
         {
           columns: [
-            {width: 'auto', text: 'นัด', style: 'fSize12', margin: [0, 2]},
+            {width: 'auto', text: 'นัด', style: 'fSize11', margin: [0, 1]},
             {
               width: 'auto', table: {
-                widths: [2],
+                widths: [1],
                 body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
                   [{text: '', border: [true, false, true, true], alignment: 'center'}],
                 ]
               }
             },
-            {width: 'auto', text: 'Swab', style: 'fSize12', margin: [0, 2]},
-            {width: 'auto', text: 'ครั้งที่ 1........................................................', style: 'fSize12', margin: [0, 2]},
-            {width: 'auto', text: 'ครั้งที่ 2........................................................', style: 'fSize12', margin: [0, 2]},
-            {width: 'auto', text: 'ครั้งที่ 3........................................................', style: 'fSize12', margin: [0, 2]},
-            {
-              width: 'auto', table: {
-                widths: [2],
-                body: [
-                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
-                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
-                ]
-              }
-            },
-            {width: 'auto', text: 'แนะนำ DMHT' , style: 'fSize12', margin: [0, 2]},
+            {width: 'auto', text: 'Swab', style: 'fSize11', margin: [0, 1]},
+            {width: 'auto', text: 'ครั้งที่ 1.....................................', style: 'fSize11', margin: [0, 1]},
+            {width: 'auto', text: 'ครั้งที่ 2.....................................', style: 'fSize11', margin: [0, 1]},
+            {width: 'auto', text: 'ครั้งที่ 3.....................................', style: 'fSize11', margin: [0, 1]},
+            {width: 'auto', text: 'จพต. (วันที่.....................................ถึง.......................................)', style: 'fSize11', margin: [10, 1]},
           ],
           columnGap: 5
         },
         {
           columns: [
-            {width: 'auto', text: 'จพต. (วันที่.....................................ถึง.......................................)', style: 'fSize12'},
-            {width: 'auto', text: 'ที่อยู่สำหรับกักตัว............................................................................................................................................', style: 'fSize12'}
+            {width: 'auto', text: 'ที่อยู่สำหรับกักตัว.............................................................................................................................................................', style: 'fSize11'},
+            {width: 'auto', text: 'ประเมินสภาพบ้านสำหรับ HI', style: 'fSize11', margin: [5, 0]},
+            {
+              width: 'auto', table: {
+                widths: [1],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ไม่ได้', style: 'fSize11'},
+            {
+              width: 'auto', table: {
+                widths: [1],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center'}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ได้', style: 'fSize11'},
           ],
           columnGap: 5
         },
         {
-          margin: [0, 17],
+          margin: [0, 15],
           columns: [
             {
               width: 'auto',
-              text: 'ผู้รายงาน ............................................................................',
-              style: 'fSize12'
+              text: 'ผู้รายงาน ..................................................................................................',
+              style: 'fSize11'
             },
-            {width: 'auto', text: 'โรงพยาบาลราชบุรี โทรศัพท์ 032-719600 ต่อ 1284', style: 'fSize12'},
-            {width: 'auto', text: 'วันที่สอบสวน ........................................', style: 'fSize12'},
-            {width: 'auto', text: 'เวลา .............. น.', style: 'fSize12'}
+            {width: 'auto', text: 'โรงพยาบาลราชบุรี โทรศัพท์ 032-719600 ต่อ 1284', style: 'fSize11'},
+            {width: 'auto', text: 'วันที่สอบสวน .....................................', style: 'fSize11'},
+            {width: 'auto', text: 'เวลา ................. น.', style: 'fSize11'}
           ],
           columnGap: 5
         },
@@ -2022,6 +2051,7 @@ export class ReportComponent implements OnInit {
           fontSize: 14,
           bold: true
         },
+        fSize11: {fontSize: 11},
         fSize12: {fontSize: 12},
         fSize13: {fontSize: 13},
         fSize24: {fontSize: 24, bold: true}
@@ -3272,6 +3302,7 @@ export class ReportComponent implements OnInit {
         } : null,
         {text: this.dataNovelByID.novel_namevac3, absolutePosition: {x: 280, y: 573}, bold: true},
         {text: this.dataNovelByID.novel_placevac3, absolutePosition: {x: 420, y: 573}, bold: true},
+
 
         // staff
         {text: this.dataNovelStaff.riskconnect, absolutePosition: {x: 50, y: 459}, bold: true},

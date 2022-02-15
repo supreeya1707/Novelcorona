@@ -1231,6 +1231,31 @@
             <input type="text " class="form-control" id="placevaccine3" [(ngModel)]="placevac3">
           </div>
         </div>
+
+        <div class="row mt-5">
+          <div class=" col-md-4 ">
+            <label>ครั้งที่ 4 วันที่ได้รับ </label>
+            <div class="input-group">
+              <input class="form-control" #datepickerVac4="bsDatepicker" bsDatepicker [(ngModel)]="datevac4">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerVac4.toggle()"
+                     [attr.aria-expanded]="datepickerVac4.isOpen"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label>ชื่อวัคซีน </label>
+            <select class="form-control" placeholder="ชื่อวัคซีน" name="namevac4" id="namevac4"
+                    [(ngModel)]="namevac4">
+              <option *ngFor="let vac of dataVaccine" [value]="vac.vaccine_name">{{vac.vaccine_name}}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>สถานที่ได้รับ </label>
+            <input type="text " class="form-control" id="placevaccine4" [(ngModel)]="placevac4">
+          </div>
+        </div>
       </div>
     </div>
   </div>

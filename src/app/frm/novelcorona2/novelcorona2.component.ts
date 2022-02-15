@@ -100,9 +100,6 @@ export class Novelcorona2Component implements OnInit {
 
   datadate: any = moment();
   datatreat: any;
-  datevac1: any;
-  datevac2: any;
-  datevac3: any;
   datecome: any;
   d: any;
   fistHosp = 'โรงพยาบาลราชบุรี';
@@ -118,12 +115,20 @@ export class Novelcorona2Component implements OnInit {
   weight: any;
   high: any;
 
+  datevac1: any;
+  datevac2: any;
+  datevac3: any;
+  datevac4: any;
+
   namevac1: any;
   namevac2: any;
   namevac3: any;
+  namevac4: any;
+
   placevac1: any;
   placevac2: any;
   placevac3: any;
+  placevac4: any;
 
 
   assign_fever: any;
@@ -320,6 +325,7 @@ export class Novelcorona2Component implements OnInit {
     this.getContact();
     this.getVaccine();
     this.setValidators();
+
     setTimeout(() => {
       this.openModal();
     }, 300);
@@ -362,7 +368,7 @@ export class Novelcorona2Component implements OnInit {
   }
 
   openModal(): any {
-    this.modalService.open(this.content01, {size: 'xl', backdrop: 'static'});this.modalService.open(this.content01, {size: 'xl', backdrop: 'static'});
+    this.modalService.open(this.content01, {size: 'xl', backdrop: 'static'});
   }
 
   btnStep1(): any {
@@ -662,6 +668,10 @@ export class Novelcorona2Component implements OnInit {
     data.novel_namevac3 = this.namevac3;
     data.novel_placevac3 = this.placevac3;
 
+    data.novel_getvac4 = (this.datevac4 != null) ? moment(this.datevac4).format('YYYY-MM-DD') : null;
+    data.novel_namevac4 = this.namevac4;
+    data.novel_placevac4 = this.placevac4;
+
     data.novel_servicepoint = this.servicepoint;
     data.novel_dhph = this.dhph;
     data.novel_input_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -693,7 +703,7 @@ export class Novelcorona2Component implements OnInit {
       const txtError = rs.error.substr(result);
 
       // this.errorNotification();
-      // console.log(rs.error);
+      console.log(rs.error);
       Swal.fire('ไม่สำเร็จ', 'บันทึกข้อมูลไม่สำเร็จ!<br><br>' + txtError, 'error')
         .then(() => {
           this.btndisble = false;

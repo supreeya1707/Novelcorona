@@ -127,13 +127,12 @@ export class RecheckComponent implements OnInit {
   vac1: any;
   vac2: any;
   vac3: any;
+  vac4: any;
   edate: any;
 
   dateSsick: any;
   datatreat: any;
-  datevac1: any;
-  datevac2: any;
-  datevac3: any;
+
 
   dateSARS1: any;
   dateSARS2: any;
@@ -160,12 +159,20 @@ export class RecheckComponent implements OnInit {
   high: any;
   contactid: any;
 
+  datevac1: any;
+  datevac2: any;
+  datevac3: any;
+  datevac4: any;
+
   namevac1: any;
   namevac2: any;
   namevac3: any;
+  namevac4: any;
+
   placevac1: any;
   placevac2: any;
   placevac3: any;
+  placevac4: any;
 
   puiPriority: any;
   radiouri: any;
@@ -245,6 +252,8 @@ export class RecheckComponent implements OnInit {
   dateSquarantine = null;
   dateEquarantine = null;
   payment: any;
+
+  radiohomei: any;
 
   dataSContact: SContact[] = [
     {value: '1', viewValue: 'บุคคลากรใส่ surgical mask ร่วมกับ face shield หรือ อยู่ห่างจากผู้ป่วยเกิน 1 เมตร'},
@@ -626,6 +635,15 @@ export class RecheckComponent implements OnInit {
     this.namevac3 = this.dataNovel.novel_namevac3;
     this.placevac3 = this.dataNovel.novel_placevac3;
 
+    if (this.dataNovel.novel_getvac4){
+      this.vac4 =  moment(this.dataNovel.novel_getvac4).add(543, 'year').format('DD/MM/YYYY');
+      this.getDateVac4(moment(this.dataNovel.novel_getvac4).format('YYYY-MM-DD'));
+    }else{
+      this.vac4 = null;
+    }
+    this.namevac4 = this.dataNovel.novel_namevac4;
+    this.placevac4 = this.dataNovel.novel_placevac4;
+
     const resDataTL = await this.api.getTimeLineById(novelid);
     if (resDataTL.ok){
       this.dataTL = resDataTL.message[0];
@@ -730,11 +748,14 @@ export class RecheckComponent implements OnInit {
           this.getEDatequarantine(moment(this.dataStaff.edate_quaran).format('YYYY-MM-DD'));
         }
 
+
+
         if (this.dataStaff.sdate_quaran != null){
           this.dateSquarantine = (moment(this.dataStaff.sdate_quaran).add(543, 'year').format('DD/MM/YYYY'));
           this.getDatequarantine(moment(this.dataStaff.sdate_quaran).format('YYYY-MM-DD'));
         }
         this.addressquaran = this.dataStaff.address_quaran;
+        this.radiohomei =  this.dataStaff.homei;
         this.reporter = this.dataStaff.reporter;
         this.reportpoint = this.dataStaff.report_point;
 
@@ -821,6 +842,10 @@ export class RecheckComponent implements OnInit {
 
   getDateVac3(e: any): any {
     this.datevac3 = moment(e).format('YYYY-MM-DD');
+  }
+
+  getDateVac4(e: any): any {
+    this.datevac4 = moment(e).format('YYYY-MM-DD');
   }
 
   getDateSARS1(e: any): any {
@@ -967,7 +992,6 @@ export class RecheckComponent implements OnInit {
     data.sars2_placesend = this.placesendSAR2;
     data.sars2_result = this.radiodetect2;
 
-
     data.sars3_date = (this.dateSARS3 != null) ? moment(this.dateSARS3).format('YYYY-MM-DD') : null;
     data.sars3_type = this.typeSAR3;
     data.sars3_placesend = this.placesendSAR3;
@@ -990,6 +1014,7 @@ export class RecheckComponent implements OnInit {
     data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;
+    data.homei = this.radiohomei;
     data.payment = this.payment;
     data.reporter = this.reporter;
     data.report_point = this.reportpoint;
@@ -1046,6 +1071,7 @@ export class RecheckComponent implements OnInit {
     data.sdate_quaran = (this.startquaran != null) ? moment(this.startquaran).format('YYYY-MM-DD') : null;
     data.edate_quaran = (this.endquaran != null) ? moment(this.endquaran).format('YYYY-MM-DD') : null;
     data.address_quaran = this.addressquaran;
+    data.homei = this.radiohomei;
     data.reporter = this.reporter;
     data.report_point = this.reportpoint;
     data.payment = this.payment;
@@ -1178,6 +1204,9 @@ export class RecheckComponent implements OnInit {
     data.novel_getvac3 = (this.datevac3 != null) ? moment(this.datevac3).format('YYYY-MM-DD') : null;
     data.novel_namevac3 = this.namevac3;
     data.novel_placevac3 = this.placevac3;
+    data.novel_getvac4 = (this.datevac4 != null) ? moment(this.datevac4).format('YYYY-MM-DD') : null;
+    data.novel_namevac4 = this.namevac4;
+    data.novel_placevac4 = this.placevac4;
 
     infoData.push(data);
 

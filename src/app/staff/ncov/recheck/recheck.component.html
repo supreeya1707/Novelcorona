@@ -1276,6 +1276,36 @@
             <input type="text " class="form-control" id="placevaccine3" [(ngModel)]="placevac3">
           </div>
         </div>
+
+        <div class="row mt-5">
+          <div class=" col-md-4 ">
+            <label>ครั้งที่ 4 วันที่ได้รับ </label>
+            <div class="input-group">
+              <input class="form-control" (bsValueChange)="getDateVac4($event)" #datepickerVac4="bsDatepicker"
+                     bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                     [value]="vac3">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar" (click)="datepickerVac4.toggle()"
+                     [attr.aria-expanded]="datepickerVac4.isOpen"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label>ชื่อวัคซีน </label>
+            <select class="form-control" placeholder="ชื่อวัคซีน" name="namevac4" id="namevac4"
+                    [(ngModel)]="namevac4">
+              <option *ngFor="let vac of dataVaccine" [value]="vac.vaccine_name">{{vac.vaccine_name}}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>สถานที่ได้รับ </label>
+            <input type="text " class="form-control" id="placevaccine4" [(ngModel)]="placevac4">
+          </div>
+        </div>
+
+
+
         <hr class="mt-15">
         <div class="row mt-10">
           <div class="form-group">
@@ -1613,6 +1643,24 @@
           <div class="col">
             <label>ที่อยู่สำหรับการกักตัว </label>
             <input type="text " class="form-control" id="addressquaran" [(ngModel)]="addressquaran" >
+          </div>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col">
+            <label>ประเมินสภาพบ้านสำหรับ HI </label>
+            <div class="radio-inline">
+              <label class="radio">
+                <input type="radio" name="radiohomei" id="radiohomei0"  [(ngModel)]="radiohomei" [value]="0"/>
+                <span></span>ไม่ได้
+              </label>
+
+              <label class="radio">
+                <input type="radio" name="radiohomei" id="radiohomei1"  [(ngModel)]="radiohomei" [value]="1"/>
+                <span></span>ได้
+              </label>
+
+            </div>
           </div>
         </div>
 
