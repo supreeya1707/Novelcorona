@@ -268,6 +268,7 @@ export class Novelcorona2Component implements OnInit {
       station: [null, Validators.compose([Validators.required])],
       telephone: [null, Validators.compose([Validators.required, Validators.minLength(10)])],
       treat: [null],
+      lifeinsurance: [null, Validators.compose([Validators.required])],
       birthday: [null, Validators.compose([Validators.required])],
       addr: [null],
       moo: [null],
@@ -567,7 +568,7 @@ export class Novelcorona2Component implements OnInit {
       data.novel_treat = this.generalFrm.value.treat;
     }
 
-
+    data.novel_lifeinsurance = this.generalFrm.value.lifeinsurance;
     data.novel_number_address = this.generalFrm.value.addr;
     data.novel_moo = this.generalFrm.value.moo;
     data.novel_mooban = this.generalFrm.value.mooban;

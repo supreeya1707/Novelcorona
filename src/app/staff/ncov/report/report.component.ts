@@ -572,6 +572,8 @@ export class ReportComponent implements OnInit {
         {text: this.dataNovelByID.novel_high, absolutePosition: {x: 170, y: 160}, bold: true},
         {text: this.dataNovelByID.novel_bmi, absolutePosition: {x: 265, y: 160}, bold: true},
 
+        (this.dataNovelByID.novel_lifeinsurance === 0) ? {text: '√', absolutePosition: {x: 385, y: 154}, style: 'fSize24'} : (this.dataNovelByID.novel_lifeinsurance === 1) ? {text: '√', absolutePosition: {x: 420, y: 154}, style: 'fSize24'} : null,
+
         (this.dataNovelByID.novel_fever === 1) ? {text: '√', absolutePosition: {x: 208, y: 170}, style: 'fSize24'} : null,
         {text: this.dataNovelByID.novel_assign_fever, absolutePosition: {x: 300, y: 176}, bold: true},
         (this.dataNovelByID.novel_uri === 1) ? {text: '√', absolutePosition: {x: 477, y: 170}, style: 'fSize24'} : null,
@@ -890,10 +892,32 @@ export class ReportComponent implements OnInit {
           columns: [
             {width: 'auto', text: 'น้ำหนัก..........................กก.'},
             {width: 'auto', text: 'ส่วนสูง..........................ซม.'},
-            {width: 'auto', text: 'BMI..........................'},
+            {width: 'auto', text: 'BMI..........................                         '},
+            {width: 'auto', text: 'ประกันชีวิตโควิด'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ไม่มี'},
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'มี'}
           ],
           columnGap: 5
         },
+
         {columns: [
             {width: 'auto', text: '2. อาการและอาการแสดง ในวันที่พบผู้ป่วย : ', style: 'title'},
             {width: 'auto', text: '   '},
@@ -1833,7 +1857,7 @@ export class ReportComponent implements OnInit {
         },
         {text: 'แพทย์ผู้ตรวจรักษาประเมินว่ามีความจำเป็นตามดุลยพินิจของแพทย์ ระบุ', margin: [30, 5, 20, 0]},
         {
-          margin: [50, 2, 20, 0],
+          margin: [50, 2, 0, 0],
           columns: [
             {
               width: 'auto', table: {
@@ -1865,6 +1889,22 @@ export class ReportComponent implements OnInit {
               }
             },
             {width: 'auto', text: 'อื่นๆ................................................'},
+          ],
+          columnGap: 5
+        },
+        {
+          margin: [50, 2, 20, 0],
+          columns: [
+            {
+              width: 'auto', table: {
+                widths: [2],
+                body: [
+                  [{text: '', border: [true, true, true, false], alignment: 'center', margin: [0, 1]}],
+                  [{text: '', border: [true, false, true, true], alignment: 'center'}],
+                ]
+              }
+            },
+            {width: 'auto', text: 'ผู้ป่วยมีโอกาสติดเชื้อสูงและเสี่ยงต่อการแพร่กระจายเชื้อต่อผู้อื่นเป็นจำนวนมาก'},
           ],
           columnGap: 5
         },
@@ -2036,9 +2076,9 @@ export class ReportComponent implements OnInit {
         (this.dataNovelStaff.sars_pt_type === 9) ? {text: '√', absolutePosition: {x: 254, y: 249}, style: 'fSize24'} : null,
         (this.dataNovelStaff.sars_pt_type === 10) ? {text: '√', absolutePosition: {x: 336, y: 249}, style: 'fSize24'} : null,
 
-        {text: ptfullname, absolutePosition: {x: 100, y: 566}, bold: true},
-        {image: this.imgSign04, absolutePosition: {x: 270, y: 425}, fit: [65, 65]},
-        {image: this.imgSign05, absolutePosition: {x: 270, y: 650}, fit: [65, 65]},
+        {text: ptfullname, absolutePosition: {x: 100, y: 585}, bold: true},
+        {image: this.imgSign04, absolutePosition: {x: 270, y: 443}, fit: [65, 65]},
+        {image: this.imgSign05, absolutePosition: {x: 270, y: 668}, fit: [65, 65]},
 
       ],
       defaultStyle: {
@@ -3864,7 +3904,7 @@ export class ReportComponent implements OnInit {
         {image: this.logo, fit: [65, 65], alignment: 'center'},
         {text: 'คำสั่งของเจ้าพนักงานควบคุมโรคติดต่อ', alignment: 'center'},
         {text: 'ตามประกาศกระทรวงสาธารณสุขเรื่องหลักเกณฑ์วิธีการและเงื่อนไขในการดำเนินการหรือออกคำสั่ง', alignment: 'center'},
-        {text: 'ของเจ้าหนักงานควบคุมโรคติดต่อ พ.ศ. ๒๕๖๐', alignment: 'center'},
+        {text: 'ของเจ้าพนักงานควบคุมโรคติดต่อ พ.ศ. ๒๕๖๐', alignment: 'center'},
         {
           columns: [
             {width: '60%', text: 'คำสั่งเลขที่ ............/๒๕๖๕'},
@@ -3891,7 +3931,7 @@ export class ReportComponent implements OnInit {
           columnGap: 5
         },
         {text: 'สาธารณสุขเรื่องหลักเกณฑ์วิธีการและเงื่อนไขในการดำเนินการหรือออกคำสั่งของเจ้าพนักงานควบคุมโรคติดต่อพ.ศ. ๒๕๖๐ ข้าพเจ้า'},
-        {text: '(นาย/นาง/นางสาว)........................................................................................................ตำแหน่งเจ้าหนักงงานควบคุมโรคติดต่อสังกัด/'},
+        {text: '(นาย/นาง/นางสาว)........................................................................................................ตำแหน่งเจ้าพนักงานควบคุมโรคติดต่อสังกัด/'},
         {text: 'หน่วยงาน .........................................................................................................................................ได้พบว่า'},
         {
           columns: [

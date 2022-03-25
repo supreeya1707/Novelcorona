@@ -226,7 +226,7 @@
           </div>
 
           <div class="row mt-5">
-            <div class="col-lg-6">
+            <div class="col-lg-4">
               <div class="form-group">
                 <label>สิทธิการรักษา <!--<span class="text-danger">*</span>--></label>
                 <select class="form-control" placeholder="ใส่สิทธิการรักษา" name="treat" id="treat" formControlName="treat" [(ngModel)]="treat">
@@ -234,10 +234,33 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-6" *ngIf="treat === 'อื่น ๆ'">
+            <div class="col-md-4" *ngIf="treat === 'อื่น ๆ'">
               <div class="form-group">
                 <label>&nbsp;</label>
                 <input type="text" class="form-control" placeholder="โปรดระบุสิทธิการรักษา"  [(ngModel)]="other_treat"  [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="form-label">&nbsp;ประกันชีวิตโควิด 19 <span class="text-danger">*</span></label>
+                <div class="row col-lg-12 mt-2">
+                  <div class="form-check col-6">
+                    <input class="form-check-input" type="radio" name="lifeinsurance" id="lifeinsurance1"
+                           style="padding-left: 10px" [value]="0" formControlName="lifeinsurance"
+                           [ngClass]="{ 'is-invalid': submitted && f.lifeinsurance.errors || ((f.lifeinsurance.touched || f.lifeinsurance.dirty) && f.lifeinsurance.invalid) }">
+                    <label class="form-check-label" for="lifeinsurance1">&nbsp;ไม่มี</label>
+                    <div class="invalid-feedback mt-lg-3 mt-sm-1"
+                         *ngIf="submitted && f.lifeinsurance.errors || ((f.lifeinsurance.touched || f.lifeinsurance.dirty) && f.lifeinsurance.invalid)">
+                      <div class="text-left fSize12" *ngIf="f.lifeinsurance.errors.required">กรุณาเลือกประกันชีวิตโควิด</div>
+                    </div>
+                  </div>
+                  <div class="form-check col-6">
+                    <input class="form-check-input" type="radio" name="lifeinsurance" id="lifeinsurance2"
+                           [value]="1" formControlName="lifeinsurance"
+                           [ngClass]="{ 'is-invalid': submitted && f.lifeinsurance.errors || ((f.lifeinsurance.touched || f.lifeinsurance.dirty) && f.lifeinsurance.invalid) }">
+                    <label class="form-check-label" for="lifeinsurance2">&nbsp;มี</label>
+                  </div>
+                </div>
               </div>
             </div>
 

@@ -31,7 +31,7 @@
               <th width="5%">นัด Swab 3</th>
               <th width="9%">ผู้รายงาน</th>
               <th width="8%">จุดรับบริการ</th>
-              <th width="5%">เวลาบันทึกข้อมูล</th>
+              <th width="5%">วันที่บันทึกข้อมูล</th>
               <th width="10%"></th>
             </tr>
             </thead>
@@ -51,7 +51,7 @@
               <td class="text-center" *ngIf="novel.date_swab3 === null"></td>
               <td class="text-left">{{novel.reporter}}</td>
               <td class="text-left">{{novel.servicepoint}}</td>
-              <td class="text-center">{{novel.timereport}} น.</td>
+              <td class="text-center">{{novel.novel_input_datetime | thaiDate  : 'short'}}</td>
               <td class="text-center noDisplay">
                 <div *ngIf="novel.sdate_quaran !== null  ">
                   <button class="btn btn-xs btn-outline-dark" tooltipHtml="แก้ไข" placement="bottom"

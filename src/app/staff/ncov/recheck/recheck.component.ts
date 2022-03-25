@@ -357,6 +357,7 @@ export class RecheckComponent implements OnInit {
       station: [null, Validators.compose([Validators.required])],
       telephone: [null, Validators.compose([Validators.required, Validators.minLength(10)])],
       treat: [null],
+      lifeinsurance: [null, Validators.compose([Validators.required])],
       addr: [null],
       moo: [null],
       mooban: [null],
@@ -495,6 +496,8 @@ export class RecheckComponent implements OnInit {
           }
         }
       }
+
+      this.generalFrm.get('lifeinsurance').setValue(this.dataNovel.novel_lifeinsurance);
 
       // this.generalFrm.get('treat').setValue(this.dataNovel['novel_treat']);
       // this.generalFrm.get('birthday').setValue(moment(this.dataNovel['novel_birthday']).format('DD/MM/YYYY'));
@@ -1103,6 +1106,7 @@ export class RecheckComponent implements OnInit {
     data.novel_station = this.generalFrm.value.station;
     data.novel_phone = this.generalFrm.value.telephone;
     data.novel_treat = (this.generalFrm.value.treat === 'อื่น ๆ') ? this.other_treat : this.generalFrm.value.treat;
+    data.novel_lifeinsurance = this.generalFrm.value.lifeinsurance;
 
     data.novel_number_address = this.generalFrm.value.addr;
     data.novel_moo = this.generalFrm.value.moo;
