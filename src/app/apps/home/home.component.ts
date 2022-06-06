@@ -94,4 +94,9 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/forms/novelcorona2');
 
   }
+
+  openCoVRefer(): any {
+    window.open(
+      'http://www.rbhportal.com/covrefer/#/', '_blank');
+  }
 }

@@ -490,6 +490,7 @@ export class RecheckComponent implements OnInit {
         for (let i = 0; i < this.dataPTtpye.length; i++){
           if (this.dataNovel.novel_treat === this.dataPTtpye[i].value ){
             this.generalFrm.get('treat').setValue(this.dataNovel.novel_treat);
+            break;
           }else{
             this.generalFrm.get('treat').setValue('อื่น ๆ');
             this.other_treat = (this.dataNovel.novel_treat === 'อื่น ๆ') ? null : this.dataNovel.novel_treat;
@@ -1020,6 +1021,7 @@ export class RecheckComponent implements OnInit {
     data.homei = this.radiohomei;
     data.payment = this.payment;
     data.reporter = this.reporter;
+    data.first_reporter = this.reporter;
     data.report_point = this.reportpoint;
     data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
@@ -1078,7 +1080,7 @@ export class RecheckComponent implements OnInit {
     data.reporter = this.reporter;
     data.report_point = this.reportpoint;
     data.payment = this.payment;
-    // data.report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
+    data.update_report_datetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     infoData.push(data);
     const resStaff = await this.api.updateStaff(this.novelID, infoData);
