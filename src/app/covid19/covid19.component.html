@@ -1,0 +1,108 @@
+<div class="container font-prompt-medium mt-15 min-vh-90">
+  <div class="col-lg-12 text-center">
+    <div class="col-lg-6 offset-lg-3">
+      <form [formGroup]="frmSerch">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">CID</span>
+          </div>
+          <input name="cid" id="cid" formControlName="cid"
+                 maxlength="13" inputmode="numeric" pattern="[0-9]*" digitOnly
+                 [ngClass]="{ 'is-invalid': submitted && f1.cid.errors  || ((f1.cid.touched || f1.cid.dirty) && f1.cid.invalid) }"
+                 class="form-control" type="text" placeholder="ใส่เลขประจำตัวประชาชน">
+          <div class="input-group-append">
+            <button class="btn btn-dark" (click)="getCitizenData()">ค้นหา</button>
+          </div>
+          <div *ngIf="submitted && f1.cid.errors  || ((f1.cid.touched || f1.cid.dirty) && f1.cid.invalid)"
+               class="invalid-feedback">
+            <div class="text-left fSize12" *ngIf="f1.cid.errors.required">กรุณาใส่เลขประจำตัวประชาชน</div>
+            <div class="text-left fSize12" *ngIf="f1.cid.errors.minlength">กรุณาใส่เลขประจำตัวประชาชน 13 หลัก</div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <form [formGroup]="frmpatient">
+    <div class="card mt-5">
+      <div class="card-body">
+          <div class="row">
+           <div class="col-lg-12">
+             <div class="form-group">
+               <label>เลขประจำตัวประชาชน</label>
+               <input type="text" class="form-control" placeholder="เลขประจำตัวประชาชน" name="cid2" id="cid2"
+                      formControlName="cid2" readonly>
+             </div>
+           </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>คำนำหน้าชื่อ</label>
+                <input type="text" class="form-control" placeholder="คำนำหน้าชื่อ" name="pname" id="pname"
+                       formControlName="pname" readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>ชื่อ</label>
+                <input type="text" class="form-control" placeholder="ชื่อ" name="fname" id="fname" formControlName="fname">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>นามสกุล</label>
+                <input type="text" class="form-control" placeholder="นามสกุล" name="lname" id="lname" formControlName="lname" readonly>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>น้ำหนัก (กิโลกรัม)</label>
+              <input type="text" class="form-control" placeholder="น้ำหนัก" name="weight" id="weight"
+                     formControlName="weight">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>ส่วนสูง (เซนติเมตร)</label>
+              <input type="text" class="form-control" placeholder="ส่วนสูง" name="height" id="height"
+                     formControlName="height">
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf="f.weight.value != null && f.height.value  != null">
+            <div class="form-group">
+              <label>BMI</label>
+              <input type="text" class="form-control" placeholder="ส่วนสูง" name="bmi" id="bmi"
+                     formControlName="bmi" readonly
+                     [value]="(f.weight.value  / ((f.height.value / 100) * (f.height.value / 100))).toFixed(2)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+</div>
+
+
+<app-scroll-to-top></app-scroll-to-top>
+
+<footer class="main-footer" style="margin: unset; padding: unset">
+  <div class="text-right pt-4 pb-4" style="background-color: #000000">
+    <img src="assets/picture/footer_copyright.svg" class="footer02">
+  </div>
+</footer>
+
+
+
+
+
+

@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {ApplayoutComponent} from './apps/applayout/applayout.component';
 import {StaffLayoutComponent} from './staff/staff-layout/staff-layout.component';
 
-
 const routes: Routes = [
   {path: '', redirectTo: 'apps', pathMatch: 'full'},
   { path: 'apps',
@@ -16,7 +15,8 @@ const routes: Routes = [
   { path: 'staff',
     loadChildren: () => import('./staff/staff.module').then(m => m.StaffModule),
     component: StaffLayoutComponent
-  }
+  },
+  { path: 'covid19', loadChildren: () => import('./covid19/covid19.module').then(m => m.Covid19Module)}
 ];
 
 @NgModule({
