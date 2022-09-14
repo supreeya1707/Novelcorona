@@ -99,4 +99,8 @@ export class HomeComponent implements OnInit {
     window.open(
       'http://www.rbhportal.com/covrefer/#/', '_blank');
   }
+
+  openCoV19(): any {
+    this.router.navigateByUrl('/covid19');
+  }
 }
