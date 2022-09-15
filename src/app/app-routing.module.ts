@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./staff/staff.module').then(m => m.StaffModule),
     component: StaffLayoutComponent
   },
-  { path: 'covid19', loadChildren: () => import('./covid19/covid19.module').then(m => m.Covid19Module)}
+  // { path: 'covid19', loadChildren: () => import('./covid19/covid19.module').then(m => m.Covid19Module)}
 ];
 
 @NgModule({
